@@ -8,5 +8,5 @@ INSERT INTO articles VALUES ('1', 'contenu1', 'photo1', 'titre1'), ('2', 'conten
 INSERT INTO users VALUES ('1', 'test', 'toto', '1'), ('2', 'test', 'tata', '2'), ('3', 'test', 'tutu', '3');
 INSERT INTO joueurs VALUES (1, 33770, '1981-05-19', 'matthieulondeix@gmail.com', 'LONDEIX', 23, 'Matthieu',  'rue du hapchot', '', '', 'SALLES', 2), (2, 33770, '1981-05-19', 'matthieu.londeix@labanquepostale.fr', 'LONDEIX', 23, 'Matthieu',  'rue du hapchot', '', '', 'SALLES', 1), (3, 33770, '1981-05-19', 'matthieu.londeix.lp2@gmail.com', 'LONDEIX', 23, 'Matthieu',  'rue du hapchot', '', '', 'SALLES', 3);
 INSERT INTO avoir VALUES (1, 2018, true, 1, 1), (2, 2018, false, 2, 2);
-INSERT INTO licence VALUES (1, 'Adulte', 'certif', 'idpaiement', true, 'form', 90.00, 90.00), (2, 'M15', 'certif2', 'idpaiement2', false, 'form2', 60.00, 90.00);
+INSERT INTO licence VALUES (1, 'certif', 'form', 'idpaiement', true, 90.00, 90.00, '1'), (2, 'certif2', 'form2', 'idpaiement2', false, 60.00, 90.00, '3');
 INSERT INTO categories VALUES (1, 'M11'), (2, 'M13G'), (3, 'M13F'), (4, 'M15G'), (5, 'M15F'), (6, 'M17G'), (7, 'M17F'), (8, 'M20G'), (9, 'M20F'), (10, 'Adultes Débutants'), (11, 'Adultes');

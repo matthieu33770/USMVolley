@@ -1,14 +1,18 @@
 package usmvolley.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -54,12 +58,18 @@ public class Joueurs implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "id_user")
 	private Users user;
+	
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH })
+	@JoinTable(name = "joueur_equipe", joinColumns = @JoinColumn(name = "idJoueur"), inverseJoinColumns = @JoinColumn(name = "idEquipe"))
+	private Collection<Equipes> equipes;
 
 	public Joueurs() {
 	}
 
 	public Joueurs(Integer idJoueur, String nom, String prenom, Integer numeroAdresse, String rue, Integer codePostal,
-			String ville, String mail, String telephone1, String telephone2, Date dateNaissance, Users user) {
+			String ville, String mail, String telephone1, String telephone2, Date dateNaissance, Users user,
+			Collection<Equipes> equipes) {
+		super();
 		this.idJoueur = idJoueur;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -72,6 +82,7 @@ public class Joueurs implements Serializable {
 		this.telephone2 = telephone2;
 		this.dateNaissance = dateNaissance;
 		this.user = user;
+		this.equipes = equipes;
 	}
 
 	public Integer getIdJoueur() {
@@ -170,13 +181,19 @@ public class Joueurs implements Serializable {
 		this.user = user;
 	}
 
+	public Collection<Equipes> getEquipes() {
+		return equipes;
+	}
+
+	public void setEquipes(Collection<Equipes> equipes) {
+		this.equipes = equipes;
+	}
+
 	@Override
 	public String toString() {
 		return "Joueurs [idJoueur=" + idJoueur + ", nom=" + nom + ", prenom=" + prenom + ", numeroAdresse="
 				+ numeroAdresse + ", rue=" + rue + ", codePostal=" + codePostal + ", ville=" + ville + ", mail=" + mail
 				+ ", telephone1=" + telephone1 + ", telephone2=" + telephone2 + ", dateNaissance=" + dateNaissance
-				+ ", user=" + user + "]";
-	}
-	
-	
+				+ ", user=" + user + ", equipes=" + equipes + "]";
+	}	
 }

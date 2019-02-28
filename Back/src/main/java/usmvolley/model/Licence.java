@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Licence implements Serializable {
@@ -21,8 +23,9 @@ public class Licence implements Serializable {
 	@Column(name = "prix")
 	private Double prixLicence;
 	
-	@Column(name = "categorie")
-	private String categorie;
+	@OneToOne
+	@JoinColumn(name = "id_categorie")
+	private Categories categories;
 	
 	@Column(name = "formulaire")
 	private String formulaire;
@@ -42,17 +45,19 @@ public class Licence implements Serializable {
 	public Licence() {
 	}
 
-	public Licence(Integer idLicence, Double prixLicence, String categorie, String formulaire, String certificatMedical,
-			Boolean isPaye, String idPaiement, Double montantPaye) {
+	public Licence(Integer idLicence, Double prixLicence, Categories categories, String formulaire,
+			String certificatMedical, Boolean isPaye, String idPaiement, Double montantPaye) {
 		this.idLicence = idLicence;
 		this.prixLicence = prixLicence;
-		this.categorie = categorie;
+		this.categories = categories;
 		this.formulaire = formulaire;
 		this.certificatMedical = certificatMedical;
 		this.isPaye = isPaye;
 		this.idPaiement = idPaiement;
 		this.montantPaye = montantPaye;
 	}
+
+
 
 	public Integer getIdLicence() {
 		return idLicence;
@@ -70,12 +75,12 @@ public class Licence implements Serializable {
 		this.prixLicence = prixLicence;
 	}
 
-	public String getCategorie() {
-		return categorie;
+	public Categories getCategories() {
+		return categories;
 	}
 
-	public void setCategorie(String categorie) {
-		this.categorie = categorie;
+	public void setCategories(Categories categories) {
+		this.categories = categories;
 	}
 
 	public String getFormulaire() {
@@ -120,7 +125,7 @@ public class Licence implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Licence [idLicence=" + idLicence + ", prixLicence=" + prixLicence + ", categorie=" + categorie
+		return "Licence [idLicence=" + idLicence + ", prixLicence=" + prixLicence + ", categories=" + categories
 				+ ", formulaire=" + formulaire + ", certificatMedical=" + certificatMedical + ", isPaye=" + isPaye
 				+ ", idPaiement=" + idPaiement + ", montantPaye=" + montantPaye + "]";
 	}

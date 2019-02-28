@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import usmvolley.model.Categories;
 import usmvolley.model.Licence;
 import usmvolley.repository.LicenceRepository;
 
@@ -77,7 +78,7 @@ public class LicenceController {
 		
 		Licence newLicence = null;
 		Double prixLicence = licence.getPrixLicence();
-		String categorieLicence = licence.getCategorie();
+		Categories categorieLicence = licence.getCategories();
 		String formulaireLicence = licence.getFormulaire();
 		String certificatMedicalLicence = licence.getCertificatMedical();
 		//Boolean isPayeLicence = licence.getIsPaye();
@@ -87,7 +88,7 @@ public class LicenceController {
 		if (prixLicence == null) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le prix de la licence");
 		}
-		if ((categorieLicence == null) || (categorieLicence.isEmpty()))
+		if (categorieLicence == null)
 		{
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque la catégorie de la licence");
 		}
@@ -139,7 +140,7 @@ public class LicenceController {
 	{
 		Licence modificationLicence = null;
 		Double prixLicence = licence.getPrixLicence();
-		String categorieLicence = licence.getCategorie();
+		Categories categorieLicence = licence.getCategories();
 		String formulaireLicence = licence.getFormulaire();
 		String certificatMedicalLicence = licence.getCertificatMedical();
 		//Boolean isPayeLicence = licence.getIsPaye();
@@ -149,7 +150,7 @@ public class LicenceController {
 		if (prixLicence == null) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le prix de la licence");
 		}
-		if ((categorieLicence == null) || (categorieLicence.isEmpty()))
+		if (categorieLicence == null)
 		{
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque la catégorie de la licence");
 		}

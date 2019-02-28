@@ -34,15 +34,15 @@ public class ArticlesController {
 	@GetMapping("/get/articles")
 	public ResponseEntity<List<Articles>> getListeArticles() {
 		
-		List<Articles> listeAticles = null;
+		List<Articles> listeArticles = null;
 		
 		try {
-			listeAticles = articlesRepo.findAll();
+			listeArticles = articlesRepo.findAll();
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		}
 		
-		return ResponseEntity.status(HttpStatus.OK).body(listeAticles);
+		return ResponseEntity.status(HttpStatus.OK).body(listeArticles);
 	}
 	
 	/**

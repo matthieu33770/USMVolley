@@ -91,37 +91,37 @@ public class JoueursController {
 		Users userJoueur = joueur.getUser();
 		
 		if ((nomJoueur == null) || (nomJoueur.isEmpty())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le mot de passe");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le nom du joueur");
 		}
 		if ((prenomJoueur == null) || (prenomJoueur.isEmpty())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le mot de passe");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le prenom du joueur");
 		}
 		if (numeroAdresseJoueur == null) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le mot de passe");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le numéro de la rue");
 		}
 		if ((rueJoueur == null) || (rueJoueur.isEmpty())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le mot de passe");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le nom de la rue");
 		}
 		if (codePostalJoueur == null) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le mot de passe");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le code postal");
 		}
 		if ((villeJoueur == null) || (villeJoueur.isEmpty())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le mot de passe");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque la ville");
 		}
 		if ((mailJoueur == null) || (mailJoueur.isEmpty())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le mot de passe");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le mail");
 		}
 		if ((telephone1Joueur == null) || (telephone1Joueur.isEmpty())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le mot de passe");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le numérode telephone 1");
 		}
 		if ((telephone2Joueur == null) || (telephone2Joueur.isEmpty())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le mot de passe");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le numérode telephone 2");
 		}
 		if (dateJoueur == null) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le mot de passe");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque la date de naissance");
 		}
 		if (userJoueur == null) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le mot de passe");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque l'identifiant");
 		}
 	
 		newJoueur = joueursRepo.save(joueur);
@@ -168,37 +168,37 @@ public class JoueursController {
 		Users userJoueur = joueur.getUser();
 		
 		if ((nomJoueur == null) || (nomJoueur.isEmpty())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le mot de passe");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le nom du joueur");
 		}
 		if ((prenomJoueur == null) || (prenomJoueur.isEmpty())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le mot de passe");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le prenom du joueur");
 		}
 		if (numeroAdresseJoueur == null) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le mot de passe");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le numéro de la rue");
 		}
 		if ((rueJoueur == null) || (rueJoueur.isEmpty())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le mot de passe");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le nom de la rue");
 		}
 		if (codePostalJoueur == null) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le mot de passe");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le code postal");
 		}
 		if ((villeJoueur == null) || (villeJoueur.isEmpty())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le mot de passe");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque la ville");
 		}
 		if ((mailJoueur == null) || (mailJoueur.isEmpty())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le mot de passe");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le mail");
 		}
 		if ((telephone1Joueur == null) || (telephone1Joueur.isEmpty())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le mot de passe");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le numérode telephone 1");
 		}
 		if ((telephone2Joueur == null) || (telephone2Joueur.isEmpty())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le mot de passe");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le numérode telephone 2");
 		}
 		if (dateJoueur == null) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le mot de passe");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque la date de naissance");
 		}
 		if (userJoueur == null) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le mot de passe");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque l'identifiant");
 		}
 		
 		try

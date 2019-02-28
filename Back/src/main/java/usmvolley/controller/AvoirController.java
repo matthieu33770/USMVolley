@@ -28,8 +28,8 @@ public class AvoirController {
 	private AvoirRepository avoirRepo;
 	
 	/**
-	 * Methode Voir tous les rôles
-	 * @return liste de tous les rôles
+	 * Methode Voir tout Avoir
+	 * @return liste de tout Avoir
 	 */
 	@GetMapping("/get/avoir")
 	public ResponseEntity<List<Avoir>> getListeAvoir() {
@@ -46,8 +46,8 @@ public class AvoirController {
 	}
 	
 	/**
-	 * Methode Voir un rôle
-	 * @return liste un rôle
+	 * Methode Voir un Avoir
+	 * @return liste un Avoir
 	 */
 	@GetMapping("/get/unAvoir/{idAvoir}")
 	public ResponseEntity<?> getUnAvoir(@PathVariable Integer idAvoir) {
@@ -92,7 +92,7 @@ public class AvoirController {
 	 * @return supprime un avoir
 	 */
 	@DeleteMapping("/delete/{idAvoir}")
-	public ResponseEntity<?> deleteRole(@PathVariable Integer idAvoir)
+	public ResponseEntity<?> deleteAvoir(@PathVariable Integer idAvoir)
 	{
 		try
 		{
@@ -106,8 +106,8 @@ public class AvoirController {
 	
 	/**
 	 * Methode UPDATE
-	 * @param information rôle et idRole
-	 * @return modifie un role
+	 * @param information Avoir et idAvoir
+	 * @return modifie un Avoir
 	 */
 	@PutMapping("/update/{idAvoir}")
 	public ResponseEntity<?> updateAvoir(@RequestBody Avoir avoir, @PathVariable Integer idAvoir) throws Exception

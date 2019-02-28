@@ -1,0 +1,41 @@
+buildscript {
+	ext {
+		springBootVersion = '2.1.1.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+
+group = 'co.simplon.eval3'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.1.1.RELEASE'
+    
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.1.1.RELEASE'
+    
+    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+	compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.47'
+	
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools
+	compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '2.1.1.RELEASE'
+	
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
+	//compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.1.1.RELEASE'
+}

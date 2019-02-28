@@ -1,0 +1,14 @@
+.saisie{
+    display: flex;
+    font-family: Maven Pro;
+  }
+  
+  .left {
+    width: 40%;
+    margin-left: 150px;
+  }
+  
+  .right {
+    width: 40%;
+    margin-left: 50px;
+  }

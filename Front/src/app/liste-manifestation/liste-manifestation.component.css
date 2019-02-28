@@ -1,0 +1,7 @@
+.listeManifestation {
+    font-family: Maven Pro;
+    display: flex;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    justify-content: center;
+}

@@ -17,15 +17,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import usmvolley.model.Inscrire;
-import usmvolley.repository.InscrireRepository;
+import usmvolley.repository.CreneauRepository;
 
 @RestController
-@RequestMapping("/inscrire")
+@RequestMapping("/creneaux")
 @CrossOrigin("http://localhost:4200")
-public class InscrireController {
+public class CreneauController {
 	
 	@Autowired
-	private InscrireRepository inscrireRepo;
+	private CreneauRepository creneauxRepo;
 	
 	/**
 	 * Methode Voir tous les inscrire
@@ -37,7 +37,7 @@ public class InscrireController {
 		List<Inscrire> listeInscrire = null;
 		
 		try {
-			listeInscrire = inscrireRepo.findAll();
+			listeInscrire = creneauxRepo.findAll();
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		}
@@ -55,7 +55,7 @@ public class InscrireController {
 		Optional<Inscrire> inscrire = null;
 		
 		try {
-			inscrire = inscrireRepo.findById(idInscrire);
+			inscrire = creneauxRepo.findById(idInscrire);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
@@ -82,7 +82,7 @@ public class InscrireController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque la disponibilité du joueur");
 		}
 		
-		newInscrire = inscrireRepo.save(inscrire);
+		newInscrire = creneauxRepo.save(inscrire);
 		return ResponseEntity.status(HttpStatus.CREATED).body(newInscrire);
 	}
 	
@@ -96,7 +96,7 @@ public class InscrireController {
 	{
 		try
 		{
-			inscrireRepo.deleteById(idInscrire);
+			creneauxRepo.deleteById(idInscrire);
 		} catch (Exception e)
 		{
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -122,7 +122,7 @@ public class InscrireController {
 		
 		try
 		{
-			modificationInscrire = inscrireRepo.save(inscrire);
+			modificationInscrire = creneauxRepo.save(inscrire);
 		} catch (Exception e)
 		{
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());

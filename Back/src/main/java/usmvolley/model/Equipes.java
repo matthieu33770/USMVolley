@@ -9,7 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -29,15 +31,20 @@ public class Equipes implements Serializable {
 	@ManyToMany(cascade = CascadeType.REMOVE, mappedBy = "equipes")
 	@JsonIgnore
 	private Collection<Joueurs> joueurs;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_manifestation")
+	private Manifestations manifestation;
 
 	public Equipes() {
 	}
 
-	public Equipes(Integer idEquipe, String libelleEquipe, Collection<Joueurs> joueurs) {
+	public Equipes(Integer idEquipe, String libelleEquipe, Collection<Joueurs> joueurs, Manifestations manifestation) {
 		super();
 		this.idEquipe = idEquipe;
 		this.libelleEquipe = libelleEquipe;
 		this.joueurs = joueurs;
+		this.manifestation = manifestation;
 	}
 
 	public int getIdEquipe() {
@@ -64,9 +71,18 @@ public class Equipes implements Serializable {
 		this.joueurs = joueurs;
 	}
 
+	public Manifestations getManifestation() {
+		return manifestation;
+	}
+
+	public void setManifestation(Manifestations manifestation) {
+		this.manifestation = manifestation;
+	}
+
 	@Override
 	public String toString() {
-		return "Equipes [idEquipe=" + idEquipe + ", libelleEquipe=" + libelleEquipe + ", joueurs=" + joueurs + "]";
+		return "Equipes [idEquipe=" + idEquipe + ", libelleEquipe=" + libelleEquipe + ", joueurs=" + joueurs
+				+ ", manifestation=" + manifestation + "]";
 	}
 
 }

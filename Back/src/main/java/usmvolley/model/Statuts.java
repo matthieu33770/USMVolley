@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Statuts implements Serializable {
@@ -20,13 +22,19 @@ public class Statuts implements Serializable {
 	
 	@Column(name = "libelle_statut")
 	private String libelleStatut;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_manifestation")
+	private Manifestations manifestation;
 
 	public Statuts() {
 	}
 
-	public Statuts(Integer idStatut, String libelleStatut) {
+	public Statuts(Integer idStatut, String libelleStatut, Manifestations manifestation) {
+		super();
 		this.idStatut = idStatut;
 		this.libelleStatut = libelleStatut;
+		this.manifestation = manifestation;
 	}
 
 	public Integer getIdStatut() {
@@ -45,8 +53,17 @@ public class Statuts implements Serializable {
 		this.libelleStatut = libelleStatut;
 	}
 
+	public Manifestations getManifestation() {
+		return manifestation;
+	}
+
+	public void setManifestation(Manifestations manifestation) {
+		this.manifestation = manifestation;
+	}
+
 	@Override
 	public String toString() {
-		return "Statuts [idStatut=" + idStatut + ", libelleStatut=" + libelleStatut + "]";
-	}	
+		return "Statuts [idStatut=" + idStatut + ", libelleStatut=" + libelleStatut + ", manifestation=" + manifestation
+				+ "]";
+	}
 }

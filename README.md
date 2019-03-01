@@ -4,7 +4,7 @@ Projet Chef D'oeuvre
 
 Création d'une app avec utilisation :<br/>
 	- en back de SpringBoot et Hibernate avec persistence des données<br/>
-	- en front via HTML, CSS et JavaScript<br/>
+	- en front Angular via HTML, CSS et JavaScript<br/>
 
 ## Organisation :
 

@@ -49,7 +49,7 @@ public class PossederController {
 	 * Methode Voir un posseder
 	 * @return liste un posseder
 	 */
-	@GetMapping("/get/unInscrire/{idPosseder}")
+	@GetMapping("/get/unPosseder/{idPosseder}")
 	public ResponseEntity<?> getUnPosseder(@PathVariable Integer idPosseder) {
 		
 		Optional<Posseder> posseder = null;
@@ -110,7 +110,7 @@ public class PossederController {
 	 * @return modifie un posseder
 	 */
 	@PutMapping("/update/{idPosseder}")
-	public ResponseEntity<?> updatePosseder(@RequestBody Posseder posseder, @PathVariable Integer idpPosseder) throws Exception
+	public ResponseEntity<?> updatePosseder(@RequestBody Posseder posseder, @PathVariable Integer idPosseder) throws Exception
 	{
 		
 		Posseder modificationPosseder = null;

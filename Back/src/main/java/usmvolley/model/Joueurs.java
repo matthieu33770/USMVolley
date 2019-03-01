@@ -59,6 +59,11 @@ public class Joueurs implements Serializable {
 	@JoinColumn(name = "id_user")
 	private Users user;
 	
+	@ManyToOne
+	@JoinColumn(name = "id_avoir")
+	private Avoir avoir;
+	
+	
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH })
 	@JoinTable(name = "joueur_equipe", joinColumns = @JoinColumn(name = "idJoueur"), inverseJoinColumns = @JoinColumn(name = "idEquipe"))
 	private Collection<Equipes> equipes;
@@ -68,8 +73,7 @@ public class Joueurs implements Serializable {
 
 	public Joueurs(Integer idJoueur, String nom, String prenom, Integer numeroAdresse, String rue, Integer codePostal,
 			String ville, String mail, String telephone1, String telephone2, Date dateNaissance, Users user,
-			Collection<Equipes> equipes) {
-		super();
+			Avoir avoir, Collection<Equipes> equipes) {
 		this.idJoueur = idJoueur;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -82,6 +86,7 @@ public class Joueurs implements Serializable {
 		this.telephone2 = telephone2;
 		this.dateNaissance = dateNaissance;
 		this.user = user;
+		this.avoir = avoir;
 		this.equipes = equipes;
 	}
 
@@ -181,6 +186,14 @@ public class Joueurs implements Serializable {
 		this.user = user;
 	}
 
+	public Avoir getAvoir() {
+		return avoir;
+	}
+
+	public void setAvoir(Avoir avoir) {
+		this.avoir = avoir;
+	}
+
 	public Collection<Equipes> getEquipes() {
 		return equipes;
 	}
@@ -194,6 +207,6 @@ public class Joueurs implements Serializable {
 		return "Joueurs [idJoueur=" + idJoueur + ", nom=" + nom + ", prenom=" + prenom + ", numeroAdresse="
 				+ numeroAdresse + ", rue=" + rue + ", codePostal=" + codePostal + ", ville=" + ville + ", mail=" + mail
 				+ ", telephone1=" + telephone1 + ", telephone2=" + telephone2 + ", dateNaissance=" + dateNaissance
-				+ ", user=" + user + ", equipes=" + equipes + "]";
-	}	
+				+ ", user=" + user + ", avoir=" + avoir + ", equipes=" + equipes + "]";
+	}
 }

@@ -29,20 +29,15 @@ public class Avoir implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "id_licence")
 	private Licence licence;
-	
-	@ManyToOne
-	@JoinColumn(name = "id_joueur")
-	private Joueurs joueur;
 
 	public Avoir() {
 	}
 
-	public Avoir(Integer idAvoir, Integer anneeAvoir, Boolean isValide, Licence licence, Joueurs joueur) {
+	public Avoir(Integer idAvoir, Integer anneeAvoir, Boolean isValide, Licence licence) {
 		this.idAvoir = idAvoir;
 		this.anneeAvoir = anneeAvoir;
 		this.isValide = isValide;
 		this.licence = licence;
-		this.joueur = joueur;
 	}
 
 	public Integer getIdAvoir() {
@@ -77,17 +72,9 @@ public class Avoir implements Serializable {
 		this.licence = licence;
 	}
 
-	public Joueurs getJoueur() {
-		return joueur;
-	}
-
-	public void setJoueur(Joueurs joueur) {
-		this.joueur = joueur;
-	}
-
 	@Override
 	public String toString() {
 		return "Avoir [idAvoir=" + idAvoir + ", anneeAvoir=" + anneeAvoir + ", isValide=" + isValide + ", licence="
-				+ licence + ", joueur=" + joueur + "]";
+				+ licence + "]";
 	}
 }

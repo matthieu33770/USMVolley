@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Horaire implements Serializable {
@@ -23,17 +21,13 @@ public class Horaire implements Serializable {
 	
 	@Column(name = "date_horaire")
 	private Date dateHoraire;
-	
-	@Column(name = "heure_horaire")
-	private Integer heureHoraire;
 
 	public Horaire() {
 	}
 
-	public Horaire(Integer idHoraire, Date dateHoraire, Integer heureHoraire) {
+	public Horaire(Integer idHoraire, Date dateHoraire) {
 		this.idHoraire = idHoraire;
 		this.dateHoraire = dateHoraire;
-		this.heureHoraire = heureHoraire;
 	}
 
 	public Integer getIdHoraire() {
@@ -52,17 +46,8 @@ public class Horaire implements Serializable {
 		this.dateHoraire = dateHoraire;
 	}
 
-	public Integer getHeureHoraire() {
-		return heureHoraire;
-	}
-
-	public void setHeureHoraire(Integer heureHoraire) {
-		this.heureHoraire = heureHoraire;
-	}
-
 	@Override
 	public String toString() {
-		return "Horaire [idHoraire=" + idHoraire + ", dateHoraire=" + dateHoraire + ", heureHoraire=" + heureHoraire
-				+ "]";
+		return "Horaire [idHoraire=" + idHoraire + ", dateHoraire=" + dateHoraire + "]";
 	}
 }

@@ -29,15 +29,22 @@ public class Inscrire implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "id_joueur")
 	private Joueurs joueur;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_manifestation")
+	private Manifestations manifestation;
 
 	public Inscrire() {
 	}
 
-	public Inscrire(Integer idInscrire, String disponible, Boolean isSelectionne, Joueurs joueur) {
+	public Inscrire(Integer idInscrire, String disponible, Boolean isSelectionne, Joueurs joueur,
+			Manifestations manifestation) {
+		super();
 		this.idInscrire = idInscrire;
 		this.disponible = disponible;
 		this.isSelectionne = isSelectionne;
 		this.joueur = joueur;
+		this.manifestation = manifestation;
 	}
 
 	public Integer getIdInscrire() {
@@ -71,9 +78,17 @@ public class Inscrire implements Serializable {
 		this.joueur = joueur;
 	}
 
+	public Manifestations getManifestation() {
+		return manifestation;
+	}
+
+	public void setManifestation(Manifestations manifestation) {
+		this.manifestation = manifestation;
+	}
+
 	@Override
 	public String toString() {
 		return "Inscrire [idInscrire=" + idInscrire + ", disponible=" + disponible + ", isSelectionne=" + isSelectionne
-				+ ", joueur=" + joueur + "]";
+				+ ", joueur=" + joueur + ", manifestation=" + manifestation + "]";
 	}
 }

@@ -35,10 +35,6 @@ public class Manifestations implements Serializable {
 	private Lieux lieu;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_inscrire")
-	private Inscrire inscrire;
-	
-	@ManyToOne
 	@JoinColumn(name = "id_statut")
 	private Statuts statut;
 	
@@ -54,14 +50,13 @@ public class Manifestations implements Serializable {
 	}
 
 	public Manifestations(Integer idManifestation, String libelleManifestation, String periodicite, Equipes equipe,
-			Lieux lieu, Inscrire inscrire, Statuts statut, Horaire horaire, Creneau creneau) {
+			Lieux lieu, Statuts statut, Horaire horaire, Creneau creneau) {
 		super();
 		this.idManifestation = idManifestation;
 		this.libelleManifestation = libelleManifestation;
 		this.periodicite = periodicite;
 		this.equipe = equipe;
 		this.lieu = lieu;
-		this.inscrire = inscrire;
 		this.statut = statut;
 		this.horaire = horaire;
 		this.creneau = creneau;
@@ -107,14 +102,6 @@ public class Manifestations implements Serializable {
 		this.lieu = lieu;
 	}
 
-	public Inscrire getInscrire() {
-		return inscrire;
-	}
-
-	public void setInscrire(Inscrire inscrire) {
-		this.inscrire = inscrire;
-	}
-
 	public Statuts getStatut() {
 		return statut;
 	}
@@ -142,7 +129,7 @@ public class Manifestations implements Serializable {
 	@Override
 	public String toString() {
 		return "Manifestations [idManifestation=" + idManifestation + ", libelleManifestation=" + libelleManifestation
-				+ ", periodicite=" + periodicite + ", equipe=" + equipe + ", lieu=" + lieu + ", inscrire=" + inscrire
-				+ ", statut=" + statut + ", horaire=" + horaire + ", creneau=" + creneau + "]";
+				+ ", periodicite=" + periodicite + ", equipe=" + equipe + ", lieu=" + lieu + ", statut=" + statut +
+				", horaire=" + horaire + ", creneau=" + creneau + "]";
 	}
 }

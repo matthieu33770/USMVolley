@@ -49,7 +49,7 @@ public class CreneauController {
 	 * Methode Voir un creneaux
 	 * @return liste un creneaux
 	 */
-	@GetMapping("/get/unInscrire/{idCreneau}")
+	@GetMapping("/get/unCreneau/{idCreneau}")
 	public ResponseEntity<?> getUnCreneau(@PathVariable Integer idCreneau) {
 		
 		Optional<Creneau> creneau = null;

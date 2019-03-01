@@ -72,13 +72,13 @@ public class UsersController {
 	 * Methode Voir un user
 	 * @return liste un user
 	 */
-	@GetMapping("/get/unUser/{username}")
-	public ResponseEntity<?> getUserByUsername(@PathVariable String userName) {
+	@GetMapping("/get/byUser/{username}")
+	public ResponseEntity<?> getUserByUsername(@PathVariable String username) {
 		
 		Optional<Users> user = null;
 		
 		try {
-			user = usersRepo.findUserByUsername(userName);
+			user = usersRepo.findUserByUsername(username);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}

@@ -78,12 +78,8 @@ public class HoraireController {
 		
 		Horaire newHoraire = null;
 		Date dateHoraire = horaire.getDateHoraire();
-		Integer heureHoraire = horaire.getHeureHoraire();
 		
 		if (dateHoraire == null) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque la disponibilité du joueur");
-		}
-		if (heureHoraire == null) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque la disponibilité du joueur");
 		}
 		
@@ -96,7 +92,7 @@ public class HoraireController {
 	 * @param idHoraire
 	 * @return supprime horaire
 	 */
-	@DeleteMapping("/delete/{idHoraires}")
+	@DeleteMapping("/delete/{idHoraire}")
 	public ResponseEntity<?> deleteHoraire(@PathVariable Integer idHoraire)
 	{
 		try
@@ -120,12 +116,8 @@ public class HoraireController {
 		
 		Horaire modificationHoraire = null;
 		Date dateHoraire = horaire.getDateHoraire();
-		Integer heureHoraire = horaire.getHeureHoraire();
 		
 		if (dateHoraire == null) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque la disponibilité du joueur");
-		}
-		if (heureHoraire == null) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque la disponibilité du joueur");
 		}
 		

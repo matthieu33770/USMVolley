@@ -78,7 +78,7 @@ public class InscrireController {
 		Inscrire newInscrire = null;
 		String disponibleInscrire = inscrire.getDisponible();
 		
-		if (disponibleInscrire == null) {
+		if ((disponibleInscrire == null) || (disponibleInscrire.isEmpty())){
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque la disponibilité du joueur");
 		}
 		
@@ -116,7 +116,7 @@ public class InscrireController {
 		Inscrire modificationInscrire = null;
 		String disponibleInscrire = inscrire.getDisponible();
 		
-		if (disponibleInscrire == null) {
+		if ((disponibleInscrire == null) || (disponibleInscrire.isEmpty())){
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque la disponibilité du joueur");
 		}
 		

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import usmvolley.model.Inscrire;
+import usmvolley.model.Manifestations;
 import usmvolley.repository.ManifestationsRepository;
 
 @RestController
@@ -28,75 +28,79 @@ public class ManifestationController {
 	private ManifestationsRepository manifestationsRepo;
 	
 	/**
-	 * Methode Voir tous les inscrire
-	 * @return liste de tous les inscrire
+	 * Methode Voir toutes les manifestations
+	 * @return liste de toutes les manifestations
 	 */
-	@GetMapping("/get/inscrire")
-	public ResponseEntity<List<Inscrire>> getListeInscrire() {
+	@GetMapping("/get/manifestations")
+	public ResponseEntity<List<Manifestations>> getListeManifestations() {
 		
-		List<Inscrire> listeInscrire = null;
+		List<Manifestations> listeManifestations = null;
 		
 		try {
-			listeInscrire = manifestationsRepo.findAll();
+			listeManifestations = manifestationsRepo.findAll();
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		}
 		
-		return ResponseEntity.status(HttpStatus.OK).body(listeInscrire);
+		return ResponseEntity.status(HttpStatus.OK).body(listeManifestations);
 	}
 	
 	/**
-	 * Methode Voir un Inscrire
-	 * @return liste un Inscrire
+	 * Methode Voir une manifestation
+	 * @return liste une manifestation
 	 */
-	@GetMapping("/get/unInscrire/{idInscrire}")
-	public ResponseEntity<?> getUnInscrire(@PathVariable Integer idInscrire) {
+	@GetMapping("/get/uneManifestation/{idManifestation}")
+	public ResponseEntity<?> getUneManifestation(@PathVariable Integer idManifestation) {
 		
-		Optional<Inscrire> inscrire = null;
+		Optional<Manifestations> manifestation = null;
 		
 		try {
-			inscrire = manifestationsRepo.findById(idInscrire);
+			manifestation = manifestationsRepo.findById(idManifestation);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
 		
-		if (inscrire == null) {
+		if (manifestation == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		}
 		
-		return ResponseEntity.status(HttpStatus.OK).body(inscrire);
+		return ResponseEntity.status(HttpStatus.OK).body(manifestation);
 	}
 	
 	/**
 	 * Methode CREATE
-	 * @param information Inscrire
-	 * @return ajoute Inscrire
+	 * @param information Manifestation
+	 * @return ajoute une Manifestation
 	 */
 	@PostMapping("/create")
-	public ResponseEntity<?> addInscrire(@RequestBody Inscrire inscrire) {
+	public ResponseEntity<?> addManifestation(@RequestBody Manifestations manifestation) {
 		
-		Inscrire newInscrire = null;
-		String disponibleInscrire = inscrire.getDisponible();
+		Manifestations newManifestation = null;
+		String libelleManifestation = manifestation.getLibelleManifestation();
+		String periodiciteManifestation = manifestation.getPeriodicite();
 		
-		if (disponibleInscrire == null) {
+		if ((libelleManifestation == null) || (libelleManifestation.isEmpty())) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque la disponibilité du joueur");
+		}
+		if ((periodiciteManifestation == null) || (periodiciteManifestation.isEmpty())) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque la disponibilité du joueur");
 		}
 		
-		newInscrire = manifestationsRepo.save(inscrire);
-		return ResponseEntity.status(HttpStatus.CREATED).body(newInscrire);
+		newManifestation = manifestationsRepo.save(manifestation);
+		return ResponseEntity.status(HttpStatus.CREATED).body(newManifestation);
 	}
 	
 	/**
 	 * Methode DELETE
-	 * @param idInscrire
-	 * @return supprime Inscrire
+	 * @param idManifestation
+	 * @return supprime une Manifestation
 	 */
-	@DeleteMapping("/delete/{idInscrire}")
-	public ResponseEntity<?> deleteInscrire(@PathVariable Integer idInscrire)
+	@DeleteMapping("/delete/{idManifestation}")
+	public ResponseEntity<?> deleteManifestation(@PathVariable Integer idManifestation)
 	{
 		try
 		{
-			manifestationsRepo.deleteById(idInscrire);
+			manifestationsRepo.deleteById(idManifestation);
 		} catch (Exception e)
 		{
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -106,28 +110,32 @@ public class ManifestationController {
 	
 	/**
 	 * Methode UPDATE
-	 * @param information Inscrire et idInscrire
-	 * @return modifie un Inscrire
+	 * @param information Manifestation et idManifestation
+	 * @return modifie une Manifestation
 	 */
-	@PutMapping("/update/{idInscrire}")
-	public ResponseEntity<?> updateInscrire(@RequestBody Inscrire inscrire, @PathVariable Integer idInscrire) throws Exception
+	@PutMapping("/update/{idManifestation}")
+	public ResponseEntity<?> updateManifestation(@RequestBody Manifestations manifestation, @PathVariable Integer idManifestation) throws Exception
 	{
 		
-		Inscrire modificationInscrire = null;
-		String disponibleInscrire = inscrire.getDisponible();
+		Manifestations modificationManifestation = null;
+		String libelleManifestation = manifestation.getLibelleManifestation();
+		String periodiciteManifestation = manifestation.getPeriodicite();
 		
-		if (disponibleInscrire == null) {
+		if ((libelleManifestation == null) || (libelleManifestation.isEmpty())) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque la disponibilité du joueur");
+		}
+		if ((periodiciteManifestation == null) || (periodiciteManifestation.isEmpty())) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque la disponibilité du joueur");
 		}
 		
 		try
 		{
-			modificationInscrire = manifestationsRepo.save(inscrire);
+			modificationManifestation = manifestationsRepo.save(manifestation);
 		} catch (Exception e)
 		{
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		}
 		
-		return ResponseEntity.status(HttpStatus.OK).body(modificationInscrire);
+		return ResponseEntity.status(HttpStatus.OK).body(modificationManifestation);
 	}
 }

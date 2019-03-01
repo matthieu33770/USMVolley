@@ -78,7 +78,7 @@ public class PossederController {
 		Posseder newPosseder = null;
 		String saisonPosseder = posseder.getSaison();
 		
-		if (saisonPosseder == null) {
+		if ((saisonPosseder == null) || (saisonPosseder.isEmpty())){
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque la saison");
 		}
 		
@@ -116,7 +116,7 @@ public class PossederController {
 		Posseder modificationPosseder = null;
 		String saisonPosseder = posseder.getSaison();
 		
-		if (saisonPosseder == null) {
+		if ((saisonPosseder == null) || (saisonPosseder.isEmpty())){
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque la saison");
 		}
 		

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import usmvolley.model.Inscrire;
+import usmvolley.model.Creneau;
 import usmvolley.repository.CreneauRepository;
 
 @RestController
@@ -28,75 +28,75 @@ public class CreneauController {
 	private CreneauRepository creneauxRepo;
 	
 	/**
-	 * Methode Voir tous les inscrire
-	 * @return liste de tous les inscrire
+	 * Methode Voir tous les creneaux
+	 * @return liste de tous les creneaux
 	 */
-	@GetMapping("/get/inscrire")
-	public ResponseEntity<List<Inscrire>> getListeInscrire() {
+	@GetMapping("/get/creneaux")
+	public ResponseEntity<List<Creneau>> getListeCreneaux() {
 		
-		List<Inscrire> listeInscrire = null;
+		List<Creneau> listeCreneaux = null;
 		
 		try {
-			listeInscrire = creneauxRepo.findAll();
+			listeCreneaux = creneauxRepo.findAll();
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		}
 		
-		return ResponseEntity.status(HttpStatus.OK).body(listeInscrire);
+		return ResponseEntity.status(HttpStatus.OK).body(listeCreneaux);
 	}
 	
 	/**
-	 * Methode Voir un Inscrire
-	 * @return liste un Inscrire
+	 * Methode Voir un creneaux
+	 * @return liste un creneaux
 	 */
-	@GetMapping("/get/unInscrire/{idInscrire}")
-	public ResponseEntity<?> getUnInscrire(@PathVariable Integer idInscrire) {
+	@GetMapping("/get/unInscrire/{idCreneau}")
+	public ResponseEntity<?> getUnCreneau(@PathVariable Integer idCreneau) {
 		
-		Optional<Inscrire> inscrire = null;
+		Optional<Creneau> creneau = null;
 		
 		try {
-			inscrire = creneauxRepo.findById(idInscrire);
+			creneau = creneauxRepo.findById(idCreneau);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
 		
-		if (inscrire == null) {
+		if (creneau == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		}
 		
-		return ResponseEntity.status(HttpStatus.OK).body(inscrire);
+		return ResponseEntity.status(HttpStatus.OK).body(creneau);
 	}
 	
 	/**
 	 * Methode CREATE
-	 * @param information Inscrire
-	 * @return ajoute Inscrire
+	 * @param information creneau
+	 * @return ajoute creneau
 	 */
 	@PostMapping("/create")
-	public ResponseEntity<?> addInscrire(@RequestBody Inscrire inscrire) {
+	public ResponseEntity<?> addCreneau(@RequestBody Creneau creneau) {
 		
-		Inscrire newInscrire = null;
-		String disponibleInscrire = inscrire.getDisponible();
+		Creneau newCreneau = null;
+		String creneauCr = creneau.getCreneau();
 		
-		if (disponibleInscrire == null) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque la disponibilité du joueur");
+		if ((creneauCr == null) || (creneauCr.isEmpty())) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le nom du créneau");
 		}
 		
-		newInscrire = creneauxRepo.save(inscrire);
-		return ResponseEntity.status(HttpStatus.CREATED).body(newInscrire);
+		newCreneau = creneauxRepo.save(creneau);
+		return ResponseEntity.status(HttpStatus.CREATED).body(newCreneau);
 	}
 	
 	/**
 	 * Methode DELETE
-	 * @param idInscrire
-	 * @return supprime Inscrire
+	 * @param idCreneau
+	 * @return supprime creneau
 	 */
-	@DeleteMapping("/delete/{idInscrire}")
-	public ResponseEntity<?> deleteInscrire(@PathVariable Integer idInscrire)
+	@DeleteMapping("/delete/{idCreneau}")
+	public ResponseEntity<?> deleteCreneau(@PathVariable Integer idCreneau)
 	{
 		try
 		{
-			creneauxRepo.deleteById(idInscrire);
+			creneauxRepo.deleteById(idCreneau);
 		} catch (Exception e)
 		{
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -106,28 +106,28 @@ public class CreneauController {
 	
 	/**
 	 * Methode UPDATE
-	 * @param information Inscrire et idInscrire
-	 * @return modifie un Inscrire
+	 * @param information Creneau et idCreneau
+	 * @return modifie un Creneau
 	 */
-	@PutMapping("/update/{idInscrire}")
-	public ResponseEntity<?> updateInscrire(@RequestBody Inscrire inscrire, @PathVariable Integer idInscrire) throws Exception
+	@PutMapping("/update/{idCreneau}")
+	public ResponseEntity<?> updateCreneau(@RequestBody Creneau creneau, @PathVariable Integer idCreneau) throws Exception
 	{
 		
-		Inscrire modificationInscrire = null;
-		String disponibleInscrire = inscrire.getDisponible();
+		Creneau modificationCreneau = null;
+		String creneauCr = creneau.getCreneau();
 		
-		if (disponibleInscrire == null) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque la disponibilité du joueur");
+		if ((creneauCr == null) || (creneauCr.isEmpty())) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le nom du créneau");
 		}
 		
 		try
 		{
-			modificationInscrire = creneauxRepo.save(inscrire);
+			modificationCreneau = creneauxRepo.save(creneau);
 		} catch (Exception e)
 		{
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		}
 		
-		return ResponseEntity.status(HttpStatus.OK).body(modificationInscrire);
+		return ResponseEntity.status(HttpStatus.OK).body(modificationCreneau);
 	}
 }

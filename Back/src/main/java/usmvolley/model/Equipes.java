@@ -31,20 +31,15 @@ public class Equipes implements Serializable {
 	@ManyToMany(cascade = CascadeType.REMOVE, mappedBy = "equipes")
 	@JsonIgnore
 	private Collection<Joueurs> joueurs;
-	
-	@ManyToOne
-	@JoinColumn(name = "id_manifestation")
-	private Manifestations manifestation;
 
 	public Equipes() {
 	}
 
-	public Equipes(Integer idEquipe, String libelleEquipe, Collection<Joueurs> joueurs, Manifestations manifestation) {
+	public Equipes(Integer idEquipe, String libelleEquipe, Collection<Joueurs> joueurs) {
 		super();
 		this.idEquipe = idEquipe;
 		this.libelleEquipe = libelleEquipe;
 		this.joueurs = joueurs;
-		this.manifestation = manifestation;
 	}
 
 	public int getIdEquipe() {
@@ -71,18 +66,10 @@ public class Equipes implements Serializable {
 		this.joueurs = joueurs;
 	}
 
-	public Manifestations getManifestation() {
-		return manifestation;
-	}
-
-	public void setManifestation(Manifestations manifestation) {
-		this.manifestation = manifestation;
-	}
-
 	@Override
 	public String toString() {
 		return "Equipes [idEquipe=" + idEquipe + ", libelleEquipe=" + libelleEquipe + ", joueurs=" + joueurs
-				+ ", manifestation=" + manifestation + "]";
+				+ "]";
 	}
 
 }

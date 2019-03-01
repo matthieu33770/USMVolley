@@ -69,6 +69,28 @@ public class UsersController {
 	}
 	
 	/**
+	 * Methode Voir un user
+	 * @return liste un user
+	 */
+	@GetMapping("/get/unUser/{username}")
+	public ResponseEntity<?> getUserByUsername(@PathVariable String userName) {
+		
+		Optional<Users> user = null;
+		
+		try {
+			user = usersRepo.findUserByUsername(userName);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+		
+		if (user == null) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+		}
+		
+		return ResponseEntity.status(HttpStatus.OK).body(user);
+	}
+	
+	/**
 	 * Methode CREATE
 	 * @param information user
 	 * @return ajoute un user

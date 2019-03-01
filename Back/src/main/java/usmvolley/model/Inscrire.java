@@ -27,22 +27,16 @@ public class Inscrire implements Serializable {
 	private Boolean isSelectionne;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_manifestation")
-	private Manifestations manifestation;
-	
-	@ManyToOne
 	@JoinColumn(name = "id_joueur")
 	private Joueurs joueur;
 
 	public Inscrire() {
 	}
 
-	public Inscrire(Integer idInscrire, String disponible, Boolean isSelectionne, Manifestations manifestation,
-			Joueurs joueur) {
+	public Inscrire(Integer idInscrire, String disponible, Boolean isSelectionne, Joueurs joueur) {
 		this.idInscrire = idInscrire;
 		this.disponible = disponible;
 		this.isSelectionne = isSelectionne;
-		this.manifestation = manifestation;
 		this.joueur = joueur;
 	}
 
@@ -69,15 +63,6 @@ public class Inscrire implements Serializable {
 	public void setIsSelectionne(Boolean isSelectionne) {
 		this.isSelectionne = isSelectionne;
 	}
-
-	public Manifestations getManifestation() {
-		return manifestation;
-	}
-
-	public void setManifestation(Manifestations manifestation) {
-		this.manifestation = manifestation;
-	}
-
 	public Joueurs getJoueur() {
 		return joueur;
 	}
@@ -89,6 +74,6 @@ public class Inscrire implements Serializable {
 	@Override
 	public String toString() {
 		return "Inscrire [idInscrire=" + idInscrire + ", disponible=" + disponible + ", isSelectionne=" + isSelectionne
-				+ ", manifestation=" + manifestation + ", joueur=" + joueur + "]";
+				+ ", joueur=" + joueur + "]";
 	}
 }

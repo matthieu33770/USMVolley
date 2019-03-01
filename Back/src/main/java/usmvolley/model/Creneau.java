@@ -25,20 +25,15 @@ public class Creneau implements Serializable {
 	private String creneau;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_manifestation")
-	private Manifestations manifestation;
-	
-	@ManyToOne
 	@JoinColumn(name = "id_categorie")
 	private Categories categorie;
 
 	public Creneau() {
 	}
 
-	public Creneau(Integer idCreneau, String creneau, Manifestations manifestation, Categories categorie) {
+	public Creneau(Integer idCreneau, String creneau, Categories categorie) {
 		this.idCreneau = idCreneau;
 		this.creneau = creneau;
-		this.manifestation = manifestation;
 		this.categorie = categorie;
 	}
 
@@ -58,14 +53,6 @@ public class Creneau implements Serializable {
 		this.creneau = creneau;
 	}
 
-	public Manifestations getManifestation() {
-		return manifestation;
-	}
-
-	public void setManifestation(Manifestations manifestation) {
-		this.manifestation = manifestation;
-	}
-
 	public Categories getCategorie() {
 		return categorie;
 	}
@@ -76,7 +63,6 @@ public class Creneau implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Creneau [idCreneau=" + idCreneau + ", creneau=" + creneau + ", manifestation=" + manifestation
-				+ ", categorie=" + categorie + "]";
+		return "Creneau [idCreneau=" + idCreneau + ", creneau=" + creneau + ", categorie=" + categorie + "]";
 	}
 }

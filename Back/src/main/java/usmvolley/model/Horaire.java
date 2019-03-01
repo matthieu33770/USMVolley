@@ -26,19 +26,14 @@ public class Horaire implements Serializable {
 	
 	@Column(name = "heure_horaire")
 	private Integer heureHoraire;
-	
-	@ManyToOne
-	@JoinColumn(name = "id_manifestation")
-	private Manifestations manifestation;
 
 	public Horaire() {
 	}
 
-	public Horaire(Integer idHoraire, Date dateHoraire, Integer heureHoraire, Manifestations manifestation) {
+	public Horaire(Integer idHoraire, Date dateHoraire, Integer heureHoraire) {
 		this.idHoraire = idHoraire;
 		this.dateHoraire = dateHoraire;
 		this.heureHoraire = heureHoraire;
-		this.manifestation = manifestation;
 	}
 
 	public Integer getIdHoraire() {
@@ -65,17 +60,9 @@ public class Horaire implements Serializable {
 		this.heureHoraire = heureHoraire;
 	}
 
-	public Manifestations getManifestation() {
-		return manifestation;
-	}
-
-	public void setManifestation(Manifestations manifestation) {
-		this.manifestation = manifestation;
-	}
-
 	@Override
 	public String toString() {
 		return "Horaire [idHoraire=" + idHoraire + ", dateHoraire=" + dateHoraire + ", heureHoraire=" + heureHoraire
-				+ ", manifestation=" + manifestation + "]";
+				+ "]";
 	}
 }

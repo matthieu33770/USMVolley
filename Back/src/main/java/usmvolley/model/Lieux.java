@@ -22,19 +22,14 @@ public class Lieux implements Serializable {
 	
 	@Column(name = "lieu")
 	private String lieu;
-	
-	@ManyToOne
-	@JoinColumn(name = "id_manifestation")
-	private Manifestations manifestation;
 
 	public Lieux() {
 	}
 	
-	public Lieux(Integer idLieu, String lieu, Manifestations manifestation) {
+	public Lieux(Integer idLieu, String lieu) {
 		super();
 		this.idLieu = idLieu;
 		this.lieu = lieu;
-		this.manifestation = manifestation;
 	}
 
 	public Integer getIdLieu() {
@@ -53,16 +48,8 @@ public class Lieux implements Serializable {
 		this.lieu = lieu;
 	}
 
-	public Manifestations getManifestation() {
-		return manifestation;
-	}
-
-	public void setManifestation(Manifestations manifestation) {
-		this.manifestation = manifestation;
-	}
-
 	@Override
 	public String toString() {
-		return "Lieux [idLieu=" + idLieu + ", lieu=" + lieu + ", manifestation=" + manifestation + "]";
+		return "Lieux [idLieu=" + idLieu + ", lieu=" + lieu + "]";
 	}
 }

@@ -22,19 +22,14 @@ public class Statuts implements Serializable {
 	
 	@Column(name = "libelle_statut")
 	private String libelleStatut;
-	
-	@ManyToOne
-	@JoinColumn(name = "id_manifestation")
-	private Manifestations manifestation;
 
 	public Statuts() {
 	}
 
-	public Statuts(Integer idStatut, String libelleStatut, Manifestations manifestation) {
+	public Statuts(Integer idStatut, String libelleStatut) {
 		super();
 		this.idStatut = idStatut;
 		this.libelleStatut = libelleStatut;
-		this.manifestation = manifestation;
 	}
 
 	public Integer getIdStatut() {
@@ -53,17 +48,8 @@ public class Statuts implements Serializable {
 		this.libelleStatut = libelleStatut;
 	}
 
-	public Manifestations getManifestation() {
-		return manifestation;
-	}
-
-	public void setManifestation(Manifestations manifestation) {
-		this.manifestation = manifestation;
-	}
-
 	@Override
 	public String toString() {
-		return "Statuts [idStatut=" + idStatut + ", libelleStatut=" + libelleStatut + ", manifestation=" + manifestation
-				+ "]";
+		return "Statuts [idStatut=" + idStatut + ", libelleStatut=" + libelleStatut + "]";
 	}
 }

@@ -20,6 +20,9 @@ public class Licence implements Serializable {
 	@Column(name = "id_licence")
 	private Integer idLicence;
 	
+	@Column(name = "numero_licence")
+	private String numeroLicence;
+	
 	@Column(name = "prix")
 	private Double prixLicence;
 	
@@ -45,9 +48,11 @@ public class Licence implements Serializable {
 	public Licence() {
 	}
 
-	public Licence(Integer idLicence, Double prixLicence, Categories categories, String formulaire,
-			String certificatMedical, Boolean isPaye, String idPaiement, Double montantPaye) {
+	public Licence(Integer idLicence, String numeroLicence, Double prixLicence, Categories categories,
+			String formulaire, String certificatMedical, Boolean isPaye, String idPaiement, Double montantPaye) {
+		super();
 		this.idLicence = idLicence;
+		this.numeroLicence = numeroLicence;
 		this.prixLicence = prixLicence;
 		this.categories = categories;
 		this.formulaire = formulaire;
@@ -56,8 +61,6 @@ public class Licence implements Serializable {
 		this.idPaiement = idPaiement;
 		this.montantPaye = montantPaye;
 	}
-
-
 
 	public Integer getIdLicence() {
 		return idLicence;
@@ -123,10 +126,19 @@ public class Licence implements Serializable {
 		this.montantPaye = montantPaye;
 	}
 
+	public String getNumeroLicence() {
+		return numeroLicence;
+	}
+
+	public void setNumeroLicence(String numeroLicence) {
+		this.numeroLicence = numeroLicence;
+	}
+
 	@Override
 	public String toString() {
-		return "Licence [idLicence=" + idLicence + ", prixLicence=" + prixLicence + ", categories=" + categories
-				+ ", formulaire=" + formulaire + ", certificatMedical=" + certificatMedical + ", isPaye=" + isPaye
-				+ ", idPaiement=" + idPaiement + ", montantPaye=" + montantPaye + "]";
+		return "Licence [idLicence=" + idLicence + ", numeroLicence=" + numeroLicence + ", prixLicence=" + prixLicence
+				+ ", categories=" + categories + ", formulaire=" + formulaire + ", certificatMedical="
+				+ certificatMedical + ", isPaye=" + isPaye + ", idPaiement=" + idPaiement + ", montantPaye="
+				+ montantPaye + "]";
 	}
 }

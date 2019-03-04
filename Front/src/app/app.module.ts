@@ -16,6 +16,7 @@ import { PartenairesComponent } from './partenaires/partenaires.component';
 import { ListeManifestationComponent } from './liste-manifestation/liste-manifestation.component';
 import { DetailManifestationComponent } from './detail-manifestation/detail-manifestation.component';
 import { GestionComponent } from './gestion/gestion.component';
+import { ListeJoueursComponent } from './liste-joueurs/liste-joueurs.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { GestionComponent } from './gestion/gestion.component';
     PartenairesComponent,
     ListeManifestationComponent,
     DetailManifestationComponent,
-    GestionComponent
+    GestionComponent,
+    ListeJoueursComponent
   ],
   imports: [
     BrowserModule,

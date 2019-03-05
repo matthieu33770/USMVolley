@@ -16,11 +16,9 @@ export class JoueursService {
   availableJoueur$: BehaviorSubject<Joueur[]> = new BehaviorSubject(this.availableJoueur);
 
   constructor(private httpClient: HttpClient) {  }
-  /**
-   * La fonction getJoueurs() est privée car elle n'a besoin d'être appellée que dans le service.
-   */
+
   public getJoueurs(): Observable<Joueur[]> {
-    return this.httpClient.get<Joueur[]>('http://localhost:8080/homeediteur/get/alleditors');
+    return this.httpClient.get<Joueur[]>('http://localhost:8080/joueurs/get/joueurs');
   }
 
   public publishJoueurs() {
@@ -36,16 +34,16 @@ export class JoueursService {
    * grâce à son ID.
    * @param idJoueur l'id qu'il faut rechercher dans la liste.
    */
-  public findJoueur(idJoueur: number): Observable<Joueur> {
-    if (idJoueur) {
-      if (!this.availableJoueur) {
-        return this.getJoueurs().pipe(map(joueurs => joueurs.find(joueur => joueur.idJoueur === idJoueur)));
-      }
-      return of(this.availableJoueur.find(joueur => joueur.idJoueur === idJoueur));
-    } else {
-      return of(new Joueur(null, ''));
-    }
-  }
+  // public findJoueur(idJoueur: number): Observable<Joueur> {
+  //   if (idJoueur) {
+  //     if (!this.availableJoueur) {
+  //       return this.getJoueurs().pipe(map(joueurs => joueurs.find(joueur => joueur.idJoueur === idJoueur)));
+  //     }
+  //     return of(this.availableJoueur.find(joueur => joueur.idJoueur === idJoueur));
+  //   } else {
+  //     return of(new Joueur(null, ''));
+  //   }
+  // }
 
   /**
    * Fonction de création d'un nouveau joueur.
@@ -53,7 +51,7 @@ export class JoueursService {
    * @param newJoueur le nouveau livre à créer
    */
   public createJoueur(newJoueur: Joueur) {
-    this.httpClient.post<Joueur>('http://localhost:8080/homeediteur/post', newJoueur).subscribe(
+    this.httpClient.post<Joueur>('http://localhost:8080/joueurs/create', newJoueur).subscribe(
       createJoueur => {
         this.availableJoueur.push(createJoueur);
       }

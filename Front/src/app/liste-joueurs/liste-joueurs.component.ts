@@ -14,16 +14,17 @@ import { JoueursService } from '../joueurs.service';
 export class ListeJoueursComponent implements OnInit {
 
   joueurList: BehaviorSubject<Joueur[]>;
-  displayedColumns: string[] = ['select', 'idEditeur', 'nomEditeur'];
+  displayedColumns: string[] = ['select', 'nomJoueur', 'prenomJoueur', 'sexeJoueur', 'numeroAdresseJoueur', 'rueJoueur', 'codePostalJoueur', 'villeJoueur', 'mailJoueur', 'telephone1Joueur', 'telephone2Joueur', 'dateNaissanceJoueur', 'avoirJoueur', 'userJoueur', 'equipesJoueur'];
   dataSource = new MatTableDataSource<Joueur>();
   selection = new SelectionModel<Joueur>(false, []);
 
   constructor(private router: Router, private joueurService: JoueursService) { }
 
   ngOnInit() {
-    this.getJoueur();
-    console.log(this.getJoueur);
-    this.getJoueur();
+    this.joueurService.getJoueurs().subscribe(Joueurs => this.dataSource = new MatTableDataSource<Joueur>(Joueurs));
+    // this.getJoueur();
+    // console.log(this.getJoueur);
+    // this.getJoueur();
   }
 
   getJoueur(): void {
@@ -31,7 +32,7 @@ export class ListeJoueursComponent implements OnInit {
   }
 
   onEdit(selected: Joueur[]) {
-    this.router.navigate(['detailediteur/' + selected[0].idJoueur]);
+    this.router.navigate(['detailjoueur/' + selected[0].idJoueur]);
   }
 
   delete(selected: Joueur[]) {

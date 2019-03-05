@@ -1,0 +1,12 @@
+.gestion {
+    font-family: Maven Pro;
+    display: flex;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    justify-content: center;
+}
+
+.button {
+    margin-top: 5px;
+    margin-bottom: 7px;
+  }

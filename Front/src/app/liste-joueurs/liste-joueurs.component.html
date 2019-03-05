@@ -1,4 +1,4 @@
-<div class="edition">
+<div class="joueurs">
   <div class="left">
   <h1>Les Joueurs</h1>
   
@@ -24,16 +24,88 @@
       </td>
     </ng-container>
 
-    <!-- Id Column -->
-    <ng-container matColumnDef="idEditeur">
-      <th mat-header-cell *matHeaderCellDef>Id Editeur</th>
-      <td mat-cell *matCellDef="let editeur">{{editeur.idEditeur}}</td>
+    <!-- Nom Column -->
+    <ng-container matColumnDef="nomJoueur">
+      <th mat-header-cell *matHeaderCellDef>Nom</th>
+      <td mat-cell *matCellDef="let joueur">{{joueur.nom}}</td>
+    </ng-container>
+    
+    <!-- Prénom Column -->
+    <ng-container matColumnDef="prenomJoueur">
+      <th mat-header-cell *matHeaderCellDef>Prénom</th>
+      <td mat-cell *matCellDef="let joueur">{{joueur.prenom}}</td>
+    </ng-container>
+    
+    <!-- Sexe Column -->
+    <ng-container matColumnDef="sexeJoueur">
+      <th mat-header-cell *matHeaderCellDef>Sexe</th>
+      <td mat-cell *matCellDef="let joueur">{{joueur.sexe}}</td>
+    </ng-container>
+    
+    <!-- Numero Rue Column -->
+    <ng-container matColumnDef="numeroAdresseJoueur">
+      <th mat-header-cell *matHeaderCellDef>Numero</th>
+      <td mat-cell *matCellDef="let joueur">{{joueur.numeroAdresse}}</td>
+    </ng-container>
+    
+    <!-- Rue Column -->
+    <ng-container matColumnDef="rueJoueur">
+      <th mat-header-cell *matHeaderCellDef>Rue</th>
+      <td mat-cell *matCellDef="let joueur">{{joueur.rue}}</td>
+    </ng-container>
+    
+    <!-- Code Postal Column -->
+    <ng-container matColumnDef="codePostalJoueur">
+      <th mat-header-cell *matHeaderCellDef>Code Postal</th>
+      <td mat-cell *matCellDef="let joueur">{{joueur.codePostal}}</td>
     </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="nomEditeur">
-      <th mat-header-cell *matHeaderCellDef>Maison d'édition</th>
-      <td mat-cell *matCellDef="let editeur">{{editeur.nomEditeur}}</td>
+    <!-- Ville Column -->
+    <ng-container matColumnDef="villeJoueur">
+      <th mat-header-cell *matHeaderCellDef>Ville</th>
+      <td mat-cell *matCellDef="let joueur">{{joueur.ville}}</td>
+    </ng-container>
+
+    <!-- Mail Column -->
+    <ng-container matColumnDef="mailJoueur">
+      <th mat-header-cell *matHeaderCellDef>@mail</th>
+      <td mat-cell *matCellDef="let joueur">{{joueur.mail}}</td>
+    </ng-container>
+
+    <!-- Tel1 Column -->
+    <ng-container matColumnDef="telephone1Joueur">
+      <th mat-header-cell *matHeaderCellDef>Téléphone</th>
+      <td mat-cell *matCellDef="let joueur">{{joueur.telephone1}}</td>
+    </ng-container>
+
+    <!-- Tel2 Column -->
+    <ng-container matColumnDef="telephone2Joueur">
+      <th mat-header-cell *matHeaderCellDef>Téléphone</th>
+      <td mat-cell *matCellDef="let joueur">{{joueur.telephone2}}</td>
+    </ng-container>
+
+    <!-- Date de naissance Column -->
+    <ng-container matColumnDef="dateNaissanceJoueur">
+      <th mat-header-cell *matHeaderCellDef>Date de Naissance</th>
+      <td mat-cell *matCellDef="let joueur">{{joueur.dateNaissance}}</td>
+    </ng-container>
+
+    <!-- Avoir Column -->
+    <ng-container matColumnDef="avoirJoueur">
+      <th mat-header-cell *matHeaderCellDef>Licence</th>
+      <td mat-cell *matCellDef="let joueur">{{joueur.avoirJoueur}}</td>
+    </ng-container>
+
+    <!-- User Column -->
+    <ng-container matColumnDef="userJoueur">
+      <th mat-header-cell *matHeaderCellDef>Utilisateur</th>
+      <td mat-cell *matCellDef="let joueur">{{joueur.userJoueur}}</td>
+    </ng-container>
+
+    <!-- Equipe Column -->
+    <ng-container matColumnDef="equipesJoueur">
+      <th mat-header-cell *matHeaderCellDef>Equipes</th>
+      <td mat-cell *matCellDef="let joueur">{{joueur.equipesJoueur}}</td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

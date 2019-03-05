@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Joueur } from './Model/Joueur';
+import { Joueur } from '../Model/Joueur';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { User } from '../Model/User';
+import { Role } from '../Model/Role';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +18,18 @@ export class JoueursService {
   availableJoueur$: BehaviorSubject<Joueur[]> = new BehaviorSubject(this.availableJoueur);
 
   constructor(private httpClient: HttpClient) {  }
+
+  getUsers(): Observable<User[]> {
+    return this.httpClient.get<User[]>('http://localhost:8080/users/get/users');
+  }
+
+  getRoles(): Observable<Role[]> {
+    return this.httpClient.get<Role[]>('http://localhost:8080/roles/get/roles');
+  }
+
+  getPlayers(): Observable<Joueur[]> {
+    return this.httpClient.get<Joueur[]>('http://localhost:8080/joueurs/get/joueurs');
+  }
 
   public getJoueurs(): Observable<Joueur[]> {
     return this.httpClient.get<Joueur[]>('http://localhost:8080/joueurs/get/joueurs');

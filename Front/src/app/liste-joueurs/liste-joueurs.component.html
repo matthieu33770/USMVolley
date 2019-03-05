@@ -1,17 +1,19 @@
 <div class="joueurs">
-  <div class="left">
-  <h1>Les Joueurs</h1>
+  <div class="titre">
+  <h1>Les joueurs et les droits</h1>
+  </div>
   
-  <div class="right">
-    <button mat-raised-button routerLink="/newjoueur">Nouveau</button>
+  <div class="boutons">
+    <button mat-raised-button (click)="exportAsXLSX()">Exporter</button>
+    <button mat-raised-button color="accent" routerLink="/newjoueur">Nouveau</button>
     <button mat-raised-button (click)="onEdit(selection.selected)">Editer</button>
     <button mat-raised-button color="warn" (click)="delete(selection.selected)">Supprimer</button>
   </div>
-  
+  <br>
   <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource">
+    <table mat-table [dataSource]="dataSource" class="tableau">
   
-       <!-- Checkbox Column -->
+    <!-- Checkbox Column -->
     <ng-container matColumnDef="select">
       <th mat-header-cell *matHeaderCellDef>
         
@@ -90,16 +92,22 @@
       <td mat-cell *matCellDef="let joueur">{{joueur.dateNaissance}}</td>
     </ng-container>
 
-    <!-- Avoir Column -->
-    <ng-container matColumnDef="avoirJoueur">
-      <th mat-header-cell *matHeaderCellDef>Licence</th>
-      <td mat-cell *matCellDef="let joueur">{{joueur.avoirJoueur}}</td>
-    </ng-container>
-
     <!-- User Column -->
     <ng-container matColumnDef="userJoueur">
-      <th mat-header-cell *matHeaderCellDef>Utilisateur</th>
-      <td mat-cell *matCellDef="let joueur">{{joueur.userJoueur}}</td>
+      <th mat-header-cell *matHeaderCellDef>Rôle</th>
+      <td mat-cell *matCellDef="let joueur">{{joueur.user.role.libelleRole}}</td>
+    </ng-container>
+
+    <!-- Licence Column -->
+    <ng-container matColumnDef="avoirJoueur">
+      <th mat-header-cell *matHeaderCellDef>Numéro de Licence</th>
+      <td mat-cell *matCellDef="let joueur">{{joueur.avoir.licence.numeroLicence}}</td>
+    </ng-container>
+
+    <!-- Licence Valide Column -->
+    <ng-container matColumnDef="licenceValideJoueur">
+      <th mat-header-cell *matHeaderCellDef>Licence Valide pour l'année</th>
+      <td mat-cell *matCellDef="let joueur">{{joueur.avoir.isValide}}</td>
     </ng-container>
 
     <!-- Equipe Column -->
@@ -111,4 +119,10 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+</div>
+<br>
+<div class="boutons">
+  <button mat-raised-button color="accent" routerLink="/gestion">Retour</button>
+</div>
+<br>
 </div>

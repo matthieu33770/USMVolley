@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import usmvolley.model.Role;
 import usmvolley.model.Users;
 import usmvolley.repository.UsersRepository;
 
@@ -101,7 +100,7 @@ public class UsersController {
 		Users newUser = null;
 		String mdpUser = user.getMdp();
 		String usernameUser = user.getUsername();
-		Role roleUser = user.getRole();
+		//Role roleUser = user.getRole();
 		
 		if ((mdpUser == null) || (mdpUser.isEmpty())) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le mot de passe");
@@ -109,9 +108,9 @@ public class UsersController {
 		if ((usernameUser == null) || (usernameUser.isEmpty())) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le nom d'utilisateur");
 		}
-		if (roleUser == null) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le rôle");
-		}
+		//if (roleUser == null) {
+		//	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le rôle");
+		//}
 		
 		newUser = usersRepo.save(user);
 		return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
@@ -146,7 +145,7 @@ public class UsersController {
 		Users modificationUser = null;
 		String mdpUser = user.getMdp();
 		String usernameUser = user.getUsername();
-		Role roleUser = user.getRole();
+		//Role roleUser = user.getRole();
 		
 		if ((mdpUser == null) || (mdpUser.isEmpty())) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le mot de passe");
@@ -154,9 +153,9 @@ public class UsersController {
 		if ((usernameUser == null) || (usernameUser.isEmpty())) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le nom d'utilisateur");
 		}
-		if (roleUser == null) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le rôle");
-		}
+		//if (roleUser == null) {
+		//	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le rôle");
+		//}
 		
 		try
 		{

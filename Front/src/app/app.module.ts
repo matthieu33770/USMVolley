@@ -44,10 +44,10 @@ import { ListeJoueursComponent } from './liste-joueurs/liste-joueurs.component';
     MaterialModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: function tokenGetter(){
+        tokenGetter: function tokenGetter() {
           return localStorage.getItem('access_token');
         },
-        whitelistedDomains: ['localhost:4200'],
+        whitelistedDomains: ['localhost:8080'],
         blacklistedRoutes: ['http://localhost:4200/auth/login']
       }
     })

@@ -61,13 +61,14 @@ export class JoueursService {
 
   /**
    * Fonction de création d'un nouveau joueur.
-   * Elle met à jour notre liste de joueurq et notre liste observable.
-   * @param newJoueur le nouveau livre à créer
+   * Elle met à jour notre liste de joueur et notre liste observable.
+   * @param newJoueur le nouveau joueur à créer
    */
   public createJoueur(newJoueur: Joueur) {
     this.httpClient.post<Joueur>('http://localhost:8080/joueurs/create', newJoueur).subscribe(
       createJoueur => {
         this.availableJoueur.push(createJoueur);
+        this.availableJoueur$.next(this.availableJoueur);
       }
     );
   }

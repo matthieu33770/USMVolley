@@ -68,6 +68,28 @@ public class RoleController {
 	}
 	
 	/**
+	 * Methode Voir un user
+	 * @return liste un user
+	 */
+	@GetMapping("/getRole/byUser/{username}")
+	public ResponseEntity<?> getRoleByUsername(@PathVariable String username) {
+		
+		Optional<Role> role = null;
+		
+		try {
+			role = roleRepo.findRoleByUsername(username);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+		
+		if (role == null) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+		}
+		
+		return ResponseEntity.status(HttpStatus.OK).body(role);
+	}
+	
+	/**
 	 * Methode CREATE
 	 * @param information rôle
 	 * @return ajoute un rôle

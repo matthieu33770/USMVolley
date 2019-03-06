@@ -20,13 +20,18 @@ public class Role implements Serializable {
 	
 	@Column(name = "libelle_role")
 	private String libelleRole;
+	
+	@Column(name = "username", unique = true)
+	private String username;
 
 	public Role() {
 	}
 
-	public Role(Integer idRole, String libelleRole) {
+	public Role(Integer idRole, String libelleRole, String username) {
+		super();
 		this.idRole = idRole;
 		this.libelleRole = libelleRole;
+		this.username = username;
 	}
 
 	public Integer getIdRole() {
@@ -45,8 +50,16 @@ public class Role implements Serializable {
 		this.libelleRole = libelleRole;
 	}
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	@Override
 	public String toString() {
-		return "Role [idRole=" + idRole + ", libelleRole=" + libelleRole + "]";
+		return "Role [idRole=" + idRole + ", libelleRole=" + libelleRole + ", username=" + username + "]";
 	}
 }

@@ -37,5 +37,5 @@ dependencies {
 	compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '2.1.1.RELEASE'
 	
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
-	compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.1.1.RELEASE'
+	//compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.1.1.RELEASE'
 }

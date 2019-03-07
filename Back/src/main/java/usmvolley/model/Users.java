@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Users implements Serializable {
@@ -29,17 +31,22 @@ public class Users implements Serializable {
 
 	@Column(name = "id_role")
 	private Integer role;
+	
+	@ManyToOne
+	@JoinColumn(name = "fonction")
+	private Fonctions fonction;
 
 	public Users() {
 	}
 
-	public Users(Integer idUser, String username, String mdp, boolean isValide, Integer role) {
+	public Users(Integer idUser, String username, String mdp, boolean isValide, Integer role, Fonctions fonction) {
 		super();
 		this.idUser = idUser;
 		this.username = username;
 		this.mdp = mdp;
 		this.isValide = isValide;
 		this.role = role;
+		this.fonction = fonction;
 	}
 
 	public Integer getIdUser() {
@@ -80,6 +87,14 @@ public class Users implements Serializable {
 
 	public void setRole(Integer role) {
 		this.role = role;
+	}
+
+	public Fonctions getFonction() {
+		return fonction;
+	}
+
+	public void setIdFonction(Fonctions fonction) {
+		this.fonction = fonction;
 	}
 
 	@Override

@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ExcelService } from '../Services/excel.service';
 import { Router } from '@angular/router';
 import { JoueursService } from '../Services/joueurs.service';
 import { User } from '../Model/User';
 import { Role } from '../Model/Role';
 import { Joueur } from '../Model/Joueur';
+import { Fonction } from '../Model/Fonction';
 
 @Component({
   selector: 'app-liste-joueurs',
@@ -16,9 +17,11 @@ import { Joueur } from '../Model/Joueur';
 })
 export class ListeJoueursComponent implements OnInit {
 
+  idJoueur: number;
   joueur: Joueur;
   users: User [] = [];
   roles: Role [] = [];
+  fonctions: Fonction [] = [];
   players: any = [];
   joueurList: BehaviorSubject<Joueur[]>;
   displayedColumns: string[] = ['select', 'nomJoueur', 'prenomJoueur', 'sexeJoueur', 'numeroAdresseJoueur', 'rueJoueur', 'codePostalJoueur', 'villeJoueur', 'mailJoueur', 'telephone1Joueur', 'telephone2Joueur', 'dateNaissanceJoueur', 'userJoueur', 'avoirJoueur', 'licenceValideJoueur', 'equipesJoueur'];
@@ -31,6 +34,7 @@ export class ListeJoueursComponent implements OnInit {
     this.joueurList = this.joueurService.availableJoueur$;
     this.getUser();
     this.getRole();
+    this.getFonction();
     this.getPlayer();
     this.joueurService.getJoueurs().subscribe(Joueurs => this.dataSource = new MatTableDataSource<Joueur>(Joueurs));
   }
@@ -41,20 +45,22 @@ export class ListeJoueursComponent implements OnInit {
   getRole(): void {
     this.joueurService.getRoles().subscribe(Roles => this.roles = Roles);
   }
+  getFonction(): void {
+    this.joueurService.getFonctions().subscribe(Fonctions => this.fonctions = Fonctions);
+  }
   getPlayer(): void {
     this.joueurService.getPlayers().subscribe(Joueurs => this.players = Joueurs);
   }
 
   onEdit(selected: Joueur[]) {
-    this.router.navigate(['detailjoueur/' + selected[0].idJoueur]);
+    console.log(selected[0].idJoueur);
+    this.router.navigate(['gestion/joueurs/detailjoueur/' + selected[0].idJoueur]);
   }
 
   delete(selected: Joueur[]) {
     console.log(selected);
     if (selected.length !== 0) {
-      console.log(this.joueurService.availableJoueur);
       this.joueurService.availableJoueur.splice(this.joueurService.availableJoueur.indexOf(selected[0]), 1);
-      // this.getJoueur();
       this.selection = new SelectionModel<Joueur>(false, []);
     }
   }

@@ -7,7 +7,12 @@
     <button mat-raised-button (click)="exportAsXLSX()">Exporter</button>
     <button mat-raised-button color="accent" routerLink="/newjoueur">Nouveau</button>
     <button mat-raised-button (click)="onEdit(selection.selected)">Editer</button>
-    <button mat-raised-button color="warn" (click)="delete(selection.selected)">Supprimer</button>
+    <span *ngIf="confirmDelete">
+      <span>Etes vous sûr de vouloir supprimer ce joueur ?</span>
+      <button mat-raised-button color="warn" (click)="delete(selection.selected)">Oui</button>
+      <button mat-raised-button color="accent" (click)="confirmDelete=false">Non</button>
+    </span>  
+    <button *ngIf="!confirmDelete" mat-raised-button color="warn" (click)="confirmDelete=true">Supprimer</button>
   </div>
   <br>
   <div class="mat-elevation-z8">
@@ -94,8 +99,8 @@
 
     <!-- User Column -->
     <ng-container matColumnDef="userJoueur">
-      <th mat-header-cell *matHeaderCellDef>Rôle</th>
-      <td mat-cell *matCellDef="let joueur">{{joueur.user.role.libelleRole}}</td>
+      <th mat-header-cell *matHeaderCellDef>Fonction</th>
+      <td mat-cell *matCellDef="let joueur">{{joueur.user.fonction.libelleFonction}}</td>
     </ng-container>
 
     <!-- Licence Column -->

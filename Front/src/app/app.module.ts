@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material-module';
@@ -19,6 +20,7 @@ import { ListeManifestationComponent } from './liste-manifestation/liste-manifes
 import { DetailManifestationComponent } from './detail-manifestation/detail-manifestation.component';
 import { GestionComponent } from './gestion/gestion.component';
 import { ListeJoueursComponent } from './liste-joueurs/liste-joueurs.component';
+import { DetailJoueurComponent } from './detail-joueur/detail-joueur.component';
 
 @NgModule({
   declarations: [
@@ -33,12 +35,15 @@ import { ListeJoueursComponent } from './liste-joueurs/liste-joueurs.component';
     ListeManifestationComponent,
     DetailManifestationComponent,
     GestionComponent,
-    ListeJoueursComponent
+    ListeJoueursComponent,
+    DetailJoueurComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     NoopAnimationsModule,
     MaterialModule,

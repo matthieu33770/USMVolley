@@ -132,7 +132,7 @@ public class RoleController {
 	 * @return modifie un role
 	 */
 	@PutMapping("/update/{idRole}")
-	public ResponseEntity<?> updateEquipe(@RequestBody Role role, @PathVariable Integer idRole) throws Exception
+	public ResponseEntity<?> updateRole(@RequestBody Role role, @PathVariable Integer idRole) throws Exception
 	{
 		Role modificationRole = null;
 		String libelleRole = role.getLibelleRole();

@@ -10,6 +10,7 @@ import { PartenairesComponent } from './partenaires/partenaires.component';
 import { ListeManifestationComponent } from './liste-manifestation/liste-manifestation.component';
 import { GestionComponent } from './gestion/gestion.component';
 import { ListeJoueursComponent } from './liste-joueurs/liste-joueurs.component';
+import { DetailJoueurComponent } from './detail-joueur/detail-joueur.component';
 
 const routes: Routes = [
   {path: 'equipes', component: EquipesComponent},
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path: 'manifestations', component: ListeManifestationComponent},
   {path: 'gestion', component: GestionComponent},
   {path: 'gestion/joueurs', component: ListeJoueursComponent},
+  {path: 'gestion/joueurs/detailjoueur/:idJoueur', component: DetailJoueurComponent},
   {path: '', component: AccueilComponent}
 ];
 

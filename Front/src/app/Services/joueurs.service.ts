@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Joueur } from '../Model/Joueur';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+
+import { Joueur } from '../Model/Joueur';
 import { User } from '../Model/User';
 import { Role } from '../Model/Role';
+import { Fonction } from '../Model/Fonction';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +27,10 @@ export class JoueursService {
 
   getRoles(): Observable<Role[]> {
     return this.httpClient.get<Role[]>('http://localhost:8080/roles/get/roles');
+  }
+
+  getFonctions(): Observable<Fonction[]> {
+    return this.httpClient.get<Fonction[]>('http://localhost:8080/fonctions/get/fonctions');
   }
 
   getPlayers(): Observable<Joueur[]> {
@@ -48,16 +54,16 @@ export class JoueursService {
    * grâce à son ID.
    * @param idJoueur l'id qu'il faut rechercher dans la liste.
    */
-  // public findJoueur(idJoueur: number): Observable<Joueur> {
-  //   if (idJoueur) {
-  //     if (!this.availableJoueur) {
-  //       return this.getJoueurs().pipe(map(joueurs => joueurs.find(joueur => joueur.idJoueur === idJoueur)));
-  //     }
-  //     return of(this.availableJoueur.find(joueur => joueur.idJoueur === idJoueur));
-  //   } else {
-  //     return of(new Joueur(null, ''));
-  //   }
-  // }
+  public findJoueur(idJoueur: number): Observable<Joueur> {
+    if (idJoueur) {
+      if (!this.availableJoueur) {
+        return this.getJoueurs().pipe(map(joueurs => joueurs.find(joueur => joueur.idJoueur === idJoueur)));
+      }
+      return of(this.availableJoueur.find(joueur => joueur.idJoueur === idJoueur));
+    } else {
+      return of(new Joueur(null, '', '', '', 0, '', 0, '', '', '', '', null, null, null, null));
+    }
+  }
 
   /**
    * Fonction de création d'un nouveau joueur.
@@ -75,5 +81,10 @@ export class JoueursService {
 
   getJoueurByName(nomJoueur: string): Observable<Joueur> {
     return of(this.availableJoueur.find(editeur => editeur.nomJoueur === nomJoueur));
+  }
+
+  supprimerJoueur(id: number): Joueur[] {
+    this.availableJoueur = this.availableJoueur.filter( joueur => joueur.idJoueur !== id ).slice();
+    return this.availableJoueur;
   }
 }

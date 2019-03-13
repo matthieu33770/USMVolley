@@ -1,5 +1,5 @@
-<h1>Edition du profil de <strong>{{ editionJoueur.nom }} {{ editionJoueur.prenom }}</strong></h1>
-<div class="edition">
+<div class="edition"></div>
+<h1 class="titre">Edition du profil de <strong>{{ editionJoueur.nom }} {{ editionJoueur.prenom }}</strong></h1>
 <div class="identification">
   <mat-form-field>
       <input matInput placeholder="Nom" [(ngModel)]="editionJoueur.nom" name="nom">
@@ -42,24 +42,17 @@
   </mat-form-field>
 <div class="donneesClub">  
   <mat-form-field>
-    <input matInput placeholder="Fonction" [(ngModel)]="editionJoueur.user.fonction.libelleFonction" name="libelle">
+    <mat-select placeholder="Fonction" [(ngModel)]="editionJoueur.user.fonction.libelleFonction" name="libelleFonction">
+      <mat-option *ngFor="let fonction of fonctionList" [value]="fonction.libelleFonction">
+        {{fonction.libelleFonction}}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
   <mat-form-field>
     <input matInput placeholder="Numero de Licence" [(ngModel)]="editionJoueur.avoir.licence.numeroLicence" name="numeroLicence">
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Validité Licence" [(ngModel)]="editionJoueur.avoir.isValide" name="validiteLicence">
+    <input matInput placeholder="Validité Licence" [(ngModel)]= editionJoueur.avoir.isValide name="validiteLicence">
   </mat-form-field>
-</div>
-<div class="equipes">
-  <!-- <mat-form-field *ngFor="let equipeControl of getEquipesControl().controls; let i = index">
-    <mat-select placeholder="Equipe" [formControlName]="i">
-    
-      <mat-option *ngFor="let equipe of equipes" [value]="equipesInit[i]">
-        {{ equipe.libelleEquipe }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field> -->
-  <button mat-raised-button color="accent" (click)="onAddEquipe()">Ajouter une équipe</button>
 </div>
 </div>

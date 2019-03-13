@@ -70,6 +70,50 @@ public class JoueursController {
 	}
 	
 	/**
+	 * Methode Voir un joueur
+	 * @return liste un joueur selon son nom
+	 */
+	@GetMapping("/get/byJoueur/{nom}")
+	public ResponseEntity<?> getJoueurByNom(@PathVariable String nom) {
+		
+		Optional<Joueurs> joueur = null;
+		
+		try {
+			joueur = joueursRepo.findJoueurByNom(nom);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+		
+		if (joueur == null) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+		}
+		
+		return ResponseEntity.status(HttpStatus.OK).body(joueur);
+	}
+	
+	/**
+	 * Methode Voir un joueur
+	 * @return liste un joueur selon son sex
+	 */
+	@GetMapping("/get/byJoueur/{sexe}")
+	public ResponseEntity<?> getJoueurBySexe(@PathVariable String sexe) {
+		
+		Optional<Joueurs> joueur = null;
+		
+		try {
+			joueur = joueursRepo.findJoueurBySexe(sexe);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+		
+		if (joueur == null) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+		}
+		
+		return ResponseEntity.status(HttpStatus.OK).body(joueur);
+	}
+	
+	/**
 	 * Methode CREATE
 	 * @param information joueur
 	 * @return ajoute un joueur

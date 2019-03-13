@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Equipes implements Serializable {
@@ -27,7 +28,7 @@ public class Equipes implements Serializable {
 	private String libelleEquipe;
 	
 	@ManyToMany(cascade = CascadeType.REMOVE, mappedBy = "equipes")
-	@JsonIgnore
+	@JsonIgnoreProperties("equipes")
 	private Collection<Joueurs> joueurs;
 
 	public Equipes() {

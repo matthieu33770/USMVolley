@@ -22,6 +22,10 @@ export class EquipesService {
     return this.httpClient.get<Equipe[]>('http://localhost:8080/equipes/get/equipes');
   }
 
+  getTeams(): Observable<Equipe[]> {
+    return this.httpClient.get<Equipe[]>('http://localhost:8080/equipes/get/equipes');
+  }
+
   public publishEquipes() {
     this.getEquipes().subscribe(
       equipeList => {

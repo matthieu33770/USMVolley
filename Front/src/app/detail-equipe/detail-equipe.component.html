@@ -1,0 +1,31 @@
+<div class="edition"></div>
+<h1 class="equipe">Edition de l'équipe <strong>{{ editionEquipe.libelleEquipe }}</strong></h1>
+
+<div class="identification">
+  <mat-form-field>
+      <input matInput placeholder="idEquipe" [(ngModel)]="editionEquipe.idEquipe" name="idEquipe">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="libelleEquipe" [(ngModel)]="editionEquipe.libelleEquipe" name="libelleEquipe">
+  </mat-form-field>
+</div>
+
+<div class="joueurEquipe">
+<h3>Joueur dans l'équipe</h3>
+  <div *ngFor="let adulte of joueurEquipe; let i = index" >
+    <mat-card class="cardJoueurEquipe">
+      <p class="center">{{ adulte.nom }}</p>
+      <p class="annee">{{ adulte.prenom }}</p>
+    </mat-card>
+  </div>
+</div>
+
+<div class="joueurDispo">
+<h3>Joueur disponible</h3>
+<div *ngFor="let adulte of joueurAdulte; let i = index" >
+<mat-card class="cardJoueurDispo">
+  <p class="center">{{ adulte.nom }}</p>
+  <p class="annee">{{ adulte.prenom }}</p>
+</mat-card>
+</div>
+</div>

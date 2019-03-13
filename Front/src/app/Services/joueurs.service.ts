@@ -80,7 +80,7 @@ export class JoueursService {
   }
 
   getJoueurByName(nomJoueur: string): Observable<Joueur> {
-    return of(this.availableJoueur.find(editeur => editeur.nomJoueur === nomJoueur));
+    return of(this.availableJoueur.find(joueur => joueur.nomJoueur === nomJoueur));
   }
 
   supprimerJoueur(id: number): Joueur[] {

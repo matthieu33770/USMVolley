@@ -18,9 +18,14 @@ header {
     align-items: center;
 }
 
-.menu {
-    /* font-size: 20px; */
-    justify-content: center !important;
+.menu1 {
+    justify-content: flex-end !important;
+    flex-grow: 1;
+    height: 20px;
+    margin-top: 50px;
+ }
+
+ .menu2 {
     flex-grow: 1;
     height: 20px;
     margin-top: 50px;

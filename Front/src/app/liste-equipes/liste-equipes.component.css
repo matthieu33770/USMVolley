@@ -1,0 +1,30 @@
+.equipes {
+    font-family: Maven Pro;
+}
+
+.titre {
+    display: flex;
+    justify-content: center;
+}
+
+.boutons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+th.mat-header-cell {
+    text-align: center;
+}
+
+td {
+    text-align: center;
+}
+
+.mat-elevation-z8 {
+    display: flex;
+    justify-content: center;
+}
+
+.tableau {
+    border-spacing: 10px;
+}

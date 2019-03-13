@@ -10,6 +10,6 @@ export class Licence {
                 public isPayeLicence: Boolean,
                 public idPaiementLicence: String,
                 public montantPayeLicence: number,
-                public categorieLicence: Categorie,
+                public categories: Categorie,
     ) {}
 }

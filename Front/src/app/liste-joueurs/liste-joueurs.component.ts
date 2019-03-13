@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ExcelService } from '../Services/excel.service';
+
 import { Router } from '@angular/router';
 import { JoueursService } from '../Services/joueurs.service';
+import { ExcelService } from '../Services/excel.service';
+
 import { User } from '../Model/User';
 import { Role } from '../Model/Role';
 import { Joueur } from '../Model/Joueur';
@@ -18,7 +20,9 @@ import { Fonction } from '../Model/Fonction';
 export class ListeJoueursComponent implements OnInit {
 
   idJoueur: number;
-  joueur: Joueur;
+  nbreMasculin: Joueur [] = [];
+  nbreFeminin: Joueur [] = [];
+  joueur: Joueur [] = [];
   users: User [] = [];
   roles: Role [] = [];
   fonctions: Fonction [] = [];
@@ -36,7 +40,11 @@ export class ListeJoueursComponent implements OnInit {
     this.getRole();
     this.getFonction();
     this.getPlayer();
-    this.joueurService.getJoueurs().subscribe(Joueurs => this.dataSource = new MatTableDataSource<Joueur>(Joueurs));
+    this.joueurService.getJoueurs().subscribe(Joueurs => {this.dataSource = new MatTableDataSource<Joueur>(Joueurs);
+                                              this.nbreMasculin = Joueurs.filter(joueur => {if (joueur.sexe === 'M') { return true; }} );
+                                              this.nbreFeminin = Joueurs.filter(joueur => {if (joueur.sexe === 'F') {return true; }} );
+                                              console.log(this.nbreMasculin, this.nbreFeminin)}
+                                              );
   }
 
   getUser(): void {

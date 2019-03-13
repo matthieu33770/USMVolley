@@ -7,7 +7,7 @@ export class Joueur {
     constructor(public idJoueur: number,
                 public nomJoueur: String,
                 public prenomJoueur: String,
-                public sexeJoueur: String,
+                public sexe: String,
                 public numeroAdresseJoueur: number,
                 public rueJoueur: String,
                 public codePostalJoueur: number,
@@ -16,8 +16,8 @@ export class Joueur {
                 public telephone1Joueur: String,
                 public telephone2Joueur: String,
                 public dateNaissanceJoueur: Date,
-                public avoirJoueur: Avoir,
+                public avoir: Avoir,
                 public userJoueur: User,
-                public equipesJoueur: Equipe [],
+                public equipes: Equipe [],
     ) {}
 }

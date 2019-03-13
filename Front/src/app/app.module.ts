@@ -21,6 +21,8 @@ import { DetailManifestationComponent } from './detail-manifestation/detail-mani
 import { GestionComponent } from './gestion/gestion.component';
 import { ListeJoueursComponent } from './liste-joueurs/liste-joueurs.component';
 import { DetailJoueurComponent } from './detail-joueur/detail-joueur.component';
+import { DetailEquipeComponent } from './detail-equipe/detail-equipe.component';
+import { ListeEquipesComponent } from './liste-equipes/liste-equipes.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { DetailJoueurComponent } from './detail-joueur/detail-joueur.component';
     DetailManifestationComponent,
     GestionComponent,
     ListeJoueursComponent,
-    DetailJoueurComponent
+    DetailJoueurComponent,
+    DetailEquipeComponent,
+    ListeEquipesComponent
   ],
   imports: [
     BrowserModule,

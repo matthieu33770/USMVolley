@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,22 +17,56 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import usmvolley.dto.JsonWebToken;
+import usmvolley.exception.ExistingUsernameException;
+import usmvolley.exception.InvalidCredentialsException;
 import usmvolley.model.Users;
 import usmvolley.repository.UsersRepository;
+import usmvolley.service.UserService;
 
 @RestController
 @RequestMapping("/users")
-@CrossOrigin("http://localhost:4200")
+//@CrossOrigin("http://localhost:4200")
 public class UsersController {
 	
 	@Autowired
 	private UsersRepository usersRepo;
+	
+	private UserService appUserService;
+	
+	/**
+     * Method to register a new user in database.
+     * @param user the new user to create.
+     * @return a JWT if sign up is ok, a bad response code otherwise.
+     */
+    @PostMapping("/sign-up")
+    public ResponseEntity<JsonWebToken> signUp(@RequestBody Users user) {
+        try {
+            return ResponseEntity.ok(new JsonWebToken(appUserService.signup(user)));
+        } catch (ExistingUsernameException ex) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+    /**
+     * Method to sign in a user (already existing).
+     * @param user the user to sign in to the app.
+     * @return a JWT if sign in is ok, a bad response code otherwise.
+     */
+    @PostMapping("/sign-in")
+    public ResponseEntity<JsonWebToken> signIn(@RequestBody Users user) {
+        try {
+            return ResponseEntity.ok(new JsonWebToken(appUserService.signin(user.getUsername(), user.getMdp())));
+        } catch (InvalidCredentialsException ex) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
 	
 	/**
 	 * Methode Voir tous les users
 	 * @return liste de tous les users
 	 */
 	@GetMapping("/get/users")
+	@PreAuthorize("hasRole('ROLE_CAPITAINE') or hasRole('ROLE_BUREAU') or hasRole('ROLE_LICENCIE')")
 	public ResponseEntity<List<Users>> getListeUsers() {
 		
 		List<Users> listeUsers = null;

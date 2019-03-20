@@ -7,6 +7,9 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material-module';
 import { JwtModule } from '@auth0/angular-jwt';
 
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AgendaComponent } from './agenda/agenda.component';
@@ -59,6 +62,10 @@ import { ListeEquipesComponent } from './liste-equipes/liste-equipes.component';
         whitelistedDomains: ['localhost:8080'],
         blacklistedRoutes: ['http://localhost:4200/auth/login']
       }
+    }),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
     })
   ],
   providers: [],

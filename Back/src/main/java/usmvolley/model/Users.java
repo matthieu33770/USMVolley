@@ -1,9 +1,14 @@
 package usmvolley.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,8 +34,9 @@ public class Users implements Serializable {
 	@Column(name = "is_Valide")
 	private boolean isValide;
 
-	@Column(name = "id_role")
-	private Integer role;
+	 @ElementCollection(fetch = FetchType.EAGER)
+	 @Enumerated(EnumType.STRING)
+	 private List<RoleUser> roleList;
 	
 	@ManyToOne
 	@JoinColumn(name = "fonction")
@@ -39,15 +45,28 @@ public class Users implements Serializable {
 	public Users() {
 	}
 
-	public Users(Integer idUser, String username, String mdp, boolean isValide, Integer role, Fonctions fonction) {
+	public Users(String username, String mdp) {
+		this.username = username;
+		this.mdp = mdp;
+	}
+	
+	public Users(String username, String mdp, List<RoleUser> roleList) {
+		this.username = username;
+		this.mdp = mdp;
+		this.roleList = roleList;
+	}
+
+	public Users(Integer idUser, String username, String mdp, boolean isValide, List<RoleUser> roleList,
+			Fonctions fonction) {
 		super();
 		this.idUser = idUser;
 		this.username = username;
 		this.mdp = mdp;
 		this.isValide = isValide;
-		this.role = role;
+		this.roleList = roleList;
 		this.fonction = fonction;
 	}
+
 
 	public Integer getIdUser() {
 		return idUser;
@@ -81,12 +100,12 @@ public class Users implements Serializable {
 		this.isValide = isValide;
 	}
 
-	public Integer getRole() {
-		return role;
+	public List<RoleUser> getRole() {
+		return roleList;
 	}
 
-	public void setRole(Integer role) {
-		this.role = role;
+	public void setRole(List<RoleUser> roleList) {
+		this.roleList = roleList;
 	}
 
 	public Fonctions getFonction() {
@@ -100,6 +119,6 @@ public class Users implements Serializable {
 	@Override
 	public String toString() {
 		return "Users [idUser=" + idUser + ", username=" + username + ", mdp=" + mdp + ", isValide=" + isValide
-				+ ", role=" + role + "]";
+				+ ", role=" + roleList + "]";
 	}
 }

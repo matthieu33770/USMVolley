@@ -8,6 +8,10 @@ import usmvolley.model.Users;
 
 public interface UsersRepository extends JpaRepository<Users, Integer>{
 	
-	Optional<Users> findUserByUsername(String userName);
+	Optional<Users> findUserByUsername(String username);
+	
+	boolean existsByUsername(String username);
+	
+	void deleteByUsername(String username);
 
 }

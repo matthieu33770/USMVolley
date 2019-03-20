@@ -1,27 +1,32 @@
 package usmvolley.service;
 
-import usmvolley.exception.ExistingUsernameException;
-import usmvolley.exception.InvalidCredentialsException;
-import usmvolley.model.Users;
-import usmvolley.repository.UsersRepository;
-import usmvolley.security.JwtTokenProvider;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import usmvolley.exception.ExistingUsernameException;
+import usmvolley.exception.InvalidCredentialsException;
+import usmvolley.model.Users;
+import usmvolley.repository.UsersRepository;
+import usmvolley.security.JwtTokenProvider;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     private UsersRepository userRepository;
+    @Autowired
     private BCryptPasswordEncoder passwordEncoder;
     private JwtTokenProvider jwtTokenProvider;
     private AuthenticationManager authenticationManager;
-
+    
     public UserServiceImpl(UsersRepository userRepository, BCryptPasswordEncoder passwordEncoder,
                               JwtTokenProvider jwtTokenProvider, AuthenticationManager authenticationManager) {
         this.userRepository = userRepository;

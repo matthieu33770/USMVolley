@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Users implements Serializable {
@@ -34,9 +35,9 @@ public class Users implements Serializable {
 	@Column(name = "is_Valide")
 	private boolean isValide;
 
-	 @ElementCollection(fetch = FetchType.EAGER)
-	 @Enumerated(EnumType.STRING)
-	 private List<RoleUser> roleList;
+	@ElementCollection(fetch = FetchType.EAGER)
+	@Enumerated(EnumType.STRING)
+	private List<RoleUser> roleList;
 	
 	@ManyToOne
 	@JoinColumn(name = "fonction")
@@ -45,12 +46,12 @@ public class Users implements Serializable {
 	public Users() {
 	}
 
-	public Users(String username, String mdp) {
+	public Users(@NotNull String username,@NotNull String mdp) {
 		this.username = username;
 		this.mdp = mdp;
 	}
 	
-	public Users(String username, String mdp, List<RoleUser> roleList) {
+	public Users(@NotNull String username,@NotNull String mdp, List<RoleUser> roleList) {
 		this.username = username;
 		this.mdp = mdp;
 		this.roleList = roleList;

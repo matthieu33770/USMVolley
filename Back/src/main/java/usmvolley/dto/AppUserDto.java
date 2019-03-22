@@ -1,9 +1,10 @@
 package usmvolley.dto;
 
-import usmvolley.model.Fonctions;
+import java.util.List;
 
 import javax.validation.constraints.NotNull;
-import java.util.List;
+
+import usmvolley.model.RoleUser;
 
 /**
  * Specific App User DTO to be able to send user data without password through REST responses.
@@ -14,7 +15,7 @@ public class AppUserDto {
 
     private String username;
 
-    private List<Fonctions> fonctionList;
+    private List<RoleUser> roleList;
 
     private AppUserDto() {
 
@@ -24,8 +25,8 @@ public class AppUserDto {
         this.username = username;
     }
 
-    public AppUserDto(@NotNull String username, List<Fonctions> fonctionList) {
+    public AppUserDto(@NotNull String username, List<RoleUser> roleList) {
         this.username = username;
-        this.fonctionList = fonctionList;
+        this.roleList = roleList;
     }
 }

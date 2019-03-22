@@ -1,5 +1,8 @@
 package usmvolley.security;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +15,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableWebSecurity
@@ -29,11 +34,6 @@ public class JDBCWebSecurity extends WebSecurityConfigurerAdapter {
     @Bean
     public UserDetailsService userDetailsService() {
         return super.userDetailsService();
-    }
-    
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
     }
 	
 	@Autowired
@@ -63,13 +63,16 @@ public class JDBCWebSecurity extends WebSecurityConfigurerAdapter {
     	//Disable CSRF
     	http.csrf().disable();
     	
+    	// No session will be created or used by spring security
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+    	
         http.authorizeRequests()
     	.antMatchers("/").permitAll()
     	.antMatchers("/public").permitAll()
     	.antMatchers("/joueurs/get/joueurs").permitAll()
     	.antMatchers("/deny").denyAll()
     	.antMatchers("/manifestations").hasAnyAuthority("Captaine", "Bureau")
-    	.antMatchers("/users").hasAnyAuthority("Bureau")
+    	.antMatchers("/users/sign-in").permitAll()
     	.anyRequest().authenticated()
     	.and()
     	.formLogin().permitAll()
@@ -87,8 +90,27 @@ public class JDBCWebSecurity extends WebSecurityConfigurerAdapter {
      */
     @Override
     public void configure(WebSecurity web) throws Exception {
-    	web.ignoring().antMatchers("");
-    	web.ignoring().antMatchers("");
+    	web.ignoring().antMatchers("/");
+    	web.ignoring().antMatchers("/");
+    }
+    
+    /**
+     * Generic configuration for CORS. Useful here for development purposes as front is developed with Angular.
+     * @return the CorsConfigurationSource object.
+     */
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        final CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
+
+        configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH"));
+
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
+
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+
+        return source;
     }
 
 }

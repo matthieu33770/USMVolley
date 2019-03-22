@@ -26,7 +26,7 @@ import usmvolley.service.UserService;
 
 @RestController
 @RequestMapping("/users")
-//@CrossOrigin("http://localhost:4200")
+@CrossOrigin("http://localhost:4200")
 public class UsersController {
 	
 	@Autowired
@@ -47,13 +47,14 @@ public class UsersController {
             return ResponseEntity.badRequest().build();
         }
     }
-    /**
+    /*
      * Method to sign in a user (already existing).
      * @param user the user to sign in to the app.
      * @return a JWT if sign in is ok, a bad response code otherwise.
      */
     @PostMapping("/sign-in")
     public ResponseEntity<JsonWebToken> signIn(@RequestBody Users user) {
+    	System.out.println(user);
         try {
             return ResponseEntity.ok(new JsonWebToken(appUserService.signin(user.getUsername(), user.getMdp())));
         } catch (InvalidCredentialsException ex) {

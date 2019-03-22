@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -7,8 +8,10 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material-module';
 import { JwtModule } from '@auth0/angular-jwt';
 
-import { CalendarModule, DateAdapter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+// import { CalendarModule, DateAdapter } from 'angular-calendar';
+// import { FlatpickrModule } from 'angularx-flatpickr';
+// import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+// import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -47,6 +50,7 @@ import { ListeEquipesComponent } from './liste-equipes/liste-equipes.component';
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
@@ -54,6 +58,7 @@ import { ListeEquipesComponent } from './liste-equipes/liste-equipes.component';
     BrowserAnimationsModule,
     NoopAnimationsModule,
     MaterialModule,
+    // NgbModalModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: function tokenGetter() {
@@ -62,11 +67,12 @@ import { ListeEquipesComponent } from './liste-equipes/liste-equipes.component';
         whitelistedDomains: ['localhost:8080'],
         blacklistedRoutes: ['http://localhost:4200/auth/login']
       }
-    }),
-    CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory
     })
+    // FlatpickrModule.forRoot(),
+    // CalendarModule.forRoot({
+    //   provide: DateAdapter,
+    //   useFactory: adapterFactory
+    // })
   ],
   providers: [],
   bootstrap: [AppComponent]

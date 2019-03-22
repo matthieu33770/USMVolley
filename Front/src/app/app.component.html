@@ -20,17 +20,17 @@
     <img class="img-responsive" src="assets/images/logo_usm_mios.png" routerLink="">
   </div>
   <div class="menu2">
-    <button mat-flat-button routerLink="/saisie">Inscription</button>
+    <button mat-flat-button routerLink="/saisie">{{formulaire}}</button>
     <button mat-flat-button routerLink="/partenaires">Les Partenaires</button>
     <button mat-flat-button routerLink="/connexion">Connexion</button>
-    <button mat-flat-button [matMenuTriggerFor]="menu">Menu</button>
+    <button *ngIf="isConnecte" mat-flat-button [matMenuTriggerFor]="menu">Menu</button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item [matMenuTriggerFor]="menuL">Licencié</button>
+      <button *ngIf="isLicencie" mat-menu-item [matMenuTriggerFor]="menuL">Licencié</button>
         <mat-menu #menuL="matMenu">
             <button mat-menu-item routerLink="/saisie">Mon Profil</button>
             <button mat-menu-item routerLink="/saisie">Renouveler sa Licence</button>
         </mat-menu>
-      <button mat-menu-item [matMenuTriggerFor]="menuC">Capitaine</button>
+      <button *ngIf="isCapitaine" mat-menu-item [matMenuTriggerFor]="menuC">Capitaine</button>
       <mat-menu #menuC="matMenu">
           <button mat-menu-item routerLink="/saisie">Mon Profil</button>
           <button mat-menu-item routerLink="/saisie">Renouveler sa Licence</button>
@@ -39,7 +39,7 @@
           <button mat-menu-item>Faire une Sélection</button>
           <button mat-menu-item>Envoyer un Mail</button>
       </mat-menu>
-      <button mat-menu-item [matMenuTriggerFor]="menuB">Bureau</button>
+      <button *ngIf="isBureau" mat-menu-item [matMenuTriggerFor]="menuB">Bureau</button>
       <mat-menu #menuB="matMenu">
           <button mat-menu-item routerLink="/saisie">Mon Profil</button>
           <button mat-menu-item routerLink="/saisie">Renouveler sa Licence</button>

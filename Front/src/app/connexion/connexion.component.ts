@@ -1,15 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { LoginService } from '../Services/login.service';
+import { User } from '../model/User';
 
 @Component({
   selector: 'app-connexion',
   templateUrl: './connexion.component.html',
   styleUrls: ['./connexion.component.css']
 })
-export class ConnexionComponent implements OnInit {
+export class ConnexionComponent {
 
-  constructor() { }
+  loginForm = this.fb.group({
+    username: [null, Validators.required],
+    mdp: [null, Validators.compose([
+      Validators.required, Validators.minLength(1), Validators.maxLength(255)])
+    ]
+  });
 
-  ngOnInit() {
+  constructor(private fb: FormBuilder, private loginService: LoginService) { }
+
+  onSubmit() {
+    const user = new User();
+    user.username = this.loginForm.value.username;
+    user.mdp = this.loginForm.value.mdp;
+    this.loginService.signIn(user);
   }
 
 }

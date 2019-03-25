@@ -32,7 +32,11 @@ public class UsersController {
 	@Autowired
 	private UsersRepository usersRepo;
 	
-	private UserService appUserService;
+	private UserService userService;
+	
+    public UsersController(UserService userService) {
+        this.userService = userService;
+    }
 	
 	/**
      * Method to register a new user in database.
@@ -42,7 +46,7 @@ public class UsersController {
     @PostMapping("/sign-up")
     public ResponseEntity<JsonWebToken> signUp(@RequestBody Users user) {
         try {
-            return ResponseEntity.ok(new JsonWebToken(appUserService.signup(user)));
+            return ResponseEntity.ok(new JsonWebToken(userService.signup(user)));
         } catch (ExistingUsernameException ex) {
             return ResponseEntity.badRequest().build();
         }
@@ -54,9 +58,10 @@ public class UsersController {
      */
     @PostMapping("/sign-in")
     public ResponseEntity<JsonWebToken> signIn(@RequestBody Users user) {
-    	System.out.println(user);
+//    	System.out.println(user);
         try {
-            return ResponseEntity.ok(new JsonWebToken(appUserService.signin(user.getUsername(), user.getMdp())));
+        	System.out.println(userService.signin(user.getUsername(), user.getMdp()));
+            return ResponseEntity.ok(new JsonWebToken(userService.signin(user.getUsername(), user.getMdp())));
         } catch (InvalidCredentialsException ex) {
             return ResponseEntity.badRequest().build();
         }

@@ -15,7 +15,7 @@ export class LoginService {
   // permet de conserver le role pour l'utiliser dans les guards
   userRoles: BehaviorSubject<string[]> = new BehaviorSubject([]);
 
-  isConnecte: boolean;
+  isConnecte: boolean = false;
 
   constructor(private httpClient: HttpClient, private router: Router) {
     this.getUserRoles();
@@ -31,6 +31,8 @@ export class LoginService {
     this.httpClient.post<JsonWebToken>(environment.apiUrl + 'sign-in', user).subscribe(
       token => {
         sessionStorage.setItem(environment.accessToken, token.token);
+        console.log(sessionStorage);
+        console.log(token);
 
         this.getUserRoles();
 

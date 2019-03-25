@@ -29,7 +29,7 @@ public class UserDetailService implements UserDetailsService {
         return User
                 .withUsername(username)
                 .password(user.get().getMdp())
-                .authorities(user.get().getRole())
+                .authorities(user.get().getRoleList())
                 .accountExpired(false)
                 .accountLocked(false)
                 .credentialsExpired(false)

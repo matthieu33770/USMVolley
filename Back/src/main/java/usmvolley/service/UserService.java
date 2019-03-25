@@ -19,7 +19,7 @@ public interface UserService {
      * @return the JWT if credentials are valid, throws InvalidCredentialsException otherwise.
      * @throws InvalidCredentialsException
      */
-    String signin(String username, String password) throws InvalidCredentialsException;
+    String signin(String username, String mdp) throws InvalidCredentialsException;
 
     /**
      * Method that signs up a new user in the application.

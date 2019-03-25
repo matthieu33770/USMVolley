@@ -53,7 +53,7 @@ public class JwtTokenProvider {
      * @return the created JWT as String.
      */
     public String createToken(String username, List<RoleUser> roles) {
-
+    	System.out.println("token");
         Claims claims = Jwts.claims().setSubject(username);
         claims.put("auth", roles.stream().map(s -> new SimpleGrantedAuthority(s.getAuthority())).filter(Objects::nonNull).collect(Collectors.toList()));
 

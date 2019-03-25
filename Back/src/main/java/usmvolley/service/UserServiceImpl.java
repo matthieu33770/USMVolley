@@ -25,11 +25,6 @@ public class UserServiceImpl implements UserService {
     private JwtTokenProvider jwtTokenProvider;
     private AuthenticationManager authenticationManager;
     
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
-    
     public UserServiceImpl(UsersRepository userRepository, BCryptPasswordEncoder passwordEncoder,
                               JwtTokenProvider jwtTokenProvider, AuthenticationManager authenticationManager) {
         this.userRepository = userRepository;
@@ -39,10 +34,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String signin(String username, String password) throws InvalidCredentialsException {
+    public String signin(String username, String mdp) throws InvalidCredentialsException {
         try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-            return jwtTokenProvider.createToken(username, userRepository.findUserByUsername(username).get().getRole());
+        	System.out.println("Je suis ici !");
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, mdp));
+            System.out.println("Je suis là !");
+            return jwtTokenProvider.createToken(username, userRepository.findUserByUsername(username).get().getRoleList());
         } catch (AuthenticationException e) {
             throw new InvalidCredentialsException();
         }
@@ -51,9 +48,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public String signup(Users user) throws ExistingUsernameException {
         if (!userRepository.existsByUsername(user.getUsername())) {
-        	Users userToSave = new Users(user.getUsername(), passwordEncoder.encode(user.getMdp()), user.getRole());
+        	Users userToSave = new Users(user.getUsername(), passwordEncoder.encode(user.getMdp()), user.getRoleList());
             userRepository.save(userToSave);
-            return jwtTokenProvider.createToken(user.getUsername(), user.getRole());
+            return jwtTokenProvider.createToken(user.getUsername(), user.getRoleList());
         } else {
             throw new ExistingUsernameException();
         }

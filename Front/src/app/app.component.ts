@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {environment} from './../environments/environment';
 import {LoginService} from './Services/login.service';
 
 @Component({
@@ -12,7 +13,7 @@ import {LoginService} from './Services/login.service';
 export class AppComponent implements OnInit {
   title = 'USM volley';
 
-  isConnecte: boolean;
+  isLoggedin = false;
   isLicencie: boolean;
   isCapitaine: boolean;
   isBureau: boolean;
@@ -27,10 +28,13 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.isConnecte = this.loginService.isConnecte;
-    if (this.isConnecte) {
+    if (this.loginService.loggedIn != null) {
+      this.isLoggedin = this.loginService.loggedIn;
+    }
+    console.log(this.isLoggedin);
+    if (this.isLoggedin) {
       this.formulaire = 'Renouvellement';
-    } else {
+    } else if (!this.isLoggedin) {
       this.formulaire = 'Inscription';
     }
     this.loginService.userRoles.subscribe(userRoles => {
@@ -38,5 +42,10 @@ export class AppComponent implements OnInit {
       this.isCapitaine = userRoles.includes('ROLE_CAPITAINE');
       this.isBureau = userRoles.includes('ROLE_BUREAU');
     });
+  }
+
+  onDeconnect() {
+    this.loginService.signOut();
+    this.isLoggedin = false;
   }
 }

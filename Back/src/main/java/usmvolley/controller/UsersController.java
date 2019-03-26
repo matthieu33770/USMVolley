@@ -37,6 +37,12 @@ public class UsersController {
     public UsersController(UserService userService) {
         this.userService = userService;
     }
+    
+    @GetMapping
+    @PreAuthorize("hasRole('ROLE_BUREAU')")
+	public List<Users> getUsers() {
+		return userService.findAllUsers();
+	}
 	
 	/**
      * Method to register a new user in database.
@@ -56,7 +62,7 @@ public class UsersController {
      * @param user the user to sign in to the app.
      * @return a JWT if sign in is ok, a bad response code otherwise.
      */
-    @PostMapping("/sign-in")
+    @PostMapping("/signin")
     public ResponseEntity<JsonWebToken> signIn(@RequestBody Users user) {
 //    	System.out.println(user);
         try {
@@ -72,18 +78,18 @@ public class UsersController {
 	 * @return liste de tous les users
 	 */
 	@GetMapping("/get/users")
-	@PreAuthorize("hasRole('ROLE_CAPITAINE') or hasRole('ROLE_BUREAU') or hasRole('ROLE_LICENCIE')")
-	public ResponseEntity<List<Users>> getListeUsers() {
+//	@PreAuthorize("hasRole('ROLE_CAPITAINE') or hasRole('ROLE_BUREAU') or hasRole('ROLE_LICENCIE')")
+	public List<Users> getListeUsers() {
 		
 		List<Users> listeUsers = null;
 		
-		try {
+//		try {
 			listeUsers = usersRepo.findAll();
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-		}
-		
-		return ResponseEntity.status(HttpStatus.OK).body(listeUsers);
+//		} catch (Exception e) {
+//			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+//		}
+		return listeUsers;
+//		return ResponseEntity.status(HttpStatus.OK).body(listeUsers);
 	}
 	
 	/**
@@ -91,6 +97,7 @@ public class UsersController {
 	 * @return liste un user
 	 */
 	@GetMapping("/get/unUser/{idUser}")
+	@PreAuthorize("hasRole('ROLE_BUREAU')")
 	public ResponseEntity<?> getUnUser(@PathVariable Integer idUser) {
 		
 		Optional<Users> user = null;
@@ -113,6 +120,7 @@ public class UsersController {
 	 * @return liste un user
 	 */
 	@GetMapping("/get/byUser/{username}")
+	@PreAuthorize("hasRole('ROLE_BUREAU')")
 	public ResponseEntity<?> getUserByUsername(@PathVariable String username) {
 		
 		Optional<Users> user = null;
@@ -136,6 +144,7 @@ public class UsersController {
 	 * @return ajoute un user
 	 */
 	@PostMapping("/create")
+	@PreAuthorize("hasRole('ROLE_BUREAU')")
 	public ResponseEntity<?> addUser(@RequestBody Users user) {
 		
 		Users newUser = null;
@@ -163,6 +172,7 @@ public class UsersController {
 	 * @return supprime un user
 	 */
 	@DeleteMapping("/delete/{idUser}")
+	@PreAuthorize("hasRole('ROLE_BUREAU')")
 	public ResponseEntity<?> deleteUser(@PathVariable Integer idUser)
 	{
 		try
@@ -181,6 +191,7 @@ public class UsersController {
 	 * @return modifie un user
 	 */
 	@PutMapping("/update/{idUser}")
+	@PreAuthorize("hasRole('ROLE_BUREAU')")
 	public ResponseEntity<?> updateUser(@RequestBody Users user, @PathVariable Integer idUser) throws Exception
 	{
 		Users modificationUser = null;

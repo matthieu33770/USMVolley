@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +35,7 @@ public class JoueursController {
 	 * @return liste de tous les joueurs
 	 */
 	@GetMapping("/get/joueurs")
+//	@PreAuthorize("hasAuthority('ROLE_BUREAU')")
 	public ResponseEntity<List<Joueurs>> getListeJoueurs() {
 		
 		List<Joueurs> listeJoueurs = null;
@@ -52,6 +54,7 @@ public class JoueursController {
 	 * @return liste un joueur
 	 */
 	@GetMapping("/get/unJoueur/{idJoueur}")
+	@PreAuthorize("hasRole('ROLE_BUREAU')")
 	public ResponseEntity<?> getUnJoueur(@PathVariable Integer idJoueur) {
 		
 		Optional<Joueurs> joueur = null;
@@ -74,6 +77,7 @@ public class JoueursController {
 	 * @return liste un joueur selon son nom
 	 */
 	@GetMapping("/get/byJoueur/{nom}")
+	@PreAuthorize("hasRole('ROLE_BUREAU')")
 	public ResponseEntity<?> getJoueurByNom(@PathVariable String nom) {
 		
 		Optional<Joueurs> joueur = null;
@@ -96,6 +100,7 @@ public class JoueursController {
 	 * @return liste un joueur selon son sex
 	 */
 	@GetMapping("/get/byJoueur/{sexe}")
+	@PreAuthorize("hasRole('ROLE_BUREAU')")
 	public ResponseEntity<?> getJoueurBySexe(@PathVariable String sexe) {
 		
 		Optional<Joueurs> joueur = null;
@@ -119,6 +124,7 @@ public class JoueursController {
 	 * @return ajoute un joueur
 	 */
 	@PostMapping("/create")
+	@PreAuthorize("hasRole('ROLE_BUREAU')")
 	public ResponseEntity<?> addJoueur(@RequestBody Joueurs joueur) {
 		
 		Joueurs newJoueur = null;
@@ -178,6 +184,7 @@ public class JoueursController {
 	 * @return supprime un joueur
 	 */
 	@DeleteMapping("/delete/{idJoueur}")
+	@PreAuthorize("hasRole('ROLE_BUREAU')")
 	public ResponseEntity<?> deleteUser(@PathVariable Integer idJoueur)
 	{
 		try
@@ -196,6 +203,7 @@ public class JoueursController {
 	 * @return modifie un joueur
 	 */
 	@PutMapping("/update/{idJoueur}")
+	@PreAuthorize("hasRole('ROLE_BUREAU')")
 	public ResponseEntity<?> updateJoueur(@RequestBody Joueurs joueur, @PathVariable Integer idJoueur) throws Exception
 	{
 		Joueurs modificationJoueur = null;

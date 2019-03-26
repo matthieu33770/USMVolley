@@ -33,7 +33,7 @@ public interface UserService {
      * Method that finds all users from the application database.
      * @return the list of all application users.
      */
-    List<Users> findAllUsers();
+    public List<Users> findAllUsers();
 
     /**
      * Method that finds a user based on its username.

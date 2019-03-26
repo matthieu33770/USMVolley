@@ -24,6 +24,7 @@ export class ConnexionComponent {
     user.username = this.loginForm.value.username;
     user.mdp = this.loginForm.value.mdp;
     this.loginService.signIn(user);
+    console.log(user);
   }
 
 }

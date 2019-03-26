@@ -22,33 +22,33 @@
   <div class="menu2">
     <button mat-flat-button routerLink="/saisie">{{formulaire}}</button>
     <button mat-flat-button routerLink="/partenaires">Les Partenaires</button>
-    <button mat-flat-button routerLink="/connexion">Connexion</button>
-    <button *ngIf="isConnecte" mat-flat-button [matMenuTriggerFor]="menu">Menu</button>
-    <mat-menu #menu="matMenu">
-      <button *ngIf="isLicencie" mat-menu-item [matMenuTriggerFor]="menuL">Licencié</button>
-        <mat-menu #menuL="matMenu">
-            <button mat-menu-item routerLink="/saisie">Mon Profil</button>
-            <button mat-menu-item routerLink="/saisie">Renouveler sa Licence</button>
-        </mat-menu>
-      <button *ngIf="isCapitaine" mat-menu-item [matMenuTriggerFor]="menuC">Capitaine</button>
+    <button *ngIf="!isLoggedin" mat-flat-button routerLink="/connexion">Connexion</button>
+    <button *ngIf="isLoggedin && isLicencie" mat-flat-button [matMenuTriggerFor]="menuL">Licencié</button>
+      <mat-menu #menuL="matMenu">
+        <button mat-menu-item routerLink="/saisie">Mon Profil</button>
+        <button mat-menu-item routerLink="/saisie">Renouveler sa Licence</button>
+        <button mat-menu-item type="submit" (click)="onDeconnect()">Se déconnecter</button>
+      </mat-menu>
+    <button *ngIf="isLoggedin && isCapitaine" mat-menu-item [matMenuTriggerFor]="menuC">Capitaine</button>
       <mat-menu #menuC="matMenu">
-          <button mat-menu-item routerLink="/saisie">Mon Profil</button>
-          <button mat-menu-item routerLink="/saisie">Renouveler sa Licence</button>
-          <button mat-menu-item>Publier un Article</button>
-          <button mat-menu-item routerLink="/manifestations">Gérer une Manifestation</button>
-          <button mat-menu-item>Faire une Sélection</button>
-          <button mat-menu-item>Envoyer un Mail</button>
+        <button mat-menu-item routerLink="/saisie">Mon Profil</button>
+        <button mat-menu-item routerLink="/saisie">Renouveler sa Licence</button>
+        <button mat-menu-item>Publier un Article</button>
+        <button mat-menu-item routerLink="/manifestations">Gérer une Manifestation</button>
+        <button mat-menu-item>Faire une Sélection</button>
+        <button mat-menu-item>Envoyer un Mail</button>
+        <button mat-menu-item type="submit" (click)="onDeconnect()">Se déconnecter</button>
       </mat-menu>
-      <button *ngIf="isBureau" mat-menu-item [matMenuTriggerFor]="menuB">Bureau</button>
+    <button *ngIf="isLoggedin && isBureau" mat-flat-button [matMenuTriggerFor]="menuB">Bureau</button>
       <mat-menu #menuB="matMenu">
-          <button mat-menu-item routerLink="/saisie">Mon Profil</button>
-          <button mat-menu-item routerLink="/saisie">Renouveler sa Licence</button>
-          <button mat-menu-item>Publier un Article</button>
-          <button mat-menu-item routerLink="/manifestations">Gérer une Manifestation</button>
-          <button mat-menu-item>Faire une Sélection</button>
-          <button mat-menu-item>Envoyer un Mail</button>
-          <button mat-menu-item routerLink="/gestion">Gérer les Données</button>
-      </mat-menu>
+        <button mat-menu-item routerLink="/saisie">Mon Profil</button>
+        <button mat-menu-item routerLink="/saisie">Renouveler sa Licence</button>
+        <button mat-menu-item>Publier un Article</button>
+        <button mat-menu-item routerLink="/manifestations">Gérer une Manifestation</button>
+        <button mat-menu-item>Faire une Sélection</button>
+        <button mat-menu-item>Envoyer un Mail</button>
+        <button mat-menu-item routerLink="/gestion">Gérer les Données</button>
+        <button mat-menu-item type="submit" (click)="onDeconnect()">Se déconnecter</button>
     </mat-menu>
   </div>
 </header>

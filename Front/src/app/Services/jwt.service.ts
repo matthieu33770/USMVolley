@@ -9,15 +9,15 @@ export class JwtService {
 
   constructor(private httpClient: HttpClient) { }
 
-  login(email: string, password: string) {
-    return this.httpClient.post<{access_token: string}>('http://localhost:8080/joueurs/get', {email, password}).pipe(tap(res => {
+  login(username: string, mdp: string) {
+    return this.httpClient.post<{access_token: string}>('http://localhost:8080/joueurs/get', {username, mdp}).pipe(tap(res => {
       localStorage.setItem('access_token', res.access_token);
     }));
   }
 
-  register(email: string, password: string) {
-    return this.httpClient.post<{access_token: string}>('http://localhost:8080/joueurs/get', {email, password}).pipe(tap(res => {
-      this.login(email, password);
+  register(username: string, mdp: string) {
+    return this.httpClient.post<{access_token: string}>('http://localhost:8080/joueurs/get', {username, mdp}).pipe(tap(res => {
+      this.login(username, mdp);
     }));
   }
 

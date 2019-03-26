@@ -3,7 +3,6 @@ package usmvolley.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
@@ -20,7 +19,6 @@ import usmvolley.security.JwtTokenProvider;
 public class UserServiceImpl implements UserService {
 
     private UsersRepository userRepository;
-    @Autowired
     private BCryptPasswordEncoder passwordEncoder;
     private JwtTokenProvider jwtTokenProvider;
     private AuthenticationManager authenticationManager;
@@ -36,9 +34,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public String signin(String username, String mdp) throws InvalidCredentialsException {
         try {
-        	System.out.println("Je suis ici !");
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, mdp));
-            System.out.println("Je suis là !");
             return jwtTokenProvider.createToken(username, userRepository.findUserByUsername(username).get().getRoleList());
         } catch (AuthenticationException e) {
             throw new InvalidCredentialsException();

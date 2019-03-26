@@ -26,9 +26,11 @@ public class Users implements Serializable {
 	@Column(name = "id_user")
 	private Integer idUser;
 	
+	@NotNull
 	@Column(name = "username", unique = true)
 	private String username;
 	
+	@NotNull
 	@Column(name = "mdp")
 	private String mdp;
 	
@@ -39,9 +41,9 @@ public class Users implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private List<RoleUser> roleList;
 	
-//	@ManyToOne
-//	@JoinColumn(name = "fonction")
-//	private Fonctions fonction;
+	@ManyToOne
+	@JoinColumn(name = "fonction")
+	private Fonctions fonction;
 
 	public Users() {
 	}
@@ -65,7 +67,7 @@ public class Users implements Serializable {
 		this.mdp = mdp;
 		this.isValide = isValide;
 		this.roleList = roleList;
-//		this.fonction = fonction;
+		this.fonction = fonction;
 	}
 
 
@@ -109,13 +111,13 @@ public class Users implements Serializable {
 		this.roleList = roleList;
 	}
 
-//	public Fonctions getFonction() {
-//		return fonction;
-//	}
-//
-//	public void setIdFonction(Fonctions fonction) {
-//		this.fonction = fonction;
-//	}
+	public Fonctions getFonction() {
+		return fonction;
+	}
+
+	public void setIdFonction(Fonctions fonction) {
+		this.fonction = fonction;
+	}
 
 	@Override
 	public String toString() {

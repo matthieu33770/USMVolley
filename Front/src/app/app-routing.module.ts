@@ -27,6 +27,8 @@ const routes: Routes = [
   {path: 'gestion/joueurs/detailjoueur/:idJoueur', component: DetailJoueurComponent},
   {path: 'gestion/equipes', component: ListeEquipesComponent},
   {path: 'gestion/equipes/detailequipe/:idEquipe', component: DetailEquipeComponent},
+  {path: 'accueil', component: AccueilComponent},
+  {path: 'accueil/logout', component: AccueilComponent},
   {path: '', component: AccueilComponent}
 ];
 

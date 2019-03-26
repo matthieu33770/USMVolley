@@ -42,8 +42,8 @@
   </mat-form-field>
 <div class="donneesClub">  
   <mat-form-field>
-    <mat-select placeholder="Fonction" [(ngModel)]="editionJoueur.user.fonction.libelleFonction" name="libelleFonction">
-      <mat-option *ngFor="let fonction of fonctionList" [value]="fonction.libelleFonction">
+    <mat-select placeholder="Fonction" [(ngModel)]="editionJoueur.user.roleList" name="libelleFonction">
+      <mat-option *ngFor="let fonction of fonctionList" [value]="roleList">
         {{fonction.libelleFonction}}
       </mat-option>
     </mat-select>

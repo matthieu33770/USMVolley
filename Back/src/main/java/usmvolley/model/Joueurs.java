@@ -34,6 +34,9 @@ public class Joueurs implements Serializable {
 	@Column(name = "sexe")
 	private String sexe;
 	
+	@Column(name = "taille")
+	private String taille;
+	
 	@Column(name = "numero_adresse")
 	private Integer numeroAdresse;
 	
@@ -74,14 +77,15 @@ public class Joueurs implements Serializable {
 	public Joueurs() {
 	}
 
-	public Joueurs(Integer idJoueur, String nom, String prenom, String sexe, Integer numeroAdresse, String rue,
-			Integer codePostal, String ville, String mail, String telephone1, String telephone2, Date dateNaissance,
-			Users user, Avoir avoir, Collection<Equipes> equipes) {
+	public Joueurs(Integer idJoueur, String nom, String prenom, String sexe, String taille, Integer numeroAdresse,
+			String rue, Integer codePostal, String ville, String mail, String telephone1, String telephone2,
+			Date dateNaissance, Users user, Avoir avoir, Collection<Equipes> equipes) {
 		super();
 		this.idJoueur = idJoueur;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.sexe = sexe;
+		this.taille = taille;
 		this.numeroAdresse = numeroAdresse;
 		this.rue = rue;
 		this.codePostal = codePostal;
@@ -117,6 +121,22 @@ public class Joueurs implements Serializable {
 
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
+	}
+
+	public String getSexe() {
+		return sexe;
+	}
+
+	public void setSexe(String sexe) {
+		this.sexe = sexe;
+	}
+
+	public String getTaille() {
+		return taille;
+	}
+
+	public void setTaille(String taille) {
+		this.taille = taille;
 	}
 
 	public Integer getNumeroAdresse() {
@@ -207,20 +227,13 @@ public class Joueurs implements Serializable {
 		this.equipes = equipes;
 	}
 
-	public String getSexe() {
-		return sexe;
-	}
-
-	public void setSexe(String sexe) {
-		this.sexe = sexe;
-	}
-
 	@Override
 	public String toString() {
-		return "Joueurs [idJoueur=" + idJoueur + ", nom=" + nom + ", prenom=" + prenom + ", sexe=" + sexe
-				+ ", numeroAdresse=" + numeroAdresse + ", rue=" + rue + ", codePostal=" + codePostal + ", ville="
-				+ ville + ", mail=" + mail + ", telephone1=" + telephone1 + ", telephone2=" + telephone2
+		return "Joueurs [idJoueur=" + idJoueur + ", nom=" + nom + ", prenom=" + prenom + ", sexe=" + sexe + ", taille="
+				+ taille + ", numeroAdresse=" + numeroAdresse + ", rue=" + rue + ", codePostal=" + codePostal
+				+ ", ville=" + ville + ", mail=" + mail + ", telephone1=" + telephone1 + ", telephone2=" + telephone2
 				+ ", dateNaissance=" + dateNaissance + ", user=" + user + ", avoir=" + avoir + ", equipes=" + equipes
 				+ "]";
 	}
+
 }

@@ -1,31 +1,106 @@
-<div class="edition"></div>
-<h1 class="equipe">Edition de l'équipe <strong>{{ editionEquipe.libelleEquipe }}</strong></h1>
-
-<div class="identification">
-  <mat-form-field>
-      <input matInput placeholder="idEquipe" [(ngModel)]="editionEquipe.idEquipe" name="idEquipe">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="libelleEquipe" [(ngModel)]="editionEquipe.libelleEquipe" name="libelleEquipe">
-  </mat-form-field>
-</div>
-
-<div class="joueurEquipe">
-<h3>Joueur dans l'équipe</h3>
-  <div *ngFor="let adulte of joueurEquipe; let i = index" >
-    <mat-card class="cardJoueurEquipe">
-      <p class="center">{{ adulte.nom }}</p>
-      <p class="annee">{{ adulte.prenom }}</p>
-    </mat-card>
+<div class="edition">
+  
+  <div class="identification">
+    <h1 class="equipe">Edition de l'équipe <strong>{{ editionEquipe.libelleEquipe }}</strong></h1>
+    <div>
+    <mat-form-field>
+      <input matInput placeholder="libelleEquipe" [(ngModel)]="editionEquipe.libelleEquipe" name="libelleEquipe">
+    </mat-form-field>
   </div>
-</div>
+  </div>
 
-<div class="joueurDispo">
-<h3>Joueur disponible</h3>
-<div *ngFor="let adulte of joueurAdulte; let i = index" >
-<mat-card class="cardJoueurDispo">
-  <p class="center">{{ adulte.nom }}</p>
-  <p class="annee">{{ adulte.prenom }}</p>
-</mat-card>
-</div>
+  <div class="boutons">
+      <button mat-raised-button (click)="exportAsXLSX()">Exporter</button>
+      <button mat-raised-button color="accent" (click)="modifier()">Modifier</button>
+      <button mat-raised-button color="primary" (click)="ajouter(selection.selected)">Ajouter</button>
+      <button mat-raised-button color="warn" (click)="enlever(selection.selected)">Enlever</button>
+    </div>
+
+  <div class="tab">
+      <div class="joueurEquipe">
+          <h3>Joueurs de l'équipe</h3>
+          <div *ngFor="let joueur of joueurEquipe">
+            <table mat-table [dataSource]="dataEquipe" class="tableau">
+          
+            <!-- Checkbox Column -->
+            <ng-container matColumnDef="select">
+              <th mat-header-cell *matHeaderCellDef>
+                
+              </th>
+              <td mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()"
+                              (change)="$event ? selection.toggle(row) : null"
+                              [checked]="selection.isSelected(row)">
+                </mat-checkbox>
+              </td>
+            </ng-container>
+    
+            <!-- Nom Column -->
+            <ng-container matColumnDef="nomJoueur">
+              <th mat-header-cell *matHeaderCellDef>Nom</th>
+              <td mat-cell *matCellDef="let adulte">{{ adulte.nom }}</td>
+            </ng-container>
+    
+            <!-- Prenom Column -->
+            <ng-container matColumnDef="prenomJoueur">
+                <th mat-header-cell *matHeaderCellDef>Prénom</th>
+                <td mat-cell *matCellDef="let adulte">{{ adulte.prenom }}</td>
+              </ng-container>
+    
+            <!-- Licence Column -->
+            <ng-container matColumnDef="licenceJoueur">
+              <th mat-header-cell *matHeaderCellDef>N° Licence</th>
+              <td mat-cell *matCellDef="let adulte">{{ adulte.avoir.licence.numeroLicence }}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </div>
+        </div>
+
+    <div class="joueurDispo">
+        <h3>Joueurs disponibles</h3>
+        <div *ngFor="let joueur of joueurEquipe">
+          <table mat-table [dataSource]="dataAdulte" class="tableau">
+        
+          <!-- Checkbox Column -->
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+              
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox (click)="$event.stopPropagation()"
+                            (change)="$event ? selection.toggle(row) : null"
+                            [checked]="selection.isSelected(row)">
+              </mat-checkbox>
+            </td>
+          </ng-container>
+  
+          <!-- Nom Column -->
+          <ng-container matColumnDef="nomJoueur">
+            <th mat-header-cell *matHeaderCellDef>Nom</th>
+            <td mat-cell *matCellDef="let adulte">{{ adulte.nom }}</td>
+          </ng-container>
+  
+          <!-- Prenom Column -->
+          <ng-container matColumnDef="prenomJoueur">
+              <th mat-header-cell *matHeaderCellDef>Prénom</th>
+              <td mat-cell *matCellDef="let adulte">{{ adulte.prenom }}</td>
+            </ng-container>
+  
+          <!-- Licence Column -->
+          <ng-container matColumnDef="licenceJoueur">
+            <th mat-header-cell *matHeaderCellDef>N° Licence</th>
+            <td mat-cell *matCellDef="let adulte">{{ adulte.avoir.licence.numeroLicence }}</td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+      </div>
+  </div>
+  <br>
+  <div class="boutons">
+      <button mat-raised-button color="accent" routerLink="/gestion/equipes">Retour</button>
+    </div>
 </div>

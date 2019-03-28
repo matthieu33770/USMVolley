@@ -3,12 +3,20 @@
     font-family: Maven Pro;
   }
   
-  .left {
+  .left {    
+    flex-grow: 1;
     width: 40%;
     margin-left: 150px;
   }
+
+  .center {
+    flex-grow: 2;
+    width: 40%;
+    margin-left: 50px;
+  }
   
   .right {
+    flex-grow: 3;
     width: 40%;
     margin-left: 50px;
   }

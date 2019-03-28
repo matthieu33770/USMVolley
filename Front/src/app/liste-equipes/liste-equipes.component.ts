@@ -54,7 +54,6 @@ export class ListeEquipesComponent implements OnInit {
   }
 
   onEdit(selected: Equipe[]) {
-    console.log(selected[0].idEquipe);
     this.router.navigate(['gestion/equipes/detailequipe/' + selected[0].idEquipe]);
   }
 

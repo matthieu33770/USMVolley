@@ -3,68 +3,111 @@
 <div class="left">
   <p>
     <mat-form-field>
-      <input matInput placeholder="Nom">
+      <input matInput placeholder="Nom" [(ngModel)]="editionJoueur.nom" name="nom">
     </mat-form-field>
   </p>
   <p>
     <mat-form-field>
-      <input matInput placeholder="Prénom">
+      <input matInput placeholder="Prénom" [(ngModel)]="editionJoueur.prenom" name="prenom">
     </mat-form-field>
   </p>
+  <p>
+    <mat-form-field>
+      <mat-select placeholder="Sexe">
+          <mat-option value="m">Masculin</mat-option>
+          <mat-option value="f">Féminin</mat-option>
+        </mat-select>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field>
+      <input matInput placeholder="Taille en cm" [(ngModel)]="editionJoueur.taille" name="taille">
+    </mat-form-field>
+  </p>
+  <p>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Date de Naissance">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </p> 
+  <p>
+    <mat-form-field>
+      <input matInput placeholder="Adresse Mail" [(ngModel)]="editionJoueur.mail" name="mail">
+    </mat-form-field>
+  </p>
+</div>
+
+<div class="center">
   <p>  
   <mat-form-field>
-    <input matInput placeholder="Numéro">
+    <input matInput placeholder="Numéro" [(ngModel)]="editionJoueur.numeroAdresse" name="numeroAdresse">
   </mat-form-field>
   </p>
   <p>
     <mat-form-field>
-     <input matInput placeholder="Rue">
+     <input matInput placeholder="Rue" [(ngModel)]="editionJoueur.rue" name="rue">
     </mat-form-field>
   </p>
   <p>
     <mat-form-field>
-      <input matInput placeholder="Code Postal">
+      <input matInput placeholder="Code Postal" [(ngModel)]="editionJoueur.codePostal" name="codePostal">
     </mat-form-field>
   </p>
   <p>
     <mat-form-field>
-      <input matInput placeholder="Ville">
+      <input matInput placeholder="Ville" [(ngModel)]="editionJoueur.ville" name="ville">
     </mat-form-field>
   </p>
+  <p>
+      <mat-form-field>
+        <input matInput placeholder="N° de téléphone" [(ngModel)]="editionJoueur.telephone1" name="telephone1">
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field>
+        <input matInput placeholder="N° de portable" [(ngModel)]="editionJoueur.telephone2" name="telephone2">
+      </mat-form-field>
+    </p>
 </div>
 
-<div class="right">
-  <p>
+  <div class="right">
+    <p>
     <mat-form-field>
-      <input matInput placeholder="N° de téléphone">
+      <input matInput placeholder="Nom d'utilisateur" [(ngModel)]="editionUser.username" name="username">
     </mat-form-field>
   </p>
   <p>
     <mat-form-field>
-      <input matInput placeholder="N° de portable">
+      <input matInput placeholder="Mot de passe" [(ngModel)]="editionUser.mdp" name="mdp">
+    </mat-form-field>
+  </p>
+
+  <p>
+      <mat-form-field>
+        <input matInput placeholder="Formulaire Licence">
+      </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field>
+      <input matInput placeholder="Certificat Médical">
     </mat-form-field>
   </p>
   <p>
     <mat-form-field>
-      <input matInput [matDatepicker]="picker" placeholder="Date de Naissance">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
+      <mat-select placeholder="Mode de Paiement">
+          <mat-option value="cheque">Chèque</mat-option>
+          <mat-option value="espece">Espèces</mat-option>
+          <mat-option value="paypal">PayPal</mat-option>
+        </mat-select>
     </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field>
-      <input matInput placeholder="Nom d'utilisateur">
-    </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field>
-      <input matInput placeholder="Mot de passe choisi">
-    </mat-form-field>
-  </p>
+  </p>    
+  
 
   <div class="bouton">
-    <button mat-raised-button color="accent" type="submit" (click)="onSave()">Enregistrer</button>
-</div>
+    <button *ngIf="!isLoggedin" mat-raised-button color="accent" type="submit" (click)="onSave()">Enregistrer</button>
+    <button *ngIf="isLoggedin" mat-raised-button color="accent" type="submit" (click)="onSave()">Mise à jour</button>
+  </div>
 </div>
 
 </div>

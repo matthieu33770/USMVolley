@@ -68,8 +68,25 @@ export class EquipesService {
     );
   }
 
-  supprimerEquipe(id: number): Equipe[] {
-    this.availableEquipe = this.availableEquipe.filter( equipe => equipe.idEquipe !== id ).slice();
+  /**
+   * Fonction de mise à jour d'une équipe
+   * @param equipe l'équipe à mettre à jour
+   */
+  public updateEquipe(equipe: Equipe) {
+    this.httpClient.put<Equipe>(`http://localhost:8080/joueurs/update/${equipe.idEquipe}`, equipe).subscribe(
+      updateEquipe => {
+        this.availableEquipe$.next(this.availableEquipe);
+      }
+    );
+  }
+
+  /**
+   * Fonction de suppression d'une équipe.
+   * Elle met à jour notre liste d'équipe et notre liste observable.
+   * @param idEquipe de l'équipe à supprimer
+   */
+  supprimerEquipe(idEquipe: number): Equipe[] {
+    this.availableEquipe = this.availableEquipe.filter( equipe => equipe.idEquipe !== idEquipe ).slice();
     return this.availableEquipe;
   }
 }

@@ -20,7 +20,7 @@ export class ConnexionComponent {
   constructor(private fb: FormBuilder, private loginService: LoginService) { }
 
   onSubmit() {
-    const user = new User();
+    const user = new User(0, '', '', false, [], null);
     user.username = this.loginForm.value.username;
     user.mdp = this.loginForm.value.mdp;
     this.loginService.signIn(user);

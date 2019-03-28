@@ -79,12 +79,63 @@ export class JoueursService {
     );
   }
 
-  getJoueurByName(nomJoueur: string): Observable<Joueur> {
+  /**
+   * Cette fonction permet de trouver un user dans la liste des users chargées par l'application
+   * grâce à son Username.
+   * @param User le username qu'il faut rechercher dans la liste.
+   */
+  public findByUser(idUser: number): Observable<Joueur> {
+    if (idUser) {
+      console.log(idUser);
+      if (!this.availableJoueur) {
+        return this.getJoueurs().pipe(map(joueurs => joueurs.find(joueur => joueur.user.idUser === idUser)));
+      }
+      return of(this.availableJoueur.find(joueur => joueur.user.idUser === idUser));
+    } else {
+      return of(new Joueur(null, '', '', '', 0, '', 0, '', '', '', '', null, null, null, null));
+    }
+  }
+
+  /**
+   * Cette fonction permet de trouver un user dans la liste des users chargées par l'application
+   * grâce à son Username.
+   * @param username le username qu'il faut rechercher dans la liste.
+   */
+  public findByUsername(username: String): Observable<Joueur> {
+    if (username) {
+      console.log(username);
+      if (!this.availableJoueur) {
+        return this.getJoueurs().pipe(map(joueurs => joueurs.find(joueur => joueur.user.username === username)));
+      }
+      return of(this.availableJoueur.find(joueur => joueur.user.username === username));
+    } else {
+      return of(new Joueur(null, '', '', '', 0, '', 0, '', '', '', '', null, null, null, null));
+    }
+  }
+
+  getJoueurByName(nomJoueur: String): Observable<Joueur> {
     return of(this.availableJoueur.find(joueur => joueur.nomJoueur === nomJoueur));
   }
 
-  supprimerJoueur(id: number): Joueur[] {
-    this.availableJoueur = this.availableJoueur.filter( joueur => joueur.idJoueur !== id ).slice();
+  /**
+   * Fonction de mise à jour d'un joueur
+   * @param joueur le joueur à mettre à jour
+   */
+  public updateJoueur(joueur: Joueur) {
+    this.httpClient.put<Joueur>(`http://localhost:8080/joueurs/update/${joueur.idJoueur}`, joueur).subscribe(
+      updateJoueur => {
+        this.availableJoueur$.next(this.availableJoueur);
+      }
+    );
+  }
+
+  /**
+   * Fonction de suppression d'un joueur.
+   * Elle met à jour notre liste de joueurs et notre liste observable.
+   * @param idJoueur du joueur à supprimer
+   */
+  supprimerJoueur(idJoueur: number): Joueur[] {
+    this.availableJoueur = this.availableJoueur.filter( joueur => joueur.idJoueur !== idJoueur ).slice();
     return this.availableJoueur;
   }
 }

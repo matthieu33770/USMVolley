@@ -1,3 +1,28 @@
 .edition {
     font-family: Maven Pro;
 }
+
+.identification {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 500px;
+}
+
+.boutons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.tab{
+    display: flex;
+    justify-content: center;
+}
+
+.joueurEquipe {
+    margin-right: 40px;
+}
+
+.joueurDispo {
+    margin-left: 40px;
+}

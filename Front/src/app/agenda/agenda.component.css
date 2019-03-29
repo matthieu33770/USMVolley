@@ -1,6 +1,17 @@
 .agenda{
-    display: flex;
-    justify-content: center;
+    
+    font-family: Maven Pro;
+}
+
+.titre {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.calendrier {
+  display: flex;
+  justify-content: center;
 }
 
 h3 {

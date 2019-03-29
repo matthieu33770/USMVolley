@@ -1,3 +1,8 @@
 .edition {
     font-family: Maven Pro;
 }
+
+.boutons {
+    display: flex;
+    justify-content: flex-end;
+}

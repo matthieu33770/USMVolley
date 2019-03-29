@@ -1,15 +1,22 @@
 <div class="gestion">
+  <div class="titre">
+      <h1>Gestion des données</h1>
+  </div>
+
+  <div class="gerer">
   <div class="left">
     <mat-list>
       <mat-divider></mat-divider>
       <mat-list-item>Gérer les licenciés et les droits</mat-list-item>
       <mat-divider></mat-divider>
+      <mat-list-item>Gérer les équipes</mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>Gérer les articles</mat-list-item>
+      <mat-divider></mat-divider>
       <mat-list-item>Gérer les statuts</mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item>Gérer les lieux</mat-list-item>
-      <mat-divider></mat-divider>
-      <mat-list-item>Gérer les équipes</mat-list-item>
-      <mat-divider></mat-divider>
+      <mat-divider></mat-divider>      
       <mat-list-item>Gérer les créneaux</mat-list-item>
       <mat-divider></mat-divider>
     </mat-list>
@@ -23,9 +30,13 @@
       </div>
       <mat-divider></mat-divider>
       <div class="button">
-        <button mat-raised-button color="accent">Gérer</button>
+        <button mat-raised-button color="accent" routerLink="/gestion/equipes">Gérer</button>
       </div>
       <mat-divider></mat-divider>
+      <div class="button">
+          <button mat-raised-button color="accent" routerLink="/gestion/articles">Gérer</button>
+        </div>
+        <mat-divider></mat-divider>
       <div class="button">
         <button mat-raised-button color="accent">Gérer</button>
       </div>
@@ -40,5 +51,5 @@
       <mat-divider></mat-divider>
     </mat-list>  
   </div>
-
+</div>
 </div>

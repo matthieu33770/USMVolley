@@ -1,22 +1,32 @@
 .saisie{
-    display: flex;
-    font-family: Maven Pro;
-  }
-  
-  .left {    
-    flex-grow: 1;
-    width: 40%;
-    margin-left: 150px;
-  }
+  font-family: Maven Pro;
+}
 
-  .center {
-    flex-grow: 2;
-    width: 40%;
-    margin-left: 50px;
-  }
+.titre {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.data {
+  display: flex;
+  justify-content: center;
+}
   
-  .right {
-    flex-grow: 3;
-    width: 40%;
-    margin-left: 50px;
-  }
+.left {    
+  flex-grow: 1;
+  width: 40%;
+  margin-left: 150px;
+}
+
+.center {
+  flex-grow: 2;
+  width: 40%;
+  margin-left: 50px;
+}
+  
+.right {
+  flex-grow: 3;
+  width: 40%;
+  margin-left: 50px;
+}

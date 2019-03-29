@@ -1,0 +1,9 @@
+.partenaires{
+  font-family: Maven Pro;
+}
+
+.titre {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}

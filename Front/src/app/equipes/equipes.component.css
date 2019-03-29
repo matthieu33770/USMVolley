@@ -1,7 +1,17 @@
 .equipes{
-    display: flex;
-    font-family: Maven Pro;
-  }
+  font-family: Maven Pro;
+}
+
+.titre {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.categories {
+  display: flex;
+  justify-content: center;
+}
 
   .jeunes {
     width: 40%;

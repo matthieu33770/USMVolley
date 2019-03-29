@@ -13,6 +13,8 @@ import { ListeJoueursComponent } from './liste-joueurs/liste-joueurs.component';
 import { DetailJoueurComponent } from './detail-joueur/detail-joueur.component';
 import { ListeEquipesComponent } from './liste-equipes/liste-equipes.component';
 import { DetailEquipeComponent } from './detail-equipe/detail-equipe.component';
+import { ArticleComponent } from './article/article.component';
+import { ListeArticlesComponent } from './liste-articles/liste-articles.component';
 
 const routes: Routes = [
   {path: 'equipes', component: EquipesComponent},
@@ -29,6 +31,8 @@ const routes: Routes = [
   {path: 'gestion/equipes/detailequipe/:idEquipe', component: DetailEquipeComponent},
   {path: 'accueil', component: AccueilComponent},
   {path: 'accueil/logout', component: AccueilComponent},
+  {path: 'gestion/articles', component: ListeArticlesComponent},
+  {path: 'gestion/articles/redactionArticle/:idArticle', component: ArticleComponent},
   {path: '', component: AccueilComponent}
 ];
 

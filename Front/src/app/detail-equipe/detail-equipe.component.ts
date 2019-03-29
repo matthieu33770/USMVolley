@@ -5,10 +5,10 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { ExcelService } from '../Services/excel.service';
 
 import { Equipe } from '../Model/Equipe';
+import { Joueur } from '../Model/Joueur';
 
 import { EquipesService } from '../Services/equipes.service';
 import { JoueursService } from '../Services/joueurs.service';
-import { Joueur } from '../Model/Joueur';
 
 @Component({
   selector: 'app-detail-equipe',

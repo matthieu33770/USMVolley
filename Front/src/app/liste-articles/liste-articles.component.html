@@ -1,0 +1,61 @@
+<div class="articles">
+    <div class="titre">
+    <h1>Liste des Articles</h1>
+    </div>
+    
+    <div class="boutons">
+      <button mat-raised-button (click)="exportAsXLSX()">Exporter</button>
+      <button mat-raised-button color="accent" routerLink="/newequipe">Nouveau</button>
+      <button mat-raised-button (click)="onEdit(selection.selected)">Editer</button>
+      <span *ngIf="confirmDelete">
+        <span>Etes vous sûr de vouloir supprimer cet article ?</span>
+        <button mat-raised-button color="warn" (click)="delete(selection.selected)">Oui</button>
+        <button mat-raised-button color="accent" (click)="confirmDelete=false">Non</button>
+      </span>  
+      <button *ngIf="!confirmDelete" mat-raised-button color="warn" (click)="confirmDelete=true">Supprimer</button>
+    </div>
+    <br>
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" class="tableau">
+    
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+  
+      <!-- Nom Column -->
+      <ng-container matColumnDef="titreArticle">
+        <th mat-header-cell *matHeaderCellDef>Titre de l'Article</th>
+        <td mat-cell *matCellDef="let article">{{article.titreArticle}}</td>
+      </ng-container>
+  
+      <!-- nombre de Joueur Column -->
+      <ng-container matColumnDef="photoArticle">
+        <th mat-header-cell *matHeaderCellDef>Photo</th>
+        <td mat-cell *matCellDef="let article">{{article.photoArticle}}</td>
+      </ng-container>
+      
+      <!-- nombre de Garçons Column -->
+      <ng-container matColumnDef="contenuArticle">
+        <th mat-header-cell *matHeaderCellDef>Contenu</th>
+        <td mat-cell *matCellDef="let article">{{article.contenuArticle}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  <br>
+  <div class="boutons">
+    <button mat-raised-button color="accent" routerLink="/gestion">Retour</button>
+  </div>
+  <br>
+</div>

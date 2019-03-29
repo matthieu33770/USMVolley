@@ -1,6 +1,16 @@
 .lieux{
-    display: flex;
     font-family: Maven Pro;
+  }
+
+  .titre {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
+  
+  .gymnases {
+    display: flex;
+    justify-content: center;
   }
   
   .texte {

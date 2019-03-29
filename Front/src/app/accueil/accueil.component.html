@@ -2,8 +2,18 @@
   <div class="titre">
     <h1>Bienvenue sur le site de l'Union Salles Mios Volley Ball !</h1> 
   </div>
-  <!-- <br>
-  <div>
-    <h3>USM VB</h3>
-  </div> -->
+  <mat-card class="article-card" *ngFor="let article of articleList | async">
+    <mat-card-header>
+      <mat-card-title>{{ article.titreArticle }}</mat-card-title>
+    </mat-card-header>
+    <ng-template #Image ><img mat-card-image class="image" src="{{ article.photoArticle }}" alt="Photo de l'article"></ng-template>
+    <mat-card-content>
+      <p>{{ article.contenuArticle }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <div class="bouton">
+        <button mat-raised-button color="accent" type="submit" (click)="onSubmit()">Lire l'article</button>
+      </div>
+    </mat-card-actions>
+  </mat-card>
 </div>

@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../Services/login.service';
-import { JoueursService } from '../Services/joueurs.service';
 import { environment } from '../../environments/environment';
 import { BehaviorSubject } from 'rxjs';
 import * as jwt_decode from 'jwt-decode';
-import { User } from '../model/User';
-import { UsersService } from '../Services/users.service';
+import {  FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';
 
+import { LoginService } from '../Services/login.service';
+import { JoueursService } from '../Services/joueurs.service';
+import { UsersService } from '../Services/users.service';
 import { Joueur } from '../Model/Joueur';
+import { User } from '../model/User';
+
+const URL = 'http://localhost:3000/api/upload';
 
 @Component({
   selector: 'app-saisie',
@@ -27,6 +30,9 @@ export class SaisieComponent implements OnInit {
   userList: BehaviorSubject<User[]>;
   player: Joueur [] = [];
 
+  public uploaderFormulaire: FileUploader = new FileUploader({url: URL, itemAlias: 'fichier'});
+  public uploaderCertificat: FileUploader = new FileUploader({url: URL, itemAlias: 'fichier'});
+
   constructor(private loginService: LoginService, private joueurService: JoueursService, private userService: UsersService) {
   }
 
@@ -42,6 +48,18 @@ export class SaisieComponent implements OnInit {
     this.getJoueur();
     console.log(this.player);
     console.log(this.editionJoueur);
+    this.uploaderFormulaire.onAfterAddingFile = (file) => {
+      file.withCredentials = false;
+    };
+    this.uploaderFormulaire.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
+         console.log('FileUpload:uploaded:', item, status, response);
+         alert('File uploaded successfully');
+     };
+    this.uploaderCertificat.onAfterAddingFile = (file) => { file.withCredentials = false; };
+    this.uploaderCertificat.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
+         console.log('FileUpload:uploaded:', item, status, response);
+         alert('File uploaded successfully');
+     };
   }
 
   getUser(): void {

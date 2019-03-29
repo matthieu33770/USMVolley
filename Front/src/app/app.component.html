@@ -26,14 +26,12 @@
     <button *ngIf="isLoggedin && isLicencie" mat-flat-button [matMenuTriggerFor]="menuL">Licencié</button>
       <mat-menu #menuL="matMenu">
         <button mat-menu-item routerLink="/saisie">Mon Profil</button>
-        <button mat-menu-item routerLink="/saisie">Renouveler sa Licence</button>
         <button mat-menu-item type="submit" (click)="onDeconnect()">Se déconnecter</button>
       </mat-menu>
     <button *ngIf="isLoggedin && isCapitaine" mat-menu-item [matMenuTriggerFor]="menuC">Capitaine</button>
       <mat-menu #menuC="matMenu">
         <button mat-menu-item routerLink="/saisie">Mon Profil</button>
-        <button mat-menu-item routerLink="/saisie">Renouveler sa Licence</button>
-        <button mat-menu-item>Publier un Article</button>
+        <button mat-menu-item routerLink="/accueil/redactionArticle">Publier un Article</button>
         <button mat-menu-item routerLink="/manifestations">Gérer une Manifestation</button>
         <button mat-menu-item>Faire une Sélection</button>
         <button mat-menu-item>Envoyer un Mail</button>
@@ -42,8 +40,7 @@
     <button *ngIf="isLoggedin && isBureau" mat-flat-button [matMenuTriggerFor]="menuB">Bureau</button>
       <mat-menu #menuB="matMenu">
         <button mat-menu-item routerLink="/saisie">Mon Profil</button>
-        <button mat-menu-item routerLink="/saisie">Renouveler sa Licence</button>
-        <button mat-menu-item>Publier un Article</button>
+        <button mat-menu-item routerLink="/accueil/redactionArticle">Publier un Article</button>
         <button mat-menu-item routerLink="/manifestations">Gérer une Manifestation</button>
         <button mat-menu-item>Faire une Sélection</button>
         <button mat-menu-item>Envoyer un Mail</button>

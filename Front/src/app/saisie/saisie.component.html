@@ -1,77 +1,82 @@
 <div class="saisie">
+  <div class="titre">
+    <h1>Edition des données de <strong>{{ editionJoueur.prenom }} {{ editionJoueur.nom }}</strong></h1>
+  </div>
+  <div class="data">
+    <div class="left">
+      <p>
+        <mat-form-field>
+          <input matInput placeholder="Nom" [(ngModel)]="editionJoueur.nom" name="nom">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <input matInput placeholder="Prénom" [(ngModel)]="editionJoueur.prenom" name="prenom">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <input *ngIf="editionJoueur.sexe" matInput placeholder="Sexe" [(ngModel)]="editionJoueur.sexe" name="sexe">
+          <mat-select *ngIf="!editionJoueur.sexe" placeholder="Sexe">
+              <mat-option value="vide">  </mat-option>
+              <mat-option value="m">Masculin</mat-option>
+              <mat-option value="f">Féminin</mat-option>
+            </mat-select>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <input matInput placeholder="Taille en cm" [(ngModel)]="editionJoueur.taille" name="taille">
+        </mat-form-field>
+      </p>
+      <p>
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker" placeholder="Date de Naissance" [value]="editionJoueur.dateNaissanceJoueur">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </p> 
+      <p>
+        <mat-form-field>
+          <input matInput placeholder="Adresse Mail" [(ngModel)]="editionJoueur.mail" name="mail">
+        </mat-form-field>
+      </p>
+    </div>
 
-<div class="left">
-  <p>
-    <mat-form-field>
-      <input matInput placeholder="Nom" [(ngModel)]="editionJoueur.nom" name="nom">
-    </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field>
-      <input matInput placeholder="Prénom" [(ngModel)]="editionJoueur.prenom" name="prenom">
-    </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field>
-      <mat-select placeholder="Sexe">
-          <mat-option value="m">Masculin</mat-option>
-          <mat-option value="f">Féminin</mat-option>
-        </mat-select>
-    </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field>
-      <input matInput placeholder="Taille en cm" [(ngModel)]="editionJoueur.taille" name="taille">
-    </mat-form-field>
-  </p>
-  <p>
+    <div class="center">
+      <p>  
       <mat-form-field>
-        <input matInput [matDatepicker]="picker" placeholder="Date de Naissance">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+        <input matInput placeholder="Numéro" [(ngModel)]="editionJoueur.numeroAdresse" name="numeroAdresse">
       </mat-form-field>
-    </p> 
-  <p>
-    <mat-form-field>
-      <input matInput placeholder="Adresse Mail" [(ngModel)]="editionJoueur.mail" name="mail">
-    </mat-form-field>
-  </p>
-</div>
+      </p>
+      <p>
+        <mat-form-field>
+        <input matInput placeholder="Rue" [(ngModel)]="editionJoueur.rue" name="rue">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <input matInput placeholder="Code Postal" [(ngModel)]="editionJoueur.codePostal" name="codePostal">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <input matInput placeholder="Ville" [(ngModel)]="editionJoueur.ville" name="ville">
+        </mat-form-field>
+      </p>
+      <p>
+          <mat-form-field>
+            <input matInput placeholder="N° de téléphone" [(ngModel)]="editionJoueur.telephone1" name="telephone1">
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field>
+            <input matInput placeholder="N° de portable" [(ngModel)]="editionJoueur.telephone2" name="telephone2">
+          </mat-form-field>
+        </p>
+    </div>
 
-<div class="center">
-  <p>  
-  <mat-form-field>
-    <input matInput placeholder="Numéro" [(ngModel)]="editionJoueur.numeroAdresse" name="numeroAdresse">
-  </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field>
-     <input matInput placeholder="Rue" [(ngModel)]="editionJoueur.rue" name="rue">
-    </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field>
-      <input matInput placeholder="Code Postal" [(ngModel)]="editionJoueur.codePostal" name="codePostal">
-    </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field>
-      <input matInput placeholder="Ville" [(ngModel)]="editionJoueur.ville" name="ville">
-    </mat-form-field>
-  </p>
-  <p>
-      <mat-form-field>
-        <input matInput placeholder="N° de téléphone" [(ngModel)]="editionJoueur.telephone1" name="telephone1">
-      </mat-form-field>
-    </p>
-    <p>
-      <mat-form-field>
-        <input matInput placeholder="N° de portable" [(ngModel)]="editionJoueur.telephone2" name="telephone2">
-      </mat-form-field>
-    </p>
-</div>
-
-  <div class="right">
+    <div class="right">
     <p>
     <mat-form-field>
       <input matInput placeholder="Nom d'utilisateur" [(ngModel)]="editionUser.username" name="username">
@@ -84,14 +89,22 @@
   </p>
 
   <p>
-      <mat-form-field>
-        <input matInput placeholder="Formulaire Licence">
-      </mat-form-field>
+    Formulaire Fédération<br>(nom.prenom.formulaire.pdf)
+    <input placeholder="Formulaire" type="file" name="formulaire" ng2FileSelect [uploader]="uploaderFormulaire" />
+    <button mat-raised-button type="button" class="btn btn-success btn-s" 
+      (click)="uploaderFormulaire.uploadAll()" 
+      [disabled]="!uploaderFormulaire.getNotUploadedItems().length" >
+        Charger
+    </button>
   </p>
   <p>
-    <mat-form-field>
-      <input matInput placeholder="Certificat Médical">
-    </mat-form-field>
+    Certificat Médical<br>(nom.prenom.certificat.pdf)
+    <input placeholder="Certificat" type="file" name="certificat" ng2FileSelect [uploader]="uploaderCertificat" />
+    <button mat-raised-button type="button" class="btn btn-success btn-s" 
+      (click)="uploaderCertificat.uploadAll()" 
+      [disabled]="!uploaderCertificat.getNotUploadedItems().length" >
+          Charger
+    </button>
   </p>
   <p>
     <mat-form-field>
@@ -108,6 +121,6 @@
     <button *ngIf="!isLoggedin" mat-raised-button color="accent" type="submit" (click)="onSave()">Enregistrer</button>
     <button *ngIf="isLoggedin" mat-raised-button color="accent" type="submit" (click)="onSave()">Mise à jour</button>
   </div>
-</div>
-
+    </div>
+  </div>
 </div>

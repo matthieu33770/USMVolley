@@ -1,16 +1,20 @@
-.manifestations{
+.article {
     font-family: Maven Pro;
-  }
-  
-  .titre {
+}
+
+.titre {
     display: flex;
     justify-content: center;
-    margin-bottom: 40px;
-  }
+}
 
-.listeManifestation {
+.data {
     display: flex;
     margin-top: 100px;
     margin-bottom: 100px;
     justify-content: center;
+}
+
+.boutons {
+    display: flex;
+    justify-content: flex-end;
 }

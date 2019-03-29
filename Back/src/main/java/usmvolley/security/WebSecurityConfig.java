@@ -57,6 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/roles/**").permitAll()
                 .antMatchers("/fonctions/**").permitAll()
                 .antMatchers("/equipes/**").permitAll()
+                .antMatchers("/articles/**").permitAll()
                 // Disallow everything else...
                 .anyRequest().authenticated();
         
@@ -76,6 +77,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/roles/**");
         web.ignoring().antMatchers("/fonctions/**");
         web.ignoring().antMatchers("/equipes/**");
+        web.ignoring().antMatchers("/articles/**");
         //.anyRequest();
     }
 

@@ -1,0 +1,30 @@
+<div class="article">
+  <div class="titre">
+    <h1>Rédaction d'un article</h1>
+  </div>
+
+  <div class="data">
+    <p>
+      <mat-form-field>
+        <input matInput placeholder="Titre" [(ngModel)]="editionArticle.titre" name="titre">
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field>
+        <input matInput placeholder="Contenu" [(ngModel)]="editionArticle.contenu" name="contenu">
+      </mat-form-field>
+    </p>
+    <p>
+      Photo de l'article<br>
+      <input placeholder="Photo" type="file" name="photo" ng2FileSelect [uploader]="uploaderPhoto" />
+      <button mat-raised-button type="button" class="btn btn-success btn-s" 
+        (click)="uploaderPhoto.uploadAll()" 
+        [disabled]="!uploaderPhoto.getNotUploadedItems().length" >
+            Charger
+      </button>
+    </p>
+  </div>
+  <div class="boutons">
+      <button mat-raised-button color="accent" routerLink="/gestion/articles">Retour</button>
+  </div>
+</div>

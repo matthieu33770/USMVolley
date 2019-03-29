@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { FileSelectDirective } from 'ng2-file-upload';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -29,6 +30,8 @@ import { ListeJoueursComponent } from './liste-joueurs/liste-joueurs.component';
 import { DetailJoueurComponent } from './detail-joueur/detail-joueur.component';
 import { DetailEquipeComponent } from './detail-equipe/detail-equipe.component';
 import { ListeEquipesComponent } from './liste-equipes/liste-equipes.component';
+import { ArticleComponent } from './article/article.component';
+import { ListeArticlesComponent } from './liste-articles/liste-articles.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,10 @@ import { ListeEquipesComponent } from './liste-equipes/liste-equipes.component';
     ListeJoueursComponent,
     DetailJoueurComponent,
     DetailEquipeComponent,
-    ListeEquipesComponent
+    ListeEquipesComponent,
+    FileSelectDirective,
+    ArticleComponent,
+    ListeArticlesComponent
   ],
   imports: [
     BrowserModule,

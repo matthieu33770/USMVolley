@@ -58,7 +58,7 @@ export class ListeEquipesComponent implements OnInit {
   }
 
   delete(selected: Equipe[]) {
-    console.log(selected);
+    console.log(selected[0]);
     if (selected.length !== 0) {
       this.equipeService.availableEquipe.splice(this.equipeService.availableEquipe.indexOf(selected[0]), 1);
       this.selection = new SelectionModel<Equipe>(false, []);

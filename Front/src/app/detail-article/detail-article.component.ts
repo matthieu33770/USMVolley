@@ -13,11 +13,12 @@ const URL = 'http://localhost:3000/api/upload';
 
 @Component({
   selector: 'app-article',
-  templateUrl: './article.component.html',
-  styleUrls: ['./article.component.css']
+  templateUrl: './detail-article.component.html',
+  styleUrls: ['./detail-article.component.css']
 })
-export class ArticleComponent implements OnInit {
+export class DetailArticleComponent implements OnInit {
 
+  isModification: Boolean = false;
   idArticle: number;
   article;
   editionArticle: Article = new Article(0, '', '', '');
@@ -29,8 +30,10 @@ export class ArticleComponent implements OnInit {
               private excelService: ExcelService) { }
 
   ngOnInit() {
-    this.idArticle = +this.route.snapshot.params.idArticle;
+    this.idArticle = Number(this.route.snapshot.params.idArticle);
+    console.log(this.idArticle);
     this.getArticle();
+    console.log(this.getArticle());
     this.articleService.findArticle(this.idArticle).subscribe(article => {
       this.editionArticle = article; });
 
@@ -39,6 +42,11 @@ export class ArticleComponent implements OnInit {
          console.log('FileUpload:uploaded:', item, status, response);
          alert('File uploaded successfully');
      };
+
+    console.log(this.editionArticle);
+    if (this.idArticle) {
+      this.isModification = true;
+    }
   }
 
   getArticle(): void {

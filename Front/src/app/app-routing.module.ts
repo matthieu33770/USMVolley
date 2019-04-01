@@ -13,8 +13,10 @@ import { ListeJoueursComponent } from './liste-joueurs/liste-joueurs.component';
 import { DetailJoueurComponent } from './detail-joueur/detail-joueur.component';
 import { ListeEquipesComponent } from './liste-equipes/liste-equipes.component';
 import { DetailEquipeComponent } from './detail-equipe/detail-equipe.component';
-import { ArticleComponent } from './article/article.component';
+import { DetailArticleComponent } from './detail-article/detail-article.component';
 import { ListeArticlesComponent } from './liste-articles/liste-articles.component';
+import { ListeStatutComponent } from './liste-statut/liste-statut.component';
+import { DetailStatutComponent } from './detail-statut/detail-statut.component';
 
 const routes: Routes = [
   {path: 'equipes', component: EquipesComponent},
@@ -27,12 +29,18 @@ const routes: Routes = [
   {path: 'gestion', component: GestionComponent},
   {path: 'gestion/joueurs', component: ListeJoueursComponent},
   {path: 'gestion/joueurs/detailjoueur/:idJoueur', component: DetailJoueurComponent},
+  {path: 'gestion/joueurs/detailjoueur/newJoueur', component: SaisieComponent},
   {path: 'gestion/equipes', component: ListeEquipesComponent},
   {path: 'gestion/equipes/detailequipe/:idEquipe', component: DetailEquipeComponent},
+  {path: 'gestion/equipes/detailequipe/newEquipe', component: DetailEquipeComponent},
+  {path: 'gestion/articles', component: ListeArticlesComponent},
+  {path: 'gestion/articles/redactionArticle/:idArticle', component: DetailArticleComponent},
+  {path: 'gestion/articles/redactionArticle/newArticle', component: DetailArticleComponent},
+  {path: 'gestion/statuts', component: ListeStatutComponent},
+  {path: 'gestion/statuts/detailstatut/:idStatut', component: DetailStatutComponent},
+  {path: 'gestion/statuts/detailstatut/newStatut', component: DetailStatutComponent},
   {path: 'accueil', component: AccueilComponent},
   {path: 'accueil/logout', component: AccueilComponent},
-  {path: 'gestion/articles', component: ListeArticlesComponent},
-  {path: 'gestion/articles/redactionArticle/:idArticle', component: ArticleComponent},
   {path: '', component: AccueilComponent}
 ];
 

@@ -25,6 +25,7 @@ export class ConnexionComponent {
     user.mdp = this.loginForm.value.mdp;
     this.loginService.signIn(user);
     console.log(user);
+    console.log(user.roleList);
   }
 
 }

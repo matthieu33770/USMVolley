@@ -18,6 +18,7 @@ import { EquipesService } from '../Services/equipes.service';
 })
 export class DetailJoueurComponent implements OnInit {
 
+  ismodification: Boolean = false;
   idJoueur: number;
   idFonction: number;
   idEquipe: number;
@@ -44,8 +45,10 @@ export class DetailJoueurComponent implements OnInit {
     this.getFonction();
     this.getEquipe();
     this.joueurService.findJoueur(this.idJoueur).subscribe(joueur => {
-      this.editionJoueur = joueur;
-    });
+      this.editionJoueur = joueur; });
+    if (this.editionJoueur.idJoueur) {
+      this.ismodification = true;
+    }
   }
 
   getFonction(): void {

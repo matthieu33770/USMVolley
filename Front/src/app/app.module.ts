@@ -30,8 +30,10 @@ import { ListeJoueursComponent } from './liste-joueurs/liste-joueurs.component';
 import { DetailJoueurComponent } from './detail-joueur/detail-joueur.component';
 import { DetailEquipeComponent } from './detail-equipe/detail-equipe.component';
 import { ListeEquipesComponent } from './liste-equipes/liste-equipes.component';
-import { ArticleComponent } from './article/article.component';
+import { DetailArticleComponent } from './detail-article/detail-article.component';
 import { ListeArticlesComponent } from './liste-articles/liste-articles.component';
+import { DetailStatutComponent } from './detail-statut/detail-statut.component';
+import { ListeStatutComponent } from './liste-statut/liste-statut.component';
 
 @NgModule({
   declarations: [
@@ -51,8 +53,10 @@ import { ListeArticlesComponent } from './liste-articles/liste-articles.componen
     DetailEquipeComponent,
     ListeEquipesComponent,
     FileSelectDirective,
-    ArticleComponent,
-    ListeArticlesComponent
+    DetailArticleComponent,
+    ListeArticlesComponent,
+    DetailStatutComponent,
+    ListeStatutComponent
   ],
   imports: [
     BrowserModule,

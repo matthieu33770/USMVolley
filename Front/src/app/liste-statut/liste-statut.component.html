@@ -1,14 +1,14 @@
-<div class="articles">
+<div class="statuts">
     <div class="titre">
-    <h1>Liste des Articles</h1>
+    <h1>Liste des Statuts</h1>
     </div>
     
     <div class="boutons">
       <button mat-raised-button (click)="exportAsXLSX()">Exporter</button>
-      <button mat-raised-button color="accent" routerLink="/gestion/articles/redactionArticle/newArticle">Nouveau</button>
+      <button mat-raised-button color="accent" routerLink="/gestion/statuts/detailstatut/newStatut">Nouveau</button>
       <button mat-raised-button (click)="onEdit(selection.selected)">Editer</button>
       <span *ngIf="confirmDelete">
-        <span>Etes vous sûr de vouloir supprimer cet article ?</span>
+        <span>Etes vous sûr de vouloir supprimer ce statut ?</span>
         <button mat-raised-button color="warn" (click)="delete(selection.selected)">Oui</button>
         <button mat-raised-button color="accent" (click)="confirmDelete=false">Non</button>
       </span>  
@@ -32,21 +32,9 @@
       </ng-container>
   
       <!-- Nom Column -->
-      <ng-container matColumnDef="titreArticle">
-        <th mat-header-cell *matHeaderCellDef>Titre de l'Article</th>
-        <td mat-cell *matCellDef="let article">{{article.titreArticle}}</td>
-      </ng-container>
-  
-      <!-- nombre de Joueur Column -->
-      <ng-container matColumnDef="photoArticle">
-        <th mat-header-cell *matHeaderCellDef>Photo</th>
-        <td mat-cell *matCellDef="let article">{{article.photoArticle}}</td>
-      </ng-container>
-      
-      <!-- nombre de Garçons Column -->
-      <ng-container matColumnDef="contenuArticle">
-        <th mat-header-cell *matHeaderCellDef>Contenu</th>
-        <td mat-cell *matCellDef="let article">{{article.contenuArticle}}</td>
+      <ng-container matColumnDef="libelleStatut">
+        <th mat-header-cell *matHeaderCellDef>Libellé du Statut</th>
+        <td mat-cell *matCellDef="let statut">{{statut.libelleStatut}}</td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

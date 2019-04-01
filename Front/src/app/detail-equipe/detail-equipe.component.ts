@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
-import { ExcelService } from '../Services/excel.service';
 
 import { Equipe } from '../Model/Equipe';
 import { Joueur } from '../Model/Joueur';
 
 import { EquipesService } from '../Services/equipes.service';
 import { JoueursService } from '../Services/joueurs.service';
+import { ExcelService } from '../Services/excel.service';
 
 @Component({
   selector: 'app-detail-equipe',
@@ -18,6 +18,7 @@ import { JoueursService } from '../Services/joueurs.service';
 
 export class DetailEquipeComponent implements OnInit {
 
+  ismodification: Boolean = false;
   idEquipe: number;
   equipe;
   equipeList: Equipe [];
@@ -40,6 +41,9 @@ export class DetailEquipeComponent implements OnInit {
     this.getEquipe();
     this.equipeService.findEquipe(this.idEquipe).subscribe(equipe => {
       this.editionEquipe = equipe; });
+    if (this.editionEquipe.idEquipe) {
+      this.ismodification = true;
+    }
     this.getAdulte();
   }
 

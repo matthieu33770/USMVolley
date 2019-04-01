@@ -31,7 +31,6 @@ export class AppComponent implements OnInit {
     if (this.loginService.loggedIn != null) {
       this.isLoggedin = this.loginService.loggedIn;
     }
-    console.log(this.isLoggedin);
     if (this.isLoggedin) {
       this.formulaire = 'Renouvellement';
     } else if (!this.isLoggedin) {

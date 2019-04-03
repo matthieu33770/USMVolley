@@ -17,6 +17,12 @@ import { DetailArticleComponent } from './detail-article/detail-article.componen
 import { ListeArticlesComponent } from './liste-articles/liste-articles.component';
 import { ListeStatutComponent } from './liste-statut/liste-statut.component';
 import { DetailStatutComponent } from './detail-statut/detail-statut.component';
+import { ListeDisponibilitesComponent } from './liste-disponibilites/liste-disponibilites.component';
+import { DetailDisponibilitesComponent } from './detail-disponibilites/detail-disponibilites.component';
+import { ListeLieuxComponent } from './liste-lieux/liste-lieux.component';
+import { DetailLieuxComponent } from './detail-lieux/detail-lieux.component';
+import { ListeCreneauxComponent } from './liste-creneaux/liste-creneaux.component';
+import { DetailCreneauxComponent } from './detail-creneaux/detail-creneaux.component';
 
 const routes: Routes = [
   {path: 'equipes', component: EquipesComponent},
@@ -39,6 +45,15 @@ const routes: Routes = [
   {path: 'gestion/statuts', component: ListeStatutComponent},
   {path: 'gestion/statuts/detailstatut/:idStatut', component: DetailStatutComponent},
   {path: 'gestion/statuts/detailstatut/newStatut', component: DetailStatutComponent},
+  {path: 'gestion/lieux', component: ListeLieuxComponent},
+  {path: 'gestion/lieux/detaillieu/:idLieu', component: DetailLieuxComponent},
+  {path: 'gestion/lieux/detaillieu/newLieu', component: DetailLieuxComponent},
+  {path: 'gestion/disponibilites', component: ListeDisponibilitesComponent},
+  {path: 'gestion/disponibilites/detaildisponibilite/:idDisponibilite', component: DetailDisponibilitesComponent},
+  {path: 'gestion/disponibilites/detaildisponibilite/newDisponibilite', component: DetailDisponibilitesComponent},
+  {path: 'gestion/creneaux', component: ListeCreneauxComponent},
+  {path: 'gestion/creneaux/detailcreneau/:idCreneau', component: DetailCreneauxComponent},
+  {path: 'gestion/creneaux/detailcreneau/newCreneau', component: DetailCreneauxComponent},
   {path: 'accueil', component: AccueilComponent},
   {path: 'accueil/logout', component: AccueilComponent},
   {path: '', component: AccueilComponent}

@@ -1,0 +1,55 @@
+<div class="creneaux">
+  <div class="titre">
+  <h1>Liste des Statuts</h1>
+  </div>
+  
+  <div class="boutons">
+    <button mat-raised-button (click)="exportAsXLSX()">Exporter</button>
+    <button mat-raised-button color="accent" routerLink="/gestion/creneaux/detailcreneau/newCreneau">Nouveau</button>
+    <button mat-raised-button (click)="onEdit(selection.selected)">Editer</button>
+    <span *ngIf="confirmDelete">
+      <span>Etes vous sûr de vouloir supprimer ce statut ?</span>
+      <button mat-raised-button color="warn" (click)="delete(selection.selected)">Oui</button>
+      <button mat-raised-button color="accent" (click)="confirmDelete=false">Non</button>
+    </span>  
+    <button *ngIf="!confirmDelete" mat-raised-button color="warn" (click)="confirmDelete=true">Supprimer</button>
+  </div>
+  <br>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" class="tableau">
+  
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <!-- Nom Column -->
+    <ng-container matColumnDef="creneau">
+      <th mat-header-cell *matHeaderCellDef>Libellé du Creneau</th>
+      <td mat-cell *matCellDef="let creneau">{{creneau.creneau}}</td>
+    </ng-container>
+
+     <!-- Nom Column -->
+     <ng-container matColumnDef="categorieCreneau">
+      <th mat-header-cell *matHeaderCellDef>Catégorie du Creneau</th>
+      <td mat-cell *matCellDef="let creneau">{{creneau.categorie.libelleCategorie}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+<br>
+<div class="boutons">
+  <button mat-raised-button color="accent" routerLink="/gestion">Retour</button>
+</div>
+<br>
+</div>

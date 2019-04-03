@@ -1,0 +1,19 @@
+<div class="lieu">
+  <div class="titre">
+    <h1 *ngIf="isModification">Edition d'un lieu</h1>
+    <h1 *ngIf="!isModification">Création d'un lieu</h1>
+  </div>
+
+  <div class="data">
+    <p>
+      <mat-form-field>
+        <input matInput placeholder="libelle" [(ngModel)]="editionLieu.lieu" name="libelle">
+      </mat-form-field>
+    </p>
+  </div>
+  <div class="boutons">
+    <button *ngIf="isModification" mat-raised-button color="primary" (click)="onSave()">Modifier</button>
+    <button *ngIf="!isModification" mat-raised-button color="primary" (click)="onSave()">Enregistrer</button>
+    <button mat-raised-button color="accent" routerLink="/gestion/lieux">Retour</button>
+  </div>
+</div>

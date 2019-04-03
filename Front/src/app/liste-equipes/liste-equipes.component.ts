@@ -36,8 +36,8 @@ export class ListeEquipesComponent implements OnInit {
     this.getTeam();
     this.equipeService.getEquipes().subscribe(Equipes => {this.dataSource = new MatTableDataSource<Equipe>(Equipes);
                                               Equipes.forEach( equipe => {
-                                              this.nbreMasculin = equipe.joueurs.filter(joueur => {if (joueur.sexe === 'M') { return true; }} );
-                                              this.nbreFeminin = equipe.joueurs.filter(joueur => {if (joueur.sexe === 'F') { return true; }} );
+                                              this.nbreMasculin = equipe.joueurs.filter(joueur => {if (joueur.sexe === 'Masculin') { return true; }} );
+                                              this.nbreFeminin = equipe.joueurs.filter(joueur => {if (joueur.sexe === 'Féminin') { return true; }} );
                                               console.log(this.nbreMasculin, this.nbreFeminin);
                                             equipe.nbreHomme = this.nbreMasculin.length;
                                             equipe.nbreFemme = this.nbreFeminin.length; });

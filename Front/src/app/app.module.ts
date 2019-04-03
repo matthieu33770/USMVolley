@@ -34,6 +34,12 @@ import { DetailArticleComponent } from './detail-article/detail-article.componen
 import { ListeArticlesComponent } from './liste-articles/liste-articles.component';
 import { DetailStatutComponent } from './detail-statut/detail-statut.component';
 import { ListeStatutComponent } from './liste-statut/liste-statut.component';
+import { ListeLieuxComponent } from './liste-lieux/liste-lieux.component';
+import { ListeDisponibilitesComponent } from './liste-disponibilites/liste-disponibilites.component';
+import { ListeCreneauxComponent } from './liste-creneaux/liste-creneaux.component';
+import { DetailLieuxComponent } from './detail-lieux/detail-lieux.component';
+import { DetailCreneauxComponent } from './detail-creneaux/detail-creneaux.component';
+import { DetailDisponibilitesComponent } from './detail-disponibilites/detail-disponibilites.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +62,13 @@ import { ListeStatutComponent } from './liste-statut/liste-statut.component';
     DetailArticleComponent,
     ListeArticlesComponent,
     DetailStatutComponent,
-    ListeStatutComponent
+    ListeStatutComponent,
+    ListeLieuxComponent,
+    ListeDisponibilitesComponent,
+    ListeCreneauxComponent,
+    DetailLieuxComponent,
+    DetailCreneauxComponent,
+    DetailDisponibilitesComponent
   ],
   imports: [
     BrowserModule,

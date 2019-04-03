@@ -1,0 +1,19 @@
+<div class="disponibilite">
+  <div class="titre">
+    <h1 *ngIf="isModification">Edition d'un motif de disponibilité</h1>
+    <h1 *ngIf="!isModification">Création d'un motif de disponibilité</h1>
+  </div>
+
+  <div class="data">
+    <p>
+      <mat-form-field>
+        <input matInput placeholder="libelle" [(ngModel)]="editionDisponibilite.libelleDisponibilite" name="libelle">
+      </mat-form-field>
+    </p>
+  </div>
+  <div class="boutons">
+    <button *ngIf="isModification" mat-raised-button color="primary" (click)="onSave()">Modifier</button>
+    <button *ngIf="!isModification" mat-raised-button color="primary" (click)="onSave()">Enregistrer</button>
+    <button mat-raised-button color="accent" routerLink="/gestion/disponibilites">Retour</button>
+  </div>
+</div>

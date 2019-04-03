@@ -1,0 +1,20 @@
+.disponibilite {
+    font-family: Maven Pro;
+}
+
+.titre {
+    display: flex;
+    justify-content: center;
+}
+
+.data {
+    display: flex;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    justify-content: center;
+}
+
+.boutons {
+    display: flex;
+    justify-content: flex-end;
+}

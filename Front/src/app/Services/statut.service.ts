@@ -10,7 +10,7 @@ import { Statut } from '../Model/Statut';
 })
 export class StatutService {
 
-  // La liste des equipes
+  // La liste des statuts
   public availableStatut: Statut [];
 
   // La liste observable que l'on rend visible partout dans l'application
@@ -49,7 +49,7 @@ export class StatutService {
   /**
    * Fonction de création d'un nouveau statut.
    * Elle met à jour notre liste de statut et notre liste observable.
-   * @param newStatut la nouvelle équipe à créer
+   * @param newStatut le nouveau lieu à créer
    */
   public createStatut(newStatut: Statut) {
     this.httpClient.post<Statut>('http://localhost:8080/statuts/create', newStatut).subscribe(
@@ -75,7 +75,7 @@ export class StatutService {
   /**
    * Fonction de suppression d'un statut.
    * Elle met à jour notre liste de statut et notre liste observable.
-   * @param idStatut de l'équipe à supprimer
+   * @param idStatut du statut à supprimer
    */
   supprimerStatut(idStatut: number): Statut[] {
     this.availableStatut = this.availableStatut.filter( statut => statut.idStatut !== idStatut ).slice();

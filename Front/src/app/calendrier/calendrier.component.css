@@ -1,8 +1,26 @@
+.calendrier{
+  font-family: Maven Pro;
+}
+
+.titre {
+  display: flex;
+  justify-content: center !important;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
 h3 {
-    margin: 0 0 10px;
-  }
-  
-  pre {
-    background-color: #f5f5f5;
-    padding: 15px;
-  }
+  display: flex;
+  justify-content: center !important;
+  margin: 0 0 10px;
+}
+
+.boutons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+pre {
+  background-color: #f5f5f5;
+  padding: 15px;
+}

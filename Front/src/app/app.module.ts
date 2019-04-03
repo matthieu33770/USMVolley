@@ -43,7 +43,6 @@ import { DetailLieuxComponent } from './detail-lieux/detail-lieux.component';
 import { DetailCreneauxComponent } from './detail-creneaux/detail-creneaux.component';
 import { DetailDisponibilitesComponent } from './detail-disponibilites/detail-disponibilites.component';
 import { CalendrierComponent } from './calendrier/calendrier.component';
-import { ListeManifestationsComponent } from './liste-manifestations/liste-manifestations.component';
 
 registerLocaleData(localeFr);
 
@@ -75,8 +74,7 @@ registerLocaleData(localeFr);
     DetailLieuxComponent,
     DetailCreneauxComponent,
     DetailDisponibilitesComponent,
-    CalendrierComponent,
-    ListeManifestationsComponent
+    CalendrierComponent
   ],
   imports: [
     BrowserModule,

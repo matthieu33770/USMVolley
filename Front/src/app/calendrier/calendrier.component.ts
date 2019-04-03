@@ -1,5 +1,6 @@
 import {
   Component,
+  OnInit,
   ChangeDetectionStrategy,
   ViewChild,
   TemplateRef
@@ -23,18 +24,32 @@ import {
   CalendarView
 } from 'angular-calendar';
 
+import {LoginService} from '../Services/login.service';
+
 const colors: any = {
-  red: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3'
+  open: {
+    primary: '#FF0000'
   },
-  blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF'
+  loisir1: {
+    primary: '#0038FF'
   },
-  yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA'
+  loisir2: {
+    primary: '#00FCFF'
+  },
+  heitz: {
+    primary: 'FF45F2'
+  },
+  coupe: {
+    primary: 'E85416'
+  },
+  jeune: {
+    primary: 'FFEA16'
+  },
+  entrainementAdulte: {
+    primary: '8B3AFF'
+  },
+  entrainementJeune: {
+    primary: '57FF00'
   }
 };
 
@@ -44,7 +59,7 @@ const colors: any = {
   templateUrl: './calendrier.component.html',
   styleUrls: ['./calendrier.component.css']
 })
-export class CalendrierComponent {
+export class CalendrierComponent implements OnInit {
 
   @ViewChild('modalContent') modalContent: TemplateRef<any>;
 
@@ -56,11 +71,16 @@ export class CalendrierComponent {
 
   locale: String = 'fr';
 
+  isLicencie: boolean;
+  isCapitaine: boolean;
+  isBureau: boolean;
+
   modalData: {
     action: string;
     event: CalendarEvent;
   };
 
+  // Affichage de la manifestation pour s'inscrire
   actions: CalendarEventAction[] = [
     {
       label: '<i class="fa fa-fw fa-pencil"></i>',
@@ -79,51 +99,20 @@ export class CalendrierComponent {
 
   refresh: Subject<any> = new Subject();
 
+  // Liste des évènements
   events: CalendarEvent[] = [
     {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
-    },
-    {
       start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: colors.yellow,
+      title: 'C est un test',
       actions: this.actions
     },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: colors.blue,
-      allDay: true
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: new Date(),
-      title: 'A draggable and resizable event',
-      color: colors.yellow,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
-    }
   ];
 
-  activeDayIsOpen: Boolean = true;
+  activeDayIsOpen: Boolean = false;
 
-  constructor(private modal: NgbModal) {}
+  constructor(private modal: NgbModal, private loginService: LoginService) {}
 
+  // Développe le jour cliqué
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
       this.viewDate = date;
@@ -138,6 +127,7 @@ export class CalendrierComponent {
     }
   }
 
+  // Modification d'un évènement ?
   eventTimesChanged({
     event,
     newStart,
@@ -161,6 +151,7 @@ export class CalendrierComponent {
     this.modal.open(this.modalContent, { size: 'lg' });
   }
 
+  // Ajout d'un évènement
   addEvent(): void {
     this.events = [
       ...this.events,
@@ -178,6 +169,7 @@ export class CalendrierComponent {
     ];
   }
 
+  // Suppression d'un évènement
   deleteEvent(eventToDelete: CalendarEvent) {
     this.events = this.events.filter(event => event !== eventToDelete);
   }
@@ -188,5 +180,13 @@ export class CalendrierComponent {
 
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
+  }
+
+  ngOnInit() {
+    this.loginService.userRoles.subscribe(userRoles => {
+      this.isLicencie = userRoles.includes('ROLE_LICENCIE');
+      this.isCapitaine = userRoles.includes('ROLE_CAPITAINE');
+      this.isBureau = userRoles.includes('ROLE_BUREAU');
+    });
   }
 }

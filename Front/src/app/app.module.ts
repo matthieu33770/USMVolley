@@ -9,10 +9,12 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material-module';
 import { JwtModule } from '@auth0/angular-jwt';
 
-// import { CalendarModule, DateAdapter } from 'angular-calendar';
-// import { FlatpickrModule } from 'angularx-flatpickr';
-// import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-// import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { FlatpickrModule } from 'angularx-flatpickr';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -40,6 +42,10 @@ import { ListeCreneauxComponent } from './liste-creneaux/liste-creneaux.componen
 import { DetailLieuxComponent } from './detail-lieux/detail-lieux.component';
 import { DetailCreneauxComponent } from './detail-creneaux/detail-creneaux.component';
 import { DetailDisponibilitesComponent } from './detail-disponibilites/detail-disponibilites.component';
+import { CalendrierComponent } from './calendrier/calendrier.component';
+import { ListeManifestationsComponent } from './liste-manifestations/liste-manifestations.component';
+
+registerLocaleData(localeFr);
 
 @NgModule({
   declarations: [
@@ -68,7 +74,9 @@ import { DetailDisponibilitesComponent } from './detail-disponibilites/detail-di
     ListeCreneauxComponent,
     DetailLieuxComponent,
     DetailCreneauxComponent,
-    DetailDisponibilitesComponent
+    DetailDisponibilitesComponent,
+    CalendrierComponent,
+    ListeManifestationsComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +88,7 @@ import { DetailDisponibilitesComponent } from './detail-disponibilites/detail-di
     BrowserAnimationsModule,
     NoopAnimationsModule,
     MaterialModule,
-    // NgbModalModule,
+    NgbModalModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: function tokenGetter() {
@@ -89,12 +97,12 @@ import { DetailDisponibilitesComponent } from './detail-disponibilites/detail-di
         whitelistedDomains: ['localhost:8080'],
         blacklistedRoutes: ['http://localhost:4200/auth/login']
       }
+    }),
+    FlatpickrModule.forRoot(),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
     })
-    // FlatpickrModule.forRoot(),
-    // CalendarModule.forRoot({
-    //   provide: DateAdapter,
-    //   useFactory: adapterFactory
-    // })
   ],
   providers: [],
   bootstrap: [AppComponent]

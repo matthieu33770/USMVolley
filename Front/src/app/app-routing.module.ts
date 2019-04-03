@@ -23,10 +23,12 @@ import { ListeLieuxComponent } from './liste-lieux/liste-lieux.component';
 import { DetailLieuxComponent } from './detail-lieux/detail-lieux.component';
 import { ListeCreneauxComponent } from './liste-creneaux/liste-creneaux.component';
 import { DetailCreneauxComponent } from './detail-creneaux/detail-creneaux.component';
+import { CalendrierComponent } from './calendrier/calendrier.component';
 
 const routes: Routes = [
   {path: 'equipes', component: EquipesComponent},
   {path: 'agenda', component: AgendaComponent},
+  {path: 'calendrier', component: CalendrierComponent},
   {path: 'lieux', component: LieuxComponent},
   {path: 'saisie', component: SaisieComponent},
   {path: 'partenaires', component: PartenairesComponent},

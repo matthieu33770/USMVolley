@@ -62,6 +62,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/lieux/**").permitAll()
                 .antMatchers("/creneaux/**").permitAll()
                 .antMatchers("/disponibilite/**").permitAll()
+                .antMatchers("/categories/**").permitAll()
                 // Disallow everything else...
                 .anyRequest().authenticated();
         
@@ -86,6 +87,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/lieux/**");
         web.ignoring().antMatchers("/creneaux/**");
         web.ignoring().antMatchers("/disponibilite/**");
+        web.ignoring().antMatchers("/categories/**");
         //.anyRequest();
     }
 

@@ -31,7 +31,7 @@
       </p>
       <p>
           <mat-form-field>
-            <input matInput [matDatepicker]="picker" placeholder="Date de Naissance" [value]="editionJoueur.dateNaissanceJoueur">
+            <input matInput [matDatepicker]="picker" placeholder="Date de Naissance" [(ngModel)]="editionJoueur.dateNaissance" [value]="editionJoueur.dateNaissance">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>

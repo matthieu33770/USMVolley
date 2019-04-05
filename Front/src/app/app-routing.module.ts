@@ -24,6 +24,8 @@ import { DetailLieuxComponent } from './detail-lieux/detail-lieux.component';
 import { ListeCreneauxComponent } from './liste-creneaux/liste-creneaux.component';
 import { DetailCreneauxComponent } from './detail-creneaux/detail-creneaux.component';
 import { CalendrierComponent } from './calendrier/calendrier.component';
+import { ListeCategoriesComponent } from './liste-categories/liste-categories.component';
+import { DetailCategorieComponent } from './detail-categorie/detail-categorie.component';
 
 const routes: Routes = [
   {path: 'equipes', component: EquipesComponent},
@@ -56,6 +58,9 @@ const routes: Routes = [
   {path: 'gestion/creneaux', component: ListeCreneauxComponent},
   {path: 'gestion/creneaux/detailcreneau/:idCreneau', component: DetailCreneauxComponent},
   {path: 'gestion/creneaux/detailcreneau/newCreneau', component: DetailCreneauxComponent},
+  {path: 'gestion/categories', component: ListeCategoriesComponent},
+  {path: 'gestion/categories/detailcategorie/:idCategorie', component: DetailCategorieComponent},
+  {path: 'gestion/categories/detailcategorie/newCategorie', component: DetailCategorieComponent},
   {path: 'accueil', component: AccueilComponent},
   {path: 'accueil/logout', component: AccueilComponent},
   {path: '', component: AccueilComponent}

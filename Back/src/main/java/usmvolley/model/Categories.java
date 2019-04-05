@@ -20,13 +20,17 @@ public class Categories implements Serializable {
 	
 	@Column(name = "libelle_categoriee")
 	private String libelleCategorie;
+	
+	@Column(name = "age_max")
+	private Integer ageMax;
 
 	public Categories() {
 	}
 
-	public Categories(Integer idCategorie, String libelleCategorie) {
+	public Categories(Integer idCategorie, String libelleCategorie, Integer ageMax) {
 		this.idCategorie = idCategorie;
 		this.libelleCategorie = libelleCategorie;
+		this.ageMax = ageMax;
 	}
 
 	public Integer getIdCategorie() {
@@ -45,8 +49,18 @@ public class Categories implements Serializable {
 		this.libelleCategorie = libelleCategorie;
 	}
 
+	public Integer getAgeMax() {
+		return ageMax;
+	}
+
+	public void setAgeMax(Integer ageMax) {
+		this.ageMax = ageMax;
+	}
+
 	@Override
 	public String toString() {
-		return "Categories [idCategorie=" + idCategorie + ", libelleCategorie=" + libelleCategorie + "]";
+		return "Categories [idCategorie=" + idCategorie + ", libelleCategorie=" + libelleCategorie + ", ageMax="
+				+ ageMax + "]";
 	}
+	
 }

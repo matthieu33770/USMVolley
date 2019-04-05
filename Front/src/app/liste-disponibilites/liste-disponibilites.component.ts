@@ -39,7 +39,7 @@ export class ListeDisponibilitesComponent implements OnInit {
 
   getDisponibilites(): void {
     // tslint:disable-next-line:no-shadowed-variable
-    this.disponibiliteService.getDisponibilites().subscribe(Article => this.teams = Article);
+    this.disponibiliteService.getDisponibilites().subscribe(Disponibilite => this.teams = Disponibilite);
   }
 
   onEdit(selected: Disponibilite[]) {

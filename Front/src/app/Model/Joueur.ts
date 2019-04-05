@@ -15,7 +15,7 @@ export class Joueur {
                 public mailJoueur: String,
                 public telephone1Joueur: String,
                 public telephone2Joueur: String,
-                public dateNaissanceJoueur: Date,
+                public dateNaissance: Date,
                 public avoir: Avoir,
                 public user: User,
                 public equipes: Equipe [],

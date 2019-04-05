@@ -41,8 +41,8 @@ export class ListeJoueursComponent implements OnInit {
     this.getFonction();
     this.getPlayer();
     this.joueurService.getJoueurs().subscribe(Joueurs => {this.dataSource = new MatTableDataSource<Joueur>(Joueurs);
-                                              this.nbreMasculin = Joueurs.filter(joueur => {if (joueur.sexe === 'M') { return true; }} );
-                                              this.nbreFeminin = Joueurs.filter(joueur => {if (joueur.sexe === 'F') {return true; }} );
+                                              this.nbreMasculin = Joueurs.filter(joueur => {if (joueur.sexe === 'Masculin') { return true; }} );
+                                              this.nbreFeminin = Joueurs.filter(joueur => {if (joueur.sexe === 'Féminin') {return true; }} );
                                               console.log(this.nbreMasculin, this.nbreFeminin); }
                                               );
   }

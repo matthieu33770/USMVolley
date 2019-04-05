@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -43,6 +43,8 @@ import { DetailLieuxComponent } from './detail-lieux/detail-lieux.component';
 import { DetailCreneauxComponent } from './detail-creneaux/detail-creneaux.component';
 import { DetailDisponibilitesComponent } from './detail-disponibilites/detail-disponibilites.component';
 import { CalendrierComponent } from './calendrier/calendrier.component';
+import { ListeCategoriesComponent } from './liste-categories/liste-categories.component';
+import { DetailCategorieComponent } from './detail-categorie/detail-categorie.component';
 
 registerLocaleData(localeFr);
 
@@ -74,7 +76,9 @@ registerLocaleData(localeFr);
     DetailLieuxComponent,
     DetailCreneauxComponent,
     DetailDisponibilitesComponent,
-    CalendrierComponent
+    CalendrierComponent,
+    ListeCategoriesComponent,
+    DetailCategorieComponent
   ],
   imports: [
     BrowserModule,
@@ -102,7 +106,7 @@ registerLocaleData(localeFr);
       useFactory: adapterFactory
     })
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

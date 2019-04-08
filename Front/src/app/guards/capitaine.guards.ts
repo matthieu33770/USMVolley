@@ -12,9 +12,10 @@ export class CapitaineGuard implements CanActivate {
     if (!this.loginService.loggedIn) {
       this.router.navigate(['login']);
       return false;
-    } else if (this.loginService.userRoles.getValue().includes('ROLE_CAPITAINE')) {
+    } else if (this.loginService.userRole.getValue().includes('ROLE_CAPITAINE')) {
       return true;
     }
+
 
     return false;
   }

@@ -201,12 +201,13 @@
       </div>
       <div class="modal-body">
         <div>
-          Action:
-          <pre>{{ modalData?.action }}</pre>
+          Manifestation :
+          <pre>{{ modalData?.event.title }} - {{ modalData?.event.team }}</pre>
+          <pre>{{ modalData?.event.start }} - {{ modalData?.event.lieu }}</pre>
         </div>
         <div>
-          Event:
-          <pre>{{ modalData?.event | json }}</pre>
+          Disponibilité :
+          <pre>{{ modalData?.event }}</pre>
         </div>
       </div>
       <div class="modal-footer">

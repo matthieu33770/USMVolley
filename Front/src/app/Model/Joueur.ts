@@ -5,8 +5,8 @@ import { Equipe } from './Equipe';
 export class Joueur {
 
     constructor(public idJoueur: number,
-                public nomJoueur: String,
-                public prenomJoueur: String,
+                public nom: string,
+                public prenom: string,
                 public sexe: String,
                 public numeroAdresseJoueur: number,
                 public rueJoueur: String,

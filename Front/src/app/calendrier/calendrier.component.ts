@@ -23,35 +23,9 @@ import {
   CalendarEventTimesChangedEvent,
   CalendarView
 } from 'angular-calendar';
+import { MyEvent } from './interfaceCalendarEvent';
 
 import {LoginService} from '../Services/login.service';
-
-const colors: any = {
-  open: {
-    primary: '#FF0000'
-  },
-  loisir1: {
-    primary: '#0038FF'
-  },
-  loisir2: {
-    primary: '#00FCFF'
-  },
-  heitz: {
-    primary: 'FF45F2'
-  },
-  coupe: {
-    primary: 'E85416'
-  },
-  jeune: {
-    primary: 'FFEA16'
-  },
-  entrainementAdulte: {
-    primary: '8B3AFF'
-  },
-  entrainementJeune: {
-    primary: '57FF00'
-  }
-};
 
 @Component({
   selector: 'app-calendrier',
@@ -100,10 +74,22 @@ export class CalendrierComponent implements OnInit {
   refresh: Subject<any> = new Subject();
 
   // Liste des évènements
-  events: CalendarEvent[] = [
+//   interface MyEvent extends CalendarEvent {
+//     team: string;
+//   }
+
+//   events: MyEvent[] = [{
+//     title: 'title',
+//     start: new Date(),
+//     team: 'bar',
+//     actions : this.actions
+//   },
+// ];
+  events: MyEvent[] = [
     {
       start: startOfDay(new Date()),
-      title: 'C est un test',
+      title: 'Match',
+      team: 'Loisir 1',
       actions: this.actions
     },
   ];
@@ -156,10 +142,9 @@ export class CalendrierComponent implements OnInit {
     this.events = [
       ...this.events,
       {
-        title: 'New event',
+        title: 'Match',
+        team: 'Loisir 2',
         start: startOfDay(new Date()),
-        end: endOfDay(new Date()),
-        color: colors.red,
         draggable: true,
         resizable: {
           beforeStart: true,
@@ -183,10 +168,10 @@ export class CalendrierComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loginService.userRoles.subscribe(userRoles => {
-      this.isLicencie = userRoles.includes('ROLE_LICENCIE');
-      this.isCapitaine = userRoles.includes('ROLE_CAPITAINE');
-      this.isBureau = userRoles.includes('ROLE_BUREAU');
+    this.loginService.userRole.subscribe(userRole => {
+      this.isLicencie = userRole.includes('ROLE_LICENCIE');
+      this.isCapitaine = userRole.includes('ROLE_CAPITAINE');
+      this.isBureau = userRole.includes('ROLE_BUREAU');
     });
   }
 }

@@ -12,7 +12,7 @@ export class BureauGuard implements CanActivate {
     if (!this.loginService.loggedIn) {
       this.router.navigate(['login']);
       return false;
-    } else if (this.loginService.userRoles.getValue().includes('ROLE_BUREAU')) {
+    } else if (this.loginService.userRole.getValue().includes('ROLE_BUREAU')) {
       return true;
     }
 

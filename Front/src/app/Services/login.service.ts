@@ -14,19 +14,19 @@ import { Location } from '@angular/common';
 export class LoginService {
 
   // permet de conserver le role pour l'utiliser dans les guards
-  userRoles: BehaviorSubject<string[]> = new BehaviorSubject([]);
+  userRole: BehaviorSubject<string> = new BehaviorSubject('');
 
   isConnecte: Boolean = false;
 
   constructor(private httpClient: HttpClient, private router: Router, private location: Location) {
-    this.getUserRoles();
+    this.getUserRole();
   }
 
-  public get loggedIn(): boolean {
-    if (sessionStorage.getItem(environment.accessToken) !== null) {
-      return this.isConnecte = true;
-    }
-  }
+  // public get loggedIn(): boolean {
+  //   if (sessionStorage.getItem(environment.accessToken) !== null) {
+  //     return this.isConnecte = true;
+  //   }
+  // }
 
   public get logged(): boolean {
     return sessionStorage.getItem(environment.accessToken) !== null;
@@ -38,7 +38,7 @@ export class LoginService {
         sessionStorage.setItem(environment.accessToken, token.token);
         console.log(token.token);
         console.log(environment.accessToken);
-        this.getUserRoles();
+        this.getUserRole();
 
         this.router.navigate(['/agenda']);
         this.router.navigate(['/accueil']);
@@ -49,17 +49,17 @@ export class LoginService {
   }
 
   signOut() {
+    this.userRole.next('');
     sessionStorage.removeItem(environment.accessToken);
-    this.router.navigate(['/agenda']);
     this.router.navigate(['/accueil/logout']);
   }
 
-  private getUserRoles() {
+  private getUserRole() {
     if (sessionStorage.getItem(environment.accessToken)) {
       const decodedToken = jwt_decode(sessionStorage.getItem(environment.accessToken));
       console.log(decodedToken);
-      const authorities: Array<any> = decodedToken.auth;
-      this.userRoles.next(authorities.map(authority => authority.authority));
+      const authority = decodedToken.auth[0].authority;
+      this.userRole.next(authority);
     }
   }
 }

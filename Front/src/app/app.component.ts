@@ -28,23 +28,32 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.loginService.loggedIn != null) {
-      this.isLoggedin = this.loginService.loggedIn;
-    }
+    this.getConnection();
+  }
+
+  getConnection() {
+    this.loginService.userRole.subscribe(userRole => {
+      console.log(userRole);
+      this.isLicencie = userRole.includes('ROLE_LICENCIE');
+      this.isCapitaine = userRole.includes('ROLE_CAPITAINE');
+      this.isBureau = userRole.includes('ROLE_BUREAU');
+      this.isLoggedin = userRole.length > 0;
+      console.log(this.isLoggedin);
+    });
     if (this.isLoggedin) {
       this.formulaire = 'Renouvellement';
     } else if (!this.isLoggedin) {
       this.formulaire = 'Inscription';
     }
-    this.loginService.userRoles.subscribe(userRoles => {
-      this.isLicencie = userRoles.includes('ROLE_LICENCIE');
-      this.isCapitaine = userRoles.includes('ROLE_CAPITAINE');
-      this.isBureau = userRoles.includes('ROLE_BUREAU');
-    });
   }
 
   onDeconnect() {
     this.loginService.signOut();
     this.isLoggedin = false;
+    if (this.isLoggedin) {
+      this.formulaire = 'Renouvellement';
+    } else if (!this.isLoggedin) {
+      this.formulaire = 'Inscription';
+    }
   }
 }

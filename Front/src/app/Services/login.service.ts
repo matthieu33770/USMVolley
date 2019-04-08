@@ -17,16 +17,11 @@ export class LoginService {
   userRole: BehaviorSubject<string> = new BehaviorSubject('');
 
   isConnecte: Boolean = false;
+  isLoggedin: Boolean = false;
 
   constructor(private httpClient: HttpClient, private router: Router, private location: Location) {
     this.getUserRole();
   }
-
-  // public get loggedIn(): boolean {
-  //   if (sessionStorage.getItem(environment.accessToken) !== null) {
-  //     return this.isConnecte = true;
-  //   }
-  // }
 
   public get logged(): boolean {
     return sessionStorage.getItem(environment.accessToken) !== null;
@@ -39,10 +34,7 @@ export class LoginService {
         console.log(token.token);
         console.log(environment.accessToken);
         this.getUserRole();
-
-        this.router.navigate(['/agenda']);
         this.router.navigate(['/accueil']);
-
         this.isConnecte = true;
       },
       error => console.log('Error while login'));

@@ -85,11 +85,11 @@ export class CalendrierComponent implements OnInit {
 //     actions : this.actions
 //   },
 // ];
-  events: MyEvent[] = [
+  events: CalendarEvent[] = [
     {
       start: startOfDay(new Date()),
       title: 'Match',
-      team: 'Loisir 1',
+      // team: 'Loisir 1',
       actions: this.actions
     },
   ];
@@ -143,7 +143,7 @@ export class CalendrierComponent implements OnInit {
       ...this.events,
       {
         title: 'Match',
-        team: 'Loisir 2',
+        // team: 'Loisir 2',
         start: startOfDay(new Date()),
         draggable: true,
         resizable: {

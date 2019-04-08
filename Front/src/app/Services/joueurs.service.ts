@@ -114,7 +114,7 @@ export class JoueursService {
   }
 
   getJoueurByName(nomJoueur: String): Observable<Joueur> {
-    return of(this.availableJoueur.find(joueur => joueur.nomJoueur === nomJoueur));
+    return of(this.availableJoueur.find(joueur => joueur.nom === nomJoueur));
   }
 
   /**

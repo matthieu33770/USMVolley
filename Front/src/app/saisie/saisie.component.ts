@@ -29,6 +29,8 @@ export class SaisieComponent implements OnInit {
   isLoggedin = false;
   username: String;
   user;
+  formulaire: string;
+  certificat: string;
   editionUser: User = new User(0, '', '', false, ['ROLE_LICENCIE'], null);
   editionJoueur: Joueur = new Joueur(null, '', '', '', 0, '', 0, '', '', '', '', null, null, null, null);
   userList: BehaviorSubject<User[]>;
@@ -50,9 +52,11 @@ export class SaisieComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.loginService.loggedIn != null) {
-      this.isLoggedin = this.loginService.loggedIn;
-    }
+    this.loginService.userRole.subscribe(userRole => {
+      this.isLoggedin = userRole.length > 0;
+      console.log(this.isLoggedin);
+    });
+
     this.username = jwt_decode(sessionStorage.getItem(environment.accessToken)).sub;
     console.log(this.username);
     this.getUser();
@@ -68,12 +72,10 @@ export class SaisieComponent implements OnInit {
     };
     this.uploaderFormulaire.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
          console.log('FileUpload:uploaded:', item, status, response);
-         alert('File uploaded successfully');
      };
     this.uploaderCertificat.onAfterAddingFile = (file) => { file.withCredentials = false; };
     this.uploaderCertificat.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
          console.log('FileUpload:uploaded:', item, status, response);
-         alert('File uploaded successfully');
      };
   }
 
@@ -90,7 +92,9 @@ export class SaisieComponent implements OnInit {
                                               Joueurs.forEach( joueur => {
                                                 if (joueur.user.username === this.username) {
                                                   this.player.push(joueur);
-                                                  this.editionJoueur = this.player[0]; }
+                                                  this.editionJoueur = this.player[0];
+                                                  this.formulaire = 'Formulaire - ' + this.player[0].nom + ' ' + this.player[0].prenom;
+                                                  this.certificat = 'Certificat Médical - ' + this.player[0].nom + ' ' + this.player[0].prenom;  }
                                               } );
                                              });
   }

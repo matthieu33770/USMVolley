@@ -66,13 +66,13 @@
     <mwl-calendar-month-view
       *ngSwitchCase="CalendarView.Month"
       [viewDate]="viewDate"
-      [events]="events"
+      [events]="manifestations"
       [locale]="locale"
       [refresh]="refresh"
       [activeDayIsOpen]="activeDayIsOpen"
       (dayClicked)="dayClicked($event.day)"
-      (eventClicked)="handleEvent('Clicked', $event.event)"
-      (eventTimesChanged)="eventTimesChanged($event)"
+      (eventClicked)="handleEvent('Clicked', $manifestation.manifestation)"
+      (eventTimesChanged)="eventTimesChanged($manifestation)"
     >
     </mwl-calendar-month-view>
     <mwl-calendar-week-view
@@ -114,12 +114,12 @@
       </button>
       <div class="clearfix"></div>
     </div>
-
+    <ng-container *ngIf="manifestations.length > 0">
     <div class="table-responsive">
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th mat-header-cell *matHeaderCellDef></th>
+            <th></th>
             <th>Titre</th>
             <th>Equipe</th>
             <th>Début</th>
@@ -128,35 +128,37 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let event of events">
-            <td mat-cell *matCellDef="let row">
-              <mat-checkbox (click)="$event.stopPropagation()"
-                            (change)="$event ? selection.toggle(row) : null"
-                            [checked]="selection.isSelected(row)">
-              </mat-checkbox>
+          <tr *ngFor="let manifestation of manifestations">
+            <td>
+              <input type="checkbox" 
+                     (click)="$manifestation.stopPropagation()"
+                     (change)="$manifestation ? selection.toggle(row) : null"
+                     [checked]="selection.isSelected(row)">
             </td>
             <td>
               <input
                 type="text"
                 class="form-control"
-                [(ngModel)]="event.title"
+                [(ngModel)]="manifestation.title"
                 (keyup)="refresh.next()"
               />
             </td>
             <td>
-              <input
+              <select
                 type="text"
                 class="form-control"
-                [(ngModel)]="event.team"
                 (change)="refresh.next()"
-              />
+              >
+              <input [(ngModel)]="manifestation.equipe.libelleEquipe"/>
+              <option *ngFor="let equipe of equipeList" value="equipe">{{ equipe.libelleEquipe }}</option>
+              </select>
             </td>
             <td>
               <input
                 tclass="form-control"
                 type="text"
                 mwlFlatpickr
-                [(ngModel)]="event.start"
+                [(ngModel)]="manifestation.start"
                 (ngModelChange)="refresh.next()"
                 [altInput]="true"
                 [convertModelValue]="true"
@@ -167,20 +169,24 @@
               />
             </td>
             <td>
-              <input
+              <select
                 type="text"
                 class="form-control"
-                [(ngModel)]="event.lieu"
                 (change)="refresh.next()"
-              />
+              >
+              <input [(ngModel)]="manifestation.lieu.lieu"/>
+              <option *ngFor="let lieu of lieuList" value="lieu">{{ lieu.lieu }}</option>
+              </select>
             </td>
             <td>
-              <input
+              <select
                 type="text"
                 class="form-control"
-                [(ngModel)]="event.statut"
                 (change)="refresh.next()"
-              />
+              >
+              <input [(ngModel)]="manifestation.statut.libelleStatut"/>
+              <option *ngFor="let statut of statutList" value="statut">{{ statut.libelleStatut }}</option>
+              </select>
             </td>
             <td>
               
@@ -189,6 +195,7 @@
         </tbody>
       </table>
     </div>
+  </ng-container>
   </div>
 
   <div *ngIf="isLicencie || isCapitaine || isBureau">

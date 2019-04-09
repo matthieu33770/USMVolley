@@ -12,7 +12,6 @@ import { User } from '../model/User';
 import { DatePipe } from '@angular/common';
 import { CategorieService } from '../Services/categorie.service';
 import { Categorie } from '../Model/Categorie';
-import { conditionallyCreateMapObjectLiteral } from '@angular/compiler/src/render3/view/util';
 
 const URL = 'http://localhost:3000/api/upload';
 

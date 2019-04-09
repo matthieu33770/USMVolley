@@ -7,12 +7,13 @@ import { Creneau } from './Creneau';
 export class Manifestation {
 
     constructor(public idManifestation: number,
-                public libelleManifestation: String,
+                public title: string,
                 public periodiciteManifestation: String,
-                public equipeManifestation: Equipe,
-                public lieuManifestation: Lieu,
-                public statutManifestation: Statut,
-                public horaireManifestation: Horaire,
-                public creneauManifestation: Creneau,
+                public equipe: Equipe,
+                public lieu: Lieu,
+                public statut: Statut,
+                public horaire: Horaire,
+                public creneau: Creneau,
+                public start: Date,
     ) {}
 }

@@ -24,8 +24,19 @@ import {
   CalendarView
 } from 'angular-calendar';
 import { MyEvent } from './interfaceCalendarEvent';
+import { BehaviorSubject } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import {LoginService} from '../Services/login.service';
+import { Manifestation } from '../Model/Manifestation';
+import { Equipe } from '../Model/Equipe';
+import { Lieu } from '../Model/Lieu';
+import { Statut } from '../Model/Statut';
+
+import { ManifestationService } from '../Services/manifestation.service';
+import { LoginService } from '../Services/login.service';
+import { EquipesService } from '../Services/equipes.service';
+import { LieuxService } from '../Services/lieux.service';
+import { StatutService } from '../Services/statut.service';
 
 @Component({
   selector: 'app-calendrier',
@@ -48,6 +59,15 @@ export class CalendrierComponent implements OnInit {
   isLicencie: boolean;
   isCapitaine: boolean;
   isBureau: boolean;
+
+  idManifestation: number;
+  manifestations: Manifestation [];
+  manifestationList: BehaviorSubject<Manifestation[]>;
+  editionManifestation: Manifestation = new Manifestation(0, '', '' , null, null, null, null, null, new Date());
+  equipeList: Equipe [];
+  lieuList: Lieu [];
+  statutList: Statut [];
+  teams: any = [];
 
   modalData: {
     action: string;
@@ -73,30 +93,13 @@ export class CalendrierComponent implements OnInit {
 
   refresh: Subject<any> = new Subject();
 
-  // Liste des évènements
-//   interface MyEvent extends CalendarEvent {
-//     team: string;
-//   }
-
-//   events: MyEvent[] = [{
-//     title: 'title',
-//     start: new Date(),
-//     team: 'bar',
-//     actions : this.actions
-//   },
-// ];
-  events: CalendarEvent[] = [
-    {
-      start: startOfDay(new Date()),
-      title: 'Match',
-      // team: 'Loisir 1',
-      actions: this.actions
-    },
-  ];
+  events: MyEvent[] = this.manifestations;
 
   activeDayIsOpen: Boolean = false;
 
-  constructor(private modal: NgbModal, private loginService: LoginService) {}
+  constructor(private modal: NgbModal, private loginService: LoginService, private route: ActivatedRoute,
+    private manifestationService: ManifestationService, private equipeService: EquipesService,
+    private lieuxService: LieuxService, private statutService: StatutService) {}
 
   // Développe le jour cliqué
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -117,6 +120,9 @@ export class CalendrierComponent implements OnInit {
   eventTimesChanged({
     event,
     newStart,
+    newEquipe,
+    newLieu,
+    newStatut,
     newEnd
   }: CalendarEventTimesChangedEvent): void {
     this.events = this.events.map(iEvent => {
@@ -124,6 +130,9 @@ export class CalendrierComponent implements OnInit {
         return {
           ...event,
           start: newStart,
+          equipe: newEquipe,
+          lieu: newLieu,
+          statut: newStatut,
           end: newEnd
         };
       }
@@ -140,11 +149,13 @@ export class CalendrierComponent implements OnInit {
   // Ajout d'un évènement
   addEvent(): void {
     this.events = [
-      ...this.events,
+      ...this.events, //push
       {
-        title: 'Match',
-        // team: 'Loisir 2',
-        start: startOfDay(new Date()),
+        title: '',
+        equipe: null,
+        start: null,  //startOfDay(new Date()),
+        lieu: null,
+        statut: null,
         draggable: true,
         resizable: {
           beforeStart: true,
@@ -168,10 +179,39 @@ export class CalendrierComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.manifestations);
     this.loginService.userRole.subscribe(userRole => {
       this.isLicencie = userRole.includes('ROLE_LICENCIE');
       this.isCapitaine = userRole.includes('ROLE_CAPITAINE');
       this.isBureau = userRole.includes('ROLE_BUREAU');
     });
+    this.manifestationList = this.manifestationService.availableManifestation$;
+    console.log(this.manifestationList);
+    this.getManifestation();
+    console.log(this.manifestations);
+    this.getEquipe();
+    this.getLieu();
+    this.getStatut();
+  }
+
+  getManifestation(): void {
+    this.manifestationService.getManifestations().subscribe(Manifestations => {
+      this.manifestations = [];
+      Manifestations.forEach(manif => {
+        this.manifestations.push(manif);
+        // this.events.push(manif);
+      });
+      console.log(this.manifestations);
+    });
+  }
+
+  getEquipe(): void {
+    this.equipeService.getEquipes().subscribe(Equipes => this.equipeList = Equipes);
+  }
+  getLieu(): void {
+    this.lieuxService.getLieux().subscribe(Lieux => this.lieuList = Lieux);
+  }
+  getStatut(): void {
+    this.statutService.getStatuts().subscribe(Statuts => this.statutList = Statuts);
   }
 }

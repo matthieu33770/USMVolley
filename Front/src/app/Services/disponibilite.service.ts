@@ -65,7 +65,7 @@ export class DisponibiliteService {
    * @param disponibilite la disponibilite à mettre à jour
    */
   public updateDisponibilite(disponibilite: Disponibilite) {
-    this.httpClient.put<Disponibilite>(`http://localhost:8080/lieux/update/${disponibilite.idDisponibilite}`, disponibilite).subscribe(
+    this.httpClient.put<Disponibilite>(`http://localhost:8080/disponibilite/update/${disponibilite.idDisponibilite}`, disponibilite).subscribe(
       updateDisponibilite => {
         this.availableDisponibilite$.next(this.availableDisponibilite);
       }

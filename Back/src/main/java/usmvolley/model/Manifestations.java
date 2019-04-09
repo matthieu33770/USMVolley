@@ -1,6 +1,7 @@
 package usmvolley.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,8 +21,11 @@ public class Manifestations implements Serializable {
 	@Column(name = "id_manifestation")
 	private Integer idManifestation;
 	
-	@Column(name = "libelle_manifestation")
-	private String libelleManifestation;
+	@Column(name = "title")
+	private String title;
+	
+	@Column(name = "date")
+	private Date start;
 	
 	@Column(name = "periodicite")
 	private String periodicite;
@@ -48,12 +52,14 @@ public class Manifestations implements Serializable {
 
 	public Manifestations() {
 	}
+	
 
-	public Manifestations(Integer idManifestation, String libelleManifestation, String periodicite, Equipes equipe,
+	public Manifestations(Integer idManifestation, String title, Date start, String periodicite, Equipes equipe,
 			Lieux lieu, Statuts statut, Horaire horaire, Creneau creneau) {
 		super();
 		this.idManifestation = idManifestation;
-		this.libelleManifestation = libelleManifestation;
+		this.title = title;
+		this.start = start;
 		this.periodicite = periodicite;
 		this.equipe = equipe;
 		this.lieu = lieu;
@@ -61,6 +67,15 @@ public class Manifestations implements Serializable {
 		this.horaire = horaire;
 		this.creneau = creneau;
 	}
+
+	public Date getStart() {
+		return start;
+	}
+
+	public void setStart(Date start) {
+		this.start = start;
+	}
+
 
 	public Integer getIdManifestation() {
 		return idManifestation;
@@ -70,12 +85,12 @@ public class Manifestations implements Serializable {
 		this.idManifestation = idManifestation;
 	}
 
-	public String getLibelleManifestation() {
-		return libelleManifestation;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setLibelleManifestation(String libelleManifestation) {
-		this.libelleManifestation = libelleManifestation;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getPeriodicite() {
@@ -128,8 +143,9 @@ public class Manifestations implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Manifestations [idManifestation=" + idManifestation + ", libelleManifestation=" + libelleManifestation
-				+ ", periodicite=" + periodicite + ", equipe=" + equipe + ", lieu=" + lieu + ", statut=" + statut +
-				", horaire=" + horaire + ", creneau=" + creneau + "]";
+		return "Manifestations [idManifestation=" + idManifestation + ", title=" + title + ", start=" + start
+				+ ", periodicite=" + periodicite + ", equipe=" + equipe + ", lieu=" + lieu + ", statut=" + statut
+				+ ", horaire=" + horaire + ", creneau=" + creneau + "]";
 	}
+
 }

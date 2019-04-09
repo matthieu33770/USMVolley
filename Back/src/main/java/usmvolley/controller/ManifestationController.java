@@ -76,7 +76,7 @@ public class ManifestationController {
 	public ResponseEntity<?> addManifestation(@RequestBody Manifestations manifestation) {
 		
 		Manifestations newManifestation = null;
-		String libelleManifestation = manifestation.getLibelleManifestation();
+		String libelleManifestation = manifestation.getTitle();
 		String periodiciteManifestation = manifestation.getPeriodicite();
 		
 		if ((libelleManifestation == null) || (libelleManifestation.isEmpty())) {
@@ -118,7 +118,7 @@ public class ManifestationController {
 	{
 		
 		Manifestations modificationManifestation = null;
-		String libelleManifestation = manifestation.getLibelleManifestation();
+		String libelleManifestation = manifestation.getTitle();
 		String periodiciteManifestation = manifestation.getPeriodicite();
 		
 		if ((libelleManifestation == null) || (libelleManifestation.isEmpty())) {

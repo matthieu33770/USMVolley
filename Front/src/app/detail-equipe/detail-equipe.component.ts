@@ -28,7 +28,7 @@ export class DetailEquipeComponent implements OnInit {
   displayedColumns: string[] = ['select', 'nomJoueur', 'prenomJoueur', 'licenceJoueur'];
   dataEquipe = new MatTableDataSource<Joueur>();
   dataAdulte = new MatTableDataSource<Joueur>();
-  selection = new SelectionModel<Joueur>(false, []);
+  selection = new SelectionModel<Joueur>(true, []);
 
   constructor(private route: ActivatedRoute,
               private equipeService: EquipesService,

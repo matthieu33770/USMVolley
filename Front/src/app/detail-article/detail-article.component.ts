@@ -106,7 +106,7 @@ export class DetailArticleComponent implements OnInit {
     const data: FormData = new FormData();
 
     if (this.file !== undefined) {
-      this.photoTest = 'article.jpg';
+      this.photoTest = 'photo ' + this.editionArticle.photoArticle + '.jpg';
       data.append('data', this.file, this.photoTest);
       this.articleService.addPhoto(data);
     } else {

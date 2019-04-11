@@ -12,7 +12,7 @@
   <div class="boutons">
       <button mat-raised-button (click)="exportAsXLSX()">Exporter</button>
       <button *ngIf="ismodification" mat-raised-button color="accent" (click)="modifier()">Modifier</button>
-      <button *ngIf="!ismodification" mat-raised-button color="accent" (click)="modifier()">Enregistrer</button>
+      <button *ngIf="!ismodification" mat-raised-button color="accent" (click)="creer()">Enregistrer</button>
       <button mat-raised-button color="primary" (click)="ajouter(selection.selected)">Ajouter</button>
       <button mat-raised-button color="warn" (click)="enlever(selection.selected)">Enlever</button>
     </div>

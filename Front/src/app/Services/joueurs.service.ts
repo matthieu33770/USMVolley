@@ -71,6 +71,7 @@ export class JoueursService {
    * @param newJoueur le nouveau joueur à créer
    */
   public createJoueur(newJoueur: Joueur) {
+    console.log(newJoueur);
     this.httpClient.post<Joueur>('http://localhost:8080/joueurs/create', newJoueur).subscribe(
       createJoueur => {
         this.availableJoueur.push(createJoueur);
@@ -137,5 +138,16 @@ export class JoueursService {
   supprimerJoueur(idJoueur: number): Joueur[] {
     this.availableJoueur = this.availableJoueur.filter( joueur => joueur.idJoueur !== idJoueur ).slice();
     return this.availableJoueur;
+  }
+
+  /**
+   * Uploader les documents pour la licence
+   * @param data
+   */
+  public addDocument(data) {
+    this.httpClient.post('http://localhost:8080/joueurs/upload', data).subscribe(
+      () => { console.log('dedans'); },
+      (error) => {console.log('error : ', error); }
+    );
   }
 }

@@ -85,4 +85,15 @@ export class ArticlesService {
     this.availableArticle = this.availableArticle.filter( article => article.idArticle !== idArticle ).slice();
     return this.availableArticle;
   }
+
+  /**
+   * Uploader les photos d'un article
+   * @param data
+   */
+  public addPhoto(data) {
+    this.httpClient.post('http://localhost:8080/joueurs/upload', data).subscribe(
+      () => { console.log('dedans'); },
+      (error) => {console.log('error : ', error); }
+    );
+  }
 }

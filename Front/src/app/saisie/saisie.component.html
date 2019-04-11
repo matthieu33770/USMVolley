@@ -2,125 +2,119 @@
   <div class="titre">
     <h1>Edition des données de <strong>{{ editionJoueur.prenom }} {{ editionJoueur.nom }}</strong></h1>
   </div>
-  <div class="data-responsive">
-    <div class="left">
-      <p>
-        <mat-form-field>
-          <input matInput placeholder="Nom" [(ngModel)]="editionJoueur.nom" name="nom">
+
+  <div class="pad">
+    <form [formGroup]="joueurForm" >        
+      <div formGroupName="joueurGroup">
+          <mat-form-field class="watch-category-full-width">
+              <input matInput required placeholder="Nom du joueur" type="text" formControlName="nom" [errorStateMatcher]="confirmValidParentMatcher" [(ngModel)]="editionJoueur.nom">
+              <!-- <mat-error>
+                  {{errors.editionJoueur.nom}}
+              </mat-error> -->
+          </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="watch-category-full-width">
+            <input matInput required placeholder="Prénom" type="text" formControlName="prenom" [(ngModel)]="editionJoueur.prenom">
         </mat-form-field>
-      </p>
-      <p>
+      </div>
+      <div>
+          <mat-form-field class="watch-category-full-width">
+              <textarea matInput placeholder="Taille en cm" type="text" formControlName="taille" [(ngModel)]="editionJoueur.taille"></textarea>
+          </mat-form-field>
+      </div>
+      <div>
         <mat-form-field>
-          <input matInput placeholder="Prénom" [(ngModel)]="editionJoueur.prenom" name="prenom">
-        </mat-form-field>
-      </p>
-      <p>
-        <mat-form-field>
-          <input *ngIf="editionJoueur.sexe" matInput placeholder="Sexe" [(ngModel)]="editionJoueur.sexe" name="sexe">
-          <mat-select *ngIf="!editionJoueur.sexe" placeholder="Sexe">
+          <input *ngIf="editionJoueur.sexe" matInput placeholder="Sexe" [(ngModel)]="editionJoueur.sexe" formControlName="sexe">
+          <mat-select *ngIf="!editionJoueur.sexe" placeholder="Sexe" [(ngModel)]="editionJoueur.sexe" formControlName="sexe">
               <mat-option value="vide">  </mat-option>
-              <mat-option value="m">Masculin</mat-option>
-              <mat-option value="f">Féminin</mat-option>
+              <mat-option value="Masculin">Masculin</mat-option>
+              <mat-option value="Féminin">Féminin</mat-option>
             </mat-select>
         </mat-form-field>
-      </p>
-      <p>
+      </div>
+      <div>
         <mat-form-field>
-          <input matInput placeholder="Taille en cm" [(ngModel)]="editionJoueur.taille" name="taille">
+          <input matInput [matDatepicker]="picker" placeholder="Date de Naissance" [(ngModel)]="editionJoueur.dateNaissance" [value]="editionJoueur.dateNaissance" formControlName="dateNaissance">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
-      </p>
-      <p>
-          <mat-form-field>
-            <input matInput [matDatepicker]="picker" placeholder="Date de Naissance" [(ngModel)]="editionJoueur.dateNaissance" [value]="editionJoueur.dateNaissance">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-        </p> 
-      <p>
+      </div>
+      <div>
         <mat-form-field>
-          <input matInput placeholder="Adresse Mail" [(ngModel)]="editionJoueur.mail" name="mail">
+          <input matInput placeholder="Adresse Mail" [(ngModel)]="editionJoueur.mail" formControlName="mail">
         </mat-form-field>
-      </p>
-    </div>
-
-    <div class="center">
-      <p>  
-      <mat-form-field>
-        <input matInput placeholder="Numéro" [(ngModel)]="editionJoueur.numeroAdresse" name="numeroAdresse">
-      </mat-form-field>
-      </p>
-      <p>
+      </div>
+      <div> 
         <mat-form-field>
-        <input matInput placeholder="Rue" [(ngModel)]="editionJoueur.rue" name="rue">
+          <input matInput placeholder="Numéro" [(ngModel)]="editionJoueur.numeroAdresse" formControlName="numeroAdresse">
         </mat-form-field>
-      </p>
-      <p>
+      </div>
+      <div>
         <mat-form-field>
-          <input matInput placeholder="Code Postal" [(ngModel)]="editionJoueur.codePostal" name="codePostal">
+          <input matInput placeholder="Rue" [(ngModel)]="editionJoueur.rue" formControlName="rue">
         </mat-form-field>
-      </p>
-      <p>
+      </div>
+      <div>
         <mat-form-field>
-          <input matInput placeholder="Ville" [(ngModel)]="editionJoueur.ville" name="ville">
+          <input matInput placeholder="Code Postal" [(ngModel)]="editionJoueur.codePostal" formControlName="codePostal">
         </mat-form-field>
-      </p>
-      <p>
-          <mat-form-field>
-            <input matInput placeholder="N° de téléphone" [(ngModel)]="editionJoueur.telephone1" name="telephone1">
-          </mat-form-field>
-        </p>
-        <p>
-          <mat-form-field>
-            <input matInput placeholder="N° de portable" [(ngModel)]="editionJoueur.telephone2" name="telephone2">
-          </mat-form-field>
-        </p>
-    </div>
-
-    <div class="right">
-    <p>
-    <mat-form-field>
-      <input matInput placeholder="Nom d'utilisateur" [(ngModel)]="editionUser.username" name="username">
-    </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field>
-      <input matInput placeholder="Mot de passe" [(ngModel)]="editionUser.mdp" name="mdp">
-    </mat-form-field>
-  </p>
-
-  <p>
-    Formulaire Fédération<br>(nom.prenom.formulaire.pdf)
-    <input placeholder="Formulaire" type="file" name="formulaire" ng2FileSelect [uploader]="uploaderFormulaire" />
-    <button mat-raised-button type="button" class="btn btn-success btn-s" 
-      (click)="uploaderFormulaire.uploadAll()" 
-      [disabled]="!uploaderFormulaire.getNotUploadedItems().length" >
-        Charger
-    </button>
-  </p>
-  <p>
-    Certificat Médical<br>(nom.prenom.certificat.pdf)
-    <input placeholder="Certificat" type="file" name="certificat" ng2FileSelect [uploader]="uploaderCertificat" />
-    <button mat-raised-button type="button" class="btn btn-success btn-s" 
-      (click)="uploaderCertificat.uploadAll()" 
-      [disabled]="!uploaderCertificat.getNotUploadedItems().length" >
-          Charger
-    </button>
-  </p>
-  <p>
-    <mat-form-field>
-      <mat-select placeholder="Mode de Paiement">
-          <mat-option value="cheque">Chèque</mat-option>
-          <mat-option value="virement">Virement</mat-option>
-          <mat-option value="paypal">PayPal</mat-option>
-        </mat-select>
-    </mat-form-field>
-  </p>    
-  
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Ville" [(ngModel)]="editionJoueur.ville" formControlName="ville">
+        </mat-form-field>
+      </div>
+      <div>  
+        <mat-form-field>
+          <input matInput placeholder="N° de téléphone" [(ngModel)]="editionJoueur.telephone1" formControlName="telephone1">
+        </mat-form-field>
+      </div>   
+      <div>   
+        <mat-form-field>
+          <input matInput placeholder="N° de portable" [(ngModel)]="editionJoueur.telephone2" formControlName="telephone2">
+        </mat-form-field>   
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Nom d'utilisateur" formControlName="username" [(ngModel)]="editionUser.username" >
+        </mat-form-field>
+      </div>
+      <div>    
+        <mat-form-field>
+          <input matInput placeholder="Mot de passe" [(ngModel)]="editionUser.mdp" formControlName="mdp">
+        </mat-form-field>
+      </div> 
+      <div>
+        <input type="file" id="userFormulaire" (change)="onSelectFormulaire($event)" #fileInputF style="display: none">
+        <mat-form-field class="watch-category-full-width">
+          <input matInput formControlName="formulaireTest" placeholder="Formulaire à charger" readonly>
+        </mat-form-field>
+        <button mat-raised-button (click)="selectFormulaire()">Selectionner</button>
+      </div>
+      <div>
+        <input type="file" id="userCertificat" (change)="onSelectCertificat($event)" #fileInputC style="display: none">
+        <mat-form-field class="watch-category-full-width">
+          <input matInput formControlName="certificatTest" placeholder="Certificat à charger" readonly>
+        </mat-form-field>
+        <button mat-raised-button (click)="selectCertificat()">Selectionner</button>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-select placeholder="Mode de Paiement">
+            <mat-option value="cheque">Chèque</mat-option>
+            <mat-option value="virement">Virement</mat-option>
+            <mat-option value="paypal">PayPal</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <!-- <script src="https://www.paypal.com/sdk/js?client-id=sb"></script>
+      <script>paypal.Buttons().render('body');</script> -->
+    </form>
+  </div> 
 
   <div class="bouton">
     <button *ngIf="!isLoggedin" mat-raised-button color="accent" type="submit" (click)="onSave()">Enregistrer</button>
     <button *ngIf="isLoggedin" mat-raised-button color="accent" type="submit" (click)="onSave()">Mise à jour</button>
-  </div>
-    </div>
   </div>
 </div>

@@ -31,12 +31,14 @@ import { Manifestation } from '../Model/Manifestation';
 import { Equipe } from '../Model/Equipe';
 import { Lieu } from '../Model/Lieu';
 import { Statut } from '../Model/Statut';
+import { Disponibilite } from '../Model/Disponibilite';
 
 import { ManifestationService } from '../Services/manifestation.service';
 import { LoginService } from '../Services/login.service';
 import { EquipesService } from '../Services/equipes.service';
 import { LieuxService } from '../Services/lieux.service';
 import { StatutService } from '../Services/statut.service';
+import { DisponibiliteService } from '../Services/disponibilite.service';
 
 @Component({
   selector: 'app-calendrier',
@@ -67,6 +69,7 @@ export class CalendrierComponent implements OnInit {
   equipeList: Equipe [];
   lieuList: Lieu [];
   statutList: Statut [];
+  disponibiliteList: Disponibilite [];
   teams: any = [];
 
   modalData: {
@@ -99,7 +102,8 @@ export class CalendrierComponent implements OnInit {
 
   constructor(private modal: NgbModal, private loginService: LoginService, private route: ActivatedRoute,
     private manifestationService: ManifestationService, private equipeService: EquipesService,
-    private lieuxService: LieuxService, private statutService: StatutService) {}
+    private lieuxService: LieuxService, private statutService: StatutService,
+    private disponibiliteService: DisponibiliteService) {}
 
   // Développe le jour cliqué
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -192,6 +196,7 @@ export class CalendrierComponent implements OnInit {
     this.getEquipe();
     this.getLieu();
     this.getStatut();
+    this.getDisponibilite();
   }
 
   getManifestation(): void {
@@ -202,6 +207,16 @@ export class CalendrierComponent implements OnInit {
         // this.events.push(manif);
       });
       console.log(this.manifestations);
+    });
+  }
+
+  getDisponibilite(): void {
+    this.disponibiliteService.getDisponibilites().subscribe(Disponibilites => {
+      this.disponibiliteList = [];
+      Disponibilites.forEach(dispo => {
+        this.disponibiliteList.push(dispo);
+      });
+      console.log(this.disponibiliteList);
     });
   }
 

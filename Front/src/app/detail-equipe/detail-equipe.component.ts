@@ -79,6 +79,11 @@ export class DetailEquipeComponent implements OnInit {
     this.equipeService.updateEquipe(this.editionEquipe);
   }
 
+  creer() {
+    console.log(this.editionEquipe);
+    this.equipeService.createEquipe(this.editionEquipe);
+  }
+
   ajouter(selected: Joueur) {
     this.joueurEquipe.push(selected[0]);
     this.joueurAdulte.splice(this.joueurAdulte.indexOf(selected[0]), 1);

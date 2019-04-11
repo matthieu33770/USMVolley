@@ -32,6 +32,7 @@ export class ListeEquipesComponent implements OnInit {
 
   ngOnInit() {
     this.equipeList = this.equipeService.availableEquipe$;
+    this.equipeService.publishEquipes();
     this.getEquipe();
     this.getTeam();
     this.equipeService.getEquipes().subscribe(Equipes => {this.dataSource = new MatTableDataSource<Equipe>(Equipes);
@@ -59,10 +60,11 @@ export class ListeEquipesComponent implements OnInit {
 
   delete(selected: Equipe[]) {
     console.log(selected[0]);
-    if (selected.length !== 0) {
-      this.equipeService.availableEquipe.splice(this.equipeService.availableEquipe.indexOf(selected[0]), 1);
-      this.selection = new SelectionModel<Equipe>(false, []);
-    }
+    this.equipeService.supprimerEquipe(selected[0].idEquipe);
+    // if (selected.length !== 0) {
+    //   this.equipeService.availableEquipe.splice(this.equipeService.availableEquipe.indexOf(selected[0]), 1);
+    //   this.selection = new SelectionModel<Equipe>(false, []);
+    // }
   }
 
   exportAsXLSX(): void {

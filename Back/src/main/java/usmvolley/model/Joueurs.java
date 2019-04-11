@@ -61,11 +61,11 @@ public class Joueurs implements Serializable {
 	@Column(name = "date_naissance")
 	private Date dateNaissance;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_user")
 	private Users user;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_avoir")
 	private Avoir avoir;
 	

@@ -136,7 +136,12 @@ export class JoueursService {
    * @param idJoueur du joueur à supprimer
    */
   supprimerJoueur(idJoueur: number): Joueur[] {
-    this.availableJoueur = this.availableJoueur.filter( joueur => joueur.idJoueur !== idJoueur ).slice();
+    this.httpClient.delete('http://localhost:8080/joueurs/delete/' + idJoueur).subscribe(
+          () => { console.log('suppression equipe OK : ', idJoueur);
+              },
+          (error) => console.log('suppression watchCategory pb : ', error)
+      );
+      this.availableJoueur$.next(this.availableJoueur);
     return this.availableJoueur;
   }
 

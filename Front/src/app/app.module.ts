@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material-module';
 import { JwtModule } from '@auth0/angular-jwt';
+import { NgxPayPalModule } from 'ngx-paypal';
 
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { FlatpickrModule } from 'angularx-flatpickr';
@@ -91,6 +92,7 @@ registerLocaleData(localeFr);
     NoopAnimationsModule,
     MaterialModule,
     NgbModalModule,
+    NgxPayPalModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: function tokenGetter() {

@@ -3,6 +3,7 @@ package usmvolley.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
@@ -18,7 +19,10 @@ import usmvolley.security.JwtTokenProvider;
 @Service
 public class UserServiceImpl implements UserService {
 
+	@Autowired
     private UsersRepository userRepository;
+    
+    // pour chiffrer le mdp
     private BCryptPasswordEncoder passwordEncoder;
     private JwtTokenProvider jwtTokenProvider;
     private AuthenticationManager authenticationManager;
@@ -44,6 +48,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public String signup(Users user) throws ExistingUsernameException {
         if (!userRepository.existsByUsername(user.getUsername())) {
+        	//passwordEncoder.encode cryptage password
         	Users userToSave = new Users(user.getUsername(), passwordEncoder.encode(user.getMdp()), user.getRoleList());
             userRepository.save(userToSave);
             return jwtTokenProvider.createToken(user.getUsername(), user.getRoleList());

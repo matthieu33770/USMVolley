@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
 
@@ -10,7 +11,7 @@ const EXCEL_EXTENSION = '.xlsx';
 })
 export class ExcelService {
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
   public exportAsExcelFile(json: any [], excelFileName: string): void {
 
@@ -26,5 +27,24 @@ export class ExcelService {
       type: EXCEL_TYPE
     });
     FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+  }
+
+  private download() {
+    let headers = new HttpHeaders();
+    const url = 'D:\eclipse-workspace\USMVolley\Front\uploads\2 tickets C.pdf';
+    headers = headers.set('Accept', 'application/pdf');
+    return this.httpClient.get(url, { headers: headers, responseType: 'blob' });
+
+    return this.http.get('http://kmmc.in/wp-content/uploads/2014/01/lesson2.pdf',
+    {responseType:ResponseContentType.Blob}).subscribe((data)=>{
+        console.log(data);
+        var blob = new Blob([data], {type: 'application/pdf'});
+        console.log(blob);
+        saveAs(blob, "testData.pdf");
+    },
+    err=>{
+        console.log(err);
+        }
+    );
   }
 }

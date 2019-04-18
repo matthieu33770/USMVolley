@@ -4,9 +4,9 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import usmvolley.model.Role;
+import usmvolley.model.RoleFonction;
 
-public interface RoleRepository extends JpaRepository<Role, Integer>{
+public interface RoleRepository extends JpaRepository<RoleFonction, Integer>{
 
-	Optional<Role> findRoleByUsername (String username);
+	Optional<RoleFonction> findRoleByUsername (String username);
 }

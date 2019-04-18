@@ -23,7 +23,7 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import usmvolley.exception.InvalidJWTException;
-import usmvolley.model.RoleUser;
+import usmvolley.model.Role;
 
 @Component
 public class JwtTokenProvider {
@@ -52,7 +52,7 @@ public class JwtTokenProvider {
      * @param roles the user roles.
      * @return the created JWT as String.
      */
-    public String createToken(String username, List<RoleUser> roles) {
+    public String createToken(String username, List<Role> roles) {
     	System.out.println("token");
         Claims claims = Jwts.claims().setSubject(username);
         claims.put("auth", roles.stream().map(s -> new SimpleGrantedAuthority(s.getAuthority())).filter(Objects::nonNull).collect(Collectors.toList()));

@@ -4,20 +4,18 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import * as jwt_decode from 'jwt-decode';
 import { FileInformation } from '../file-information';
-// import {  FileUploa, JoueursServiceder, FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';
+import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 
 import { LoginService } from '../Services/login.service';
 import { JoueursService } from '../Services/joueurs.service';
 import { UsersService } from '../Services/users.service';
+import { CategorieService } from '../Services/categorie.service';
+
 import { Joueur } from '../Model/Joueur';
 import { User } from '../model/User';
-import { DatePipe } from '@angular/common';
-import { CategorieService } from '../Services/categorie.service';
 import { Categorie } from '../Model/Categorie';
 import { Licence } from '../Model/Licence';
 import { Avoir } from '../Model/Avoir';
-
-const URL = 'http://localhost:3000/api/upload';
 
 @Component({
   selector: 'app-saisie',
@@ -55,14 +53,13 @@ export class SaisieComponent implements OnInit {
   formulaireTest: string;
   certificatTest: string;
 
+  public payPalConfig ?: IPayPalConfig;
+
   @ViewChild('fileInputF')
   fileInputF: ElementRef;
 
   @ViewChild('fileInputC')
   fileInputC: ElementRef;
-
-  // public uploaderFormulaire: FileUploader = new FileUploader({url: URL, itemAlias: 'fichier'});
-  // public uploaderCertificat: FileUploader = new FileUploader({url: URL, itemAlias: 'fichier'});
 
   constructor(private loginService: LoginService,
               private joueursService: JoueursService,
@@ -77,6 +74,7 @@ export class SaisieComponent implements OnInit {
       console.log(this.isLoggedin);
     });
     this.joueursService.publishJoueurs();
+    this.initConfig(); //Fonction Paypal
     if (this.isLoggedin) {
       this.username = jwt_decode(sessionStorage.getItem(environment.accessToken)).sub;
       console.log(this.username);
@@ -181,43 +179,26 @@ export class SaisieComponent implements OnInit {
     console.log(this.idCat);
     // Vérifier si on est en édition ou en création
     if (!this.username) {
-      // if (this.idJoueurExistant < 200) {
-      //   this.idJoueur = 200;
-      // } else {
-      //   this.idJoueur = this.idJoueurExistant;
-      // }
-      // this.idJoueur = this.idJoueurExistant + 1;
       this.idJoueur = null;
-      console.log(this.idJoueur);
-      console.log(this.editionJoueur);
+      // console.log(this.idJoueur);
+      // console.log(this.editionJoueur);
       this.editionLicence.categories = this.categorieList[this.idCat];
-      // this.editionLicence.idLicence = this.idJoueur;
-      // console.log(this.editionLicence.idLicence);
-
-      // this.editionAvoir.idAvoir = this.idJoueur;
       this.editionAvoir.licence = this.editionLicence;
-      // console.log(this.editionAvoir.idAvoir);
-
-      // this.editionUser.idUser = this.idJoueur;
-      // console.log(this.editionUser.idUser);
-
-      // this.editionJoueur.idJoueur = this.idJoueur;
       this.editionJoueur.avoir = this.editionAvoir;
       this.editionJoueur.user = this.editionUser;
-
-      console.log(this.editionJoueur);
-
-      // this.editionJoueur.user.roleList = ['ROLE_LICENCIE'];
-      console.log(this.editionJoueur.user.roleList);
-      console.log(this.editionJoueur.avoir.licence.categories);
-      console.log(this.editionJoueur.avoir);
+      // console.log(this.editionJoueur);
+      // console.log(this.editionJoueur.user.roleList);
+      // console.log(this.editionJoueur.avoir.licence.categories);
+      // console.log(this.editionJoueur.avoir);
       //this.onRegister();
+      // this.editionJoueur.avoir.licence.formulaire = this.formulaire;
+      // this.editionJoueur.avoir.licence.certificatMedical = this.certificat;
       this.joueursService.createJoueur(this.editionJoueur);
     } else {
       this.onRegister();
       this.editionJoueur.avoir.licence.formulaire = this.formulaire;
       this.editionJoueur.avoir.licence.certificatMedical = this.certificat;
-      console.log(this.editionJoueur);
+      // console.log(this.editionJoueur);
       this.joueursService.updateJoueur(this.editionJoueur);
     }
   }
@@ -264,5 +245,67 @@ export class SaisieComponent implements OnInit {
     } else {
       // this.offresService.addWatchCategory(this.nameWatch, this.priceWatch, this.descriptionWatch, this.imageWatch);
     }
+  }
+
+private initConfig(): void {
+  // const prixAchatTotal = '' + this.commande.total.toFixed(2); // arrondi à deux chiffres aprés la virgule et convertion en string.
+    this.payPalConfig = {
+        currency: 'EUR',
+        clientId: 'sb',   // ID Marchand du compte PayPal PRO
+        createOrderOnClient: (data) => < ICreateOrderRequest > {
+            intent: 'CAPTURE',
+            purchase_units: [{
+                amount: {
+                    currency_code: 'EUR',
+                    value: '90.00',
+                    breakdown: {
+                        item_total: {
+                            currency_code: 'EUR',
+                            value: '90.00'
+                        }
+                    }
+                },
+                items: [{
+                    name: 'USM Volley Ball - Licence',
+                    quantity: '1',
+                    category: 'DIGITAL_GOODS',
+                    unit_amount: {
+                        currency_code: 'EUR',
+                        value: '90.00',
+                    },
+                }]
+            }]
+        },
+        advanced: {
+            // updateOrderDetails: {
+            //     commit: true
+            // }
+        },
+        style: {
+            label: 'paypal',
+            layout: 'vertical'
+        },
+        onApprove: (data, actions) => {
+            console.log('onApprove - transaction was approved, but not authorized', data, actions);
+            actions.order.get().then(details => {
+                console.log('onApprove - you can get full order details inside onApprove: ', details);
+            });
+
+        },
+        onClientAuthorization: (data) => {
+            console.log('onClientAuthorization', data);
+        },
+        onCancel: (data, actions) => {
+            console.log('OnCancel', data, actions);
+
+        },
+        onError: err => {
+            console.log('OnError', err);
+        },
+        onClick: () => {
+            console.log('onClick');
+        },
+    };
+    console.log(this.payPalConfig);
   }
 }

@@ -92,7 +92,6 @@ export class EquipesService {
               },
           (error) => console.log('suppression watchCategory pb : ', error)
       );
-    // this.availableEquipe = this.availableEquipe.filter( equipe => equipe.idEquipe !== idEquipe ).slice();
     return this.availableEquipe;
   }
 }

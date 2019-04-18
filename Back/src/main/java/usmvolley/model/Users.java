@@ -39,7 +39,7 @@ public class Users implements Serializable {
 
 	@ElementCollection(fetch = FetchType.EAGER)
 	@Enumerated(EnumType.STRING)
-	private List<RoleUser> roleList;
+	private List<Role> roleList;
 	
 	@ManyToOne
 	@JoinColumn(name = "fonction")
@@ -53,13 +53,13 @@ public class Users implements Serializable {
 		this.mdp = mdp;
 	}
 	
-	public Users(@NotNull String username,@NotNull String mdp, List<RoleUser> roleList) {
+	public Users(@NotNull String username,@NotNull String mdp, List<Role> roleList) {
 		this.username = username;
 		this.mdp = mdp;
 		this.roleList = roleList;
 	}
 
-	public Users(Integer idUser, String username, String mdp, boolean isValide, List<RoleUser> roleList,
+	public Users(Integer idUser, String username, String mdp, boolean isValide, List<Role> roleList,
 			Fonctions fonction) {
 		super();
 		this.idUser = idUser;
@@ -103,11 +103,11 @@ public class Users implements Serializable {
 		this.isValide = isValide;
 	}
 
-	public List<RoleUser> getRoleList() {
+	public List<Role> getRoleList() {
 		return roleList;
 	}
 
-	public void setRole(List<RoleUser> roleList) {
+	public void setRole(List<Role> roleList) {
 		this.roleList = roleList;
 	}
 

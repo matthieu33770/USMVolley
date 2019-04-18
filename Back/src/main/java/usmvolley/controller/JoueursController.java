@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,7 @@ import usmvolley.repository.CategoriesRepository;
 import usmvolley.repository.JoueursRepository;
 import usmvolley.repository.LicenceRepository;
 import usmvolley.service.FileStorageService;
+import usmvolley.service.UserService;
 import usmvolley.upload.FileInformation;
 import usmvolley.upload.exception.UploadFileException;
 
@@ -54,6 +56,12 @@ public class JoueursController {
 	
 	@Autowired
 	private FileStorageService fileStorageService;
+	
+	private BCryptPasswordEncoder passwordEncoder;
+	
+	public JoueursController( BCryptPasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
 	
 	/**
 	 * Methode Voir tous les joueurs
@@ -80,7 +88,7 @@ public class JoueursController {
 	 * @return liste un joueur
 	 */
 	@GetMapping("/get/unJoueur/{idJoueur}")
-	@PreAuthorize("hasRole('ROLE_BUREAU')")
+//	@PreAuthorize("hasRole('ROLE_BUREAU')")
 	public ResponseEntity<?> getUnJoueur(@PathVariable Integer idJoueur) {
 		
 		Optional<Joueurs> joueur = null;
@@ -103,36 +111,13 @@ public class JoueursController {
 	 * @return liste un joueur selon son nom
 	 */
 	@GetMapping("/get/byJoueur/{nom}")
-	@PreAuthorize("hasRole('ROLE_BUREAU')")
+//	@PreAuthorize("hasRole('ROLE_BUREAU')")
 	public ResponseEntity<?> getJoueurByNom(@PathVariable String nom) {
 		
 		Optional<Joueurs> joueur = null;
 		
 		try {
 			joueur = joueursRepo.findJoueurByNom(nom);
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-		}
-		
-		if (joueur == null) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-		}
-		
-		return ResponseEntity.status(HttpStatus.OK).body(joueur);
-	}
-	
-	/**
-	 * Methode Voir un joueur
-	 * @return liste un joueur selon son sex
-	 */
-	@GetMapping("/get/byJoueur/{sexe}")
-	@PreAuthorize("hasRole('ROLE_BUREAU')")
-	public ResponseEntity<?> getJoueurBySexe(@PathVariable String sexe) {
-		
-		Optional<Joueurs> joueur = null;
-		
-		try {
-			joueur = joueursRepo.findJoueurBySexe(sexe);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
@@ -166,6 +151,7 @@ public class JoueursController {
 		String telephone1Joueur = joueur.getTelephone1();
 		Date dateJoueur = joueur.getDateNaissance();
 		Users userJoueur = joueur.getUser();
+		String userJoueurMdp = passwordEncoder.encode(joueur.getUser().getMdp());
 		
 		if ((nomJoueur == null) || (nomJoueur.isEmpty())) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le nom du joueur");
@@ -200,6 +186,8 @@ public class JoueursController {
 		if (joueur.getAvoir().getLicence().getCertificatMedical() != null && joueur.getAvoir().getLicence().getFormulaire() != null && joueur.getAvoir().getLicence().getCategories() != null) {
 			joueur.getAvoir().setIsValide(true);
 		}
+		
+		joueur.getUser().setMdp(userJoueurMdp);
 	
 		newJoueur = joueursRepo.save(joueur);
 		return ResponseEntity.status(HttpStatus.CREATED).body(newJoueur);
@@ -211,9 +199,9 @@ public class JoueursController {
 	 * @return supprime un joueur
 	 */
 	@DeleteMapping("/delete/{idJoueur}")
-	@PreAuthorize("hasRole('ROLE_BUREAU')")
-	public ResponseEntity<?> deleteUser(@PathVariable Integer idJoueur)
-	{
+//	@PreAuthorize("hasRole('ROLE_BUREAU')")
+	public ResponseEntity<?> deleteUser(@PathVariable Integer idJoueur) {
+		
 		try
 		{
 			joueursRepo.deleteById(idJoueur);

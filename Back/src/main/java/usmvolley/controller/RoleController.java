@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import usmvolley.model.Role;
+import usmvolley.model.RoleFonction;
 import usmvolley.repository.RoleRepository;
 
 @RestController
@@ -32,9 +32,9 @@ public class RoleController {
 	 * @return liste de tous les rôles
 	 */
 	@GetMapping("/get/roles")
-	public ResponseEntity<List<Role>> getListeRoles() {
+	public ResponseEntity<List<RoleFonction>> getListeRoles() {
 		
-		List<Role> listeRoles = null;
+		List<RoleFonction> listeRoles = null;
 		
 		try {
 			listeRoles = roleRepo.findAll();
@@ -52,7 +52,7 @@ public class RoleController {
 	@GetMapping("/get/unRole/{idRole}")
 	public ResponseEntity<?> getUnRole(@PathVariable Integer idRole) {
 		
-		Optional<Role> role = null;
+		Optional<RoleFonction> role = null;
 		
 		try {
 			role = roleRepo.findById(idRole);
@@ -74,7 +74,7 @@ public class RoleController {
 	@GetMapping("/getRole/byUser/{username}")
 	public ResponseEntity<?> getRoleByUsername(@PathVariable String username) {
 		
-		Optional<Role> role = null;
+		Optional<RoleFonction> role = null;
 		
 		try {
 			role = roleRepo.findRoleByUsername(username);
@@ -95,9 +95,9 @@ public class RoleController {
 	 * @return ajoute un rôle
 	 */
 	@PostMapping("/create")
-	public ResponseEntity<?> addRole(@RequestBody Role role) {
+	public ResponseEntity<?> addRole(@RequestBody RoleFonction role) {
 		
-		Role newRole = null;
+		RoleFonction newRole = null;
 		String libelleRole = role.getLibelleRole();
 		
 		if ((libelleRole == null) || (libelleRole.isEmpty())) {
@@ -132,9 +132,9 @@ public class RoleController {
 	 * @return modifie un role
 	 */
 	@PutMapping("/update/{idRole}")
-	public ResponseEntity<?> updateRole(@RequestBody Role role, @PathVariable Integer idRole) throws Exception
+	public ResponseEntity<?> updateRole(@RequestBody RoleFonction role, @PathVariable Integer idRole) throws Exception
 	{
-		Role modificationRole = null;
+		RoleFonction modificationRole = null;
 		String libelleRole = role.getLibelleRole();
 		if ((libelleRole == null) || (libelleRole.isEmpty()))
 		{

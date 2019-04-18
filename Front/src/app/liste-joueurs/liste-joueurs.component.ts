@@ -35,6 +35,7 @@ export class ListeJoueursComponent implements OnInit {
   constructor(private router: Router, private joueurService: JoueursService, private excelService: ExcelService) { }
 
   ngOnInit() {
+    this.joueurService.publishJoueurs();
     this.joueurList = this.joueurService.availableJoueur$;
     this.getUser();
     this.getRole();
@@ -65,12 +66,8 @@ export class ListeJoueursComponent implements OnInit {
     this.router.navigate(['gestion/joueurs/detailjoueur/' + selected[0].idJoueur]);
   }
 
-  delete(selected: Joueur[]) {
-    console.log(selected);
-    if (selected.length !== 0) {
-      this.joueurService.availableJoueur.splice(this.joueurService.availableJoueur.indexOf(selected[0]), 1);
-      this.selection = new SelectionModel<Joueur>(false, []);
-    }
+  onDelete(selected: Joueur[]) {
+    this.joueurService.supprimerJoueur(selected[0].idJoueur);
   }
 
   exportAsXLSX(): void {

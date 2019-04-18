@@ -4,9 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,10 +34,19 @@ public class UsersController {
 	@Autowired
 	private UsersRepository usersRepo;
 	
+	@Autowired
 	private UserService userService;
 	
-    public UsersController(UserService userService) {
+//	@Bean
+//	public UserService userService() {
+//	    return super.userService();
+//	}
+	
+	private BCryptPasswordEncoder passwordEncoder;
+	
+    public UsersController(UserService userService, BCryptPasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
     
     @GetMapping
@@ -148,7 +159,7 @@ public class UsersController {
 	public ResponseEntity<?> addUser(@RequestBody Users user) {
 		
 		Users newUser = null;
-		String mdpUser = user.getMdp();
+		String mdpUser = passwordEncoder.encode(user.getMdp());
 		String usernameUser = user.getUsername();
 		//Role roleUser = user.getRole();
 		

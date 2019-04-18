@@ -31,10 +31,10 @@ export class ListeEquipesComponent implements OnInit {
   constructor(private router: Router, private equipeService: EquipesService, private excelService: ExcelService) { }
 
   ngOnInit() {
-    this.equipeList = this.equipeService.availableEquipe$;
     this.equipeService.publishEquipes();
-    this.getEquipe();
-    this.getTeam();
+    // this.equipeList = this.equipeService.availableEquipe$;
+    // this.getEquipe();
+    // this.getTeam();
     this.equipeService.getEquipes().subscribe(Equipes => {this.dataSource = new MatTableDataSource<Equipe>(Equipes);
                                               Equipes.forEach( equipe => {
                                               this.nbreMasculin = equipe.joueurs.filter(joueur => {if (joueur.sexe === 'Masculin') { return true; }} );

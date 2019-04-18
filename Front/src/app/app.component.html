@@ -36,6 +36,7 @@
         <button mat-menu-item routerLink="/manifestations">Gérer une Manifestation</button>
         <button mat-menu-item>Faire une Sélection</button>
         <button mat-menu-item>Envoyer un Mail</button>
+        <button mat-menu-item routerLink="/gestion">Gérer les Données</button>
         <button mat-menu-item type="submit" (click)="onDeconnect()">Se déconnecter</button>
       </mat-menu>
     <button *ngIf="isLoggedin && isBureau" mat-flat-button [matMenuTriggerFor]="menuB">Bureau</button>

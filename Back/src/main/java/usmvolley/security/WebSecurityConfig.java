@@ -91,6 +91,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/disponibilite/**");
         web.ignoring().antMatchers("/categories/**");
         web.ignoring().antMatchers("/manifestations/**");
+        web.ignoring().antMatchers("/resources/**");
         //.anyRequest();
     }
 

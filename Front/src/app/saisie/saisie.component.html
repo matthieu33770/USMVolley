@@ -102,15 +102,16 @@
       <div>
         <mat-form-field>
           <mat-select placeholder="Mode de Paiement">
+            <mat-option value="vide">  </mat-option>
             <mat-option value="cheque">Chèque</mat-option>
             <mat-option value="virement">Virement</mat-option>
             <mat-option value="paypal">PayPal</mat-option>
           </mat-select>
         </mat-form-field>
+        
       </div>
-      <!-- <script src="https://www.paypal.com/sdk/js?client-id=sb"></script>
-      <script>paypal.Buttons().render('body');</script> -->
     </form>
+    <ngx-paypal [config]="payPalConfig"></ngx-paypal>
   </div> 
 
   <div class="bouton">

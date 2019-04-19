@@ -67,4 +67,8 @@ export class DetailJoueurComponent implements OnInit {
     this.equipeService.getEquipeByName(libelleEquipe).subscribe(equipe => this.equipe = equipe);
   }
 
+  onSave() {
+    console.log(this.editionJoueur);
+    this.joueurService.updateJoueur(this.editionJoueur);
+  }
 }

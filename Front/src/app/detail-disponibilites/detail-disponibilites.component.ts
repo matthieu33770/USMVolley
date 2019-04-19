@@ -17,7 +17,7 @@ export class DetailDisponibilitesComponent implements OnInit {
   idDisponibilite: number;
   disponibilites: Disponibilite [] = [];
   disponibiliteList: Disponibilite [];
-  editionDisponibilite: Disponibilite = new Disponibilite(0, '');
+  editionDisponibilite: Disponibilite = new Disponibilite(0, '', 0);
 
   constructor(private route: ActivatedRoute,
               private disponibiliteService: DisponibiliteService,
@@ -37,5 +37,16 @@ export class DetailDisponibilitesComponent implements OnInit {
 
   getDisponibilite(): void {
     this.disponibiliteService.getDisponibilites().subscribe(Disponibilites => this.disponibiliteList = Disponibilites);
+  }
+
+  onSave() {
+    // Vérifier si on est en édition ou en création
+    if (!this.editionDisponibilite) {
+      this.idDisponibilite = null;
+      this.disponibiliteService.createDisponibilite(this.editionDisponibilite);
+    } else {
+    console.log(this.editionDisponibilite);
+    this.disponibiliteService.updateDisponibilite(this.editionDisponibilite);
+    }
   }
 }

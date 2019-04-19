@@ -42,6 +42,12 @@
       <th mat-header-cell *matHeaderCellDef>Prénom</th>
       <td mat-cell *matCellDef="let joueur">{{joueur.prenom}}</td>
     </ng-container>
+
+    <!-- Taille Column -->
+    <ng-container matColumnDef="tailleJoueur">
+      <th mat-header-cell *matHeaderCellDef>Taille</th>
+      <td mat-cell *matCellDef="let joueur">{{joueur.taille}}</td>
+    </ng-container>
     
     <!-- Sexe Column -->
     <ng-container matColumnDef="sexeJoueur">

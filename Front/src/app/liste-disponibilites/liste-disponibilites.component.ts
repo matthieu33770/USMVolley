@@ -19,7 +19,7 @@ export class ListeDisponibilitesComponent implements OnInit {
   idDisponibilite: number;
   disponibiliteList: BehaviorSubject<Disponibilite[]>;
   disponibilites: Disponibilite [] = [];
-  displayedColumns: string[] = ['select', 'libelleDisponibilite'];
+  displayedColumns: string[] = ['select', 'libelleDisponibilite', 'nbrePersonne'];
   dataSource = new MatTableDataSource<Disponibilite>();
   selection = new SelectionModel<Disponibilite>(false, []);
   teams: any = [];
@@ -27,19 +27,9 @@ export class ListeDisponibilitesComponent implements OnInit {
   constructor(private router: Router, private disponibiliteService: DisponibiliteService, private excelService: ExcelService) { }
 
   ngOnInit() {
+    this.disponibiliteService.publishDisponibilites();
     this.disponibiliteList = this.disponibiliteService.availableDisponibilite$;
-    this.getDisponibilite();
-    this.getDisponibilites();
     this.disponibiliteService.getDisponibilites().subscribe(Disponibilites => {this.dataSource = new MatTableDataSource<Disponibilite>(Disponibilites); });
-  }
-
-  getDisponibilite(): void {
-    this.disponibiliteService.getDisponibilites().subscribe(Disponibilites => this.disponibilites = Disponibilites);
-  }
-
-  getDisponibilites(): void {
-    // tslint:disable-next-line:no-shadowed-variable
-    this.disponibiliteService.getDisponibilites().subscribe(Disponibilite => this.teams = Disponibilite);
   }
 
   onEdit(selected: Disponibilite[]) {
@@ -49,6 +39,7 @@ export class ListeDisponibilitesComponent implements OnInit {
   delete(selected: Disponibilite[]) {
     console.log(selected);
     if (selected.length !== 0) {
+      this.disponibiliteService.supprimerDisponibilite(selected[0].idDisponibilite);
       this.disponibiliteService.availableDisponibilite.splice(this.disponibiliteService.availableDisponibilite.indexOf(selected[0]), 1);
       this.selection = new SelectionModel<Disponibilite>(false, []);
     }

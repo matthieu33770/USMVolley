@@ -38,5 +38,16 @@ export class DetailCategorieComponent implements OnInit {
   getCategorie(): void {
     this.categorieService.getCategories().subscribe(Categories => this.categorieList = Categories);
   }
+
+  onSave() {
+    // Vérifier si on est en édition ou en création
+    if (!this.editionCategorie) {
+      this.idCategorie = null;
+      this.categorieService.createCategorie(this.editionCategorie);
+    } else {
+    console.log(this.editionCategorie);
+    this.categorieService.updateCategorie(this.editionCategorie);
+    }
+  }
 }
 

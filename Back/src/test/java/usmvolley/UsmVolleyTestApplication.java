@@ -32,18 +32,21 @@ import usmvolley.service.UserService;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureMockMvc
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class UsmVolleyTestApplicationTests {
+@SpringBootTest
+public class UsmVolleyTestApplication {
 
 //	@Autowired
 //	private TestRestTemplate restTemplate;
-	
+	 
 	@Mock
 	JoueursRepository joueurRepo;
+//	
+//	@Autowired
+//	MockMvc mockMvc;
 	
-	@Autowired
-	MockMvc mockMvc;
-
+//	@Autowired
+//	private UserService userService;
+//
 	@Test
 	@WithMockUser(roles={"BUREAU"})
 	public void testGetListeJoueurs() {

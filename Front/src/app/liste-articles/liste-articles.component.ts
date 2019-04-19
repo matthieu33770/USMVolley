@@ -27,9 +27,10 @@ export class ListeArticlesComponent implements OnInit {
   constructor(private router: Router, private articleService: ArticlesService, private excelService: ExcelService) { }
 
   ngOnInit() {
+    this.articleService.publishArticles();
     this.articleList = this.articleService.availableArticle$;
-    this.getArticle();
-    this.getArticles();
+    // this.getArticle();
+    // this.getArticles();
     this.articleService.getArticles().subscribe(Articles => {this.dataSource = new MatTableDataSource<Article>(Articles); });
   }
 
@@ -49,6 +50,7 @@ export class ListeArticlesComponent implements OnInit {
   delete(selected: Article[]) {
     console.log(selected);
     if (selected.length !== 0) {
+      this.articleService.supprimerArticle(selected[0].idArticle);
       this.articleService.availableArticle.splice(this.articleService.availableArticle.indexOf(selected[0]), 1);
       this.selection = new SelectionModel<Article>(false, []);
     }

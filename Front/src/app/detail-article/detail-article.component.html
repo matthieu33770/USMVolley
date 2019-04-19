@@ -17,17 +17,18 @@
         </mat-form-field>
       </div>
       <div>
+        <input *ngIf="editionArticle.photoArticle" matInput placeholder="Photo de l'article" [(ngModel)]="editionArticle.photoArticle" formControlName="photoArticle">
         <input type="file" id="userPhoto" (change)="onSelectPhoto($event)" #fileInput style="display: none">
-        <mat-form-field class="watch-category-full-width">
-          <input matInput formControlName="photoTest" placeholder="Photo à charger" readonly>
+        <mat-form-field *ngIf="!editionArticle.photoArticle" class="watch-category-full-width">
+          <input matInput formControlName="photoArticle" placeholder="Photo à charger" readonly>
         </mat-form-field>
-        <button mat-raised-button (click)="select()">Selectionner</button>
+        <button *ngIf="!editionArticle.photoArticle" mat-raised-button (click)="select()">Selectionner</button>
       </div>
     </form>
   </div>
   <div class="boutons">
-    <button *ngIf="isModification" mat-raised-button color="primary" (click)="onRegister()">Modifier</button>
-    <button *ngIf="!isModification" mat-raised-button color="primary" (click)="onRegister()">Enregistrer</button>
+    <button *ngIf="isModification" mat-raised-button color="primary" (click)="onSave()">Modifier</button>
+    <button *ngIf="!isModification" mat-raised-button color="primary" (click)="onSave()" routerLink="/gestion/articles">Enregistrer</button>
     <button mat-raised-button color="accent" routerLink="/gestion/articles">Retour</button>
   </div>
 </div>

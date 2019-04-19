@@ -78,9 +78,16 @@ export class StatutService {
    * @param idStatut du statut à supprimer
    */
   supprimerStatut(idStatut: number): Statut[] {
+    this.httpClient.delete('http://localhost:8080/statuts/delete/' + idStatut).subscribe(
+          () => { console.log('suppression statut OK : ', idStatut);
+              },
+          (error) => console.log('suppression statut pb : ', error)
+      );
     this.availableStatut = this.availableStatut.filter( statut => statut.idStatut !== idStatut ).slice();
+    this.availableStatut$.next(this.availableStatut);
     return this.availableStatut;
   }
+
 
   /**
    * Fonction de suppression d'un statut.

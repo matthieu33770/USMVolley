@@ -10,6 +10,11 @@
         <input matInput placeholder="libelle" [(ngModel)]="editionDisponibilite.libelleDisponibilite" name="libelle">
       </mat-form-field>
     </p>
+    <p>
+      <mat-form-field>
+        <input matInput placeholder="nbrePersonne" [(ngModel)]="editionDisponibilite.nbrePersonne" name="nbrePersonne">
+      </mat-form-field>
+    </p>
   </div>
   <div class="boutons">
     <button *ngIf="isModification" mat-raised-button color="primary" (click)="onSave()">Modifier</button>

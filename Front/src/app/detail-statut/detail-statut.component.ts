@@ -39,4 +39,15 @@ export class DetailStatutComponent implements OnInit {
   getStatut(): void {
     this.statutService.getStatuts().subscribe(Statuts => this.statutList = Statuts);
   }
+
+  onSave() {
+    // Vérifier si on est en édition ou en création
+    if (!this.editionStatut) {
+      this.idStatut = null;
+      this.statutService.createStatut(this.editionStatut);
+    } else {
+    console.log(this.editionStatut);
+    this.statutService.updateStatut(this.editionStatut);
+    }
+  }
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -83,6 +84,7 @@ public class ArticlesController {
 	 * @return ajoute un article
 	 */
 	@PostMapping("/create")
+//	@PreAuthorize("hasRole('ROLE_BUREAU')")
 	public ResponseEntity<?> addArticle(@RequestBody Articles article) {
 		
 		Articles newArticle = null;
@@ -92,9 +94,6 @@ public class ArticlesController {
 		
 		if ((titreArticle == null) || (titreArticle.isEmpty())) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le titre de l'article");
-		}
-		if ((photoArticle == null) || (photoArticle.isEmpty())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque la photo pour l'article");
 		}
 		if ((contenuArticle == null) || (contenuArticle.isEmpty())) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le contenu de l'article");
@@ -114,6 +113,7 @@ public class ArticlesController {
 	{
 		try
 		{
+			System.out.println("article supprimé : " + idArticle);
 			articlesRepo.deleteById(idArticle);
 		} catch (Exception e)
 		{
@@ -132,14 +132,16 @@ public class ArticlesController {
 	{
 		Articles modificationArticle = null;
 		String titreArticle = article.getTitreArticle();
-		String photoArticle = article.getPhotoArticle();
 		String contenuArticle = article.getContenuArticle();
+		
+		if (article.getPhotoArticle() != null ) {
+			String photoArticle = article.getPhotoArticle();
+		}
+		
+		System.out.println("Article Modifié : " + article);
 		
 		if ((titreArticle == null) || (titreArticle.isEmpty())) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le titre de l'article");
-		}
-		if ((photoArticle == null) || (photoArticle.isEmpty())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque la photo pour l'article");
 		}
 		if ((contenuArticle == null) || (contenuArticle.isEmpty())) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le contenu de l'article");
@@ -157,11 +159,9 @@ public class ArticlesController {
 	}
 	
 	// upload a file and put it in D:\\eclipse-workspace\\USMVolley\\Front\\src\\assets\\documents\\ and memorize its name in DB   
-			@PostMapping(value = "/upload", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-//			@PreAuthorize("hasRole('ROLE_BUREAU')")
-			  public ResponseEntity<?> uploadFile(
-			      @RequestParam("data") MultipartFile multipartFile
-			  ) throws UploadFileException, IllegalStateException, IOException {
+	@PostMapping(value = "/upload", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+//	@PreAuthorize("hasRole('ROLE_BUREAU')")
+		public ResponseEntity<?> uploadFile(@RequestParam("data") MultipartFile multipartFile) throws UploadFileException, IllegalStateException, IOException {
 				
 			    if (multipartFile == null || multipartFile.isEmpty()) {
 			      throw new UploadFileException();

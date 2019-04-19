@@ -222,9 +222,9 @@ public class JoueursController {
 	public ResponseEntity<?> updateJoueur(@RequestBody Joueurs joueur, @PathVariable Integer idJoueur) throws Exception
 	{
 		Joueurs modificationJoueur = null;
-		Licence modificationLicence = null;
-		Avoir modificationAvoir = null;
-		Categories modificationCategorie = null;
+//		Licence modificationLicence = null;
+//		Avoir modificationAvoir = null;
+//		Categories modificationCategorie = null;
 		String nomJoueur = joueur.getNom();
 		String prenomJoueur = joueur.getPrenom();
 		Integer numeroAdresseJoueur = joueur.getNumeroAdresse();
@@ -274,10 +274,10 @@ public class JoueursController {
 		
 		try
 		{
-			System.out.println("test joueur : " + joueur.getAvoir().getLicence());
-			modificationCategorie = categorieRepo.save(joueur.getAvoir().getLicence().getCategories());
-			modificationLicence = licenceRepo.save(joueur.getAvoir().getLicence());
-			modificationAvoir = avoirRepo.save(joueur.getAvoir());
+			System.out.println("test modification joueur : " + joueur.getAvoir().getLicence());
+//			modificationCategorie = categorieRepo.save(joueur.getAvoir().getLicence().getCategories());
+//			modificationLicence = licenceRepo.save(joueur.getAvoir().getLicence());
+//			modificationAvoir = avoirRepo.save(joueur.getAvoir());
 			modificationJoueur = joueursRepo.save(joueur);
 		} catch (Exception e)
 		{

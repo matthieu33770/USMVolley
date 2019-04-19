@@ -1,15 +1,13 @@
 package usmvolley.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -19,20 +17,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.RequestBuilder;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import usmvolley.model.Avoir;
 import usmvolley.model.Categories;
+import usmvolley.model.Fonctions;
 import usmvolley.model.Joueurs;
 import usmvolley.model.Licence;
 import usmvolley.model.Users;
@@ -48,6 +50,16 @@ public class JoueursControllerTest {
 	
 	@Autowired
 	MockMvc mockMvc;
+	
+	@Autowired
+	private ObjectMapper objectMapper;
+
+	JacksonTester<Joueurs> joueurJacksonTester;
+	
+	@Before
+	public void setUp() {
+		JacksonTester.initFields(this, objectMapper);
+	}
 
 	@Test
 	@WithMockUser(roles={"BUREAU"})
@@ -77,25 +89,23 @@ public class JoueursControllerTest {
 	}
 
 	@Test
-	public void testAddJoueur() throws Exception {
-		when(this.joueurRepo.save(any())).thenReturn(Optional.of(new Joueurs(0, "Toulouse", "Lolo", "", "", 23, "Lointain", 33770, "Fort-Fort", "mm@mm.fr", "00.00.00.00.01", "",new Date(2019-07-19),new Users(), new Avoir(0, 0, false, new Licence(0, "", 0.0, new Categories(1, "toto", 11), "form", "certif", false, "", 0.0)), null)));
+	@WithMockUser(roles={"BUREAU"})
+	public void testAddJoueur() throws Exception {		
+		Joueurs joueur = new Joueurs(0, "Toto", "Test", "Andro", "123", 22, "rue lointaine", 99999, "Fort-Fort", "mm@mm.fr", "00.00.00.00.01", "", new Date(2019-01-29),
+				new Users(0, "username", "mdp", false, null, new Fonctions(1, "LICENCIE")), 
+				new Avoir(0, 2019, true, 
+						new Licence(0, "12233", 90.00, 
+								new Categories(1, "M11", 11), "formulaire", "certificat", true, "102938", 90.00)), null);
+		System.out.println(joueur);
+		
+		when(this.joueurRepo.save(any())).thenReturn(joueur);
 
-		String jsonContent = "{\"nom\": \"Toulouse\", \"prenom\": \"Lolo\", \"numeroAdresse\": \"23\", \"rue\": \"Lointain\", \"codePostal\": \"33770\","
-				+ " \"ville\": \"Fort-Fort\", \"mail\": \"mm@mm.fr\", \"telephone1\": \"00.00.00.00.01\", \"dateNaissance\": \"2019-07-19\","
-				+ " \"user\": {\"username\":\"test\", \"mdp\": \"toto\"}}";
+		String jsonContent = joueurJacksonTester.write(joueur).getJson();
+		System.out.println(jsonContent);
 
 		this.mockMvc.perform(post("/joueurs/create").contentType(MediaType.APPLICATION_JSON_UTF8).content(jsonContent))
-				.andExpect(status().isCreated()).andExpect(jsonPath("nom").value("Toulouse"))
-				.andExpect(jsonPath("prenom").value("Lolo"))
-				.andExpect(jsonPath("numeroAdresse").value(23))
-				.andExpect(jsonPath("rue").value("Lointain"))
-				.andExpect(jsonPath("codePostal").value(33770))
-				.andExpect(jsonPath("ville").value("Fort-Fort"))
-				.andExpect(jsonPath("mail").value("mm@mm.fr"))
-				.andExpect(jsonPath("telephone1").value("00.00.00.00.01"))
-				.andExpect(jsonPath("dateNaissance").value("2019-07-19"))
-				.andExpect(jsonPath("username").value("test"))
-				.andExpect(jsonPath("mdp").value("toto"));
+				.andExpect(status().isCreated()).andExpect(jsonPath("nom").value(joueur.getNom()))
+				.andExpect(jsonPath("prenom").value(joueur.getPrenom()));
 	}
 
 	@Test
@@ -109,24 +119,21 @@ public class JoueursControllerTest {
 
 	@Test
 	public void testUpdateJoueur() throws Exception {
-		when(this.joueurRepo.save(any())).thenReturn(Optional.of(new Joueurs(20, "Toulouse", "Lolo", "", "", 23, "Lointain", 33770, "Fort-Fort", "mm@mm.fr", "00.00.00.00.01", "",new Date(2019-07-19),new Users(), new Avoir(0, 0, false, new Licence(0, "", 0.0, new Categories(1, "toto", 11), "form", "certif", false, "", 0.0)), null)));
+		Joueurs joueur = new Joueurs(4, "GUERIN", "Julie", "Féminin", "123", 1, "chemin des gassinieres", 33380, "MIOS", "jujuly69@free.fr", "607193344", "", new Date(1989-01-29),
+				new Users(4, "jujuly69@free.fr", "$2a$10$gu0/JMAOkR8H2Gwqp57BVuhqSZ00ztEDkuty5cFUZ7o.DVS8Gtudu", true, null, new Fonctions(1, "LICENCIE")), 
+				new Avoir(4, 2018, true, 
+						new Licence(4, "1839663", 90.00, 
+								new Categories(6, "Adultes", 80), "formulaire", "certificat", true, "102938", 90.00)), null);
+		
+		when(this.joueurRepo.save(any())).thenReturn(joueur);
 
-		String jsonContent = "{\"nom\": \"Toulouse\", \"prenom\": \"Lolo\", \"numeroAdresse\": \"23\", \"rue\": \"Lointain\", \"codePostal\": \"33770\","
-				+ " \"ville\": \"Fort-Fort\", \"mail\": \"mm@mm.fr\", \"telephone1\": \"00.00.00.00.01\", \"dateNaissance\": \"2019-07-19\","
-				+ " \"user\": {\"username\":\"test\", \"mdp\": \"toto\"}}";
+		String jsonContent = joueurJacksonTester.write(joueur).getJson();
+		System.out.println(jsonContent);
 
-		this.mockMvc.perform(put("/joueurs/update/20").contentType(MediaType.APPLICATION_JSON_UTF8).content(jsonContent))
-				.andExpect(status().isCreated()).andExpect(jsonPath("nom").value("Toulouse"))
-				.andExpect(jsonPath("prenom").value("Lolo"))
-				.andExpect(jsonPath("numeroAdresse").value(23))
-				.andExpect(jsonPath("rue").value("Lointain"))
-				.andExpect(jsonPath("codePostal").value(33770))
-				.andExpect(jsonPath("ville").value("Fort-Fort"))
-				.andExpect(jsonPath("mail").value("mm@mm.fr"))
-				.andExpect(jsonPath("telephone1").value("00.00.00.00.01"))
-				.andExpect(jsonPath("dateNaissance").value("2019-07-19"))
-				.andExpect(jsonPath("username").value("test"))
-				.andExpect(jsonPath("mdp").value("toto"));
+		this.mockMvc.perform(put("/joueurs/update/4").contentType(MediaType.APPLICATION_JSON_UTF8).content(jsonContent))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("nom").value(joueur.getNom()))
+				.andExpect(jsonPath("taille").value(joueur.getTaille()));
 	}
 
 }

@@ -38,4 +38,15 @@ export class DetailLieuxComponent implements OnInit {
   getLieu(): void {
     this.lieuService.getLieux().subscribe(Lieux => this.lieuList = Lieux);
   }
+
+  onSave() {
+    // Vérifier si on est en édition ou en création
+    if (!this.editionLieu) {
+      this.idLieu = null;
+      this.lieuService.createLieu(this.editionLieu);
+    } else {
+    console.log(this.editionLieu);
+    this.lieuService.updateLieu(this.editionLieu);
+    }
+  }
 }

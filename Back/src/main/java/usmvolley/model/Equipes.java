@@ -29,6 +29,8 @@ public class Equipes implements Serializable {
 	@ManyToMany(cascade = CascadeType.REMOVE, mappedBy = "equipes")
 	@JsonIgnoreProperties("equipes")
 	private Collection<Joueurs> joueurs;
+	
+	
 
 	public Equipes() {
 	}

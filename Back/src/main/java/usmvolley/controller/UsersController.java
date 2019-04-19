@@ -37,11 +37,6 @@ public class UsersController {
 	@Autowired
 	private UserService userService;
 	
-//	@Bean
-//	public UserService userService() {
-//	    return super.userService();
-//	}
-	
 	private BCryptPasswordEncoder passwordEncoder;
 	
     public UsersController(UserService userService, BCryptPasswordEncoder passwordEncoder) {
@@ -50,7 +45,7 @@ public class UsersController {
     }
     
     @GetMapping
-    @PreAuthorize("hasRole('ROLE_BUREAU')")
+//    @PreAuthorize("hasRole('ROLE_BUREAU')")
 	public List<Users> getUsers() {
 		return userService.findAllUsers();
 	}
@@ -108,7 +103,7 @@ public class UsersController {
 	 * @return liste un user
 	 */
 	@GetMapping("/get/unUser/{idUser}")
-	@PreAuthorize("hasRole('ROLE_BUREAU')")
+//	@PreAuthorize("hasRole('ROLE_BUREAU')")
 	public ResponseEntity<?> getUnUser(@PathVariable Integer idUser) {
 		
 		Optional<Users> user = null;
@@ -131,7 +126,7 @@ public class UsersController {
 	 * @return liste un user
 	 */
 	@GetMapping("/get/byUser/{username}")
-	@PreAuthorize("hasRole('ROLE_BUREAU')")
+//	@PreAuthorize("hasRole('ROLE_BUREAU')")
 	public ResponseEntity<?> getUserByUsername(@PathVariable String username) {
 		
 		Optional<Users> user = null;
@@ -155,7 +150,7 @@ public class UsersController {
 	 * @return ajoute un user
 	 */
 	@PostMapping("/create")
-	@PreAuthorize("hasRole('ROLE_BUREAU')")
+//	@PreAuthorize("hasRole('ROLE_BUREAU')")
 	public ResponseEntity<?> addUser(@RequestBody Users user) {
 		
 		Users newUser = null;
@@ -183,7 +178,7 @@ public class UsersController {
 	 * @return supprime un user
 	 */
 	@DeleteMapping("/delete/{idUser}")
-	@PreAuthorize("hasRole('ROLE_BUREAU')")
+//	@PreAuthorize("hasRole('ROLE_BUREAU')")
 	public ResponseEntity<?> deleteUser(@PathVariable Integer idUser)
 	{
 		try
@@ -202,7 +197,7 @@ public class UsersController {
 	 * @return modifie un user
 	 */
 	@PutMapping("/update/{idUser}")
-	@PreAuthorize("hasRole('ROLE_BUREAU')")
+//	@PreAuthorize("hasRole('ROLE_BUREAU')")
 	public ResponseEntity<?> updateUser(@RequestBody Users user, @PathVariable Integer idUser) throws Exception
 	{
 		Users modificationUser = null;

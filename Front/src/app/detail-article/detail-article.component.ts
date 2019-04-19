@@ -27,7 +27,7 @@ export class DetailArticleComponent implements OnInit {
   articleForm: FormGroup;
   file: File;
   fileInformation: FileInformation;
-  photoTest: string;
+  photoArticle: string;
 
   @ViewChild('fileInput')
   fileInput: ElementRef;
@@ -40,13 +40,10 @@ export class DetailArticleComponent implements OnInit {
 
   ngOnInit() {
     this.idArticle = Number(this.route.snapshot.params.idArticle);
-    console.log(this.idArticle);
     this.getArticle();
     console.log(this.getArticle());
     this.articleService.findArticle(this.idArticle).subscribe(article => {
       this.editionArticle = article; });
-
-    console.log(this.editionArticle);
     if (this.idArticle) {
       this.isModification = true;
     }
@@ -76,7 +73,7 @@ export class DetailArticleComponent implements OnInit {
       {validator: this.checkTitre.bind(this)}),
       titreArticle: '',
       contenuArticle: '',
-      photoTest: '',
+      photoArticle: '',
       userFile: null,
     });
   }
@@ -91,7 +88,7 @@ export class DetailArticleComponent implements OnInit {
   onSelectPhoto(event) {
     if (event.target.files && event.target.files.length > 0) {
       this.file = event.target.files[0];
-      this.articleForm.get('photoTest').setValue(this.file.name);
+      this.articleForm.get('photoArticle').setValue(this.file.name);
       console.log(`file: ${JSON.stringify(this.file.name)}`);
       console.log(`file: ${JSON.stringify(this.file.size)}`);
       this.fileInformation = null;
@@ -102,15 +99,31 @@ export class DetailArticleComponent implements OnInit {
     this.fileInput.nativeElement.click();
   }
 
+  onSave() {
+    // Vérifier si on est en édition ou en création
+    if (!this.editionArticle) {
+      this.idArticle = null;
+      this.onRegister();
+      this.editionArticle.photoArticle = this.photoArticle;
+      console.log(this.editionArticle);
+      this.articleService.createArticle(this.editionArticle);
+    } else {
+    this.onRegister();
+    this.editionArticle.photoArticle = this.photoArticle;
+    console.log(this.editionArticle);
+    this.articleService.updateArticle(this.editionArticle);
+    }
+  }
+
   public onRegister() {
     const data: FormData = new FormData();
 
     if (this.file !== undefined) {
-      this.photoTest = 'photo ' + this.editionArticle.photoArticle + '.jpg';
-      data.append('data', this.file, this.photoTest);
+      this.photoArticle = 'photo ' + this.editionArticle.photoArticle + '.jpg';
+      data.append('data', this.file, this.photoArticle);
       this.articleService.addPhoto(data);
     } else {
-      // this.offresService.addWatchCategory(this.nameWatch, this.priceWatch, this.descriptionWatch, this.imageWatch);
+      //this.offresService.addWatchCategory(this.nameWatch, this.priceWatch, this.descriptionWatch, this.imageWatch);
     }
   }
 

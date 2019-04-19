@@ -27,19 +27,9 @@ export class ListeLieuxComponent implements OnInit {
   constructor(private router: Router, private lieuService: LieuxService, private excelService: ExcelService) { }
 
   ngOnInit() {
+    this.lieuService.publishLieux();
     this.lieuList = this.lieuService.availableLieu$;
-    this.getLieu();
-    this.getLieux();
     this.lieuService.getLieux().subscribe(Lieux => {this.dataSource = new MatTableDataSource<Lieu>(Lieux); });
-  }
-
-  getLieu(): void {
-    this.lieuService.getLieux().subscribe(Lieux => this.lieux = Lieux);
-  }
-
-  getLieux(): void {
-    // tslint:disable-next-line:no-shadowed-variable
-    this.lieuService.getLieux().subscribe(Lieu => this.teams = Lieu);
   }
 
   onEdit(selected: Lieu[]) {
@@ -49,6 +39,7 @@ export class ListeLieuxComponent implements OnInit {
   delete(selected: Lieu[]) {
     console.log(selected);
     if (selected.length !== 0) {
+      this.lieuService.supprimerLieu(selected[0].idLieu);
       this.lieuService.availableLieu.splice(this.lieuService.availableLieu.indexOf(selected[0]), 1);
       this.selection = new SelectionModel<Lieu>(false, []);
     }

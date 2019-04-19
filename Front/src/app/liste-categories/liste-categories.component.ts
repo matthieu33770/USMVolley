@@ -27,19 +27,9 @@ export class ListeCategoriesComponent implements OnInit {
   constructor(private router: Router, private categorieService: CategorieService, private excelService: ExcelService) { }
 
   ngOnInit() {
+    this.categorieService.publishCategories();
     this.categorieList = this.categorieService.availableCategorie$;
-    this.getCategorie();
-    this.getCategories();
     this.categorieService.getCategories().subscribe(Categories => {this.dataSource = new MatTableDataSource<Categorie>(Categories); });
-  }
-
-  getCategorie(): void {
-    this.categorieService.getCategories().subscribe(Categories => this.categories = Categories);
-  }
-
-  getCategories(): void {
-    // tslint:disable-next-line:no-shadowed-variable
-    this.categorieService.getCategories().subscribe(Categorie => this.teams = Categorie);
   }
 
   onEdit(selected: Categorie[]) {
@@ -49,6 +39,7 @@ export class ListeCategoriesComponent implements OnInit {
   delete(selected: Categorie[]) {
     console.log(selected);
     if (selected.length !== 0) {
+      this.categorieService.supprimerCategorie(selected[0].idCategorie);
       this.categorieService.availableCategorie.splice(this.categorieService.availableCategorie.indexOf(selected[0]), 1);
       this.selection = new SelectionModel<Categorie>(false, []);
     }

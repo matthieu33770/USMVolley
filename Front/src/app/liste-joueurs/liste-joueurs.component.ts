@@ -28,7 +28,7 @@ export class ListeJoueursComponent implements OnInit {
   fonctions: Fonction [] = [];
   players: any = [];
   joueurList: BehaviorSubject<Joueur[]>;
-  displayedColumns: string[] = ['select', 'nomJoueur', 'prenomJoueur', 'sexeJoueur', 'numeroAdresseJoueur', 'rueJoueur', 'codePostalJoueur', 'villeJoueur', 'mailJoueur', 'telephone1Joueur', 'telephone2Joueur', 'dateNaissanceJoueur', 'userJoueur', 'avoirJoueur', 'licenceValideJoueur', 'equipesJoueur'];
+  displayedColumns: string[] = ['select', 'nomJoueur', 'prenomJoueur', 'tailleJoueur', 'sexeJoueur', 'numeroAdresseJoueur', 'rueJoueur', 'codePostalJoueur', 'villeJoueur', 'mailJoueur', 'telephone1Joueur', 'telephone2Joueur', 'dateNaissanceJoueur', 'userJoueur', 'avoirJoueur', 'licenceValideJoueur', 'equipesJoueur'];
   dataSource = new MatTableDataSource<Joueur>();
   selection = new SelectionModel<Joueur>(false, []);
 

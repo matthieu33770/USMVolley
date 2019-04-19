@@ -20,13 +20,17 @@ public class Disponibilite implements Serializable{
 	
 	@Column(name = "libelle_disponibilite")
 	private String libelleDisponibilite;
+	
+	@Column(name = "nombre_personne")
+	private Integer nbrePersonne;
 
 	public Disponibilite() {
 	}
 
-	public Disponibilite(Integer idDisponibilite, String libelleDisponibilite) {
+	public Disponibilite(Integer idDisponibilite, String libelleDisponibilite, Integer nbrePersonne) {
 		this.idDisponibilite = idDisponibilite;
 		this.libelleDisponibilite = libelleDisponibilite;
+		this.nbrePersonne = nbrePersonne;
 	}
 
 	public Integer getIdDisponibilite() {
@@ -43,6 +47,14 @@ public class Disponibilite implements Serializable{
 
 	public void setLibelleDisponibilite(String libelleDisponibilite) {
 		this.libelleDisponibilite = libelleDisponibilite;
+	}
+
+	public Integer getNbrePersonne() {
+		return nbrePersonne;
+	}
+
+	public void setNbrePersonne(Integer nbrePersonne) {
+		this.nbrePersonne = nbrePersonne;
 	}
 
 	@Override

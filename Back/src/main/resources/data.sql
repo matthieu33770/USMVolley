@@ -19,6 +19,6 @@ INSERT INTO agenda VALUES (1), (2);
 INSERT INTO manifestations VALUES (1, 'ponctuelle', '2019-03-20 20:30:00', 'match', 1, 1, 1, 1, 1), (2, 'periodique', '2019-04-28 21:00:00', 'entrainement', 2, 2, 2, 2, 2);
 INSERT INTO posseder VALUES (1, 2018, 1, 2), (2, 2019, 2, 1);
 INSERT INTO inscrire VALUES (1, 'disponible', false, 2, 1), (2, 'disponible', true, 2, 1);
-INSERT INTO disponibilite VALUES (1, 'Disponible'), (2, 'Disponible si nécessaire'), (3, 'Indisponible'), (4, 'Sélectionné(e)'), (5, 'Absent(e)'), (6, 'Ne sait pas encore'), (7, 'Présent(e)'), (8, 'Présent(e) à 2');
+INSERT INTO disponibilite VALUES (1, 'Disponible', 1), (2, 'Disponible si nécessaire', 1), (3, 'Indisponible', 0), (4, 'Sélectionné(e)', 1), (5, 'Absent(e)', 0), (6, 'Ne sait pas encore', 1), (7, 'Présent(e)', 1), (8, 'Présent(e) à 2', 2);
 TRUNCATE TABLE hibernate_sequence;
 INSERT INTO hibernate_sequence VALUES (200);

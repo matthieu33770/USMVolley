@@ -139,7 +139,6 @@ export class SaisieComponent implements OnInit {
     this.joueursService.getJoueurs().subscribe(Joueurs => {this.joueurList = Joueurs;
                                                           console.log(this.joueurList);
                                                           this.idJoueurExistant = this.joueurList[this.joueurList.length - 1].idJoueur;
-                                                          console.log(this.idJoueurExistant);
                                                         });
   }
 
@@ -180,25 +179,18 @@ export class SaisieComponent implements OnInit {
     // Vérifier si on est en édition ou en création
     if (!this.username) {
       this.idJoueur = null;
-      // console.log(this.idJoueur);
-      // console.log(this.editionJoueur);
       this.editionLicence.categories = this.categorieList[this.idCat];
       this.editionAvoir.licence = this.editionLicence;
       this.editionJoueur.avoir = this.editionAvoir;
       this.editionJoueur.user = this.editionUser;
-      // console.log(this.editionJoueur);
-      // console.log(this.editionJoueur.user.roleList);
-      // console.log(this.editionJoueur.avoir.licence.categories);
-      // console.log(this.editionJoueur.avoir);
-      //this.onRegister();
-      // this.editionJoueur.avoir.licence.formulaire = this.formulaire;
-      // this.editionJoueur.avoir.licence.certificatMedical = this.certificat;
+      this.onRegister();
+      this.editionJoueur.avoir.licence.formulaire = this.formulaire;
+      this.editionJoueur.avoir.licence.certificatMedical = this.certificat;
       this.joueursService.createJoueur(this.editionJoueur);
     } else {
       this.onRegister();
       this.editionJoueur.avoir.licence.formulaire = this.formulaire;
       this.editionJoueur.avoir.licence.certificatMedical = this.certificat;
-      // console.log(this.editionJoueur);
       this.joueursService.updateJoueur(this.editionJoueur);
     }
   }

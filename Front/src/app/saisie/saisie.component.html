@@ -15,13 +15,13 @@
       </div>
       <div>
         <mat-form-field class="watch-category-full-width">
-            <input matInput required placeholder="Prénom" type="text" formControlName="prenom" [(ngModel)]="editionJoueur.prenom">
+          <input matInput required placeholder="Prénom" type="text" formControlName="prenom" [(ngModel)]="editionJoueur.prenom">
         </mat-form-field>
       </div>
       <div>
-          <mat-form-field class="watch-category-full-width">
-              <textarea matInput placeholder="Taille en cm" type="text" formControlName="taille" [(ngModel)]="editionJoueur.taille"></textarea>
-          </mat-form-field>
+        <mat-form-field class="watch-category-full-width">
+          <input matInput placeholder="Taille en cm" type="text" formControlName="taille" [(ngModel)]="editionJoueur.taille">
+        </mat-form-field>
       </div>
       <div>
         <mat-form-field>
@@ -80,7 +80,7 @@
           <input matInput placeholder="Nom d'utilisateur" formControlName="username" [(ngModel)]="editionUser.username" >
         </mat-form-field>
       </div>
-      <div>    
+      <div  *ngIf="!editionUser.mdp">    
         <mat-form-field>
           <input matInput placeholder="Mot de passe" [(ngModel)]="editionUser.mdp" formControlName="mdp">
         </mat-form-field>

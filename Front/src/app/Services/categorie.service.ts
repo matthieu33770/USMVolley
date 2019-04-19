@@ -81,7 +81,13 @@ export class CategorieService {
    * @param idCategorie la Categorie à supprimer
    */
   supprimerCategorie(idCategorie: number): Categorie[] {
+    this.httpClient.delete('http://localhost:8080/categories/delete/' + idCategorie).subscribe(
+          () => { console.log('suppression categorie OK : ', idCategorie);
+              },
+          (error) => console.log('suppression categorie pb : ', error)
+      );
     this.availableCategorie = this.availableCategorie.filter( categorie => categorie.idCategorie !== idCategorie ).slice();
+    this.availableCategorie$.next(this.availableCategorie);
     return this.availableCategorie;
   }
 

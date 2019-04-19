@@ -56,7 +56,7 @@ export class ArticlesService {
    * @param newArticle le nouvel article à créer
    */
   public createArticle(newArticle: Article) {
-    this.httpClient.post<Article>('http://localhost:8080/equipes/create', newArticle).subscribe(
+    this.httpClient.post<Article>('http://localhost:8080/articles/create', newArticle).subscribe(
       createArticle => {
         this.availableArticle.push(createArticle);
         this.availableArticle$.next(this.availableArticle);
@@ -69,7 +69,7 @@ export class ArticlesService {
    * @param article l'article à mettre à jour
    */
   public updateArticle(article: Article) {
-    this.httpClient.put<Article>(`http://localhost:8080/joueurs/update/${article.idArticle}`, article).subscribe(
+    this.httpClient.put<Article>(`http://localhost:8080/articles/update/${article.idArticle}`, article).subscribe(
       updateArticle => {
         this.availableArticle$.next(this.availableArticle);
       }
@@ -82,7 +82,12 @@ export class ArticlesService {
    * @param idArticle de l'article à supprimer
    */
   supprimerArticle(idArticle: number): Article[] {
-    this.availableArticle = this.availableArticle.filter( article => article.idArticle !== idArticle ).slice();
+    this.httpClient.delete('http://localhost:8080/articles/delete/' + idArticle).subscribe(
+          () => { console.log('suppression article OK : ', idArticle);
+              },
+          (error) => console.log('suppression article pb : ', error)
+      );
+      this.availableArticle$.next(this.availableArticle);
     return this.availableArticle;
   }
 
@@ -91,7 +96,7 @@ export class ArticlesService {
    * @param data
    */
   public addPhoto(data) {
-    this.httpClient.post('http://localhost:8080/joueurs/upload', data).subscribe(
+    this.httpClient.post('http://localhost:8080/articles/upload', data).subscribe(
       () => { console.log('dedans'); },
       (error) => {console.log('error : ', error); }
     );

@@ -8,6 +8,9 @@
     <input matInput placeholder="Prénom" [(ngModel)]="editionJoueur.prenom" name="prenom">
   </mat-form-field>
   <mat-form-field>
+    <input matInput placeholder="Taille" [(ngModel)]="editionJoueur.taille" name="taille">
+  </mat-form-field>
+  <mat-form-field>
     <input matInput placeholder="Sexe" [(ngModel)]="editionJoueur.sexe" name="sexe">
   </mat-form-field>
   <mat-form-field>
@@ -40,22 +43,36 @@
   <mat-form-field>
     <input matInput placeholder="Téléphone Portable" [(ngModel)]="editionJoueur.telephone2" name="telephone2">
   </mat-form-field>
+  <mat-form-field>
+      <input matInput placeholder="username" [(ngModel)]="editionJoueur.user.username" name="username">
+    </mat-form-field>
 <div class="donneesClub">  
   <mat-form-field>
-    <mat-select placeholder="Fonction" [(ngModel)]="editionJoueur.user.roleList" name="libelleFonction">
-      <mat-option *ngFor="let fonction of fonctionList" [value]="roleList">
+    <mat-select placeholder="Fonction" [(ngModel)]="editionJoueur.user.roleList" name="roleList">
+      <mat-option *ngFor="let fonction of fonctionList" [value]="editionJoueur.user.roleList">
         {{fonction.libelleFonction}}
       </mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field>
+      <input matInput placeholder="Formulaire" [(ngModel)]="editionJoueur.avoir.licence.formulaire" name="formulaire">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Certificat Médical" [(ngModel)]="editionJoueur.avoir.licence.certificatMedical" name="certificat">
+    </mat-form-field>
+  <mat-form-field>
     <input matInput placeholder="Numero de Licence" [(ngModel)]="editionJoueur.avoir.licence.numeroLicence" name="numeroLicence">
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="Validité Licence" [(ngModel)]= editionJoueur.avoir.isValide name="validiteLicence">
+    <mat-select placeholder="Validité Licence" [(ngModel)]="editionJoueur.avoir.isValide" formControlName="validiteLicence">
+      <mat-option value="vide">  </mat-option>
+      <mat-option value="true">Licence Ok</mat-option>
+      <mat-option value=false>Licence Nok</mat-option>
+    </mat-select>
   </mat-form-field>
 </div>
 <div class="boutons">
-    <button mat-raised-button color="accent" routerLink="/gestion/joueurs">Retour</button>
+  <button mat-raised-button color="primary" type="submit" (click)="onSave()">Enregistrer</button>
+  <button mat-raised-button color="accent" routerLink="/gestion/joueurs">Retour</button>
 </div>
 </div>

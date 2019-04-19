@@ -123,6 +123,7 @@ export class JoueursService {
    * @param joueur le joueur à mettre à jour
    */
   public updateJoueur(joueur: Joueur) {
+    console.log(joueur.idJoueur);
     this.httpClient.put<Joueur>(`http://localhost:8080/joueurs/update/${joueur.idJoueur}`, joueur).subscribe(
       updateJoueur => {
         this.availableJoueur$.next(this.availableJoueur);
@@ -137,9 +138,9 @@ export class JoueursService {
    */
   supprimerJoueur(idJoueur: number): Joueur[] {
     this.httpClient.delete('http://localhost:8080/joueurs/delete/' + idJoueur).subscribe(
-          () => { console.log('suppression equipe OK : ', idJoueur);
+          () => { console.log('suppression joueur OK : ', idJoueur);
               },
-          (error) => console.log('suppression watchCategory pb : ', error)
+          (error) => console.log('suppression joueur pb : ', error)
       );
       this.availableJoueur$.next(this.availableJoueur);
     return this.availableJoueur;

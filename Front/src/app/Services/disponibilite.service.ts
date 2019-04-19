@@ -42,7 +42,7 @@ export class DisponibiliteService {
       }
       return of(this.availableDisponibilite.find(disponibilite => disponibilite.idDisponibilite === idDisponibilite));
     } else {
-      return of(new Disponibilite(0, ''));
+      return of(new Disponibilite(0, '', 0));
     }
   }
 
@@ -59,6 +59,7 @@ export class DisponibiliteService {
       }
     );
   }
+
 
   /**
    * Fonction de mise à jour d'une disponibilite
@@ -78,7 +79,13 @@ export class DisponibiliteService {
    * @param idDisponibilite de la disponibilite à supprimer
    */
   supprimerDisponibilite(idDisponibilite: number): Disponibilite[] {
+    this.httpClient.delete('http://localhost:8080/disponibilite/delete/' + idDisponibilite).subscribe(
+          () => { console.log('suppression disponibilité OK : ', idDisponibilite);
+              },
+          (error) => console.log('suppression disponibilité pb : ', error)
+      );
     this.availableDisponibilite = this.availableDisponibilite.filter( disponibilite => disponibilite.idDisponibilite !== idDisponibilite ).slice();
+    this.availableDisponibilite$.next(this.availableDisponibilite);
     return this.availableDisponibilite;
   }
 }

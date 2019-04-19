@@ -22,7 +22,7 @@ export class LieuxService {
     return this.httpClient.get<Lieu[]>('http://localhost:8080/lieux/get/lieux');
   }
 
-  public publishStatuts() {
+  public publishLieux() {
     this.getLieux().subscribe(
       lieuList => {
         this.availableLieu = lieuList;
@@ -78,7 +78,13 @@ export class LieuxService {
    * @param idLieu du lieu à supprimer
    */
   supprimerLieu(idLieu: number): Lieu[] {
+    this.httpClient.delete('http://localhost:8080/lieux/delete/' + idLieu).subscribe(
+          () => { console.log('suppression lieu OK : ', idLieu);
+              },
+          (error) => console.log('suppression lieu pb : ', error)
+      );
     this.availableLieu = this.availableLieu.filter( lieu => lieu.idLieu !== idLieu ).slice();
+    this.availableLieu$.next(this.availableLieu);
     return this.availableLieu;
   }
 }

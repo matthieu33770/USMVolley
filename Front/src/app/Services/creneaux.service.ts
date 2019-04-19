@@ -65,7 +65,7 @@ export class CreneauxService {
    * @param creneau la creneau à mettre à jour
    */
   public updateCreneau(creneau: Creneau) {
-    this.httpClient.put<Creneau>(`http://localhost:8080/lieux/update/${creneau.idCreneau}`, creneau).subscribe(
+    this.httpClient.put<Creneau>(`http://localhost:8080/creneaux/update/${creneau.idCreneau}`, creneau).subscribe(
       updateCreneau => {
         this.availableCreneau$.next(this.availableCreneau);
       }
@@ -78,7 +78,13 @@ export class CreneauxService {
    * @param idCreneau de le Creneau à supprimer
    */
   supprimerCreneau(idCreneau: number): Creneau[] {
+    this.httpClient.delete('http://localhost:8080/creneaux/delete/' + idCreneau).subscribe(
+          () => { console.log('suppression créneau OK : ', idCreneau);
+              },
+          (error) => console.log('suppression créneau pb : ', error)
+      );
     this.availableCreneau = this.availableCreneau.filter( creneau => creneau.idCreneau !== idCreneau ).slice();
+    this.availableCreneau$.next(this.availableCreneau);
     return this.availableCreneau;
   }
 }

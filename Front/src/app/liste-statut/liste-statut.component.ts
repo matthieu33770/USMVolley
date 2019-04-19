@@ -27,19 +27,9 @@ export class ListeStatutComponent implements OnInit {
   constructor(private router: Router, private statutService: StatutService, private excelService: ExcelService) { }
 
   ngOnInit() {
+    this.statutService.publishStatuts();
     this.statutList = this.statutService.availableStatut$;
-    this.getArticle();
-    this.getArticles();
     this.statutService.getStatuts().subscribe(Statuts => {this.dataSource = new MatTableDataSource<Statut>(Statuts); });
-  }
-
-  getArticle(): void {
-    this.statutService.getStatuts().subscribe(Statuts => this.statuts = Statuts);
-  }
-
-  getArticles(): void {
-    // tslint:disable-next-line:no-shadowed-variable
-    this.statutService.getStatuts().subscribe(Article => this.teams = Article);
   }
 
   onEdit(selected: Statut[]) {
@@ -49,6 +39,7 @@ export class ListeStatutComponent implements OnInit {
   delete(selected: Statut[]) {
     console.log(selected);
     if (selected.length !== 0) {
+      this.statutService.supprimerStatut(selected[0].idStatut);
       this.statutService.availableStatut.splice(this.statutService.availableStatut.indexOf(selected[0]), 1);
       this.selection = new SelectionModel<Statut>(false, []);
     }

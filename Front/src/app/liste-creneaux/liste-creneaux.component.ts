@@ -27,19 +27,9 @@ export class ListeCreneauxComponent implements OnInit {
   constructor(private router: Router, private creneauxService: CreneauxService, private excelService: ExcelService) { }
 
   ngOnInit() {
+    this.creneauxService.publishCreneaux();
     this.creneauList = this.creneauxService.availableCreneau$;
-    this.getCreneau();
-    this.getCreneaux();
     this.creneauxService.getCreneaux().subscribe(Creneaux => {this.dataSource = new MatTableDataSource<Creneau>(Creneaux); });
-  }
-
-  getCreneau(): void {
-    this.creneauxService.getCreneaux().subscribe(Creneaux => this.creneaux = Creneaux);
-  }
-
-  getCreneaux(): void {
-    // tslint:disable-next-line:no-shadowed-variable
-    this.creneauxService.getCreneaux().subscribe(Creneau => this.teams = Creneau);
   }
 
   onEdit(selected: Creneau[]) {
@@ -49,6 +39,7 @@ export class ListeCreneauxComponent implements OnInit {
   delete(selected: Creneau[]) {
     console.log(selected);
     if (selected.length !== 0) {
+      this.creneauxService.supprimerCreneau(selected[0].idCreneau);
       this.creneauxService.availableCreneau.splice(this.creneauxService.availableCreneau.indexOf(selected[0]), 1);
       this.selection = new SelectionModel<Creneau>(false, []);
     }

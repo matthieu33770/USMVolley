@@ -10,7 +10,6 @@ import { Joueur } from '../Model/Joueur';
 import { JoueursService } from '../Services/joueurs.service';
 import { EquipesService } from '../Services/equipes.service';
 
-
 @Component({
   selector: 'app-detail-joueur',
   templateUrl: './detail-joueur.component.html',
@@ -27,6 +26,7 @@ export class DetailJoueurComponent implements OnInit {
   roles: Role [] = [];
   fonctions: Fonction [] = [];
   fonctionList: Fonction [];
+  roleList: any = [];
   equipes: Equipe [] = [];
   equipe: Equipe;
   equipeList: Equipe [];
@@ -39,8 +39,6 @@ export class DetailJoueurComponent implements OnInit {
 
   ngOnInit() {
     this.idJoueur = Number(this.route.snapshot.params.idJoueur);
-    this.idFonction = +this.route.snapshot.params.idFonction;
-    this.idEquipe = +this.route.snapshot.params.idEquipe;
     this.getUser();
     this.getFonction();
     this.getEquipe();
@@ -69,6 +67,7 @@ export class DetailJoueurComponent implements OnInit {
 
   onSave() {
     console.log(this.editionJoueur);
+    console.log(this.editionJoueur.user.roleList);
     this.joueurService.updateJoueur(this.editionJoueur);
   }
 }

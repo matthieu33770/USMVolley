@@ -78,12 +78,14 @@ public class EquipesController {
 		
 		Equipes newEquipe = null;
 		String libelleEquipe = equipe.getLibelleEquipe();
+		System.out.println("équipe du Front : " + equipe);
 		
 		if ((libelleEquipe == null) || (libelleEquipe.isEmpty())) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le nom de l'équipe");
 		}
 		
 		newEquipe = equipesRepo.save(equipe);
+		System.out.println("création équipe : " + newEquipe);
 		return ResponseEntity.status(HttpStatus.CREATED).body(newEquipe);
 	}
 	
@@ -111,7 +113,7 @@ public class EquipesController {
 	 * @return modifie une equipe
 	 */
 	@PutMapping("/update/{idEquipe}")
-	@PreAuthorize("hasAuthority('ROLE_BUREAU')")
+//	@PreAuthorize("hasAuthority('ROLE_BUREAU')")
 	public ResponseEntity<?> updateEquipe(@RequestBody Equipes equipe, @PathVariable Integer idEquipe) throws Exception
 	{
 		Equipes modificationEquipe = null;
@@ -120,9 +122,11 @@ public class EquipesController {
 		{
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le nom de l'équipe");
 		}
+		
 		try
 		{
 			modificationEquipe = equipesRepo.save(equipe);
+			System.out.println("Equipe modifiée : " + modificationEquipe);
 		} catch (Exception e)
 		{
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());

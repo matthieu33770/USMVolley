@@ -9,7 +9,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -26,7 +29,12 @@ public class Equipes implements Serializable {
 	@Column(name = "libelle_equipe")
 	private String libelleEquipe;
 	
-	@ManyToMany(cascade = CascadeType.REMOVE, mappedBy = "equipes")
+	@ManyToOne
+	@JoinColumn(name = "id_categorie")
+	private Categories categorie;
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "Equipes_Joueurs", joinColumns = @JoinColumn(name = "id_equipe"), inverseJoinColumns = @JoinColumn(name = "id_joueur"))
 	@JsonIgnoreProperties("equipes")
 	private Collection<Joueurs> joueurs;
 	
@@ -35,12 +43,14 @@ public class Equipes implements Serializable {
 	public Equipes() {
 	}
 
-	public Equipes(Integer idEquipe, String libelleEquipe, Collection<Joueurs> joueurs) {
-		super();
+	public Equipes(Integer idEquipe, String libelleEquipe, Categories categorie, Collection<Joueurs> joueurs) {
 		this.idEquipe = idEquipe;
 		this.libelleEquipe = libelleEquipe;
+		this.categorie = categorie;
 		this.joueurs = joueurs;
 	}
+
+
 
 	public int getIdEquipe() {
 		return idEquipe;
@@ -58,6 +68,14 @@ public class Equipes implements Serializable {
 		this.libelleEquipe = libelleEquipe;
 	}
 
+	public Categories getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(Categories categorie) {
+		this.categorie = categorie;
+	}
+
 	public Collection<Joueurs> getJoueurs() {
 		return joueurs;
 	}
@@ -68,8 +86,8 @@ public class Equipes implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Equipes [idEquipe=" + idEquipe + ", libelleEquipe=" + libelleEquipe + ", joueurs=" + joueurs
-				+ "]";
+		return "Equipes [idEquipe=" + idEquipe + ", libelleEquipe=" + libelleEquipe + ", categorie=" + categorie
+				+ ", joueurs=" + joueurs + "]";
 	}
 
 }

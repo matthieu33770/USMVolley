@@ -23,7 +23,7 @@ export class ListeEquipesComponent implements OnInit {
   equipe: Equipe;
   equipes: Equipe [] = [];
   equipeList: BehaviorSubject<Equipe[]>;
-  displayedColumns: string[] = ['select', 'libelleEquipe', 'nombreJoueur', 'nombreGarçons', 'nombreFilles'];
+  displayedColumns: string[] = ['select', 'libelleEquipe', 'categorie', 'nombreJoueur', 'nombreGarçons', 'nombreFilles'];
   dataSource = new MatTableDataSource<Equipe>();
   selection = new SelectionModel<Equipe>(false, []);
   teams: any = [];
@@ -32,17 +32,14 @@ export class ListeEquipesComponent implements OnInit {
 
   ngOnInit() {
     this.equipeService.publishEquipes();
-    // this.equipeList = this.equipeService.availableEquipe$;
-    // this.getEquipe();
-    // this.getTeam();
     this.equipeService.getEquipes().subscribe(Equipes => {this.dataSource = new MatTableDataSource<Equipe>(Equipes);
                                               Equipes.forEach( equipe => {
                                               this.nbreMasculin = equipe.joueurs.filter(joueur => {if (joueur.sexe === 'Masculin') { return true; }} );
                                               this.nbreFeminin = equipe.joueurs.filter(joueur => {if (joueur.sexe === 'Féminin') { return true; }} );
-                                              console.log(this.nbreMasculin, this.nbreFeminin);
                                             equipe.nbreHomme = this.nbreMasculin.length;
                                             equipe.nbreFemme = this.nbreFeminin.length; });
                                             });
+    console.log(this.dataSource);
   }
 
   getEquipe(): void {

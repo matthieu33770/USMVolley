@@ -50,7 +50,7 @@ export class EquipesService {
       }
       return of(this.availableEquipe.find(joueur => joueur.idEquipe === idEquipe));
     } else {
-      return of(new Equipe(null, '', null));
+      return of(new Equipe(null, '', null, null));
     }
   }
 

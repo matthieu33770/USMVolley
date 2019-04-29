@@ -123,7 +123,7 @@ export class JoueursService {
    * @param joueur le joueur à mettre à jour
    */
   public updateJoueur(joueur: Joueur) {
-    console.log(joueur.idJoueur);
+    console.log(joueur);
     this.httpClient.put<Joueur>(`http://localhost:8080/joueurs/update/${joueur.idJoueur}`, joueur).subscribe(
       updateJoueur => {
         this.availableJoueur$.next(this.availableJoueur);

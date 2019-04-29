@@ -1,29 +1,35 @@
 <div class="edition">
   
   <div class="identification">
-    <h1 class="equipe">Edition de l'équipe <strong>{{ editionEquipe.libelleEquipe }}</strong></h1>
+    <h1 *ngIf="isModification" class="equipe">Edition de l'équipe <strong>{{ editionEquipe.libelleEquipe }}</strong></h1>
+    <h1 *ngIf="!isModification" class="equipe">Création d'une nouvelle équipe</h1>
     <div>
     <mat-form-field>
       <input matInput placeholder="libelleEquipe" [(ngModel)]="editionEquipe.libelleEquipe" name="libelleEquipe">
     </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Libellé de la catégorie" [(ngModel)]="editionEquipe.categorie.libelleCategorie" name="categorie">
+        <mat-option *ngFor="let categorie of categoriesList" [value]="categorie.libelleCategorie">
+          {{categorie.libelleCategorie}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
   </div>
 
-  <div class="boutons">
-      <button mat-raised-button (click)="exportAsXLSX()">Exporter</button>
-      <button *ngIf="ismodification" mat-raised-button color="accent" (click)="modifier()">Modifier</button>
-      <button *ngIf="!ismodification" mat-raised-button color="accent" (click)="creer()">Enregistrer</button>
-      <button mat-raised-button color="primary" (click)="ajouter(selection.selected)">Ajouter</button>
-      <button mat-raised-button color="warn" (click)="enlever(selection.selected)">Enlever</button>
-    </div>
+  <div *ngIf="isModification" class="boutons">
+    <button mat-raised-button (click)="exportAsXLSX()">Exporter</button>
+    <button mat-raised-button color="primary" (click)="ajouter(selection.selected)">Ajouter</button>
+    <button mat-raised-button color="warn" (click)="enlever(selection.selected)">Enlever</button>
+  </div>
 
-  <div class="tab">
+  <div *ngIf="isModification" class="tab">
       <div class="joueurEquipe">
           <h3>Joueurs de l'équipe</h3>
-          <div *ngFor="let joueur of joueurEquipe">
+          <div>
             <table mat-table [dataSource]="dataEquipe" class="tableau">
           
-            <!-- Checkbox Column -->
+            <!-- Checkbox Column  *ngFor="let joueur of joueurEquipe"-->
             <ng-container matColumnDef="select">
               <th mat-header-cell *matHeaderCellDef>
                 
@@ -39,19 +45,19 @@
             <!-- Nom Column -->
             <ng-container matColumnDef="nomJoueur">
               <th mat-header-cell *matHeaderCellDef>Nom</th>
-              <td mat-cell *matCellDef="let adulte">{{ adulte.nom }}</td>
+              <td mat-cell *matCellDef="let joueur">{{ joueur.nom }}</td>
             </ng-container>
     
             <!-- Prenom Column -->
             <ng-container matColumnDef="prenomJoueur">
                 <th mat-header-cell *matHeaderCellDef>Prénom</th>
-                <td mat-cell *matCellDef="let adulte">{{ adulte.prenom }}</td>
+                <td mat-cell *matCellDef="let joueur">{{ joueur.prenom }}</td>
               </ng-container>
     
             <!-- Licence Column -->
             <ng-container matColumnDef="licenceJoueur">
               <th mat-header-cell *matHeaderCellDef>N° Licence</th>
-              <td mat-cell *matCellDef="let adulte">{{ adulte.avoir.licence.numeroLicence }}</td>
+              <td mat-cell *matCellDef="let joueur">{{ joueur.avoir.licence.numeroLicence }}</td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -61,10 +67,10 @@
 
     <div class="joueurDispo">
         <h3>Joueurs disponibles</h3>
-        <div *ngFor="let joueur of joueurEquipe">
+        <div>
           <table mat-table [dataSource]="dataAdulte" class="tableau">
         
-          <!-- Checkbox Column -->
+          <!-- Checkbox Column  *ngFor="let joueur of joueurEquipe"-->
           <ng-container matColumnDef="select">
             <th mat-header-cell *matHeaderCellDef>
               
@@ -80,19 +86,19 @@
           <!-- Nom Column -->
           <ng-container matColumnDef="nomJoueur">
             <th mat-header-cell *matHeaderCellDef>Nom</th>
-            <td mat-cell *matCellDef="let adulte">{{ adulte.nom }}</td>
+            <td mat-cell *matCellDef="let joueurAdulte">{{ joueurAdulte.nom }}</td>
           </ng-container>
   
           <!-- Prenom Column -->
           <ng-container matColumnDef="prenomJoueur">
               <th mat-header-cell *matHeaderCellDef>Prénom</th>
-              <td mat-cell *matCellDef="let adulte">{{ adulte.prenom }}</td>
+              <td mat-cell *matCellDef="let joueurAdulte">{{ joueurAdulte.prenom }}</td>
             </ng-container>
   
           <!-- Licence Column -->
           <ng-container matColumnDef="licenceJoueur">
             <th mat-header-cell *matHeaderCellDef>N° Licence</th>
-            <td mat-cell *matCellDef="let adulte">{{ adulte.avoir.licence.numeroLicence }}</td>
+            <td mat-cell *matCellDef="let joueurAdulte">{{ joueurAdulte.avoir.licence.numeroLicence }}</td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -102,6 +108,9 @@
   </div>
   <br>
   <div class="boutons">
+      <button *ngIf="isModification" mat-raised-button color="primary" (click)="onSave()" routerLink="/gestion/equipes">Modifier</button>
+      <button *ngIf="!isModification" mat-raised-button color="primary" (click)="onSave()" routerLink="/gestion/equipes">Enregistrer</button>
       <button mat-raised-button color="accent" routerLink="/gestion/equipes">Retour</button>
     </div>
+  <br>
 </div>

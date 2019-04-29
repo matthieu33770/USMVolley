@@ -69,10 +69,12 @@ public class Joueurs implements Serializable {
 	@JoinColumn(name = "id_avoir")
 	private Avoir avoir;
 	
-	
-	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH })
-	@JoinTable(name = "joueur_equipe", joinColumns = @JoinColumn(name = "idJoueur"), inverseJoinColumns = @JoinColumn(name = "idEquipe"))
+	@ManyToMany(mappedBy = "joueurs")
 	private Collection<Equipes> equipes;
+	
+//	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH })
+//	@JoinTable(name = "joueur_equipe", joinColumns = @JoinColumn(name = "idJoueur"), inverseJoinColumns = @JoinColumn(name = "idEquipe"))
+//	private Collection<Equipes> equipes;
 
 	public Joueurs() {
 	}

@@ -1,4 +1,5 @@
 import { Joueur } from './Joueur';
+import { Categorie } from './Categorie';
 
 export class Equipe {
 
@@ -7,6 +8,7 @@ export class Equipe {
 
     constructor(public idEquipe: number,
                 public libelleEquipe: String,
+                public categorie: Categorie,
                 public joueurs: Joueur [],
     ) {}
 }

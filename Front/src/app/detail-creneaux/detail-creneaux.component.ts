@@ -20,7 +20,7 @@ export class DetailCreneauxComponent implements OnInit {
   creneaux: Creneau [] = [];
   creneauList: Creneau [];
   editionCreneau: Creneau = new Creneau(0, '', new Categorie(1, 'M11', 11));
-  editionCategorie: Categorie = new Categorie(0, '', 0);
+  // editionCategorie: Categorie = new Categorie(0, '', 0);
   categorieList: any = [];
   categorie: Categorie [] = [];
   categoriesList: Categorie [];
@@ -39,14 +39,12 @@ export class DetailCreneauxComponent implements OnInit {
     if (this.editionCreneau.categorie === null) {
       this.editionCreneau.categorie = new Categorie(0, 'Choisir', 0);
     }
-    console.log(this.idCreneau);
-    console.log(this.isModification);
     if (this.idCreneau) {
       this.isModification = true;
     }
-    console.log(this.isModification);
     this.getCategories();
     this.getCategoriesL();
+    console.log(this.editionCreneau);
   }
 
   getCategories(): void {

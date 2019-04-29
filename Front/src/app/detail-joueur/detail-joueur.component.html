@@ -54,6 +54,15 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
+  <!-- <mat-form-field>
+      <input *ngIf="editionJoueur.sexe" matInput placeholder="Sexe" [(ngModel)]="editionJoueur.sexe" formControlName="sexe">
+      <mat-select matInput placeholder="Fonction" [(ngModel)]="editionJoueur.user.roleList" formControlName="roleList">
+          <mat-option value="vide">  </mat-option>
+          <mat-option value="ROLE_LICENCIE">Licencié</mat-option>
+          <mat-option value="ROLE_CAPITAINE">Capitaine</mat-option>
+          <mat-option value="ROLE_BUREAU">Bureau</mat-option>
+        </mat-select>
+    </mat-form-field> -->
   <mat-form-field>
       <input matInput placeholder="Formulaire" [(ngModel)]="editionJoueur.avoir.licence.formulaire" name="formulaire">
     </mat-form-field>

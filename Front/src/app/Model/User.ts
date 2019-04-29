@@ -6,7 +6,7 @@ export class User {
                 public username: String,
                 public mdp: String,
                 public isValide: Boolean,
-                public roleList: String[],
+                public roleList: String [],
                 public fonction: Fonction,
         ) {}
 }

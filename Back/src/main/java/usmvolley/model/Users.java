@@ -34,16 +34,20 @@ public class Users implements Serializable {
 	@Column(name = "mdp")
 	private String mdp;
 	
-	@Column(name = "is_Valide")
-	private boolean isValide;
+//	@Column(name = "is_Valide")
+//	private boolean isValide;
 
 	@ElementCollection(fetch = FetchType.EAGER)
 	@Enumerated(EnumType.STRING)
 	private List<Role> roleList;
 	
-	@ManyToOne
-	@JoinColumn(name = "fonction")
-	private Fonctions fonction;
+//	@ElementCollection(fetch = FetchType.EAGER)
+//	@Enumerated(EnumType.STRING)
+//	private Role role;
+	
+//	@ManyToOne
+//	@JoinColumn(name = "fonction")
+//	private Fonctions fonction;
 
 	public Users() {
 	}
@@ -59,17 +63,13 @@ public class Users implements Serializable {
 		this.roleList = roleList;
 	}
 
-	public Users(Integer idUser, String username, String mdp, boolean isValide, List<Role> roleList,
-			Fonctions fonction) {
+	public Users(Integer idUser, String username, String mdp, List<Role> roleList) {
 		super();
 		this.idUser = idUser;
 		this.username = username;
 		this.mdp = mdp;
-		this.isValide = isValide;
 		this.roleList = roleList;
-		this.fonction = fonction;
-	}
-
+	}	
 
 	public Integer getIdUser() {
 		return idUser;
@@ -95,13 +95,13 @@ public class Users implements Serializable {
 		this.username = username;
 	}
 
-	public boolean isValide() {
-		return isValide;
-	}
-
-	public void setValide(boolean isValide) {
-		this.isValide = isValide;
-	}
+//	public boolean isValide() {
+//		return isValide;
+//	}
+//
+//	public void setValide(boolean isValide) {
+//		this.isValide = isValide;
+//	}
 
 	public List<Role> getRoleList() {
 		return roleList;
@@ -110,18 +110,25 @@ public class Users implements Serializable {
 	public void setRole(List<Role> roleList) {
 		this.roleList = roleList;
 	}
+	
+//	public Role getRole() {
+//		return role;
+//	}
+//
+//	public void setRole(Role role) {
+//		this.role = role;
+//	}
 
-	public Fonctions getFonction() {
-		return fonction;
-	}
-
-	public void setIdFonction(Fonctions fonction) {
-		this.fonction = fonction;
-	}
+//	public Fonctions getFonction() {
+//		return fonction;
+//	}
+//
+//	public void setIdFonction(Fonctions fonction) {
+//		this.fonction = fonction;
+//	}
 
 	@Override
 	public String toString() {
-		return "Users [idUser=" + idUser + ", username=" + username + ", mdp=" + mdp + ", isValide=" + isValide
-				+ ", role=" + roleList + "]";
+		return "Users [idUser=" + idUser + ", username=" + username + ", mdp=" + mdp + "]";
 	}
 }

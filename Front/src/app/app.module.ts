@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -9,8 +9,10 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material-module';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NgxPayPalModule } from 'ngx-paypal';
+import { FullCalendarModule } from 'primeng/fullcalendar';
+import { CalendarModule } from 'primeng/primeng';
 
-import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { DateAdapter } from 'angular-calendar';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
@@ -46,6 +48,10 @@ import { DetailDisponibilitesComponent } from './detail-disponibilites/detail-di
 import { CalendrierComponent } from './calendrier/calendrier.component';
 import { ListeCategoriesComponent } from './liste-categories/liste-categories.component';
 import { DetailCategorieComponent } from './detail-categorie/detail-categorie.component';
+import {LicencieGuard} from './guards/licencie.guards';
+import {CapitaineGuard} from './guards/capitaine.guards';
+import {BureauGuard} from './guards/bureau.guards';
+import {JwtInterceptor} from './http-interceptor/jwt.interceptor';
 
 registerLocaleData(localeFr);
 
@@ -103,12 +109,19 @@ registerLocaleData(localeFr);
       }
     }),
     FlatpickrModule.forRoot(),
-    CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory
-    })
+    // CalendarModule.forRoot({
+    //   provide: DateAdapter,
+    //   useFactory: adapterFactory
+    // }),
+    FullCalendarModule,
+    CalendarModule
   ],
-  providers: [DatePipe],
+  providers: [LicencieGuard, CapitaineGuard, BureauGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

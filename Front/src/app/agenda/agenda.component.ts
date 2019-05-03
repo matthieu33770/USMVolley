@@ -1,193 +1,96 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  ViewChild,
-  TemplateRef
-} from '@angular/core';
-// import {
-//   startOfDay,
-//   endOfDay,
-//   subDays,
-//   addDays,
-//   endOfMonth,
-//   isSameDay,
-//   isSameMonth,
-//   addHours
-// } from 'date-fns';
-// import { Subject } from 'rxjs';
-// import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-// import {
-//   CalendarEvent,
-//   CalendarEventAction,
-//   CalendarEventTimesChangedEvent,
-//   CalendarView
-// } from 'angular-calendar';
+import { Component, OnInit } from '@angular/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
 
-const colors: any = {
-  red: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3'
-  },
-  blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF'
-  },
-  yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA'
-  }
-};
+import { EventService } from '../Services/event.service';
 
 @Component({
   selector: 'app-agenda',
   templateUrl: './agenda.component.html',
   styleUrls: ['./agenda.component.css']
 })
-export class AgendaComponent {
+export class AgendaComponent implements OnInit {
 
-  // @ViewChild('modalContent') modalContent: TemplateRef<any>;
+  events: any[];
+  options: any;
+  header: any;
+  fr: any;
 
-  // view: CalendarView = CalendarView.Month;
+  // locale: String = 'fr';
 
-  // CalendarView = CalendarView;
+  minDate: Date;
+  maxDate: Date;
+  invalidDates: Array<Date>;
 
-  // viewDate: Date = new Date();
+  constructor(private eventService: EventService) { }
 
-  // modalData: {
-  //   action: string;
-  //   event: CalendarEvent;
-  // };
+  ngOnInit() {
 
-  // actions: CalendarEventAction[] = [
-  //   {
-  //     label: '<i class="fa fa-fw fa-pencil"></i>',
-  //     onClick: ({ event }: { event: CalendarEvent }): void => {
-  //       this.handleEvent('Edited', event);
-  //     }
-  //   },
-  //   {
-  //     label: '<i class="fa fa-fw fa-times"></i>',
-  //     onClick: ({ event }: { event: CalendarEvent }): void => {
-  //       this.events = this.events.filter(iEvent => iEvent !== event);
-  //       this.handleEvent('Deleted', event);
-  //     }
-  //   }
-  // ];
+    this.fr = {
+      firstDayOfWeek: 1,
+      dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+      dayNamesShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+      dayNamesMin: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
+      monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+      monthNamesShort: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Déc'],
+      today: 'Jour J',
+      clear: 'Désélectionner',
+      dateFormat: 'jj/mm/aa'
+    };
 
-  // refresh: Subject<any> = new Subject();
+    this.options = {
+      plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
+      defaultDate: '2018-05-01',
+      header: {
+        left: 'prev, next',
+        center: 'title',
+        right: 'month, agendaWeek, agendaDay'
+      },
+      editable: true
+    };
 
-  // events: CalendarEvent[] = [
-  //   {
-  //     start: subDays(startOfDay(new Date()), 1),
-  //     end: addDays(new Date(), 1),
-  //     title: 'A 3 day event',
-  //     color: colors.red,
-  //     actions: this.actions,
-  //     allDay: true,
-  //     resizable: {
-  //       beforeStart: true,
-  //       afterEnd: true
-  //     },
-  //     draggable: true
-  //   },
-  //   {
-  //     start: startOfDay(new Date()),
-  //     title: 'An event with no end date',
-  //     color: colors.yellow,
-  //     actions: this.actions
-  //   },
-  //   {
-  //     start: subDays(endOfMonth(new Date()), 3),
-  //     end: addDays(endOfMonth(new Date()), 3),
-  //     title: 'A long event that spans 2 months',
-  //     color: colors.blue,
-  //     allDay: true
-  //   },
-  //   {
-  //     start: addHours(startOfDay(new Date()), 2),
-  //     end: new Date(),
-  //     title: 'A draggable and resizable event',
-  //     color: colors.yellow,
-  //     actions: this.actions,
-  //     resizable: {
-  //       beforeStart: true,
-  //       afterEnd: true
-  //     },
-  //     draggable: true
-  //   }
-  // ];
+    const today = new Date();
+    const month = today.getMonth();
+    const year = today.getFullYear();
+    const prevMonth = (month === 0) ? 11 : month - 1;
+    const prevYear = (prevMonth === 11) ? year : year;
+    const nextMonth = (month === 11) ? 0 : month + 1;
+    const nextYear = (nextMonth === 0) ? year + 1 : year;
+    this.minDate = new Date();
+    this.minDate.getDay();
+    this.minDate.setMonth(prevMonth);
+    this.minDate.setFullYear(prevYear);
+    this.maxDate = new Date();
+    this.maxDate.setMonth(nextMonth);
+    this.maxDate.setFullYear(nextYear);
 
-  // activeDayIsOpen: boolean = true;
+    const invalidDate = new Date();
+    invalidDate.setDate(today.getDay() - 1);
 
-  // constructor(private modal: NgbModal) { }
+    this.invalidDates = [];
+    let deb = 3;
+    const fin = 20;
 
-  // // ngOnInit() {
-  // // }
+    for (; deb < fin; deb ++) {
+      const autreDate = new Date();
+      autreDate.setDate(deb);
+      this.invalidDates.push(autreDate);
+    }
 
-  // dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
-  //   if (isSameMonth(date, this.viewDate)) {
-  //     this.viewDate = date;
-  //     if (
-  //       (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
-  //       events.length === 0
-  //     ) {
-  //       this.activeDayIsOpen = false;
-  //     } else {
-  //       this.activeDayIsOpen = true;
-  //     }
-  //   }
-  // }
+    // this.eventService.getEvents().then(events => {this.events = events;});
 
-  // eventTimesChanged({
-  //   event,
-  //   newStart,
-  //   newEnd
-  // }: CalendarEventTimesChangedEvent): void {
-  //   this.events = this.events.map(iEvent => {
-  //     if (iEvent === event) {
-  //       return {
-  //         ...event,
-  //         start: newStart,
-  //         end: newEnd
-  //       };
-  //     }
-  //     return iEvent;
-  //   });
-  //   this.handleEvent('Dropped or resized', event);
-  // }
+    // this.options = {
+    //   plugins:[ dayGridPlugin, timeGridPlugin, interactionPlugin ],
+    //   defaultDate: '2017-02-01',
+    //   header: {
+    //     left: 'prev,next',
+    //     center: 'title',
+    //     right: 'dayGridMonth,timeGridWeek,timeGridDay'
+    //   },
+    //   editable: true
+    //   };
+    // }
 
-  // handleEvent(action: string, event: CalendarEvent): void {
-  //   this.modalData = { event, action };
-  //   this.modal.open(this.modalContent, { size: 'lg' });
-  // }
-
-  // addEvent(): void {
-  //   this.events = [
-  //     ...this.events,
-  //     {
-  //       title: 'New event',
-  //       start: startOfDay(new Date()),
-  //       end: endOfDay(new Date()),
-  //       color: colors.red,
-  //       draggable: true,
-  //       resizable: {
-  //         beforeStart: true,
-  //         afterEnd: true
-  //       }
-  //     }
-  //   ];
-  // }
-
-  // deleteEvent(eventToDelete: CalendarEvent) {
-  //   this.events = this.events.filter(event => event !== eventToDelete);
-  // }
-
-  // setView(view: CalendarView) {
-  //   this.view = view;
-  // }
-
-  // closeOpenMonthViewDay() {
-  //   this.activeDayIsOpen = false;
-  // }
-
+  }
 }

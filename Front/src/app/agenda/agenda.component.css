@@ -1,6 +1,5 @@
 .agenda{
-    
-    font-family: Maven Pro;
+  font-family: Maven Pro;
 }
 
 .titre {
@@ -9,16 +8,6 @@
   margin-bottom: 40px;
 }
 
-.calendrier {
-  display: flex;
-  justify-content: center;
+.fullcalendrier {
+  width: 100% !important;
 }
-
-h3 {
-    margin: 0 0 10px;
-  }
-  
-  pre {
-    background-color: #f5f5f5;
-    padding: 15px;
-  }

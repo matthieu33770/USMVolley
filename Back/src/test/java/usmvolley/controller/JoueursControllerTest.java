@@ -92,7 +92,7 @@ public class JoueursControllerTest {
 	@WithMockUser(roles={"BUREAU"})
 	public void testAddJoueur() throws Exception {		
 		Joueurs joueur = new Joueurs(0, "Toto", "Test", "Andro", "123", 22, "rue lointaine", 99999, "Fort-Fort", "mm@mm.fr", "00.00.00.00.01", "", new Date(2019-01-29),
-				new Users(0, "username", "mdp", false, null, new Fonctions(1, "LICENCIE")), 
+				new Users(0, "username", "mdp", null), 
 				new Avoir(0, 2019, true, 
 						new Licence(0, "12233", 90.00, 
 								new Categories(1, "M11", 11), "formulaire", "certificat", true, "102938", 90.00)), null);
@@ -120,7 +120,7 @@ public class JoueursControllerTest {
 	@Test
 	public void testUpdateJoueur() throws Exception {
 		Joueurs joueur = new Joueurs(4, "GUERIN", "Julie", "Féminin", "123", 1, "chemin des gassinieres", 33380, "MIOS", "jujuly69@free.fr", "607193344", "", new Date(1989-01-29),
-				new Users(4, "jujuly69@free.fr", "$2a$10$gu0/JMAOkR8H2Gwqp57BVuhqSZ00ztEDkuty5cFUZ7o.DVS8Gtudu", true, null, new Fonctions(1, "LICENCIE")), 
+				new Users(4, "jujuly69@free.fr", "$2a$10$gu0/JMAOkR8H2Gwqp57BVuhqSZ00ztEDkuty5cFUZ7o.DVS8Gtudu", null), 
 				new Avoir(4, 2018, true, 
 						new Licence(4, "1839663", 90.00, 
 								new Categories(6, "Adultes", 80), "formulaire", "certificat", true, "102938", 90.00)), null);

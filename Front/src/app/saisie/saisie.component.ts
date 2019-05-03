@@ -45,8 +45,11 @@ export class SaisieComponent implements OnInit {
   idJoueur: number;
   categorieList: any = [];
   joueurList: any = [];
-  public age: number;
-  public dateNaissance: Date;
+  age: number;
+  dateNaissance: Date;
+  dateAnnee: Date;
+  annee: number;
+  dateCalculAge: Date;
   joueurForm: FormGroup;
   file: File;
   fileInformation: FileInformation;
@@ -73,7 +76,7 @@ export class SaisieComponent implements OnInit {
       this.isLoggedin = userRole.length > 0;
       console.log(this.isLoggedin);
     });
-    this.joueursService.publishJoueurs();
+    // this.joueursService.publishJoueurs();
     this.initConfig(); //Fonction Paypal
     if (this.isLoggedin) {
       this.username = jwt_decode(sessionStorage.getItem(environment.accessToken)).sub;
@@ -88,6 +91,8 @@ export class SaisieComponent implements OnInit {
     this.getJoueurs();
     this.getCategories();
     this.createForm();
+    this.dateAnnee = new Date(Date.now());
+    this.annee = this.dateAnnee.getFullYear();
   }
 
   createForm() {
@@ -150,7 +155,7 @@ export class SaisieComponent implements OnInit {
                                                   this.player.push(joueur);
                                                   this.editionJoueur = this.player[0];
                                                   this.formulaire = this.player[0].nom + ' ' + this.player[0].prenom + ' - Formulaire.pdf';
-                                                  this.certificat = this.player[0].nom + ' ' + this.player[0].prenom + ' - Certificat.pdf';
+                                                  this.certificat = this.player[0].nom + ' ' + this.player[0].prenom + ' - ' + this.annee + ' - Certificat.pdf';
                                                 }
                                                 this.joueur.push(joueur);
                                                 });
@@ -158,37 +163,39 @@ export class SaisieComponent implements OnInit {
   }
 
   onSave() {
-    console.log(this.username);
-    console.log(this.editionJoueur);
     this.dateNaissance = this.editionJoueur.dateNaissance;
+    this.dateCalculAge = new Date(this.annee, 12, 31);
     if (this.dateNaissance) {
-      const timeDiff = Math.abs(Date.now() - new Date(this.dateNaissance).getTime());
+      const timeDiff = Math.abs(new Date(this.dateCalculAge).getTime() - new Date(this.dateNaissance).getTime());
       this.age = Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25);
-      console.log(this.age);
     }
+    this.categorie = [];
     this.categorieList.forEach( categorie => {
       if (categorie.ageMax < this.age) {
-        this.categorie = [];
         this.categorie.push(categorie);
+        console.log(this.categorie);
       }
       this.idCat = this.categorie.length;
-      console.log(this.categorie.length);
-      console.log(this.idCat);
     });
     console.log(this.idCat);
     // Vérifier si on est en édition ou en création
     if (!this.username) {
       this.idJoueur = null;
+      this.formulaire = this.editionJoueur.nom + ' ' + this.editionJoueur.prenom + ' - Formulaire.pdf';
+      this.certificat = this.editionJoueur.nom + ' ' + this.editionJoueur.prenom + ' - ' + this.annee + ' - Certificat.pdf';
       this.editionLicence.categories = this.categorieList[this.idCat];
       this.editionAvoir.licence = this.editionLicence;
       this.editionJoueur.avoir = this.editionAvoir;
       this.editionJoueur.user = this.editionUser;
-      this.onRegister();
+      this.onRegisterF();
+      this.onRegisterC();
       this.editionJoueur.avoir.licence.formulaire = this.formulaire;
       this.editionJoueur.avoir.licence.certificatMedical = this.certificat;
       this.joueursService.createJoueur(this.editionJoueur);
+      console.log(this.editionJoueur);
     } else {
-      this.onRegister();
+      this.onRegisterF();
+      this.onRegisterC();
       this.editionJoueur.avoir.licence.formulaire = this.formulaire;
       this.editionJoueur.avoir.licence.certificatMedical = this.certificat;
       this.joueursService.updateJoueur(this.editionJoueur);
@@ -223,19 +230,25 @@ export class SaisieComponent implements OnInit {
     this.fileInputC.nativeElement.click();
   }
 
-  public onRegister() {
+  onRegisterF() {
     const dataF: FormData = new FormData();
-    const dataC: FormData = new FormData();
+    console.log(this.file);
 
     if (this.file !== undefined) {
       this.formulaireTest = this.formulaire;
       dataF.append('data', this.file, this.formulaire);
       this.joueursService.addDocument(dataF);
+    }
+  }
+
+  onRegisterC() {
+    const dataC: FormData = new FormData();
+    console.log(this.file);
+
+    if (this.file !== undefined) {
       this.certificatTest = this.certificat;
       dataC.append('data', this.file, this.certificat);
       this.joueursService.addDocument(dataC);
-    } else {
-      // this.offresService.addWatchCategory(this.nameWatch, this.priceWatch, this.descriptionWatch, this.imageWatch);
     }
   }
 

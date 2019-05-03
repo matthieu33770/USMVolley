@@ -3,6 +3,8 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
+import {environment} from '../../environments/environment';
+
 import { Joueur } from '../Model/Joueur';
 import { User } from '../Model/User';
 import { Role } from '../Model/Role';
@@ -22,23 +24,24 @@ export class JoueursService {
   constructor(private httpClient: HttpClient) {  }
 
   getUsers(): Observable<User[]> {
-    return this.httpClient.get<User[]>('http://localhost:8080/users/get/users');
+    return this.httpClient.get<User[]>(environment.apiUrl + 'users/get/users');
   }
 
   getRoles(): Observable<Role[]> {
-    return this.httpClient.get<Role[]>('http://localhost:8080/roles/get/roles');
+    return this.httpClient.get<Role[]>(environment.apiUrl + 'roles/get/roles');
   }
 
   getFonctions(): Observable<Fonction[]> {
-    return this.httpClient.get<Fonction[]>('http://localhost:8080/fonctions/get/fonctions');
+    return this.httpClient.get<Fonction[]>(environment.apiUrl + 'fonctions/get/fonctions');
   }
 
   getPlayers(): Observable<Joueur[]> {
-    return this.httpClient.get<Joueur[]>('http://localhost:8080/joueurs/get/joueurs');
+    return this.httpClient.get<Joueur[]>(environment.apiUrl + 'joueurs/get/joueurs');
   }
 
   public getJoueurs(): Observable<Joueur[]> {
-    return this.httpClient.get<Joueur[]>('http://localhost:8080/joueurs/get/joueurs');
+    console.log(this.httpClient);
+    return this.httpClient.get<Joueur[]>(environment.apiUrl + 'joueurs/get/joueurs');
   }
 
   public publishJoueurs() {

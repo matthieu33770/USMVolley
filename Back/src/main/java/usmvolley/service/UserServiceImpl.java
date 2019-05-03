@@ -48,7 +48,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public String signup(Users user) throws ExistingUsernameException {
         if (!userRepository.existsByUsername(user.getUsername())) {
-        	//passwordEncoder.encode cryptage password
         	Users userToSave = new Users(user.getUsername(), passwordEncoder.encode(user.getMdp()), user.getRoleList());
             userRepository.save(userToSave);
             return jwtTokenProvider.createToken(user.getUsername(), user.getRoleList());

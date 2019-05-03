@@ -11,7 +11,7 @@ import { Article } from '../Model/Article';
 import { ExcelService } from '../Services/excel.service';
 import { ArticlesService } from '../Services/articles.service';
 
-const URL = 'http://localhost:3000/api/upload';
+// const URL = 'http://localhost:3000/api/upload';
 
 @Component({
   selector: 'app-article',

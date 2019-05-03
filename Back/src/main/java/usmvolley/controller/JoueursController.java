@@ -39,7 +39,7 @@ import usmvolley.upload.exception.UploadFileException;
 
 @RestController
 @RequestMapping("/joueurs")
-@CrossOrigin("http://localhost:4200")
+//@CrossOrigin("http://localhost:4200")
 public class JoueursController {
 
 	@Autowired
@@ -68,11 +68,10 @@ public class JoueursController {
 	 * @return liste de tous les joueurs
 	 */
 	@GetMapping("/get/joueurs")
-//	@PreAuthorize("hasAuthority('ROLE_BUREAU')")
+	@PreAuthorize("hasAuthority('ROLE_BUREAU') or hasRole('ROLE_CAPITAINE')")
 	public ResponseEntity<List<Joueurs>> getListeJoueurs() {
 		
 		List<Joueurs> listeJoueurs = null;
-		System.out.println("Test GET");
 		
 		try {
 			listeJoueurs = joueursRepo.findAll();
@@ -88,7 +87,7 @@ public class JoueursController {
 	 * @return liste un joueur
 	 */
 	@GetMapping("/get/unJoueur/{idJoueur}")
-//	@PreAuthorize("hasRole('ROLE_BUREAU')")
+	@PreAuthorize("hasRole('ROLE_BUREAU')")
 	public ResponseEntity<?> getUnJoueur(@PathVariable Integer idJoueur) {
 		
 		Optional<Joueurs> joueur = null;
@@ -111,7 +110,7 @@ public class JoueursController {
 	 * @return liste un joueur selon son nom
 	 */
 	@GetMapping("/get/byJoueur/{nom}")
-//	@PreAuthorize("hasRole('ROLE_BUREAU')")
+	@PreAuthorize("hasRole('ROLE_BUREAU')")
 	public ResponseEntity<?> getJoueurByNom(@PathVariable String nom) {
 		
 		Optional<Joueurs> joueur = null;
@@ -135,6 +134,7 @@ public class JoueursController {
 	 * @return ajoute un joueur
 	 */
 	@PostMapping("/create")
+	@PreAuthorize("hasAuthority('ROLE_BUREAU') or hasRole('ROLE_CAPITAINE')")
 	public ResponseEntity<?> addJoueur(@RequestBody Joueurs joueur) {
 		
 		Joueurs newJoueur = null;
@@ -199,7 +199,7 @@ public class JoueursController {
 	 * @return supprime un joueur
 	 */
 	@DeleteMapping("/delete/{idJoueur}")
-//	@PreAuthorize("hasRole('ROLE_BUREAU')")
+	@PreAuthorize("hasRole('ROLE_BUREAU')")
 	public ResponseEntity<?> deleteUser(@PathVariable Integer idJoueur) {
 		
 		try
@@ -218,7 +218,7 @@ public class JoueursController {
 	 * @return modifie un joueur
 	 */
 	@PutMapping("/update/{idJoueur}")
-//	@PreAuthorize("hasRole('ROLE_BUREAU')")
+	@PreAuthorize("hasRole('ROLE_BUREAU')")
 	public ResponseEntity<?> updateJoueur(@RequestBody Joueurs joueur, @PathVariable Integer idJoueur) throws Exception
 	{
 		Joueurs modificationJoueur = null;

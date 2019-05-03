@@ -50,14 +50,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         // Entry points
         http.authorizeRequests()//
-        .antMatchers("/**").permitAll()
+        		.antMatchers("/**").permitAll()
                 .antMatchers("/users/signin").permitAll()
                 .antMatchers("/users/sign-up").permitAll()
-                .antMatchers("/joueurs/**").permitAll()
+//                .antMatchers("/joueurs/**").hasAnyAuthority("ROLE_BUREAU")
                 .antMatchers("/users/**").permitAll()
                 .antMatchers("/roles/**").permitAll()
                 .antMatchers("/fonctions/**").permitAll()
-                .antMatchers("/equipes/**").permitAll()
+                .antMatchers("/equipes/**").hasAnyAuthority("ROLE_CAPITAINE")
                 .antMatchers("/articles/**").permitAll()
                 .antMatchers("/statuts/**").permitAll()
                 .antMatchers("/lieux/**").permitAll()
@@ -80,7 +80,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/users/**");
-        web.ignoring().antMatchers("/joueurs/**");
+//        web.ignoring().antMatchers("/joueurs/**");
         web.ignoring().antMatchers("/roles/**");
         web.ignoring().antMatchers("/fonctions/**");
         web.ignoring().antMatchers("/equipes/**");

@@ -33,12 +33,10 @@ export class AppComponent implements OnInit {
 
   getConnection() {
     this.loginService.userRole.subscribe(userRole => {
-      console.log(userRole);
       this.isLicencie = userRole.includes('ROLE_LICENCIE');
       this.isCapitaine = userRole.includes('ROLE_CAPITAINE');
       this.isBureau = userRole.includes('ROLE_BUREAU');
       this.isLoggedin = userRole.length > 0;
-      console.log(this.isLoggedin);
     });
     if (this.isLoggedin) {
       this.formulaire = 'Renouvellement';

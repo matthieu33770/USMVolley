@@ -8,9 +8,6 @@
       <div formGroupName="joueurGroup">
           <mat-form-field class="watch-category-full-width">
               <input matInput required placeholder="Nom du joueur" type="text" formControlName="nom" [errorStateMatcher]="confirmValidParentMatcher" [(ngModel)]="editionJoueur.nom">
-              <!-- <mat-error>
-                  {{errors.editionJoueur.nom}}
-              </mat-error> -->
           </mat-form-field>
       </div>
       <div>
@@ -80,11 +77,16 @@
           <input matInput placeholder="Nom d'utilisateur" formControlName="username" [(ngModel)]="editionUser.username" >
         </mat-form-field>
       </div>
-      <div  *ngIf="!editionUser.mdp">    
+      <div  *ngIf="!isLoggedin">    
         <mat-form-field>
           <input matInput placeholder="Mot de passe" [(ngModel)]="editionUser.mdp" formControlName="mdp">
         </mat-form-field>
       </div> 
+      <div>
+        <a download="Formulaire" target="_blank" href="/assets/documents/Formulaire.pdf">
+          Télécharger le formulaire Fédération
+        </a>
+      </div>
       <div>
         <input type="file" id="userFormulaire" (change)="onSelectFormulaire($event)" #fileInputF style="display: none">
         <mat-form-field class="watch-category-full-width">
@@ -101,17 +103,35 @@
       </div>
       <div>
         <mat-form-field>
-          <mat-select placeholder="Mode de Paiement">
+          <mat-label>Sélectionner un moyen de paiement :</mat-label>
+          <mat-select placeholder="Mode de Paiement" [(value)]="paiement">
             <mat-option value="vide">  </mat-option>
             <mat-option value="cheque">Chèque</mat-option>
+              <a>
+                A l'ordre de USM Volley Ball
+              </a>
             <mat-option value="virement">Virement</mat-option>
             <mat-option value="paypal">PayPal</mat-option>
           </mat-select>
         </mat-form-field>
-        
       </div>
     </form>
-    <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+    <div [ngSwitch]="paiement">
+        <div *ngSwitchCase="cheque">
+            <a>
+              A l'ordre de USM Volley Ball
+            </a>
+          </div>
+      <div *ngSwitchCase="virement">
+        <a download="RIB" target="_blank" href="/assets/documents/RIB.pdf">
+          Télécharger le R.I.B. du club
+        </a>
+      </div>
+      <div *ngSwitchCase="paypal">
+        <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+      </div>
+      
+    </div>
   </div> 
 
   <div class="bouton">

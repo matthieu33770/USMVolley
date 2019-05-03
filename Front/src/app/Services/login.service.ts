@@ -24,15 +24,15 @@ export class LoginService {
   }
 
   public get logged(): boolean {
+    console.log(sessionStorage.getItem(environment.accessToken));
     return sessionStorage.getItem(environment.accessToken) !== null;
   }
 
   signIn(user: User) {
-    this.httpClient.post<JsonWebToken>(environment.apiUrl + 'signin', user).subscribe(
+    this.httpClient.post<JsonWebToken>(environment.apiUrl + 'users/signin', user).subscribe(
       token => {
         sessionStorage.setItem(environment.accessToken, token.token);
         console.log(token.token);
-        console.log(environment.accessToken);
         this.getUserRole();
         this.router.navigate(['/accueil']);
         this.isConnecte = true;

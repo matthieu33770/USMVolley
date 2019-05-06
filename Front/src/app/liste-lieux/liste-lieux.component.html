@@ -9,7 +9,7 @@
     <button mat-raised-button (click)="onEdit(selection.selected)">Editer</button>
     <span *ngIf="confirmDelete">
       <span>Etes vous sûr de vouloir supprimer ce lieu ?</span>
-      <button mat-raised-button color="warn" (click)="delete(selection.selected)">Oui</button>
+      <button mat-raised-button color="warn" (click)="delete(selection.selected); confirmDelete=false">Oui</button>
       <button mat-raised-button color="accent" (click)="confirmDelete=false">Non</button>
     </span>  
     <button *ngIf="!confirmDelete" mat-raised-button color="warn" (click)="confirmDelete=true">Supprimer</button>

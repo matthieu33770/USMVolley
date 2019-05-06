@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material';
 
@@ -14,7 +14,7 @@ import { ExcelService } from '../Services/excel.service';
   templateUrl: './liste-creneaux.component.html',
   styleUrls: ['./liste-creneaux.component.css']
 })
-export class ListeCreneauxComponent implements OnInit {
+export class ListeCreneauxComponent implements OnInit, OnDestroy {
 
   idCreneau: number;
   creneauList: BehaviorSubject<Creneau[]>;
@@ -24,12 +24,26 @@ export class ListeCreneauxComponent implements OnInit {
   selection = new SelectionModel<Creneau>(false, []);
   teams: any = [];
 
+  subCreneau: Subscription;
+
   constructor(private router: Router, private creneauxService: CreneauxService, private excelService: ExcelService) { }
 
   ngOnInit() {
-    this.creneauxService.publishCreneaux();
-    this.creneauList = this.creneauxService.availableCreneau$;
-    this.creneauxService.getCreneaux().subscribe(Creneaux => {this.dataSource = new MatTableDataSource<Creneau>(Creneaux); });
+    this.subCreneau = this.creneauxService.availableCreneau$.subscribe(Creneaux => {
+      this.creneaux = Creneaux;
+      this.getCreneau();
+    });
+    // this.creneauxService.publishCreneaux();
+    // this.creneauList = this.creneauxService.availableCreneau$;
+    // this.creneauxService.getCreneaux().subscribe(Creneaux => {this.dataSource = new MatTableDataSource<Creneau>(Creneaux); });
+  }
+
+  getCreneau(): void {
+    if (this.creneaux) {
+      this.dataSource = new MatTableDataSource<Creneau>(this.creneaux);
+    } else {
+      this.creneauxService.publishCreneaux();
+    }
   }
 
   onEdit(selected: Creneau[]) {
@@ -47,5 +61,11 @@ export class ListeCreneauxComponent implements OnInit {
 
   exportAsXLSX(): void {
     this.excelService.exportAsExcelFile(this.teams, 'Export');
+  }
+
+  ngOnDestroy() {
+    if (this.subCreneau) {
+      this.subCreneau.unsubscribe();
+    }
   }
 }

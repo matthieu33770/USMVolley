@@ -21,8 +21,8 @@
     </p>
   </div>
   <div class="boutons">
-    <button *ngIf="isModification" mat-raised-button color="primary" (click)="onSave()">Modifier</button>
-    <button *ngIf="!isModification" mat-raised-button color="primary" (click)="onSave()">Enregistrer</button>
+    <button *ngIf="isModification" mat-raised-button color="primary" (click)="onSave()" routerLink="/gestion/creneaux">Modifier</button>
+    <button *ngIf="!isModification" mat-raised-button color="primary" (click)="onSave()" routerLink="/gestion/creneaux">Enregistrer</button>
     <button mat-raised-button color="accent" routerLink="/gestion/creneaux">Retour</button>
   </div>
 </div>

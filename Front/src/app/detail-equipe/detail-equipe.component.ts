@@ -35,6 +35,7 @@ export class DetailEquipeComponent implements OnInit {
   categorie: Categorie [] = [];
   categoriesList: Categorie [];
   libelleCategorie: String;
+  i: number;
 
   constructor(private route: ActivatedRoute,
               private equipeService: EquipesService,
@@ -55,10 +56,6 @@ export class DetailEquipeComponent implements OnInit {
       this.isModification = true;
     }
     this.getAdulte();
-    this.dataAdulte = new MatTableDataSource<Joueur>(this.joueurAdulte);
-    this.dataEquipe = new MatTableDataSource<Joueur>(this.joueurEquipe);
-    console.log(this.dataAdulte);
-    console.log(this.dataEquipe);
     this.getCategories();
     this.getCategoriesL();
   }
@@ -82,6 +79,8 @@ export class DetailEquipeComponent implements OnInit {
                                                     this.joueurAdulte.splice(this.joueurAdulte.indexOf(this.joueurAdulte[j]), 1); }
                                                 }
                                               }
+                                              this.dataAdulte = new MatTableDataSource<Joueur>(this.joueurAdulte);
+                                              this.dataEquipe = new MatTableDataSource<Joueur>(this.joueurEquipe);
                                               });
   }
 
@@ -115,19 +114,23 @@ export class DetailEquipeComponent implements OnInit {
     }
   }
 
-  ajouter(selected: Joueur) {
-    this.joueurEquipe.push(selected[0]);
-    this.joueurAdulte.splice(this.joueurAdulte.indexOf(selected[0]), 1);
-    this.dataAdulte = new MatTableDataSource<Joueur>(this.joueurAdulte);
-    this.dataEquipe = new MatTableDataSource<Joueur>(this.joueurEquipe);
-    this.editionEquipe.joueurs.push(selected[0]);
+  ajouter(selected: Joueur[]) {
+    for (let i = 0; i < selected.length; i ++) {
+      this.joueurEquipe.push(selected[i]);
+      this.joueurAdulte.splice(this.joueurAdulte.indexOf(selected[i]), 1);
+      this.dataAdulte = new MatTableDataSource<Joueur>(this.joueurAdulte);
+      this.dataEquipe = new MatTableDataSource<Joueur>(this.joueurEquipe);
+      this.editionEquipe.joueurs.push(selected[i]);
+    }
   }
 
   enlever(selected: Joueur[]) {
-    this.joueurEquipe.splice(this.joueurEquipe.indexOf(selected[0]), 1);
-    this.joueurAdulte.push(selected[0]);
-    this.dataAdulte = new MatTableDataSource<Joueur>(this.joueurAdulte);
-    this.dataEquipe = new MatTableDataSource<Joueur>(this.joueurEquipe);
-    this.editionEquipe.joueurs.splice(this.editionEquipe.joueurs.indexOf(selected[0]), 1);
+    for (let i = 0; i < selected.length; i ++) {
+      this.joueurEquipe.splice(this.joueurEquipe.indexOf(selected[i]), 1);
+      this.joueurAdulte.push(selected[i]);
+      this.dataAdulte = new MatTableDataSource<Joueur>(this.joueurAdulte);
+      this.dataEquipe = new MatTableDataSource<Joueur>(this.joueurEquipe);
+      this.editionEquipe.joueurs.splice(this.editionEquipe.joueurs.indexOf(selected[i]), 1);
+    }
   }
 }

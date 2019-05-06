@@ -26,10 +26,10 @@
   <div *ngIf="isModification" class="tab">
       <div class="joueurEquipe">
           <h3>Joueurs de l'équipe</h3>
-          <div>
+          <div >
             <table mat-table [dataSource]="dataEquipe" class="tableau">
           
-            <!-- Checkbox Column  *ngFor="let joueur of joueurEquipe"-->
+            <!-- Checkbox Column  *ngFor="let joueur of joueurEquipe" -->
             <ng-container matColumnDef="select">
               <th mat-header-cell *matHeaderCellDef>
                 

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material';
 
@@ -14,7 +14,7 @@ import { ExcelService } from '../Services/excel.service';
   templateUrl: './liste-disponibilites.component.html',
   styleUrls: ['./liste-disponibilites.component.css']
 })
-export class ListeDisponibilitesComponent implements OnInit {
+export class ListeDisponibilitesComponent implements OnInit, OnDestroy {
 
   idDisponibilite: number;
   disponibiliteList: BehaviorSubject<Disponibilite[]>;
@@ -24,12 +24,23 @@ export class ListeDisponibilitesComponent implements OnInit {
   selection = new SelectionModel<Disponibilite>(false, []);
   teams: any = [];
 
+  subDisponibilite: Subscription;
+
   constructor(private router: Router, private disponibiliteService: DisponibiliteService, private excelService: ExcelService) { }
 
   ngOnInit() {
-    this.disponibiliteService.publishDisponibilites();
-    this.disponibiliteList = this.disponibiliteService.availableDisponibilite$;
-    this.disponibiliteService.getDisponibilites().subscribe(Disponibilites => {this.dataSource = new MatTableDataSource<Disponibilite>(Disponibilites); });
+    this.subDisponibilite = this.disponibiliteService.availableDisponibilite$.subscribe(Disponibilites => {
+      this.disponibilites = Disponibilites;
+      this.getDisponibilite();
+    });
+  }
+
+  getDisponibilite(): void {
+    if (this.disponibilites) {
+      this.dataSource = new MatTableDataSource<Disponibilite>(this.disponibilites);
+    } else {
+      this.disponibiliteService.publishDisponibilites();
+    }
   }
 
   onEdit(selected: Disponibilite[]) {
@@ -40,12 +51,16 @@ export class ListeDisponibilitesComponent implements OnInit {
     console.log(selected);
     if (selected.length !== 0) {
       this.disponibiliteService.supprimerDisponibilite(selected[0].idDisponibilite);
-      this.disponibiliteService.availableDisponibilite.splice(this.disponibiliteService.availableDisponibilite.indexOf(selected[0]), 1);
-      this.selection = new SelectionModel<Disponibilite>(false, []);
     }
   }
 
   exportAsXLSX(): void {
     this.excelService.exportAsExcelFile(this.teams, 'Export');
+  }
+
+  ngOnDestroy() {
+    if (this.subDisponibilite) {
+      this.subDisponibilite.unsubscribe();
+    }
   }
 }

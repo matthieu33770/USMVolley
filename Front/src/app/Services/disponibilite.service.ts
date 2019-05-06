@@ -68,6 +68,7 @@ export class DisponibiliteService {
   public updateDisponibilite(disponibilite: Disponibilite) {
     this.httpClient.put<Disponibilite>(`http://localhost:8080/disponibilite/update/${disponibilite.idDisponibilite}`, disponibilite).subscribe(
       updateDisponibilite => {
+        this.availableDisponibilite.splice(this.availableDisponibilite.indexOf(disponibilite), 1, updateDisponibilite);
         this.availableDisponibilite$.next(this.availableDisponibilite);
       }
     );

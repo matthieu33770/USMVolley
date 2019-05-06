@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material';
 
@@ -14,7 +14,7 @@ import { ExcelService } from '../Services/excel.service';
   templateUrl: './liste-articles.component.html',
   styleUrls: ['./liste-articles.component.css']
 })
-export class ListeArticlesComponent implements OnInit {
+export class ListeArticlesComponent implements OnInit, OnDestroy {
 
   idArticle: number;
   articleList: BehaviorSubject<Article[]>;
@@ -24,18 +24,23 @@ export class ListeArticlesComponent implements OnInit {
   selection = new SelectionModel<Article>(false, []);
   teams: any = [];
 
+  subArticle: Subscription;
+
   constructor(private router: Router, private articleService: ArticlesService, private excelService: ExcelService) { }
 
   ngOnInit() {
-    this.articleService.publishArticles();
-    this.articleList = this.articleService.availableArticle$;
-    // this.getArticle();
-    // this.getArticles();
-    this.articleService.getArticles().subscribe(Articles => {this.dataSource = new MatTableDataSource<Article>(Articles); });
+    this.subArticle = this.articleService.availableArticle$.subscribe(Articles => {
+      this.articles = Articles;
+      this.getArticle();
+    });
   }
 
   getArticle(): void {
-    this.articleService.getArticles().subscribe(Articles => this.articles = Articles);
+    if (this.articles) {
+      this.dataSource = new MatTableDataSource<Article>(this.articles);
+    } else {
+      this.articleService.publishArticles();
+    }
   }
 
   getArticles(): void {
@@ -58,5 +63,11 @@ export class ListeArticlesComponent implements OnInit {
 
   exportAsXLSX(): void {
     this.excelService.exportAsExcelFile(this.teams, 'Export');
+  }
+
+  ngOnDestroy() {
+    if (this.subArticle) {
+      this.subArticle.unsubscribe();
+    }
   }
 }

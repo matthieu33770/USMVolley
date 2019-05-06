@@ -67,6 +67,7 @@ export class StatutService {
   public updateStatut(statut: Statut) {
     this.httpClient.put<Statut>(`http://localhost:8080/statuts/update/${statut.idStatut}`, statut).subscribe(
       updateStatut => {
+        this.availableStatut.splice(this.availableStatut.indexOf(statut), 1, updateStatut);
         this.availableStatut$.next(this.availableStatut);
       }
     );

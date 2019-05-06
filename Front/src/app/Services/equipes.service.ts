@@ -76,6 +76,7 @@ export class EquipesService {
   public updateEquipe(equipe: Equipe) {
     this.httpClient.put<Equipe>(`http://localhost:8080/equipes/update/${equipe.idEquipe}`, equipe).subscribe(
       updateEquipe => {
+        this.availableEquipe.splice(this.availableEquipe.indexOf(equipe), 1, updateEquipe);
         this.availableEquipe$.next(this.availableEquipe);
       }
     );
@@ -89,6 +90,8 @@ export class EquipesService {
   supprimerEquipe(idEquipe: number): Equipe[] {
     this.httpClient.delete('http://localhost:8080/equipes/delete/' + idEquipe).subscribe(
           () => { console.log('suppression equipe OK : ', idEquipe);
+                  this.availableEquipe.splice(this.availableEquipe.indexOf(this.availableEquipe.find(equipe => equipe.idEquipe === idEquipe), 1));
+                  this.availableEquipe$.next(this.availableEquipe);
               },
           (error) => console.log('suppression watchCategory pb : ', error)
       );

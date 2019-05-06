@@ -18,6 +18,7 @@ export class AccueilComponent implements OnInit {
   constructor(private articleService: ArticlesService) { }
 
   ngOnInit() {
+    this.articleService.publishArticles();
     this.articleList = this.articleService.availableArticle$;
     console.log(this.articleService.availableArticle$);
     console.log(this.articleList);

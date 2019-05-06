@@ -50,6 +50,7 @@
   <mat-form-field>
     <mat-select placeholder="Fonction" [(ngModel)]="editionJoueur.user.roleList" name="roleList">
       <mat-option *ngFor="let fonction of fonctionList" [value]="editionJoueur.user.roleList">
+          <!-- fonction.libelleFonction -->
         {{fonction.libelleFonction}}
       </mat-option>
     </mat-select>

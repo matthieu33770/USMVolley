@@ -70,6 +70,7 @@ export class CategorieService {
   public updateCategorie(categorie: Categorie) {
     this.httpClient.put<Categorie>(`http://localhost:8080/categories/update/${categorie.idCategorie}`, categorie).subscribe(
       updateCategorie => {
+        this.availableCategorie.splice(this.availableCategorie.indexOf(categorie), 1, updateCategorie);
         this.availableCategorie$.next(this.availableCategorie);
       }
     );
@@ -83,11 +84,11 @@ export class CategorieService {
   supprimerCategorie(idCategorie: number): Categorie[] {
     this.httpClient.delete('http://localhost:8080/categories/delete/' + idCategorie).subscribe(
           () => { console.log('suppression categorie OK : ', idCategorie);
+                  this.availableCategorie = this.availableCategorie.filter( categorie => categorie.idCategorie !== idCategorie ).slice();
+                  this.availableCategorie$.next(this.availableCategorie);
               },
           (error) => console.log('suppression categorie pb : ', error)
       );
-    this.availableCategorie = this.availableCategorie.filter( categorie => categorie.idCategorie !== idCategorie ).slice();
-    this.availableCategorie$.next(this.availableCategorie);
     return this.availableCategorie;
   }
 

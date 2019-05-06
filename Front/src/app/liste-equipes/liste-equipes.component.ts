@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 import { Router } from '@angular/router';
 import { EquipesService } from '../Services/equipes.service';
@@ -14,7 +14,7 @@ import { Equipe } from '../Model/Equipe';
   templateUrl: './liste-equipes.component.html',
   styleUrls: ['./liste-equipes.component.css']
 })
-export class ListeEquipesComponent implements OnInit {
+export class ListeEquipesComponent implements OnInit, OnDestroy {
 
   idEquipe: number;
   nbreMasculin;
@@ -28,22 +28,29 @@ export class ListeEquipesComponent implements OnInit {
   selection = new SelectionModel<Equipe>(false, []);
   teams: any = [];
 
+  subEquipe: Subscription;
+
   constructor(private router: Router, private equipeService: EquipesService, private excelService: ExcelService) { }
 
   ngOnInit() {
-    this.equipeService.publishEquipes();
-    this.equipeService.getEquipes().subscribe(Equipes => {this.dataSource = new MatTableDataSource<Equipe>(Equipes);
-                                              Equipes.forEach( equipe => {
-                                              this.nbreMasculin = equipe.joueurs.filter(joueur => {if (joueur.sexe === 'Masculin') { return true; }} );
-                                              this.nbreFeminin = equipe.joueurs.filter(joueur => {if (joueur.sexe === 'Féminin') { return true; }} );
-                                            equipe.nbreHomme = this.nbreMasculin.length;
-                                            equipe.nbreFemme = this.nbreFeminin.length; });
-                                            });
-    console.log(this.dataSource);
+    this.subEquipe = this.equipeService.availableEquipe$.subscribe(Equipes => {
+      this.equipes = Equipes;
+      this.getEquipe();
+    });
   }
 
   getEquipe(): void {
-    this.equipeService.getEquipes().subscribe(Equipes => this.equipes = Equipes);
+    if (this.equipes) {
+      this.dataSource = new MatTableDataSource<Equipe>(this.equipes);
+      this.equipes.forEach( equipe => {
+        this.nbreMasculin = equipe.joueurs.filter(joueur => {if (joueur.sexe === 'Masculin') { return true; }} );
+        this.nbreFeminin = equipe.joueurs.filter(joueur => {if (joueur.sexe === 'Féminin') { return true; }} );
+        equipe.nbreHomme = this.nbreMasculin.length;
+        equipe.nbreFemme = this.nbreFeminin.length;
+      });
+    } else {
+      this.equipeService.publishEquipes();
+    }
   }
 
   getTeam(): void {
@@ -58,14 +65,16 @@ export class ListeEquipesComponent implements OnInit {
   delete(selected: Equipe[]) {
     console.log(selected[0]);
     this.equipeService.supprimerEquipe(selected[0].idEquipe);
-    // if (selected.length !== 0) {
-    //   this.equipeService.availableEquipe.splice(this.equipeService.availableEquipe.indexOf(selected[0]), 1);
-    //   this.selection = new SelectionModel<Equipe>(false, []);
-    // }
   }
 
   exportAsXLSX(): void {
     this.excelService.exportAsExcelFile(this.teams, 'Export');
+  }
+
+  ngOnDestroy() {
+    if (this.subEquipe) {
+      this.subEquipe.unsubscribe();
+    }
   }
 
 }

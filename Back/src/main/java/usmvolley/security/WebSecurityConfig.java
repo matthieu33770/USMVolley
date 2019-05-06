@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AnyRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -57,7 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/users/**").permitAll()
                 .antMatchers("/roles/**").permitAll()
                 .antMatchers("/fonctions/**").permitAll()
-                .antMatchers("/equipes/**").hasAnyAuthority("ROLE_CAPITAINE")
+//                .antMatchers("/equipes/**").hasAnyAuthority("ROLE_CAPITAINE")
                 .antMatchers("/articles/**").permitAll()
                 .antMatchers("/statuts/**").permitAll()
                 .antMatchers("/lieux/**").permitAll()
@@ -67,6 +68,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/manifestations/**").permitAll()
                 // Disallow everything else...
                 .anyRequest().authenticated();
+//        		.anyRequest().permitAll();
         
 //      // Apply JWT vérifie la requete avant envoie vers le controller
         http.addFilterBefore(new JwtTokenFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
@@ -83,7 +85,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //        web.ignoring().antMatchers("/joueurs/**");
         web.ignoring().antMatchers("/roles/**");
         web.ignoring().antMatchers("/fonctions/**");
-        web.ignoring().antMatchers("/equipes/**");
+//        web.ignoring().antMatchers("/equipes/**");
         web.ignoring().antMatchers("/articles/**");
         web.ignoring().antMatchers("/statuts/**");
         web.ignoring().antMatchers("/lieux/**");

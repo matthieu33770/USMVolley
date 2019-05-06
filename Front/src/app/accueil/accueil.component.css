@@ -7,6 +7,34 @@
 .titre {
     margin-top: 50px;
     margin-bottom: 50px;
-    font-size: 26px;
-    
+    font-size: 26px; 
+    justify-content: center;
+    text-align: center !important;
+    font-family: Muli; 
+}
+
+.article {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-family: Muli;
+}
+
+.article-card {
+    margin-left: 1px;
+    margin-right: 1px;
+    max-width: 300px;
+    max-height: 600px;
+    border-radius: 3px;
+    background: rgb(185, 187, 183);
+    border-style: groove;
+    border-color: black;
+    border-width: 2px;
+}
+
+.mat-card-header {
+    margin-left: 5%;
+    font-size: 30px;
+    max-height: 1.7em;
+    overflow: hidden;
 }

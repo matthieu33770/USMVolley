@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material';
 
@@ -14,7 +14,7 @@ import { ExcelService } from '../Services/excel.service';
   templateUrl: './liste-statut.component.html',
   styleUrls: ['./liste-statut.component.css']
 })
-export class ListeStatutComponent implements OnInit {
+export class ListeStatutComponent implements OnInit, OnDestroy {
 
   idStatut: number;
   statutList: BehaviorSubject<Statut[]>;
@@ -24,12 +24,23 @@ export class ListeStatutComponent implements OnInit {
   selection = new SelectionModel<Statut>(false, []);
   teams: any = [];
 
+  subStatut: Subscription;
+
   constructor(private router: Router, private statutService: StatutService, private excelService: ExcelService) { }
 
   ngOnInit() {
-    this.statutService.publishStatuts();
-    this.statutList = this.statutService.availableStatut$;
-    this.statutService.getStatuts().subscribe(Statuts => {this.dataSource = new MatTableDataSource<Statut>(Statuts); });
+    this.subStatut = this.statutService.availableStatut$.subscribe(Statuts => {
+      this.statuts = Statuts;
+      this.getStatut();
+    });
+  }
+
+  getStatut(): void {
+    if (this.statuts) {
+      this.dataSource = new MatTableDataSource<Statut>(this.statuts);
+    } else {
+      this.statutService.publishStatuts();
+    }
   }
 
   onEdit(selected: Statut[]) {
@@ -47,5 +58,11 @@ export class ListeStatutComponent implements OnInit {
 
   exportAsXLSX(): void {
     this.excelService.exportAsExcelFile(this.teams, 'Export');
+  }
+
+  ngOnDestroy() {
+    if (this.subStatut) {
+      this.subStatut.unsubscribe();
+    }
   }
 }

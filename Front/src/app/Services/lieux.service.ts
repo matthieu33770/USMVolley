@@ -67,6 +67,7 @@ export class LieuxService {
   public updateLieu(lieu: Lieu) {
     this.httpClient.put<Lieu>(`http://localhost:8080/lieux/update/${lieu.idLieu}`, lieu).subscribe(
       updateLieu => {
+        this.availableLieu.splice(this.availableLieu.indexOf(lieu), 1, updateLieu);
         this.availableLieu$.next(this.availableLieu);
       }
     );

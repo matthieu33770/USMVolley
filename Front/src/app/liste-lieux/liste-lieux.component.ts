@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material';
 
@@ -14,7 +14,7 @@ import { ExcelService } from '../Services/excel.service';
   templateUrl: './liste-lieux.component.html',
   styleUrls: ['./liste-lieux.component.css']
 })
-export class ListeLieuxComponent implements OnInit {
+export class ListeLieuxComponent implements OnInit, OnDestroy {
 
   idLieu: number;
   lieuList: BehaviorSubject<Lieu[]>;
@@ -24,12 +24,23 @@ export class ListeLieuxComponent implements OnInit {
   selection = new SelectionModel<Lieu>(false, []);
   teams: any = [];
 
+  subLieu: Subscription;
+
   constructor(private router: Router, private lieuService: LieuxService, private excelService: ExcelService) { }
 
   ngOnInit() {
-    this.lieuService.publishLieux();
-    this.lieuList = this.lieuService.availableLieu$;
-    this.lieuService.getLieux().subscribe(Lieux => {this.dataSource = new MatTableDataSource<Lieu>(Lieux); });
+    this.subLieu = this.lieuService.availableLieu$.subscribe(Lieux => {
+      this.lieux = Lieux;
+      this.getLieu();
+    });
+  }
+
+  getLieu(): void {
+    if (this.lieux) {
+      this.dataSource = new MatTableDataSource<Lieu>(this.lieux);
+    } else {
+      this.lieuService.publishLieux();
+    }
   }
 
   onEdit(selected: Lieu[]) {
@@ -47,6 +58,12 @@ export class ListeLieuxComponent implements OnInit {
 
   exportAsXLSX(): void {
     this.excelService.exportAsExcelFile(this.teams, 'Export');
+  }
+
+  ngOnDestroy() {
+    if (this.subLieu) {
+      this.subLieu.unsubscribe();
+    }
   }
 }
 

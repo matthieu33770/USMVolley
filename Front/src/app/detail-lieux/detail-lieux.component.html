@@ -12,7 +12,7 @@
     </p>
   </div>
   <div class="boutons">
-    <button *ngIf="isModification" mat-raised-button color="primary" (click)="onSave()">Modifier</button>
+    <button *ngIf="isModification" mat-raised-button color="primary" (click)="onSave()" routerLink="/gestion/lieux">Modifier</button>
     <button *ngIf="!isModification" mat-raised-button color="primary" (click)="onSave()" routerLink="/gestion/lieux">Enregistrer</button>
     <button mat-raised-button color="accent" routerLink="/gestion/lieux">Retour</button>
   </div>

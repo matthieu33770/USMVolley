@@ -71,6 +71,7 @@ export class ArticlesService {
   public updateArticle(article: Article) {
     this.httpClient.put<Article>(`http://localhost:8080/articles/update/${article.idArticle}`, article).subscribe(
       updateArticle => {
+        this.availableArticle.splice(this.availableArticle.indexOf(article), 1, updateArticle);
         this.availableArticle$.next(this.availableArticle);
       }
     );
@@ -84,10 +85,11 @@ export class ArticlesService {
   supprimerArticle(idArticle: number): Article[] {
     this.httpClient.delete('http://localhost:8080/articles/delete/' + idArticle).subscribe(
           () => { console.log('suppression article OK : ', idArticle);
+                  this.availableArticle.splice(this.availableArticle.indexOf(this.availableArticle.find(article => article.idArticle === idArticle), 1));
+                  this.availableArticle$.next(this.availableArticle);
               },
           (error) => console.log('suppression article pb : ', error)
       );
-      this.availableArticle$.next(this.availableArticle);
     return this.availableArticle;
   }
 

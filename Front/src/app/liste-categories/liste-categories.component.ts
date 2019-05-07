@@ -33,9 +33,6 @@ export class ListeCategoriesComponent implements OnInit, OnDestroy {
       this.categories = Categories;
       this.getCategorie();
     });
-    // this.categorieService.publishCategories();
-    // this.categorieList = this.categorieService.availableCategorie$;
-    // this.categorieService.getCategories().subscribe(Categories => {this.dataSource = new MatTableDataSource<Categorie>(Categories); });
   }
 
   getCategorie(): void {
@@ -54,8 +51,7 @@ export class ListeCategoriesComponent implements OnInit, OnDestroy {
     console.log(selected);
     if (selected.length !== 0) {
       this.categorieService.supprimerCategorie(selected[0].idCategorie);
-      // this.categorieService.availableCategorie.splice(this.categorieService.availableCategorie.indexOf(selected[0]), 1);
-      // this.selection = new SelectionModel<Categorie>(false, []);
+      this.selection = new SelectionModel<Categorie>(false, []);
     }
   }
 

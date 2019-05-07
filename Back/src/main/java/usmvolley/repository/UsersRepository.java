@@ -8,7 +8,7 @@ import usmvolley.model.Users;
 
 public interface UsersRepository extends JpaRepository<Users, Integer>{
 	
-	Optional<Users> findUserByUsername(String username);
+	Users findUserByUsername(String username);
 	
 	boolean existsByUsername(String username);
 	

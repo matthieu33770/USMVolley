@@ -106,32 +106,33 @@
           <mat-label>Sélectionner un moyen de paiement :</mat-label>
           <mat-select placeholder="Mode de Paiement" [(value)]="paiement">
             <mat-option value="vide">  </mat-option>
-            <mat-option value="cheque">Chèque</mat-option>
-              <a>
-                A l'ordre de USM Volley Ball
-              </a>
-            <mat-option value="virement">Virement</mat-option>
-            <mat-option value="paypal">PayPal</mat-option>
+            <mat-option value="cheque" (click)="choixCh=true; choixVir=false; choixPayPal=false">Chèque</mat-option>
+            <mat-option value="virement" (click)="choixCh=false; choixVir=true; choixPayPal=false">Virement</mat-option>
+            <mat-option value="paypal" (click)="choixCh=false; choixVir=false; choixPayPal=true">PayPal</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
     </form>
-    <div [ngSwitch]="paiement">
-        <div *ngSwitchCase="cheque">
+    <div *ngIf="choixCh">
             <a>
-              A l'ordre de USM Volley Ball
+              A l'ordre de <strong>USM Volley Ball</strong>
             </a>
-          </div>
-      <div *ngSwitchCase="virement">
-        <a download="RIB" target="_blank" href="/assets/documents/RIB.pdf">
-          Télécharger le R.I.B. du club
-        </a>
-      </div>
-      <div *ngSwitchCase="paypal">
-        <ngx-paypal [config]="payPalConfig"></ngx-paypal>
-      </div>
-      
     </div>
+    <div *ngIf="choixVir">
+      <a download="RIB" target="_blank" href="/assets/documents/RIB.pdf">
+        Télécharger le R.I.B. du club
+      </a>
+    </div>
+    <div *ngIf="choixPayPal">
+      <!-- <ngx-paypal [config]="payPalConfig"></ngx-paypal> -->
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+        <input type="hidden" name="cmd" value="_s-xclick">
+        <input type="hidden" name="hosted_button_id" value="4NM7JTQLQAENU">
+        <input type="image" src="https://www.paypalobjects.com/fr_FR/FR/i/btn/btn_subscribeCC_LG.gif" name="submit" alt="PayPal, le réflexe sécurité pour payer en ligne">
+        <img alt="" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
+      </form>  
+    </div>  
+    <br>
   </div> 
 
   <div class="bouton">

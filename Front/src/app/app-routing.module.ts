@@ -15,6 +15,7 @@ import { ListeEquipesComponent } from './liste-equipes/liste-equipes.component';
 import { DetailEquipeComponent } from './detail-equipe/detail-equipe.component';
 import { DetailArticleComponent } from './detail-article/detail-article.component';
 import { ListeArticlesComponent } from './liste-articles/liste-articles.component';
+import { ConsultationArticleComponent } from './consultation-article/consultation-article.component';
 import { ListeStatutComponent } from './liste-statut/liste-statut.component';
 import { DetailStatutComponent } from './detail-statut/detail-statut.component';
 import { ListeDisponibilitesComponent } from './liste-disponibilites/liste-disponibilites.component';
@@ -46,6 +47,7 @@ const routes: Routes = [
   {path: 'gestion/articles', component: ListeArticlesComponent},
   {path: 'gestion/articles/redactionArticle/:idArticle', component: DetailArticleComponent},
   {path: 'gestion/articles/redactionArticle/newArticle', component: DetailArticleComponent},
+  {path: 'article/:idArticle', component: ConsultationArticleComponent},
   {path: 'gestion/statuts', component: ListeStatutComponent},
   {path: 'gestion/statuts/detailstatut/:idStatut', component: DetailStatutComponent},
   {path: 'gestion/statuts/detailstatut/newStatut', component: DetailStatutComponent},

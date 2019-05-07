@@ -51,7 +51,6 @@ export class ListeLieuxComponent implements OnInit, OnDestroy {
     console.log(selected);
     if (selected.length !== 0) {
       this.lieuService.supprimerLieu(selected[0].idLieu);
-      this.lieuService.availableLieu.splice(this.lieuService.availableLieu.indexOf(selected[0]), 1);
       this.selection = new SelectionModel<Lieu>(false, []);
     }
   }

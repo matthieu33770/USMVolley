@@ -56,8 +56,6 @@ export class ListeArticlesComponent implements OnInit, OnDestroy {
     console.log(selected);
     if (selected.length !== 0) {
       this.articleService.supprimerArticle(selected[0].idArticle);
-      this.articleService.availableArticle.splice(this.articleService.availableArticle.indexOf(selected[0]), 1);
-      this.selection = new SelectionModel<Article>(false, []);
     }
   }
 

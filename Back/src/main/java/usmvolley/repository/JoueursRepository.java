@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import usmvolley.model.Joueurs;
+import usmvolley.model.Users;
 
 public interface JoueursRepository extends JpaRepository<Joueurs, Integer> {
 	
@@ -12,4 +13,5 @@ public interface JoueursRepository extends JpaRepository<Joueurs, Integer> {
 	
 	Optional<Joueurs> findJoueurBySexe(String sexe);
 
+	Joueurs findJoueurByUser(Users user);
 }

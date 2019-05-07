@@ -1,0 +1,23 @@
+<div class="consultationArticle">
+  <div class="titre">
+    <h1>Consultation d'un article</h1>
+  </div>
+
+  <div class="top">
+      <mat-card class="card">
+          <mat-card-header>
+            <mat-card-title><strong>{{ consultationArticle.titreArticle }}</strong></mat-card-title>
+          </mat-card-header>
+          <div class="noimage" *ngIf="!consultationArticle.photoArticle ; else Image"><img mat-card-image src="assets/photos/NoImage.jpg">
+          </div>
+          <ng-template #Image ><img mat-card-image class="image" src="{{ consultationArticle.photoArticle }}" alt="Photo de l'article"></ng-template>
+          <mat-card-content>
+            <p>{{ consultationArticle.contenuArticle }}</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button><a routerLink="/accueil">Retour</a></button>
+          </mat-card-actions>
+        </mat-card>
+  </div>
+
+</div>

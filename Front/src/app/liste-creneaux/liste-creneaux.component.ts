@@ -33,9 +33,6 @@ export class ListeCreneauxComponent implements OnInit, OnDestroy {
       this.creneaux = Creneaux;
       this.getCreneau();
     });
-    // this.creneauxService.publishCreneaux();
-    // this.creneauList = this.creneauxService.availableCreneau$;
-    // this.creneauxService.getCreneaux().subscribe(Creneaux => {this.dataSource = new MatTableDataSource<Creneau>(Creneaux); });
   }
 
   getCreneau(): void {
@@ -54,7 +51,6 @@ export class ListeCreneauxComponent implements OnInit, OnDestroy {
     console.log(selected);
     if (selected.length !== 0) {
       this.creneauxService.supprimerCreneau(selected[0].idCreneau);
-      this.creneauxService.availableCreneau.splice(this.creneauxService.availableCreneau.indexOf(selected[0]), 1);
       this.selection = new SelectionModel<Creneau>(false, []);
     }
   }

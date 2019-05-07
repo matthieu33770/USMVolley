@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
     public String signin(String username, String mdp) throws InvalidCredentialsException {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, mdp));
-            return jwtTokenProvider.createToken(username, userRepository.findUserByUsername(username).get().getRoleList());
+            return jwtTokenProvider.createToken(username, userRepository.findUserByUsername(username).getRoleList());
         } catch (AuthenticationException e) {
             throw new InvalidCredentialsException();
         }
@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<Users> findUserByUserName(String username) {
+    public Users findUserByUserName(String username) {
         return userRepository.findUserByUsername(username);
     }
 }

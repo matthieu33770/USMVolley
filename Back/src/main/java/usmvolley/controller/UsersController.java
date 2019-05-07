@@ -129,7 +129,7 @@ public class UsersController {
 //	@PreAuthorize("hasRole('ROLE_BUREAU')")
 	public ResponseEntity<?> getUserByUsername(@PathVariable String username) {
 		
-		Optional<Users> user = null;
+		Users user = null;
 		
 		try {
 			user = usersRepo.findUserByUsername(username);

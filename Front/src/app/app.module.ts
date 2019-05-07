@@ -52,6 +52,7 @@ import {LicencieGuard} from './guards/licencie.guards';
 import {CapitaineGuard} from './guards/capitaine.guards';
 import {BureauGuard} from './guards/bureau.guards';
 import {JwtInterceptor} from './http-interceptor/jwt.interceptor';
+import { ConsultationArticleComponent } from './consultation-article/consultation-article.component';
 
 registerLocaleData(localeFr);
 
@@ -85,7 +86,8 @@ registerLocaleData(localeFr);
     DetailDisponibilitesComponent,
     CalendrierComponent,
     ListeCategoriesComponent,
-    DetailCategorieComponent
+    DetailCategorieComponent,
+    ConsultationArticleComponent
   ],
   imports: [
     BrowserModule,

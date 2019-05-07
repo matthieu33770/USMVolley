@@ -54,12 +54,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         		.antMatchers("/**").permitAll()
                 .antMatchers("/users/signin").permitAll()
                 .antMatchers("/users/sign-up").permitAll()
-//                .antMatchers("/joueurs/**").hasAnyAuthority("ROLE_BUREAU")
+                .antMatchers("/joueurs/create").permitAll()
+                .antMatchers("/email/reinit/**").permitAll()
                 .antMatchers("/users/**").permitAll()
                 .antMatchers("/roles/**").permitAll()
                 .antMatchers("/fonctions/**").permitAll()
 //                .antMatchers("/equipes/**").hasAnyAuthority("ROLE_CAPITAINE")
-                .antMatchers("/articles/**").permitAll()
+//                .antMatchers("/articles/**").permitAll()
                 .antMatchers("/statuts/**").permitAll()
                 .antMatchers("/lieux/**").permitAll()
                 .antMatchers("/creneaux/**").permitAll()
@@ -86,7 +87,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/roles/**");
         web.ignoring().antMatchers("/fonctions/**");
 //        web.ignoring().antMatchers("/equipes/**");
-        web.ignoring().antMatchers("/articles/**");
+//        web.ignoring().antMatchers("/articles/**");
         web.ignoring().antMatchers("/statuts/**");
         web.ignoring().antMatchers("/lieux/**");
         web.ignoring().antMatchers("/creneaux/**");

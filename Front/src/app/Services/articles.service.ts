@@ -12,9 +12,11 @@ export class ArticlesService {
 
   // La liste des articles
   public availableArticle: Article [];
+  public reverseAvailableArticle: Article [];
 
   // La liste observable que l'on rend visible partout dans l'application
   availableArticle$: BehaviorSubject<Article[]> = new BehaviorSubject(this.availableArticle);
+  reverseAvailableArticle$: BehaviorSubject<Article[]> = new BehaviorSubject(this.reverseAvailableArticle);
 
   constructor(private httpClient: HttpClient) { }
 
@@ -31,6 +33,8 @@ export class ArticlesService {
       articleList => {
         this.availableArticle = articleList;
         this.availableArticle$.next(this.availableArticle);
+        this.reverseAvailableArticle = this.availableArticle.slice().reverse();
+        this.reverseAvailableArticle$.next(this.reverseAvailableArticle);
       });
   }
 

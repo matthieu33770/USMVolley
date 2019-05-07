@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+
 import { LoginService } from '../Services/login.service';
+import { MailService } from '../services/mail.service';
+
 import { User } from '../model/User';
 
 @Component({
@@ -17,7 +20,7 @@ export class ConnexionComponent {
     ]
   });
 
-  constructor(private fb: FormBuilder, private loginService: LoginService) { }
+  constructor(private fb: FormBuilder, private loginService: LoginService, private mailService: MailService) { }
 
   onSubmit() {
     const user = new User(0, '', '', false, [], null);
@@ -26,6 +29,12 @@ export class ConnexionComponent {
     this.loginService.signIn(user);
     console.log(user);
     console.log(user.roleList);
+  }
+
+  oubli() {
+    const username = this.loginForm.value.username;
+    this.mailService.sendMailMdP(username);
+    console.log(username);
   }
 
 }

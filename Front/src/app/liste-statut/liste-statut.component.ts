@@ -51,7 +51,6 @@ export class ListeStatutComponent implements OnInit, OnDestroy {
     console.log(selected);
     if (selected.length !== 0) {
       this.statutService.supprimerStatut(selected[0].idStatut);
-      this.statutService.availableStatut.splice(this.statutService.availableStatut.indexOf(selected[0]), 1);
       this.selection = new SelectionModel<Statut>(false, []);
     }
   }

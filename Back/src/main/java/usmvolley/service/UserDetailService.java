@@ -20,16 +20,16 @@ public class UserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        final Optional<Users> user = userRepository.findUserByUsername(username);
+        final Users user = userRepository.findUserByUsername(username);
 
-        if (!user.isPresent()) {
+        if (user == null) {
             throw new UsernameNotFoundException("AppUser '" + username + "' not found");
         }
 
         return User
                 .withUsername(username)
-                .password(user.get().getMdp())
-                .authorities(user.get().getRoleList())
+                .password(user.getMdp())
+                .authorities(user.getRoleList())
                 .accountExpired(false)
                 .accountLocked(false)
                 .credentialsExpired(false)

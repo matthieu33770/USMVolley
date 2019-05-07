@@ -19,9 +19,11 @@ export class AccueilComponent implements OnInit {
 
   ngOnInit() {
     this.articleService.publishArticles();
-    this.articleList = this.articleService.availableArticle$;
-    console.log(this.articleService.availableArticle$);
-    console.log(this.articleList);
+    this.articleList = this.articleService.reverseAvailableArticle$;
+  }
+
+  filterBy(idArticle: number) {
+    return this.articleService.availableArticle.sort((a, b) => a[idArticle] > b[idArticle] ? 1 : a[idArticle] === b[idArticle] ? 0 : -1);
   }
 
 }

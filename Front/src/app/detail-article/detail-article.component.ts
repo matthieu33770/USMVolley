@@ -11,7 +11,7 @@ import { Article } from '../Model/Article';
 import { ExcelService } from '../Services/excel.service';
 import { ArticlesService } from '../Services/articles.service';
 
-// const URL = 'http://localhost:3000/api/upload';
+const chem = 'assets/photos';
 
 @Component({
   selector: 'app-article',
@@ -28,6 +28,7 @@ export class DetailArticleComponent implements OnInit {
   file: File;
   fileInformation: FileInformation;
   photoArticle: string;
+  cheminArticle: string;
 
   @ViewChild('fileInput')
   fileInput: ElementRef;
@@ -41,7 +42,6 @@ export class DetailArticleComponent implements OnInit {
   ngOnInit() {
     this.idArticle = Number(this.route.snapshot.params.idArticle);
     this.getArticle();
-    console.log(this.getArticle());
     this.articleService.findArticle(this.idArticle).subscribe(article => {
       this.editionArticle = article; });
     if (this.idArticle) {
@@ -56,10 +56,6 @@ export class DetailArticleComponent implements OnInit {
 
   exportAsXLSX(): void {
     this.excelService.exportAsExcelFile(this.article, 'Export');
-  }
-
-  modifier() {
-    this.articleService.updateArticle(this.editionArticle);
   }
 
   createForm() {
@@ -101,16 +97,16 @@ export class DetailArticleComponent implements OnInit {
 
   onSave() {
     // Vérifier si on est en édition ou en création
-    if (!this.editionArticle) {
+    if (!this.editionArticle.idArticle) {
       this.idArticle = null;
       this.onRegister();
-      this.editionArticle.photoArticle = this.photoArticle;
-      console.log(this.editionArticle);
+      this.editionArticle.photoArticle = chem + '/' + this.photoArticle;
       this.articleService.createArticle(this.editionArticle);
     } else {
-    this.onRegister();
-    this.editionArticle.photoArticle = this.photoArticle;
-    console.log(this.editionArticle);
+      if (chem + '/' + this.photoArticle === '') {
+        console.log('je passe');
+        this.onRegister();
+      }
     this.articleService.updateArticle(this.editionArticle);
     }
   }
@@ -119,11 +115,10 @@ export class DetailArticleComponent implements OnInit {
     const data: FormData = new FormData();
 
     if (this.file !== undefined) {
-      this.photoArticle = 'photo ' + this.editionArticle.photoArticle + '.jpg';
+      this.photoArticle = this.file.name;
       data.append('data', this.file, this.photoArticle);
       this.articleService.addPhoto(data);
-    } else {
-      //this.offresService.addWatchCategory(this.nameWatch, this.priceWatch, this.descriptionWatch, this.imageWatch);
+      console.log('photo enregistrée');
     }
   }
 

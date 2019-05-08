@@ -1,5 +1,31 @@
 <div class="consultationArticle">
   <div class="titre">
+    <h1>{{ consultationArticle.titreArticle }}</h1>
+  </div>
+
+  <div class="contenuArticle">
+    <div class="noimage" *ngIf="!consultationArticle.photoArticle ; else Image"><img mat-card-image src="assets/photos/NoImage.jpg">
+    </div>
+
+    <div class="image">
+      <img src="{{ consultationArticle.photoArticle }}" alt="Photo de l'article">
+    </div>
+
+    <div class="contenu">
+      <span>{{ consultationArticle.contenuArticle }}</span>
+    </div>
+  </div>
+
+  <div class="bouton">
+    <button mat-button><a routerLink="/accueil">Retour</a></button>
+  </div>
+
+</div>
+
+
+
+<!-- <div class="consultationArticle">
+  <div class="titre">
     <h1>Consultation d'un article</h1>
   </div>
 
@@ -19,5 +45,4 @@
           </mat-card-actions>
         </mat-card>
   </div>
-
-</div>
+</div> -->

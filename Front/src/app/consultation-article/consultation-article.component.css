@@ -1,0 +1,31 @@
+.consultationArticle {
+    /* display: flex; */
+    justify-content: center;
+    text-align: center !important;
+    font-family: Muli;
+}
+
+.titre {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 26px; 
+    justify-content: center;
+    text-align: center !important;
+    font-family: Muli; 
+}
+
+.contenuArticle {
+    display: flex;
+}
+
+.noimage {
+}
+
+.image {
+}
+
+.contenu {
+    margin-left: 50px;
+    margin-top: 50vh;
+    transform: translateY(-50%);
+}

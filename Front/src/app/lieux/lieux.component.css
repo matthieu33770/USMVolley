@@ -1,8 +1,10 @@
 .lieux{
-    font-family: Maven Pro;
+    font-family: Muli;
   }
 
   .titre {
+    margin-top: 30px;
+    margin-bottom: 30px;
     display: flex;
     justify-content: center;
     margin-bottom: 40px;
@@ -15,7 +17,7 @@
   
   .texte {
     width: 40%;
-    margin-left: 150px;
+    margin-left: 100px;
     flex-direction: column;
   }
 

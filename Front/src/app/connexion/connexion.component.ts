@@ -20,7 +20,9 @@ export class ConnexionComponent {
     ]
   });
 
-  constructor(private fb: FormBuilder, private loginService: LoginService, private mailService: MailService) { }
+  constructor(private fb: FormBuilder,
+              private loginService: LoginService,
+              private mailService: MailService) { }
 
   onSubmit() {
     const user = new User(0, '', '', false, [], null);
@@ -33,8 +35,8 @@ export class ConnexionComponent {
 
   oubli() {
     const username = this.loginForm.value.username;
-    this.mailService.sendMailMdP(username);
-    console.log(username);
+    const lien = 'http://localhost:4200/connexion/chgtMdp/';
+    this.mailService.sendMailMdP(username, lien);
   }
 
 }

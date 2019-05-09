@@ -3,135 +3,141 @@
     <h1>Edition des données de <strong>{{ editionJoueur.prenom }} {{ editionJoueur.nom }}</strong></h1>
   </div>
 
-  <div class="pad">
-    <form [formGroup]="joueurForm" >        
-      <div formGroupName="joueurGroup">
+  <div class="data">
+    <form [formGroup]="joueurForm" > 
+      <div class="left">       
+        <div formGroupName="joueurGroup">
+            <mat-form-field class="watch-category-full-width">
+                <input matInput required placeholder="Nom du joueur" type="text" formControlName="nom" [errorStateMatcher]="confirmValidParentMatcher" [(ngModel)]="editionJoueur.nom">
+            </mat-form-field>
+        </div>
+        <div>
           <mat-form-field class="watch-category-full-width">
-              <input matInput required placeholder="Nom du joueur" type="text" formControlName="nom" [errorStateMatcher]="confirmValidParentMatcher" [(ngModel)]="editionJoueur.nom">
+            <input matInput required placeholder="Prénom" type="text" formControlName="prenom" [(ngModel)]="editionJoueur.prenom">
           </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field class="watch-category-full-width">
+            <input matInput placeholder="Taille en cm" type="text" formControlName="taille" [(ngModel)]="editionJoueur.taille">
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <input *ngIf="editionJoueur.sexe" matInput placeholder="Sexe" [(ngModel)]="editionJoueur.sexe" formControlName="sexe">
+            <mat-select *ngIf="!editionJoueur.sexe" placeholder="Sexe" [(ngModel)]="editionJoueur.sexe" formControlName="sexe">
+                <mat-option value="vide">  </mat-option>
+                <mat-option value="Masculin">Masculin</mat-option>
+                <mat-option value="Féminin">Féminin</mat-option>
+              </mat-select>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker" placeholder="Date de Naissance" [(ngModel)]="editionJoueur.dateNaissance" [value]="editionJoueur.dateNaissance" formControlName="dateNaissance">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="Adresse Mail" [(ngModel)]="editionJoueur.mail" formControlName="mail">
+          </mat-form-field>
+        </div>
       </div>
-      <div>
-        <mat-form-field class="watch-category-full-width">
-          <input matInput required placeholder="Prénom" type="text" formControlName="prenom" [(ngModel)]="editionJoueur.prenom">
-        </mat-form-field>
+      <div clas="center">
+        <div> 
+          <mat-form-field>
+            <input matInput placeholder="Numéro" [(ngModel)]="editionJoueur.numeroAdresse" formControlName="numeroAdresse">
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="Rue" [(ngModel)]="editionJoueur.rue" formControlName="rue">
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="Code Postal" [(ngModel)]="editionJoueur.codePostal" formControlName="codePostal">
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="Ville" [(ngModel)]="editionJoueur.ville" formControlName="ville">
+          </mat-form-field>
+        </div>
+        <div>  
+          <mat-form-field>
+            <input matInput placeholder="N° de téléphone" [(ngModel)]="editionJoueur.telephone1" formControlName="telephone1">
+          </mat-form-field>
+        </div>   
+        <div>   
+          <mat-form-field>
+            <input matInput placeholder="N° de portable" [(ngModel)]="editionJoueur.telephone2" formControlName="telephone2">
+          </mat-form-field>   
+        </div>
       </div>
-      <div>
-        <mat-form-field class="watch-category-full-width">
-          <input matInput placeholder="Taille en cm" type="text" formControlName="taille" [(ngModel)]="editionJoueur.taille">
-        </mat-form-field>
-      </div>
-      <div>
-        <mat-form-field>
-          <input *ngIf="editionJoueur.sexe" matInput placeholder="Sexe" [(ngModel)]="editionJoueur.sexe" formControlName="sexe">
-          <mat-select *ngIf="!editionJoueur.sexe" placeholder="Sexe" [(ngModel)]="editionJoueur.sexe" formControlName="sexe">
+      <div class="right">
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="Nom d'utilisateur" formControlName="username" [(ngModel)]="editionUser.username" >
+          </mat-form-field>
+        </div>
+        <div  *ngIf="!isLoggedin">    
+          <mat-form-field>
+            <input matInput placeholder="Mot de passe" [(ngModel)]="editionUser.mdp" formControlName="mdp">
+          </mat-form-field>
+        </div> 
+        <div>
+          <a download="Formulaire" target="_blank" href="/assets/documents/Formulaire.pdf">
+            Télécharger le formulaire Fédération
+          </a>
+        </div>
+        <div>
+          <input type="file" id="userFormulaire" (change)="onSelectFormulaire($event)" #fileInputF style="display: none">
+          <mat-form-field class="watch-category-full-width">
+            <input matInput formControlName="formulaireTest" placeholder="Formulaire à charger" readonly>
+          </mat-form-field>
+          <button mat-raised-button (click)="selectFormulaire()">Selectionner</button>
+        </div>
+        <div>
+          <input type="file" id="userCertificat" (change)="onSelectCertificat($event)" #fileInputC style="display: none">
+          <mat-form-field class="watch-category-full-width">
+            <input matInput formControlName="certificatTest" placeholder="Certificat à charger" readonly>
+          </mat-form-field>
+          <button mat-raised-button (click)="selectCertificat()">Selectionner</button>
+        </div>
+        <div>
+          <mat-form-field>
+            <mat-label>Sélectionner un moyen de paiement :</mat-label>
+            <mat-select placeholder="Mode de Paiement" [(value)]="paiement">
               <mat-option value="vide">  </mat-option>
-              <mat-option value="Masculin">Masculin</mat-option>
-              <mat-option value="Féminin">Féminin</mat-option>
+              <mat-option value="cheque" (click)="choixCh=true; choixVir=false; choixPayPal=false">Chèque</mat-option>
+              <mat-option value="virement" (click)="choixCh=false; choixVir=true; choixPayPal=false">Virement</mat-option>
+              <mat-option value="paypal" (click)="choixCh=false; choixVir=false; choixPayPal=true">PayPal</mat-option>
             </mat-select>
-        </mat-form-field>
-      </div>
-      <div>
-        <mat-form-field>
-          <input matInput [matDatepicker]="picker" placeholder="Date de Naissance" [(ngModel)]="editionJoueur.dateNaissance" [value]="editionJoueur.dateNaissance" formControlName="dateNaissance">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-      </div>
-      <div>
-        <mat-form-field>
-          <input matInput placeholder="Adresse Mail" [(ngModel)]="editionJoueur.mail" formControlName="mail">
-        </mat-form-field>
-      </div>
-      <div> 
-        <mat-form-field>
-          <input matInput placeholder="Numéro" [(ngModel)]="editionJoueur.numeroAdresse" formControlName="numeroAdresse">
-        </mat-form-field>
-      </div>
-      <div>
-        <mat-form-field>
-          <input matInput placeholder="Rue" [(ngModel)]="editionJoueur.rue" formControlName="rue">
-        </mat-form-field>
-      </div>
-      <div>
-        <mat-form-field>
-          <input matInput placeholder="Code Postal" [(ngModel)]="editionJoueur.codePostal" formControlName="codePostal">
-        </mat-form-field>
-      </div>
-      <div>
-        <mat-form-field>
-          <input matInput placeholder="Ville" [(ngModel)]="editionJoueur.ville" formControlName="ville">
-        </mat-form-field>
-      </div>
-      <div>  
-        <mat-form-field>
-          <input matInput placeholder="N° de téléphone" [(ngModel)]="editionJoueur.telephone1" formControlName="telephone1">
-        </mat-form-field>
-      </div>   
-      <div>   
-        <mat-form-field>
-          <input matInput placeholder="N° de portable" [(ngModel)]="editionJoueur.telephone2" formControlName="telephone2">
-        </mat-form-field>   
-      </div>
-      <div>
-        <mat-form-field>
-          <input matInput placeholder="Nom d'utilisateur" formControlName="username" [(ngModel)]="editionUser.username" >
-        </mat-form-field>
-      </div>
-      <div  *ngIf="!isLoggedin">    
-        <mat-form-field>
-          <input matInput placeholder="Mot de passe" [(ngModel)]="editionUser.mdp" formControlName="mdp">
-        </mat-form-field>
+          </mat-form-field>
+        </div>
       </div> 
-      <div>
-        <a download="Formulaire" target="_blank" href="/assets/documents/Formulaire.pdf">
-          Télécharger le formulaire Fédération
+      </form>
+      <div *ngIf="choixCh">
+              <a>
+                A l'ordre de <strong>USM Volley Ball</strong>
+              </a>
+      </div>
+      <div *ngIf="choixVir">
+        <a download="RIB" target="_blank" href="/assets/documents/RIB.pdf">
+          Télécharger le R.I.B. du club
         </a>
       </div>
-      <div>
-        <input type="file" id="userFormulaire" (change)="onSelectFormulaire($event)" #fileInputF style="display: none">
-        <mat-form-field class="watch-category-full-width">
-          <input matInput formControlName="formulaireTest" placeholder="Formulaire à charger" readonly>
-        </mat-form-field>
-        <button mat-raised-button (click)="selectFormulaire()">Selectionner</button>
-      </div>
-      <div>
-        <input type="file" id="userCertificat" (change)="onSelectCertificat($event)" #fileInputC style="display: none">
-        <mat-form-field class="watch-category-full-width">
-          <input matInput formControlName="certificatTest" placeholder="Certificat à charger" readonly>
-        </mat-form-field>
-        <button mat-raised-button (click)="selectCertificat()">Selectionner</button>
-      </div>
-      <div>
-        <mat-form-field>
-          <mat-label>Sélectionner un moyen de paiement :</mat-label>
-          <mat-select placeholder="Mode de Paiement" [(value)]="paiement">
-            <mat-option value="vide">  </mat-option>
-            <mat-option value="cheque" (click)="choixCh=true; choixVir=false; choixPayPal=false">Chèque</mat-option>
-            <mat-option value="virement" (click)="choixCh=false; choixVir=true; choixPayPal=false">Virement</mat-option>
-            <mat-option value="paypal" (click)="choixCh=false; choixVir=false; choixPayPal=true">PayPal</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-    </form>
-    <div *ngIf="choixCh">
-            <a>
-              A l'ordre de <strong>USM Volley Ball</strong>
-            </a>
-    </div>
-    <div *ngIf="choixVir">
-      <a download="RIB" target="_blank" href="/assets/documents/RIB.pdf">
-        Télécharger le R.I.B. du club
-      </a>
-    </div>
-    <div *ngIf="choixPayPal">
-      <!-- <ngx-paypal [config]="payPalConfig"></ngx-paypal> -->
-      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-        <input type="hidden" name="cmd" value="_s-xclick">
-        <input type="hidden" name="hosted_button_id" value="4NM7JTQLQAENU">
-        <input type="image" src="https://www.paypalobjects.com/fr_FR/FR/i/btn/btn_subscribeCC_LG.gif" name="submit" alt="PayPal, le réflexe sécurité pour payer en ligne">
-        <img alt="" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
-      </form>  
-    </div>  
+      <div *ngIf="choixPayPal">
+        <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+        <!-- <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+          <input type="hidden" name="cmd" value="_s-xclick">
+          <input type="hidden" name="hosted_button_id" value="4NM7JTQLQAENU">
+          <input type="image" src="https://www.paypalobjects.com/fr_FR/FR/i/btn/btn_subscribeCC_LG.gif" name="submit" alt="PayPal, le réflexe sécurité pour payer en ligne">
+          <img alt="" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
+        </form>   -->
+      </div> 
     <br>
   </div> 
 

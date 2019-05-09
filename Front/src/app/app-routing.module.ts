@@ -27,6 +27,7 @@ import { DetailCreneauxComponent } from './detail-creneaux/detail-creneaux.compo
 import { CalendrierComponent } from './calendrier/calendrier.component';
 import { ListeCategoriesComponent } from './liste-categories/liste-categories.component';
 import { DetailCategorieComponent } from './detail-categorie/detail-categorie.component';
+import { ChangementMdpComponent } from './changement-mdp/changement-mdp.component';
 
 const routes: Routes = [
   {path: 'equipes', component: EquipesComponent},
@@ -36,6 +37,7 @@ const routes: Routes = [
   {path: 'saisie', component: SaisieComponent},
   {path: 'partenaires', component: PartenairesComponent},
   {path: 'connexion', component: ConnexionComponent},
+  {path: 'connexion/chgtMdp/:idUser', component: ChangementMdpComponent},
   {path: 'manifestations', component: ListeManifestationComponent},
   {path: 'gestion', component: GestionComponent},
   {path: 'gestion/joueurs', component: ListeJoueursComponent},

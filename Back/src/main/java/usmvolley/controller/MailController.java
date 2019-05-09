@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import usmvolley.model.Joueurs;
@@ -35,23 +36,18 @@ public class MailController {
 	    	this.userRepo = userRepo;
 	    }
 	 
-	    @PostMapping("/reinit/{username}")
-	    public ResponseEntity<?> sendEmail(@PathVariable String username) {
+	    @PostMapping("/changeMdp")
+	    public ResponseEntity<?> sendEmail(@RequestParam(value= "username", required=true) String username , @RequestParam(value= "lien", required=true) String lien) {
 	    	
 	    	Users user = null;
 	    	Joueurs joueur = null;
 	    	
 			user = userRepo.findUserByUsername(username);
 			joueur = joueurRepo.findJoueurByUser(user);
-			
-			System.out.println("username : " + username);
-			System.out.println("user : " + user);
-			System.out.println("joueur : " + joueur);
-			System.out.println("mail : " + joueur.getMail());
 	    	
 	        try {
 	            
-	            sendEmailMdP(joueur.getMail(), joueur.getPrenom(), joueur.getMail());
+	            sendEmailMdP(user.getIdUser(), joueur.getNom(), joueur.getPrenom(), joueur.getMail(), lien);
 	            
 	            return ResponseEntity.status(HttpStatus.OK).body(null);
 	        }catch(Exception ex) {
@@ -60,16 +56,17 @@ public class MailController {
 	        }
 	    }
 	 
-	    private void sendEmailMdP(String nom, String prenom, String email) throws Exception{
+	    private void sendEmailMdP(Integer idUser, String nom, String prenom, String email, String lien) throws Exception{
 	        MimeMessage message = sender.createMimeMessage();
 	        MimeMessageHelper helper = new MimeMessageHelper(message);
 	        
-	        System.out.println("essai");
+	        String url = lien + idUser;
 	          
 	        helper.setTo(email);
 	        
-	        helper.setText("Bonjour " + nom + " " + prenom + ",\n\nVous êtes bien inscrit sur le site de l'Union Salles Mios Volley Ball" + 
-	        		".\nPour réinitialiser votre mot de passe, veuillez suivre le lien suivant : !\n\nUSM Volley Ball");
+	        helper.setText("Bonjour " + prenom + " " + nom + ",\n\nVous venez de faire une demande de changement de mot de passe. "  
+	        						+ "Merci de cliquer sur le lien ci dessous :\r\n" + url +"\r\n\r\n" 
+	        						+ "Si vous n'etes pas à l'origine de cette demande, merci de nous en informer\n\nUSM Volley Ball");
 	        helper.setSubject("Votre lien");
 	        
 	        System.out.println(message);

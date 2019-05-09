@@ -200,10 +200,14 @@ public class UsersController {
 //	@PreAuthorize("hasRole('ROLE_BUREAU')")
 	public ResponseEntity<?> updateUser(@RequestBody Users user, @PathVariable Integer idUser) throws Exception
 	{
+		System.out.println("User : " + user);
+		System.out.println("mdp : " + user.getMdp());
 		Users modificationUser = null;
-		String mdpUser = user.getMdp();
+		String mdpUser = passwordEncoder.encode(user.getMdp());
+//		String mdpUser = user.getMdp();
 		String usernameUser = user.getUsername();
-		//Role roleUser = user.getRole();
+		
+		System.out.println("mdp hash : " + mdpUser);
 		
 		if ((mdpUser == null) || (mdpUser.isEmpty())) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le mot de passe");
@@ -211,9 +215,6 @@ public class UsersController {
 		if ((usernameUser == null) || (usernameUser.isEmpty())) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le nom d'utilisateur");
 		}
-		//if (roleUser == null) {
-		//	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le rôle");
-		//}
 		
 		try
 		{

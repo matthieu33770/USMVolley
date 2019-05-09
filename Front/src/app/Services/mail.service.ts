@@ -8,8 +8,8 @@ export class MailService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public sendMailMdP(username: string) {
-    this.httpClient.post<string>('http://localhost:8080/emaildd/changePassword/' + username, null).subscribe(
+  public sendMailMdP(username: string, lien: string) {
+    this.httpClient.post<string>('http://localhost:8080/email/changeMdp?username=' + username + '&lien=' + lien, '').subscribe(
                   (res) => {console.log('send email ok');
                             console.log(username);
                    },

@@ -53,6 +53,7 @@ import {CapitaineGuard} from './guards/capitaine.guards';
 import {BureauGuard} from './guards/bureau.guards';
 import {JwtInterceptor} from './http-interceptor/jwt.interceptor';
 import { ConsultationArticleComponent } from './consultation-article/consultation-article.component';
+import { ChangementMdpComponent } from './changement-mdp/changement-mdp.component';
 
 registerLocaleData(localeFr);
 
@@ -87,7 +88,8 @@ registerLocaleData(localeFr);
     CalendrierComponent,
     ListeCategoriesComponent,
     DetailCategorieComponent,
-    ConsultationArticleComponent
+    ConsultationArticleComponent,
+    ChangementMdpComponent
   ],
   imports: [
     BrowserModule,

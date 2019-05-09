@@ -109,6 +109,7 @@ public class JoueursControllerTest {
 	}
 
 	@Test
+	@WithMockUser(roles={"BUREAU"})
 	public void testDeleteJoueur() throws Exception {
 		this.mockMvc.perform(delete("/joueurs/delete/3"));
 		

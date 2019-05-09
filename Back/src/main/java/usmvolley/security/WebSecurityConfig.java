@@ -57,7 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/joueurs/create").permitAll()
                 .antMatchers("/email/reinit/**").permitAll()
                 .antMatchers("/emaildd/reinit/**").permitAll()
-                .antMatchers("/users/**").permitAll()
+//                .antMatchers("/users/**").permitAll()
                 .antMatchers("/roles/**").permitAll()
                 .antMatchers("/fonctions/**").permitAll()
 //                .antMatchers("/equipes/**").hasAnyAuthority("ROLE_CAPITAINE")
@@ -83,7 +83,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/users/**");
+//        web.ignoring().antMatchers("/users/**");
         web.ignoring().antMatchers("/email");
 //        web.ignoring().antMatchers("/joueurs/**");
         web.ignoring().antMatchers("/roles/**");

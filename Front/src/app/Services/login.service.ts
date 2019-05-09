@@ -7,6 +7,7 @@ import {environment} from '../../environments/environment';
 import * as jwt_decode from 'jwt-decode';
 import {BehaviorSubject} from 'rxjs';
 import { Location } from '@angular/common';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,9 @@ export class LoginService {
   isConnecte: Boolean = false;
   isLoggedin: Boolean = false;
 
-  constructor(private httpClient: HttpClient, private router: Router, private location: Location) {
+  constructor(private httpClient: HttpClient,
+              private router: Router,
+              private snackBar: MatSnackBar) {
     this.getUserRole();
   }
 
@@ -37,7 +40,12 @@ export class LoginService {
         this.router.navigate(['/accueil']);
         this.isConnecte = true;
       },
-      error => console.log('Error while login'));
+      error => {
+        // pop-up echec
+        this.snackBar.open('Erreur de login', 'ECHEC', {
+          duration: environment.durationSnackBar
+        });
+      });
   }
 
   signOut() {
@@ -49,7 +57,6 @@ export class LoginService {
   private getUserRole() {
     if (sessionStorage.getItem(environment.accessToken)) {
       const decodedToken = jwt_decode(sessionStorage.getItem(environment.accessToken));
-      console.log(decodedToken);
       const authority = decodedToken.auth[0].authority;
       this.userRole.next(authority);
     }

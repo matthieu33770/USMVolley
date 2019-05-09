@@ -1,14 +1,14 @@
 header {
-    display: flex;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     background-color: #F9E63A;
+    max-height: 90px;
 }
 
-.img-responsive{
-    width: 20%;
+.maxmenu {
+    display: flex;
 }
 
 .logo {
@@ -18,21 +18,22 @@ header {
     align-items: center;
 }
 
+.img {
+    max-height: 90px;
+}
+
 .menu1 {
     justify-content: flex-end !important;
     flex-grow: 1;
-    height: 20px;
-    margin-top: 50px;
+    margin-top: 25px;
  }
 
  .menu2 {
     flex-grow: 1;
-    height: 20px;
-    margin-top: 50px;
+    margin-top: 25px;
  }
 
  footer {
-    display: flex;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     border-bottom-left-radius: 15px;
@@ -41,7 +42,11 @@ header {
     position: relative;
 }
 
-.contact {
+.maxcontact {
+    display: flex;
+}
+
+.contacter {
     flex-grow: 1;
     font-size: 14px;
     font-weight: bold;
@@ -75,4 +80,22 @@ header {
 
 html, body { height: 100%; }
 
-header, footer {font-family: Maven Pro; }
+header, footer {font-family: Muli; }
+
+@media only screen and (min-width: 600px) {
+    .minmenu {
+        display: none;
+    }
+    .mincontact {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .maxmenu {
+        display: none;
+    }
+    .maxcontact {
+        display: none;
+    }
+}

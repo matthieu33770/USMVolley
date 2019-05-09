@@ -84,12 +84,12 @@ export class UsersService {
 
   /**
    * Fonction de mise à jour d'un user
-   * @param user la disponibilite à mettre à jour
+   * @param user le user à mettre à jour
    */
   public updateUser(user: User) {
     console.log(user);
     console.log('http://localhost:8080/users/update/' + user.idUser + user.username);
-    this.httpClient.put<User>(`http://localhost:8080/users/update/${user.idUser}`, user);
+    return this.httpClient.put<User>(`http://localhost:8080/users/update/${user.idUser}`, user);
   }
 
   /**

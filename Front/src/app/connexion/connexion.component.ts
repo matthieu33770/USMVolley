@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
+import {environment} from '../../environments/environment';
 
 import { LoginService } from '../Services/login.service';
 import { MailService } from '../services/mail.service';
@@ -22,7 +24,8 @@ export class ConnexionComponent {
 
   constructor(private fb: FormBuilder,
               private loginService: LoginService,
-              private mailService: MailService) { }
+              private mailService: MailService,
+              private snackBar: MatSnackBar) { }
 
   onSubmit() {
     const user = new User(0, '', '', false, [], null);
@@ -37,6 +40,9 @@ export class ConnexionComponent {
     const username = this.loginForm.value.username;
     const lien = 'http://localhost:4200/connexion/chgtMdp/';
     this.mailService.sendMailMdP(username, lien);
+    this.snackBar.open('Un mail vous a été envoyé pour réinitialiser votre mot de passe.', 'Info', {
+      duration: environment.durationSnackBar
+    });
   }
 
 }

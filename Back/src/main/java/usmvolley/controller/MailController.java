@@ -64,9 +64,10 @@ public class MailController {
 	          
 	        helper.setTo(email);
 	        
-	        helper.setText("Bonjour " + prenom + " " + nom + ",\n\nVous venez de faire une demande de changement de mot de passe. "  
-	        						+ "Merci de cliquer sur le lien ci dessous :\r\n" + url +"\r\n\r\n" 
-	        						+ "Si vous n'etes pas à l'origine de cette demande, merci de nous en informer\n\nUSM Volley Ball");
+	        helper.setText("Bonjour " + prenom + " " + nom + ",\n\nVous venez de faire une demande de changement de mot de passe.\r\n"  
+	        						+ "Merci de cliquer sur le lien ci dessous pour le réinitialiser :\r\n" + url +"\r\n\r\n" 
+	        						+ "Si vous n'etes pas à l'origine de cette demande, merci de nous en informer\n\n"
+	        						+ "USM Volley Ball\nunionsallesmios.volley@gmail.com");
 	        helper.setSubject("Votre lien");
 	        
 	        System.out.println(message);

@@ -15,7 +15,6 @@ export class BureauGuard implements CanActivate {
     } else if (this.loginService.userRole.getValue().includes('ROLE_BUREAU')) {
       return true;
     }
-
     return false;
   }
 }

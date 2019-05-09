@@ -1,12 +1,12 @@
 form {
     font-family: Maven Pro;
-    width: 300px;
+    width: 400px;
     text-align: center;
     margin: 50px auto;
   }
   
   .login-card {
-    min-width: 120px;
+    min-width: 150px;
   }
   
   .mat-radio-button {

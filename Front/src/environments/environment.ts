@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:8080/',
-  accessToken: 'access_token'
+  accessToken: 'access_token',
+  durationSnackBar: 3000
 };
 
 /*

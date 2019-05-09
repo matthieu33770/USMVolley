@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
+import {environment} from '../../environments/environment';
 
 import { UsersService } from '../Services/users.service';
 
@@ -25,7 +27,8 @@ export class ChangementMdpComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private fb: FormBuilder,
-              private userService: UsersService) { }
+              private userService: UsersService,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.idUser = Number(this.route.snapshot.params.idUser);
@@ -38,7 +41,10 @@ export class ChangementMdpComponent implements OnInit {
   onSubmit() {
     this.editionUser.mdp = this.loginForm.value.newMdp;
     console.log(this.editionUser);
-    this.userService.updateUser(this.editionUser);
+    this.userService.updateUser(this.editionUser).subscribe();
+    this.snackBar.open('Votre mot de passe a été modifié !', 'Info', {
+      duration: environment.durationSnackBar
+    });
   }
 
 }

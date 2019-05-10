@@ -48,28 +48,18 @@
     </mat-form-field>
 <div class="donneesClub">  
   <mat-form-field>
-    <mat-select placeholder="Fonction" [(ngModel)]="editionJoueur.user.roleList" name="roleList">
-      <mat-option *ngFor="let fonction of fonctionList" [value]="editionJoueur.user.roleList">
-          <!-- fonction.libelleFonction -->
+    <mat-select placeholder="Fonction" [(ngModel)]="editionJoueur.user.fonction.idFonction" name="fonction.libelleFonction">
+      <mat-option *ngFor="let fonction of fonctionList" [value]="fonction.idFonction">
         {{fonction.libelleFonction}}
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <!-- <mat-form-field>
-      <input *ngIf="editionJoueur.sexe" matInput placeholder="Sexe" [(ngModel)]="editionJoueur.sexe" formControlName="sexe">
-      <mat-select matInput placeholder="Fonction" [(ngModel)]="editionJoueur.user.roleList" formControlName="roleList">
-          <mat-option value="vide">  </mat-option>
-          <mat-option value="ROLE_LICENCIE">Licencié</mat-option>
-          <mat-option value="ROLE_CAPITAINE">Capitaine</mat-option>
-          <mat-option value="ROLE_BUREAU">Bureau</mat-option>
-        </mat-select>
-    </mat-form-field> -->
   <mat-form-field>
       <input matInput placeholder="Formulaire" [(ngModel)]="editionJoueur.avoir.licence.formulaire" name="formulaire">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Certificat Médical" [(ngModel)]="editionJoueur.avoir.licence.certificatMedical" name="certificat">
-    </mat-form-field>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Certificat Médical" [(ngModel)]="editionJoueur.avoir.licence.certificatMedical" name="certificat">
+  </mat-form-field>
   <mat-form-field>
     <input matInput placeholder="Numero de Licence" [(ngModel)]="editionJoueur.avoir.licence.numeroLicence" name="numeroLicence">
   </mat-form-field>

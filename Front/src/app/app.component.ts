@@ -33,9 +33,10 @@ export class AppComponent implements OnInit {
 
   getConnection() {
     this.loginService.userRole.subscribe(userRole => {
-      this.isLicencie = userRole.includes('ROLE_LICENCIE');
-      this.isCapitaine = userRole.includes('ROLE_CAPITAINE');
-      this.isBureau = userRole.includes('ROLE_BUREAU');
+      console.log(userRole);
+      this.isLicencie = userRole.includes('Licencie');
+      this.isCapitaine = userRole.includes('Capitaine');
+      this.isBureau = userRole.includes('Bureau');
       this.isLoggedin = userRole.length > 0;
     });
     if (this.isLoggedin) {

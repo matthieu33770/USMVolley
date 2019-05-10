@@ -22,11 +22,14 @@ public class Fonctions implements Serializable {
 	private String libelleFonction;
 
 	public Fonctions() {
-		super();
 	}
 
+	public Fonctions(String libelleFonction) {
+		this.libelleFonction = libelleFonction;
+	}
+
+
 	public Fonctions(Integer idFonction, String libelleFonction) {
-		super();
 		this.idFonction = idFonction;
 		this.libelleFonction = libelleFonction;
 	}

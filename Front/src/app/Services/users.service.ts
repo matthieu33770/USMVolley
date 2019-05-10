@@ -47,7 +47,7 @@ export class UsersService {
       }
       return of(this.availableUser.find(user => user.idUser === idUser));
     } else {
-      return of(new User(0, '', '', false, [], null));
+      return of(new User(0, '', '', null));
     }
   }
 
@@ -64,7 +64,7 @@ export class UsersService {
       }
       return of(this.availableUser.find(user => user.username === username));
     } else {
-      return of(new User(0, '', '', false, [], null));
+      return of(new User(0, '', '', null));
     }
   }
 

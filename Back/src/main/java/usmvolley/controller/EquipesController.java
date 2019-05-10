@@ -33,7 +33,7 @@ public class EquipesController {
 	 * @return liste de toutes les équipes
 	 */
 	@GetMapping("/get/equipes")
-	@PreAuthorize("hasAuthority('ROLE_BUREAU') or hasRole('ROLE_CAPITAINE')")
+//	@PreAuthorize("hasAuthority('ROLE_BUREAU') or hasRole('ROLE_CAPITAINE')")
 	public ResponseEntity<List<Equipes>> getListeEquipes() {
 		
 		List<Equipes> listeEquipes = null;

@@ -160,7 +160,7 @@ public class ArticlesController {
 	
 	// upload a file and put it in D:\\eclipse-workspace\\USMVolley\\Front\\src\\assets\\documents\\ and memorize its name in DB   
 	@PostMapping(value = "/upload", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-	@PreAuthorize("hasRole('ROLE_BUREAU')")
+//	@PreAuthorize("hasRole('ROLE_BUREAU')")
 		public ResponseEntity<?> uploadFile(@RequestParam("data") MultipartFile multipartFile) throws UploadFileException, IllegalStateException, IOException {
 				
 			    if (multipartFile == null || multipartFile.isEmpty()) {

@@ -16,7 +16,7 @@ import { User } from '../Model/User';
 export class ChangementMdpComponent implements OnInit {
 
   idUser: number;
-  editionUser: User = new User(0, '', '', false, [], null);
+  editionUser: User = new User(0, '', '', null);
 
   loginForm = this.fb.group({
     username: [null, Validators.required],

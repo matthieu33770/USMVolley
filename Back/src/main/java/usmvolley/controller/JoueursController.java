@@ -68,7 +68,7 @@ public class JoueursController {
 	 * @return liste de tous les joueurs
 	 */
 	@GetMapping("/get/joueurs")
-	@PreAuthorize("hasAuthority('ROLE_BUREAU') or hasRole('ROLE_CAPITAINE')")
+	@PreAuthorize("hasAuthority('Bureau') or hasRole('ROLE_CAPITAINE')")
 	public ResponseEntity<List<Joueurs>> getListeJoueurs() {
 		
 		List<Joueurs> listeJoueurs = null;
@@ -218,7 +218,7 @@ public class JoueursController {
 	 * @return modifie un joueur
 	 */
 	@PutMapping("/update/{idJoueur}")
-	@PreAuthorize("hasRole('ROLE_BUREAU')")
+//	@PreAuthorize("hasRole('ROLE_BUREAU')")
 	public ResponseEntity<?> updateJoueur(@RequestBody Joueurs joueur, @PathVariable Integer idJoueur) throws Exception
 	{
 		Joueurs modificationJoueur = null;

@@ -38,7 +38,7 @@ export class ListeJoueursComponent implements OnInit {
     this.joueurService.publishJoueurs();
     this.joueurList = this.joueurService.availableJoueur$;
     this.getUser();
-    this.getRole();
+    // this.getRole();
     this.getFonction();
     this.getPlayer();
     this.joueurService.getJoueurs().subscribe(Joueurs => {this.dataSource = new MatTableDataSource<Joueur>(Joueurs);

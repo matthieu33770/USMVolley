@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
-import usmvolley.model.Role;
+import usmvolley.model.Fonctions;
 
 /**
  * Specific App User DTO to be able to send user data without password through REST responses.
@@ -15,7 +15,7 @@ public class AppUserDto {
 
     private String username;
 
-    private List<Role> roleList;
+    private Fonctions fonction;
 
     private AppUserDto() {
 
@@ -25,8 +25,8 @@ public class AppUserDto {
         this.username = username;
     }
 
-    public AppUserDto(@NotNull String username, List<Role> roleList) {
+    public AppUserDto(@NotNull String username, Fonctions fonction) {
         this.username = username;
-        this.roleList = roleList;
+        this.fonction = fonction;
     }
 }

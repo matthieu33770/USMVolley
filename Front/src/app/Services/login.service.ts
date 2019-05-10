@@ -22,9 +22,7 @@ export class LoginService {
 
   constructor(private httpClient: HttpClient,
               private router: Router,
-              private snackBar: MatSnackBar) {
-    this.getUserRole();
-  }
+              private snackBar: MatSnackBar) { this.getUserRole(); }
 
   public get logged(): boolean {
     console.log(sessionStorage.getItem(environment.accessToken));
@@ -57,8 +55,11 @@ export class LoginService {
   private getUserRole() {
     if (sessionStorage.getItem(environment.accessToken)) {
       const decodedToken = jwt_decode(sessionStorage.getItem(environment.accessToken));
-      const authority = decodedToken.auth[0].authority;
+      console.log(decodedToken);
+      const authority: string = decodedToken.auth.libelleFonction;
+      console.log(authority);
       this.userRole.next(authority);
+      console.log(this.userRole);
     }
   }
 }

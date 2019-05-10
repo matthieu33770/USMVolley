@@ -28,12 +28,12 @@ export class ConnexionComponent {
               private snackBar: MatSnackBar) { }
 
   onSubmit() {
-    const user = new User(0, '', '', false, [], null);
+    const user = new User(0, '', '', null);
     user.username = this.loginForm.value.username;
     user.mdp = this.loginForm.value.mdp;
     this.loginService.signIn(user);
     console.log(user);
-    console.log(user.roleList);
+    console.log(user.fonction);
   }
 
   oubli() {

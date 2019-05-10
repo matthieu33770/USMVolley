@@ -23,10 +23,10 @@ export class DetailJoueurComponent implements OnInit {
   idEquipe: number;
   users: User [] = [];
   userList: User [];
-  roles: Role [] = [];
+  // roles: Role [] = [];
   fonctions: Fonction [] = [];
   fonctionList: Fonction [];
-  roleList: any = [];
+  // roleList: any = [];
   equipes: Equipe [] = [];
   equipe: Equipe;
   equipeList: Equipe [];
@@ -66,8 +66,7 @@ export class DetailJoueurComponent implements OnInit {
   }
 
   onSave() {
-    console.log(this.editionJoueur);
-    console.log(this.editionJoueur.user.roleList);
+    this.editionJoueur.user.fonction = this.fonctionList.find(fonction => fonction.idFonction === this.editionJoueur.user.fonction.idFonction);
     this.joueurService.updateJoueur(this.editionJoueur);
   }
 }

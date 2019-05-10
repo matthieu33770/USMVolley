@@ -1,14 +1,9 @@
 package usmvolley.model;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,20 +29,9 @@ public class Users implements Serializable {
 	@Column(name = "mdp")
 	private String mdp;
 	
-//	@Column(name = "is_Valide")
-//	private boolean isValide;
-
-	@ElementCollection(fetch = FetchType.EAGER)
-	@Enumerated(EnumType.STRING)
-	private List<Role> roleList;
-	
-//	@ElementCollection(fetch = FetchType.EAGER)
-//	@Enumerated(EnumType.STRING)
-//	private Role role;
-	
-//	@ManyToOne
-//	@JoinColumn(name = "fonction")
-//	private Fonctions fonction;
+	@ManyToOne
+	@JoinColumn(name = "fonction")
+	private Fonctions fonction;
 
 	public Users() {
 	}
@@ -57,20 +41,21 @@ public class Users implements Serializable {
 		this.mdp = mdp;
 	}
 	
-	public Users(@NotNull String username,@NotNull String mdp, List<Role> roleList) {
+	public Users(@NotNull String username,@NotNull String mdp, Fonctions fonction) {
+		super();
 		this.username = username;
 		this.mdp = mdp;
-		this.roleList = roleList;
+		this.fonction = fonction;
 	}
 
-	public Users(Integer idUser, String username, String mdp, List<Role> roleList) {
+	public Users(Integer idUser, String username, String mdp, Fonctions fonction) {
 		super();
 		this.idUser = idUser;
 		this.username = username;
 		this.mdp = mdp;
-		this.roleList = roleList;
+		this.fonction = fonction;
 	}	
-
+	
 	public Integer getIdUser() {
 		return idUser;
 	}
@@ -95,37 +80,13 @@ public class Users implements Serializable {
 		this.username = username;
 	}
 
-//	public boolean isValide() {
-//		return isValide;
-//	}
-//
-//	public void setValide(boolean isValide) {
-//		this.isValide = isValide;
-//	}
-
-	public List<Role> getRoleList() {
-		return roleList;
+	public Fonctions getFonction() {
+		return fonction;
 	}
 
-	public void setRole(List<Role> roleList) {
-		this.roleList = roleList;
+	public void setIdFonction(Fonctions fonction) {
+		this.fonction = fonction;
 	}
-	
-//	public Role getRole() {
-//		return role;
-//	}
-//
-//	public void setRole(Role role) {
-//		this.role = role;
-//	}
-
-//	public Fonctions getFonction() {
-//		return fonction;
-//	}
-//
-//	public void setIdFonction(Fonctions fonction) {
-//		this.fonction = fonction;
-//	}
 
 	@Override
 	public String toString() {

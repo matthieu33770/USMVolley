@@ -45,7 +45,6 @@ import { ListeCreneauxComponent } from './liste-creneaux/liste-creneaux.componen
 import { DetailLieuxComponent } from './detail-lieux/detail-lieux.component';
 import { DetailCreneauxComponent } from './detail-creneaux/detail-creneaux.component';
 import { DetailDisponibilitesComponent } from './detail-disponibilites/detail-disponibilites.component';
-import { CalendrierComponent } from './calendrier/calendrier.component';
 import { ListeCategoriesComponent } from './liste-categories/liste-categories.component';
 import { DetailCategorieComponent } from './detail-categorie/detail-categorie.component';
 import {LicencieGuard} from './guards/licencie.guards';
@@ -86,7 +85,6 @@ registerLocaleData(localeFr);
     DetailLieuxComponent,
     DetailCreneauxComponent,
     DetailDisponibilitesComponent,
-    CalendrierComponent,
     ListeCategoriesComponent,
     DetailCategorieComponent,
     ConsultationArticleComponent,

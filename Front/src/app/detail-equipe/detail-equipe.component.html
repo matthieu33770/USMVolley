@@ -5,7 +5,7 @@
     <h1 *ngIf="!isModification" class="equipe">Création d'une nouvelle équipe</h1>
     <div>
     <mat-form-field>
-      <input matInput placeholder="libelleEquipe" [(ngModel)]="editionEquipe.libelleEquipe" name="libelleEquipe">
+      <input matInput placeholder="Nom de l'équipe" [(ngModel)]="editionEquipe.libelleEquipe" name="libelleEquipe">
     </mat-form-field>
     <mat-form-field>
       <mat-select placeholder="Libellé de la catégorie" [(ngModel)]="editionEquipe.categorie.libelleCategorie" name="categorie">
@@ -13,6 +13,9 @@
           {{categorie.libelleCategorie}}
         </mat-option>
       </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Couleur" [(ngModel)]="editionEquipe.couleur" name="couleur">
     </mat-form-field>
   </div>
   </div>

@@ -28,6 +28,9 @@ public class Equipes implements Serializable {
 	
 	@Column(name = "libelle_equipe")
 	private String libelleEquipe;
+
+	@Column(name = "couleur_equipe")
+	private String couleur;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_categorie")
@@ -43,9 +46,10 @@ public class Equipes implements Serializable {
 	public Equipes() {
 	}
 
-	public Equipes(Integer idEquipe, String libelleEquipe, Categories categorie, Collection<Joueurs> joueurs) {
+	public Equipes(Integer idEquipe, String libelleEquipe, String couleur, Categories categorie, Collection<Joueurs> joueurs) {
 		this.idEquipe = idEquipe;
 		this.libelleEquipe = libelleEquipe;
+		this.couleur = couleur;
 		this.categorie = categorie;
 		this.joueurs = joueurs;
 	}
@@ -66,6 +70,14 @@ public class Equipes implements Serializable {
 
 	public void setLibelleEquipe(String libelleEquipe) {
 		this.libelleEquipe = libelleEquipe;
+	}
+
+	public String getCouleur() {
+		return couleur;
+	}
+
+	public void setCouleur(String couleur) {
+		this.couleur = couleur;
 	}
 
 	public Categories getCategorie() {

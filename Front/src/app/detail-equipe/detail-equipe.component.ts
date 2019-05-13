@@ -26,7 +26,7 @@ export class DetailEquipeComponent implements OnInit {
   equipeList: Equipe [];
   joueurAdulte: Joueur [] = [];
   joueurEquipe: Joueur[] = [];
-  editionEquipe: Equipe = new Equipe(0, '', new Categorie(1, 'M11', 11), null);
+  editionEquipe: Equipe = new Equipe(0, '', '', new Categorie(1, 'M11', 11), null);
   displayedColumns: string[] = ['select', 'nomJoueur', 'prenomJoueur', 'licenceJoueur'];
   dataEquipe = new MatTableDataSource<Joueur>();
   dataAdulte = new MatTableDataSource<Joueur>();

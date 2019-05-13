@@ -63,13 +63,18 @@
   <mat-form-field>
     <input matInput placeholder="Numero de Licence" [(ngModel)]="editionJoueur.avoir.licence.numeroLicence" name="numeroLicence">
   </mat-form-field>
-  <mat-form-field>
-    <mat-select placeholder="Validité Licence" [(ngModel)]="editionJoueur.avoir.isValide" formControlName="validiteLicence">
+  <section>
+    <p>Licence payée</p>
+    <mat-checkbox class="paiement" [(ngModel)]="paye">Payé</mat-checkbox>
+  </section>
+  <!-- <mat-form-field>
+    <mat-select placeholder="Licence payée" [(ngModel)]="editionJoueur.avoir.isValide" formControlName="validiteLicence">
+      <mat-checkbox class="example-margin" [(ngModel)]="paye">Licence Payée</mat-checkbox>
       <mat-option value="vide">  </mat-option>
       <mat-option value="true">Licence Ok</mat-option>
-      <mat-option value=false>Licence Nok</mat-option>
+      <mat-option value="false">Licence Nok</mat-option>
     </mat-select>
-  </mat-form-field>
+  </mat-form-field> -->
 </div>
 <div class="boutons">
   <button mat-raised-button color="primary" type="submit" (click)="onSave()">Enregistrer</button>

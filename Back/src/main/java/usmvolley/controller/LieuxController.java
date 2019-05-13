@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,7 @@ public class LieuxController {
 	 * @return liste de tous les lieux
 	 */
 	@GetMapping("/get/lieux")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<List<Lieux>> getListeLieux() {
 		
 		List<Lieux> listeLieux = null;
@@ -50,6 +52,7 @@ public class LieuxController {
 	 * @return liste un lieu
 	 */
 	@GetMapping("/get/unLieu/{idLieu}")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> getUnLieu(@PathVariable Integer idLieu) {
 		
 		Optional<Lieux> lieu = null;
@@ -73,6 +76,7 @@ public class LieuxController {
 	 * @return ajoute un lieu
 	 */
 	@PostMapping("/create")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> addLieu(@RequestBody Lieux lieu) {
 		
 		Lieux newLieu = null;
@@ -92,6 +96,7 @@ public class LieuxController {
 	 * @return supprime un lieu
 	 */
 	@DeleteMapping("/delete/{idLieu}")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> deleteLieu(@PathVariable Integer idLieu)
 	{
 		try
@@ -110,6 +115,7 @@ public class LieuxController {
 	 * @return modifie un lieu
 	 */
 	@PutMapping("/update/{idLieu}")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> updateLieu(@RequestBody Lieux lieu, @PathVariable Integer idLieu) throws Exception
 	{
 		Lieux modificationLieu= null;

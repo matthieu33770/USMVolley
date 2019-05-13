@@ -45,7 +45,7 @@ public class UsersController {
     }
     
     @GetMapping
-//    @PreAuthorize("hasRole('ROLE_BUREAU')")
+    @PreAuthorize("hasAuthority('Bureau')")
 	public List<Users> getUsers() {
 		return userService.findAllUsers();
 	}
@@ -84,7 +84,7 @@ public class UsersController {
 	 * @return liste de tous les users
 	 */
 	@GetMapping("/get/users")
-//	@PreAuthorize("hasRole('ROLE_CAPITAINE') or hasRole('ROLE_BUREAU') or hasRole('ROLE_LICENCIE')")
+    @PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine') or hasAuthority('Licencie')")
 	public List<Users> getListeUsers() {
 		
 		List<Users> listeUsers = null;
@@ -103,7 +103,7 @@ public class UsersController {
 	 * @return liste un user
 	 */
 	@GetMapping("/get/unUser/{idUser}")
-//	@PreAuthorize("hasRole('ROLE_BUREAU')")
+    @PreAuthorize("hasAuthority('Bureau')")
 	public ResponseEntity<?> getUnUser(@PathVariable Integer idUser) {
 		
 		Optional<Users> user = null;
@@ -126,7 +126,7 @@ public class UsersController {
 	 * @return liste un user
 	 */
 	@GetMapping("/get/byUser/{username}")
-//	@PreAuthorize("hasRole('ROLE_BUREAU')")
+    @PreAuthorize("hasAuthority('Bureau')")
 	public ResponseEntity<?> getUserByUsername(@PathVariable String username) {
 		
 		Users user = null;
@@ -150,7 +150,7 @@ public class UsersController {
 	 * @return ajoute un user
 	 */
 	@PostMapping("/create")
-//	@PreAuthorize("hasRole('ROLE_BUREAU')")
+    @PreAuthorize("hasAuthority('Bureau')")
 	public ResponseEntity<?> addUser(@RequestBody Users user) {
 		
 		Users newUser = null;
@@ -178,7 +178,7 @@ public class UsersController {
 	 * @return supprime un user
 	 */
 	@DeleteMapping("/delete/{idUser}")
-//	@PreAuthorize("hasRole('ROLE_BUREAU')")
+    @PreAuthorize("hasAuthority('Bureau')")
 	public ResponseEntity<?> deleteUser(@PathVariable Integer idUser)
 	{
 		try
@@ -197,7 +197,7 @@ public class UsersController {
 	 * @return modifie un user
 	 */
 	@PutMapping("/update/{idUser}")
-//	@PreAuthorize(value = "")
+    @PreAuthorize("hasAuthority('Bureau')")
 	public ResponseEntity<?> updateUser(@RequestBody Users user, @PathVariable Integer idUser) throws Exception
 	{
 		System.out.println("User : " + user);

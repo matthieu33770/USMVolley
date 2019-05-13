@@ -16,11 +16,18 @@
 }
 
 .villes {
-  flex-direction: row;
+  display: flex;
+  justify-content: center;
 }
 
 .mios {
-  width: 20%;
+  width: auto;
+  height: 208px;
+  margin-right: 50px;
+}
+
+.salles {
+  margin-left: 50px;
 }
 
 .autres {

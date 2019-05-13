@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +34,7 @@ public class LicenceController {
 	 * @return liste de toutes les licences
 	 */
 	@GetMapping("/get/licences")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<List<Licence>> getListeLicences() {
 		
 		List<Licence> listeLicences = null;
@@ -51,6 +53,7 @@ public class LicenceController {
 	 * @return liste une licence
 	 */
 	@GetMapping("/get/uneLicence/{idLicence}")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> getUneLicence(@PathVariable Integer idLicence) {
 		
 		Optional<Licence> licence = null;
@@ -74,6 +77,7 @@ public class LicenceController {
 	 * @return ajoute une licence
 	 */
 	@PostMapping("/create")
+	@PreAuthorize("hasAuthority('Bureau')")
 	public ResponseEntity<?> addLicence(@RequestBody Licence licence) {
 		
 		Licence newLicence = null;
@@ -118,6 +122,7 @@ public class LicenceController {
 	 * @return supprime une licence
 	 */
 	@DeleteMapping("/delete/{idLicence}")
+	@PreAuthorize("hasAuthority('Bureau')")
 	public ResponseEntity<?> deleteLicence(@PathVariable Integer idLicence)
 	{
 		try
@@ -136,6 +141,7 @@ public class LicenceController {
 	 * @return modifie une licence
 	 */
 	@PutMapping("/update/{idLicence}")
+	@PreAuthorize("hasAuthority('Bureau')")
 	public ResponseEntity<?> updateLicence(@RequestBody Licence licence, @PathVariable Integer idLicence) throws Exception
 	{
 		Licence modificationLicence = null;

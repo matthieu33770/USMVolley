@@ -1,0 +1,23 @@
+<div class="envoyerMail">
+    <div class="titre">
+    <h1>Envoyer un mail</h1>
+    </div>
+
+    <div>
+      <mat-form-field>
+        <mat-select placeholder="Libellé de la catégorie" [(ngModel)]="categorie.libelleCategorie" name="categorie">
+          <mat-option *ngFor="let categorie of categoriesList" [value]="categorie.libelleCategorie">
+            {{categorie.libelleCategorie}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Libellé de l'équipe" [(ngModel)]="equipe.libelleEquipe" name="equipe">
+          <mat-option *ngFor="let equipe of equipesList" [value]="equipe.libelleEquipe">
+            {{equipe.libelleEquipe}}
+          </mat-option>
+       </mat-select>
+      </mat-form-field>
+    </div>
+
+</div>

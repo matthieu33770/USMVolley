@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,7 @@ public class CreneauController {
 	 * @return liste de tous les creneaux
 	 */
 	@GetMapping("/get/creneaux")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<List<Creneau>> getListeCreneaux() {
 		
 		List<Creneau> listeCreneaux = null;
@@ -50,6 +52,7 @@ public class CreneauController {
 	 * @return liste un creneaux
 	 */
 	@GetMapping("/get/unCreneau/{idCreneau}")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> getUnCreneau(@PathVariable Integer idCreneau) {
 		
 		Optional<Creneau> creneau = null;
@@ -73,6 +76,7 @@ public class CreneauController {
 	 * @return ajoute creneau
 	 */
 	@PostMapping("/create")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> addCreneau(@RequestBody Creneau creneau) {
 		
 		Creneau newCreneau = null;
@@ -92,6 +96,7 @@ public class CreneauController {
 	 * @return supprime creneau
 	 */
 	@DeleteMapping("/delete/{idCreneau}")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> deleteCreneau(@PathVariable Integer idCreneau)
 	{
 		try
@@ -110,6 +115,7 @@ public class CreneauController {
 	 * @return modifie un Creneau
 	 */
 	@PutMapping("/update/{idCreneau}")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> updateCreneau(@RequestBody Creneau creneau, @PathVariable Integer idCreneau) throws Exception
 	{
 		

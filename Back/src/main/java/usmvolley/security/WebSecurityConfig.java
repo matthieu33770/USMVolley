@@ -55,23 +55,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/users/signin").permitAll()
                 .antMatchers("/users/sign-up").permitAll()
                 .antMatchers("/users/update/**").permitAll()
-                
                 .antMatchers("/joueurs/create").permitAll()
-                .antMatchers("/email/reinit/**").permitAll()
-//                .antMatchers("/users/**").permitAll()
-                .antMatchers("/roles/**").permitAll()
-                .antMatchers("/fonctions/**").permitAll()
-//                .antMatchers("/equipes/**").hasAnyAuthority("ROLE_CAPITAINE")
-//                .antMatchers("/articles/**").permitAll()
-                .antMatchers("/statuts/**").permitAll()
-                .antMatchers("/lieux/**").permitAll()
-                .antMatchers("/creneaux/**").permitAll()
-                .antMatchers("/disponibilite/**").permitAll()
-                .antMatchers("/categories/**").permitAll()
-                .antMatchers("/manifestations/**").permitAll()
+                .antMatchers("/joueurs/upload").permitAll()
+                .antMatchers("/avoir/create").permitAll()
+                .antMatchers("/articles/get/articles").permitAll()
+                .antMatchers("/email/changeMdp").permitAll()
+                .antMatchers("/manifestations/get/manifestations").permitAll()
+                
                 // Disallow everything else...
                 .anyRequest().authenticated();
-//        		.anyRequest().permitAll();
         
 //      // Apply JWT vérifie la requete avant envoie vers le controller
         http.addFilterBefore(new JwtTokenFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
@@ -85,19 +77,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
 //        web.ignoring().antMatchers("/users/**");
-        web.ignoring().antMatchers("/email");
+//        web.ignoring().antMatchers("/email");
 //        web.ignoring().antMatchers("/joueurs/**");
-        web.ignoring().antMatchers("/roles/**");
-        web.ignoring().antMatchers("/fonctions/**");
+//        web.ignoring().antMatchers("/roles/**");
+//        web.ignoring().antMatchers("/fonctions/**");
 //        web.ignoring().antMatchers("/equipes/**");
 //        web.ignoring().antMatchers("/articles/**");
-        web.ignoring().antMatchers("/statuts/**");
-        web.ignoring().antMatchers("/lieux/**");
-        web.ignoring().antMatchers("/creneaux/**");
-        web.ignoring().antMatchers("/disponibilite/**");
-        web.ignoring().antMatchers("/categories/**");
-        web.ignoring().antMatchers("/manifestations/**");
-        web.ignoring().antMatchers("/resources/**");
+//        web.ignoring().antMatchers("/statuts/**");
+//        web.ignoring().antMatchers("/lieux/**");
+//        web.ignoring().antMatchers("/creneaux/**");
+//        web.ignoring().antMatchers("/disponibilite/**");
+//        web.ignoring().antMatchers("/categories/**");
+//        web.ignoring().antMatchers("/manifestations/**");
+//        web.ignoring().antMatchers("/resources/**");
         //.anyRequest();
     }
 

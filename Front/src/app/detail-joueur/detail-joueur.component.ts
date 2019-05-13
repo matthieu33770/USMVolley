@@ -31,6 +31,7 @@ export class DetailJoueurComponent implements OnInit {
   equipe: Equipe;
   equipeList: Equipe [];
   editionJoueur: Joueur = new Joueur(0, '', '', '', 0, '', 0, '', '', '', '', null, null, null, null);
+  paye = false;
 
   constructor(private route: ActivatedRoute,
               private joueurService: JoueursService,
@@ -66,6 +67,16 @@ export class DetailJoueurComponent implements OnInit {
   }
 
   onSave() {
+    console.log(this.paye);
+    console.log(this.editionJoueur.avoir.licence.certificatMedical);
+    console.log(this.editionJoueur.avoir.licence.formulaire);
+    // console.log();
+    this.editionJoueur.avoir.licence.isPayeLicence = this.paye;
+    if (!this.editionJoueur.avoir.licence.certificatMedical && !this.editionJoueur.avoir.licence.formulaire && this.editionJoueur.avoir.licence.isPayeLicence === true) {
+      this.editionJoueur.avoir.isValide = true;
+    } else {
+      this.editionJoueur.avoir.isValide = false;
+    }
     this.editionJoueur.user.fonction = this.fonctionList.find(fonction => fonction.idFonction === this.editionJoueur.user.fonction.idFonction);
     this.joueurService.updateJoueur(this.editionJoueur);
   }

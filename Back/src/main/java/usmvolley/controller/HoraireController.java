@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +34,7 @@ public class HoraireController {
 	 * @return liste de tous les horaires
 	 */
 	@GetMapping("/get/horaires")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<List<Horaire>> getListeHoraires() {
 		
 		List<Horaire> listeHoraires = null;
@@ -51,6 +53,7 @@ public class HoraireController {
 	 * @return liste un horaire
 	 */
 	@GetMapping("/get/unHoraire/{idHoraire}")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> getUnHoraire(@PathVariable Integer idHoraire) {
 		
 		Optional<Horaire> horaire = null;
@@ -74,6 +77,7 @@ public class HoraireController {
 	 * @return ajoute un horaire
 	 */
 	@PostMapping("/create")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> addHoraire(@RequestBody Horaire horaire) {
 		
 		Horaire newHoraire = null;
@@ -93,6 +97,7 @@ public class HoraireController {
 	 * @return supprime horaire
 	 */
 	@DeleteMapping("/delete/{idHoraire}")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> deleteHoraire(@PathVariable Integer idHoraire)
 	{
 		try
@@ -111,6 +116,7 @@ public class HoraireController {
 	 * @return modifie un horaire
 	 */
 	@PutMapping("/update/{idHoraire}")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> updateHoraire(@RequestBody Horaire horaire, @PathVariable Integer idHoraire) throws Exception
 	{
 		

@@ -12,7 +12,7 @@ export class LicencieGuard implements CanActivate {
     if (!this.loginService.isLoggedin) {
       this.router.navigate(['login']);
       return false;
-    } else if (this.loginService.userRole.getValue().includes('ROLE_LICENCIE')) {
+    } else if (this.loginService.userRole.getValue().includes('Licencie')) {
       return true;
     }
 

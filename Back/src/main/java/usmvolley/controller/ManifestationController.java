@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,7 @@ public class ManifestationController {
 	 * @return liste de toutes les manifestations
 	 */
 	@GetMapping("/get/manifestations")
+//	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine') or hasAuthority('Licencie')")
 	public ResponseEntity<List<Manifestations>> getListeManifestations() {
 		
 		List<Manifestations> listeManifestations = null;
@@ -50,6 +52,7 @@ public class ManifestationController {
 	 * @return liste une manifestation
 	 */
 	@GetMapping("/get/uneManifestation/{idManifestation}")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine') or hasAuthority('Licencie')")
 	public ResponseEntity<?> getUneManifestation(@PathVariable Integer idManifestation) {
 		
 		Optional<Manifestations> manifestation = null;
@@ -73,6 +76,7 @@ public class ManifestationController {
 	 * @return ajoute une Manifestation
 	 */
 	@PostMapping("/create")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> addManifestation(@RequestBody Manifestations manifestation) {
 		
 		Manifestations newManifestation = null;
@@ -96,6 +100,7 @@ public class ManifestationController {
 	 * @return supprime une Manifestation
 	 */
 	@DeleteMapping("/delete/{idManifestation}")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> deleteManifestation(@PathVariable Integer idManifestation)
 	{
 		try
@@ -114,6 +119,7 @@ public class ManifestationController {
 	 * @return modifie une Manifestation
 	 */
 	@PutMapping("/update/{idManifestation}")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine') or hasAuthority('Licencie')")
 	public ResponseEntity<?> updateManifestation(@RequestBody Manifestations manifestation, @PathVariable Integer idManifestation) throws Exception
 	{
 		

@@ -28,6 +28,7 @@ import { CalendrierComponent } from './calendrier/calendrier.component';
 import { ListeCategoriesComponent } from './liste-categories/liste-categories.component';
 import { DetailCategorieComponent } from './detail-categorie/detail-categorie.component';
 import { ChangementMdpComponent } from './changement-mdp/changement-mdp.component';
+import { EnvoyerMailComponent } from './envoyer-mail/envoyer-mail.component';
 
 const routes: Routes = [
   {path: 'equipes', component: EquipesComponent},
@@ -40,6 +41,7 @@ const routes: Routes = [
   {path: 'connexion/chgtMdp/:idUser', component: ChangementMdpComponent},
   {path: 'manifestations', component: ListeManifestationComponent},
   {path: 'gestion', component: GestionComponent},
+  {path: 'envoyerMail', component: EnvoyerMailComponent},
   {path: 'gestion/joueurs', component: ListeJoueursComponent},
   {path: 'gestion/joueurs/detailjoueur/:idJoueur', component: DetailJoueurComponent},
   {path: 'gestion/joueurs/detailjoueur/newJoueur', component: SaisieComponent},

@@ -54,6 +54,7 @@ import {BureauGuard} from './guards/bureau.guards';
 import {JwtInterceptor} from './http-interceptor/jwt.interceptor';
 import { ConsultationArticleComponent } from './consultation-article/consultation-article.component';
 import { ChangementMdpComponent } from './changement-mdp/changement-mdp.component';
+import { EnvoyerMailComponent } from './envoyer-mail/envoyer-mail.component';
 
 registerLocaleData(localeFr);
 
@@ -89,7 +90,8 @@ registerLocaleData(localeFr);
     ListeCategoriesComponent,
     DetailCategorieComponent,
     ConsultationArticleComponent,
-    ChangementMdpComponent
+    ChangementMdpComponent,
+    EnvoyerMailComponent
   ],
   imports: [
     BrowserModule,

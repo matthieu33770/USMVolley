@@ -33,7 +33,7 @@ public class EquipesController {
 	 * @return liste de toutes les équipes
 	 */
 	@GetMapping("/get/equipes")
-//	@PreAuthorize("hasAuthority('ROLE_BUREAU') or hasRole('ROLE_CAPITAINE')")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<List<Equipes>> getListeEquipes() {
 		
 		List<Equipes> listeEquipes = null;
@@ -52,7 +52,7 @@ public class EquipesController {
 	 * @return liste une équipe
 	 */
 	@GetMapping("/get/uneEquipe/{idEquipe}")
-	@PreAuthorize("hasAuthority('ROLE_BUREAU') or hasRole('ROLE_CAPITAINE')")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> getUneEquipe(@PathVariable Integer idEquipe) {
 		
 		Optional<Equipes> equipe = null;
@@ -76,7 +76,7 @@ public class EquipesController {
 	 * @return ajoute une équipe
 	 */
 	@PostMapping("/create")
-	@PreAuthorize("hasAuthority('ROLE_BUREAU') or hasRole('ROLE_CAPITAINE')")
+	@PreAuthorize("hasAuthority('Bureau')")
 	public ResponseEntity<?> addEquipe(@RequestBody Equipes equipe) {
 		
 		Equipes newEquipe = null;
@@ -98,7 +98,7 @@ public class EquipesController {
 	 * @return supprime une equipe
 	 */
 	@DeleteMapping("/delete/{idEquipe}")
-	@PreAuthorize("hasAuthority('ROLE_BUREAU') or hasRole('ROLE_CAPITAINE')")
+	@PreAuthorize("hasAuthority('Bureau')")
 	public ResponseEntity<?> deleteEquipe(@PathVariable Integer idEquipe)
 	{
 		try
@@ -117,7 +117,7 @@ public class EquipesController {
 	 * @return modifie une equipe
 	 */
 	@PutMapping("/update/{idEquipe}")
-	@PreAuthorize("hasAuthority('ROLE_BUREAU') or hasRole('ROLE_CAPITAINE')")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> updateEquipe(@RequestBody Equipes equipe, @PathVariable Integer idEquipe) throws Exception
 	{
 		Equipes modificationEquipe = null;

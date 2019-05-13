@@ -32,3 +32,8 @@
         width: 80vw;
     }
 }
+
+.boutons {
+    display: flex;
+    justify-content: flex-end;
+}

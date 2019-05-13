@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,7 @@ public class FonctionsController {
 	 * @return liste de tous les fonctions
 	 */
 	@GetMapping("/get/fonctions")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<List<Fonctions>> getListeFonctions() {
 		
 		List<Fonctions> listeFonctions = null;
@@ -50,6 +52,7 @@ public class FonctionsController {
 	 * @return liste une fonction
 	 */
 	@GetMapping("/get/unRole/{idFonction}")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> getUneFonction(@PathVariable Integer idFonction) {
 		
 		Optional<Fonctions> fonction = null;
@@ -73,6 +76,7 @@ public class FonctionsController {
 	 * @return ajoute une fonction
 	 */
 	@PostMapping("/create")
+	@PreAuthorize("hasAuthority('Bureau')")
 	public ResponseEntity<?> addFonction(@RequestBody Fonctions fonction) {
 		
 		Fonctions newFonction = null;
@@ -92,6 +96,7 @@ public class FonctionsController {
 	 * @return supprime une fonction
 	 */
 	@DeleteMapping("/delete/{idFonction}")
+	@PreAuthorize("hasAuthority('Bureau')")
 	public ResponseEntity<?> deleteFonction(@PathVariable Integer idFonction)
 	{
 		try
@@ -110,6 +115,7 @@ public class FonctionsController {
 	 * @return modifie une fonciton
 	 */
 	@PutMapping("/update/{idFonction}")
+	@PreAuthorize("hasAuthority('Bureau')")
 	public ResponseEntity<?> updateFonction(@RequestBody Fonctions fonction, @PathVariable Integer idFonction) throws Exception
 	{
 		Fonctions modificationFonction = null;

@@ -4,7 +4,7 @@ export class Avoir {
 
     constructor (public idAvoir: number,
                  public anneeAvoir: number,
-                 public isValideAvoir: Boolean,
+                 public isValide: Boolean,
                  public licence: Licence,
     ) {}
 }

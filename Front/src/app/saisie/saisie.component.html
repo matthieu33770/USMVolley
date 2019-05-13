@@ -4,8 +4,8 @@
   </div>
 
   <div class="data">
-    <form [formGroup]="joueurForm" > 
-      <div class="left">       
+    <form [formGroup]="joueurForm" class="joueurForm"> 
+      <div class="left dimension">       
         <div formGroupName="joueurGroup">
             <mat-form-field class="watch-category-full-width">
                 <input matInput required placeholder="Nom du joueur" type="text" formControlName="nom" [errorStateMatcher]="confirmValidParentMatcher" [(ngModel)]="editionJoueur.nom">
@@ -44,7 +44,7 @@
           </mat-form-field>
         </div>
       </div>
-      <div clas="center">
+      <div class="center dimension">
         <div> 
           <mat-form-field>
             <input matInput placeholder="Numéro" [(ngModel)]="editionJoueur.numeroAdresse" formControlName="numeroAdresse">
@@ -76,7 +76,7 @@
           </mat-form-field>   
         </div>
       </div>
-      <div class="right">
+      <div class="right dimension">
         <div>
           <mat-form-field>
             <input matInput placeholder="Nom d'utilisateur" formControlName="username" [(ngModel)]="editionUser.username" >
@@ -117,32 +117,34 @@
             </mat-select>
           </mat-form-field>
         </div>
+        <div *ngIf="choixCh">
+            <a>
+              A l'ordre de <strong>USM Volley Ball</strong>
+            </a>
+        </div>
+        <div *ngIf="choixVir">
+          <a download="RIB" target="_blank" href="/assets/documents/RIB.pdf">
+            Télécharger le R.I.B. du club
+          </a>
+        </div>
+        <div *ngIf="choixPayPal">
+          <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+          <!-- <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="4NM7JTQLQAENU">
+            <input type="image" src="https://www.paypalobjects.com/fr_FR/FR/i/btn/btn_subscribeCC_LG.gif" name="submit" alt="PayPal, le réflexe sécurité pour payer en ligne">
+            <img alt="" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
+          </form>   -->
+        </div> 
       </div> 
-      </form>
-      <div *ngIf="choixCh">
-              <a>
-                A l'ordre de <strong>USM Volley Ball</strong>
-              </a>
-      </div>
-      <div *ngIf="choixVir">
-        <a download="RIB" target="_blank" href="/assets/documents/RIB.pdf">
-          Télécharger le R.I.B. du club
-        </a>
-      </div>
-      <div *ngIf="choixPayPal">
-        <ngx-paypal [config]="payPalConfig"></ngx-paypal>
-        <!-- <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-          <input type="hidden" name="cmd" value="_s-xclick">
-          <input type="hidden" name="hosted_button_id" value="4NM7JTQLQAENU">
-          <input type="image" src="https://www.paypalobjects.com/fr_FR/FR/i/btn/btn_subscribeCC_LG.gif" name="submit" alt="PayPal, le réflexe sécurité pour payer en ligne">
-          <img alt="" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
-        </form>   -->
-      </div> 
+    </form>
+      
     <br>
   </div> 
 
-  <div class="bouton">
+  <div class="boutons">
     <button *ngIf="!isLoggedin" mat-raised-button color="accent" type="submit" (click)="onSave()">Enregistrer</button>
     <button *ngIf="isLoggedin" mat-raised-button color="accent" type="submit" (click)="onSave()">Mise à jour</button>
   </div>
+  <br>
 </div>

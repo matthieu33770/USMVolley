@@ -7,7 +7,7 @@
 
   <br>
 
-  <div class="article">
+  <!-- <div class="article1">
     <mat-card class="article-card" *ngFor="let article of articleList | async">
       <div class="entete">
         <mat-card-header>
@@ -26,6 +26,25 @@
         </mat-card-actions>
       </div>
     </mat-card>
-  </div>
+  </div> -->
 
+  <div class="articles">
+    <div class="article" *ngFor="let article of articleList | async">
+      <div class="entete">
+        <h4>{{ article.titreArticle }}</h4>
+      </div>
+      <div class="noimage" *ngIf="!article.photoArticle ; else Image"><img mat-card-image src="assets/photos/NoImage.jpg">
+      </div>
+
+      <div class="contenu">
+        <div>
+          <img class="image" src="{{ article.photoArticle }}" alt="Photo de l'article">
+        </div>
+        <p class="texte">{{ article.contenuArticle }}</p>
+      </div>
+      <div class="bouton">
+        <button mat-raised-button><a routerLink="/article/{{ article.idArticle }}">Lire l'article</a></button>
+      </div>
+    </div>
+  </div>
 <br>

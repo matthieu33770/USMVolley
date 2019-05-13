@@ -77,7 +77,7 @@ export class SaisieComponent implements OnInit {
       this.isLoggedin = userRole.length > 0;
       console.log(this.isLoggedin);
     });
-    // this.joueursService.publishJoueurs();
+    this.joueursService.publishJoueurs();
     this.initConfig(); //Fonction Paypal
     if (this.isLoggedin) {
       this.username = jwt_decode(sessionStorage.getItem(environment.accessToken)).sub;

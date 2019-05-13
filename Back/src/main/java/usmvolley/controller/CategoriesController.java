@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,7 @@ public class CategoriesController {
 	 * @return liste de toutes les catégories
 	 */
 	@GetMapping("/get/categories")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine') or hasAuthority('Licencie')")
 	public ResponseEntity<List<Categories>> getListeCategories() {
 		
 		List<Categories> listeCategories = null;
@@ -50,6 +52,7 @@ public class CategoriesController {
 	 * @return liste une catégorie
 	 */
 	@GetMapping("/get/uneCategorie/{idCategorie}")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> getUneCategorie(@PathVariable Integer idCategorie) {
 		
 		Optional<Categories> categorie = null;
@@ -73,6 +76,7 @@ public class CategoriesController {
 	 * @return ajoute une catégorie
 	 */
 	@PostMapping("/create")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> addCategorie(@RequestBody Categories categorie) {
 		
 		Categories newCategorie = null;
@@ -92,6 +96,7 @@ public class CategoriesController {
 	 * @return supprime une catégorie
 	 */
 	@DeleteMapping("/delete/{idCategorie}")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> deleteCategorie(@PathVariable Integer idCategorie)
 	{
 		try
@@ -110,6 +115,7 @@ public class CategoriesController {
 	 * @return modifie une catégorie
 	 */
 	@PutMapping("/update/{idCategorie}")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> updateCategorie(@RequestBody Categories categorie, @PathVariable Integer idCategorie) throws Exception
 	{
 		Categories modificationCategorie = null;

@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,7 @@ public class StatutsController {
 	 * @return liste de tous les statuts
 	 */
 	@GetMapping("/get/statuts")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<List<Statuts>> getListeStatus() {
 		
 		List<Statuts> listeStatuts = null;
@@ -50,6 +52,7 @@ public class StatutsController {
 	 * @return liste un statut
 	 */
 	@GetMapping("/get/unStatut/{idStatut}")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> getUnStatut(@PathVariable Integer idStatut) {
 		
 		Optional<Statuts> statut = null;
@@ -73,6 +76,7 @@ public class StatutsController {
 	 * @return ajoute un statut
 	 */
 	@PostMapping("/create")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> addStatut(@RequestBody Statuts statut) {
 		
 		Statuts newStatut = null;
@@ -92,6 +96,7 @@ public class StatutsController {
 	 * @return supprime un statut
 	 */
 	@DeleteMapping("/delete/{idStatut}")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> deleteStatut(@PathVariable Integer idStatut)
 	{
 		try
@@ -110,6 +115,7 @@ public class StatutsController {
 	 * @return modifie un statut
 	 */
 	@PutMapping("/update/{idStatut}")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> updatestatut(@RequestBody Statuts statut, @PathVariable Integer idStatut) throws Exception
 	{
 		Statuts modificationStatut = null;

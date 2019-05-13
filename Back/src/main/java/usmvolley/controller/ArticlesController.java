@@ -84,7 +84,7 @@ public class ArticlesController {
 	 * @return ajoute un article
 	 */
 	@PostMapping("/create")
-//	@PreAuthorize("hasRole('ROLE_BUREAU')")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> addArticle(@RequestBody Articles article) {
 		
 		Articles newArticle = null;
@@ -109,6 +109,7 @@ public class ArticlesController {
 	 * @return supprime une equipe
 	 */
 	@DeleteMapping("/delete/{idArticle}")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> deleteArticle(@PathVariable Integer idArticle)
 	{
 		try
@@ -127,7 +128,8 @@ public class ArticlesController {
 	 * @param information article et idArticle
 	 * @return modifie un articles
 	 */
-	@PutMapping("/update/{idArticle}")
+	@PutMapping("/update/{idArticle}")	
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> updateArticle(@RequestBody Articles article, @PathVariable Integer idArticle) throws Exception
 	{
 		Articles modificationArticle = null;
@@ -160,7 +162,7 @@ public class ArticlesController {
 	
 	// upload a file and put it in D:\\eclipse-workspace\\USMVolley\\Front\\src\\assets\\documents\\ and memorize its name in DB   
 	@PostMapping(value = "/upload", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-//	@PreAuthorize("hasRole('ROLE_BUREAU')")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 		public ResponseEntity<?> uploadFile(@RequestParam("data") MultipartFile multipartFile) throws UploadFileException, IllegalStateException, IOException {
 				
 			    if (multipartFile == null || multipartFile.isEmpty()) {

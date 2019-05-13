@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,7 @@ public class DisponibiliteController {
 	 * @return liste de tous les disponibilités
 	 */
 	@GetMapping("/get/disponibilites")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine') or hasAuthority('Licencie')")
 	public ResponseEntity<List<Disponibilite>> getListeDisponibilites() {
 		
 		List<Disponibilite> listeDisponibilite = null;
@@ -50,6 +52,7 @@ public class DisponibiliteController {
 	 * @return liste une disponibilité
 	 */
 	@GetMapping("/get/uneDisponibilite/{idDisponibilite}")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine') or hasAuthority('Licencie')")
 	public ResponseEntity<?> getUneDisponibilite(@PathVariable Integer idDisponibilite) {
 		
 		Optional<Disponibilite> disponibilite = null;
@@ -73,6 +76,7 @@ public class DisponibiliteController {
 	 * @return ajoute une disponibilité
 	 */
 	@PostMapping("/create")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> addDisponibilite(@RequestBody Disponibilite disponibilite) {
 		
 		Disponibilite newDisponibilite = null;
@@ -92,6 +96,7 @@ public class DisponibiliteController {
 	 * @return supprime une disponibilité
 	 */
 	@DeleteMapping("/delete/{idDisponibilite}")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> deleteDisponibilite(@PathVariable Integer idDisponibilite)
 	{
 		try
@@ -110,6 +115,7 @@ public class DisponibiliteController {
 	 * @return modifie une disponibilité
 	 */
 	@PutMapping("/update/{idDisponibilite}")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> updateDisponibilite(@RequestBody Disponibilite disponibilite, @PathVariable Integer idDisponibilite) throws Exception
 	{
 		

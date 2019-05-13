@@ -11,7 +11,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,13 +32,11 @@ import usmvolley.repository.CategoriesRepository;
 import usmvolley.repository.JoueursRepository;
 import usmvolley.repository.LicenceRepository;
 import usmvolley.service.FileStorageService;
-import usmvolley.service.UserService;
 import usmvolley.upload.FileInformation;
 import usmvolley.upload.exception.UploadFileException;
 
 @RestController
 @RequestMapping("/joueurs")
-//@CrossOrigin("http://localhost:4200")
 public class JoueursController {
 
 	@Autowired
@@ -68,7 +65,7 @@ public class JoueursController {
 	 * @return liste de tous les joueurs
 	 */
 	@GetMapping("/get/joueurs")
-	@PreAuthorize("hasAuthority('Bureau') or hasRole('ROLE_CAPITAINE')")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine') or hasAuthority('Licencie')")
 	public ResponseEntity<List<Joueurs>> getListeJoueurs() {
 		
 		List<Joueurs> listeJoueurs = null;
@@ -87,7 +84,7 @@ public class JoueursController {
 	 * @return liste un joueur
 	 */
 	@GetMapping("/get/unJoueur/{idJoueur}")
-	@PreAuthorize("hasRole('ROLE_BUREAU')")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> getUnJoueur(@PathVariable Integer idJoueur) {
 		
 		Optional<Joueurs> joueur = null;
@@ -110,7 +107,7 @@ public class JoueursController {
 	 * @return liste un joueur selon son nom
 	 */
 	@GetMapping("/get/byJoueur/{nom}")
-	@PreAuthorize("hasRole('ROLE_BUREAU')")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> getJoueurByNom(@PathVariable String nom) {
 		
 		Optional<Joueurs> joueur = null;
@@ -134,7 +131,6 @@ public class JoueursController {
 	 * @return ajoute un joueur
 	 */
 	@PostMapping("/create")
-	@PreAuthorize("hasAuthority('ROLE_BUREAU') or hasRole('ROLE_CAPITAINE')")
 	public ResponseEntity<?> addJoueur(@RequestBody Joueurs joueur) {
 		
 		Joueurs newJoueur = null;
@@ -199,7 +195,7 @@ public class JoueursController {
 	 * @return supprime un joueur
 	 */
 	@DeleteMapping("/delete/{idJoueur}")
-	@PreAuthorize("hasRole('ROLE_BUREAU')")
+	@PreAuthorize("hasAuthority('Bureau')")
 	public ResponseEntity<?> deleteUser(@PathVariable Integer idJoueur) {
 		
 		try
@@ -218,13 +214,10 @@ public class JoueursController {
 	 * @return modifie un joueur
 	 */
 	@PutMapping("/update/{idJoueur}")
-//	@PreAuthorize("hasRole('ROLE_BUREAU')")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> updateJoueur(@RequestBody Joueurs joueur, @PathVariable Integer idJoueur) throws Exception
 	{
 		Joueurs modificationJoueur = null;
-//		Licence modificationLicence = null;
-//		Avoir modificationAvoir = null;
-//		Categories modificationCategorie = null;
 		String nomJoueur = joueur.getNom();
 		String prenomJoueur = joueur.getPrenom();
 		Integer numeroAdresseJoueur = joueur.getNumeroAdresse();
@@ -268,13 +261,14 @@ public class JoueursController {
 		if (userJoueur == null) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque l'identifiant");
 		}
-		if (joueur.getAvoir().getLicence().getCertificatMedical() != null && joueur.getAvoir().getLicence().getFormulaire() != null && joueur.getAvoir().getLicence().getCategories() != null) {
-			joueur.getAvoir().setIsValide(true);
-		}
+//		if (joueur.getAvoir().getLicence().getCertificatMedical() != null && joueur.getAvoir().getLicence().getFormulaire() != null && joueur.getAvoir().getLicence().getCategories() != null) {
+//			joueur.getAvoir().setIsValide(true);
+//		}
 		
 		try
 		{
 			System.out.println("test modification joueur : " + joueur.getAvoir().getLicence());
+			System.out.println("test avoir : " + joueur.getAvoir().getIsValide());
 //			modificationCategorie = categorieRepo.save(joueur.getAvoir().getLicence().getCategories());
 //			modificationLicence = licenceRepo.save(joueur.getAvoir().getLicence());
 //			modificationAvoir = avoirRepo.save(joueur.getAvoir());
@@ -289,7 +283,6 @@ public class JoueursController {
 	
 	// upload a file and put it in D:\\eclipse-workspace\\USMVolley\\Front\\src\\assets\\documents\\ and memorize its name in DB   
 		@PostMapping(value = "/upload", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-//		@PreAuthorize("hasRole('ROLE_BUREAU')")
 		  public ResponseEntity<?> uploadFile(
 		      @RequestParam("data") MultipartFile multipartFile
 		  ) throws UploadFileException, IllegalStateException, IOException {

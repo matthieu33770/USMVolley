@@ -9,27 +9,24 @@
   margin-bottom: 40px;
 }
 
-.data {
+.joueurForm {
   display: flex;
-  /* flex-direction: row !important; */
-  flex-wrap: wrap;
-  /* justify-content: center; */
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.dimension {
+  width: 33%;
+  display: flex;
+  flex-direction: column;
+  
 }
   
 .left {    
-  /* flex-grow: 1; */
-  width: 40%;
-  margin-left: 50px;
+  margin-left: 10px;
 }
 
-.center {
-  /* flex-grow: 2; */
-  width: 40%;
-  margin-left: 50px;
-}
-  
-.right {
-  /* flex-grow: 3; */
-  width: 40%;
-  margin-left: 50px;
+.boutons {
+  display: flex;
+  justify-content: flex-end;
 }

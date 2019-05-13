@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.doNothing;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -62,7 +63,7 @@ public class JoueursControllerTest {
 	}
 
 	@Test
-	@WithMockUser(roles={"BUREAU"})
+	@WithMockUser(roles={"Bureau"})
 	public void testGetListeJoueurs() {
 		given(joueurRepo.findAll()).willReturn(new ArrayList<>());
 
@@ -72,6 +73,7 @@ public class JoueursControllerTest {
 	}
 
 	@Test
+	@WithMockUser(roles={"Bureau"})
 	public void testGetUnJoueur() throws Exception {
 		when(this.joueurRepo.findById(9)).thenReturn(Optional.ofNullable(new Joueurs(9, "LONDEIX", "Matthieu", null, null, null, null, null, null, null, null, null, null, null, null, null)));
 
@@ -81,6 +83,7 @@ public class JoueursControllerTest {
 
 
 	@Test
+	@WithMockUser(roles={"Bureau"})
 	public void testGetJoueurByNom() throws Exception {
 		when(this.joueurRepo.findJoueurByNom("ANDRE")).thenReturn(Optional.of(new Joueurs(0, "ANDRE", "Emmanuel", null, null, null, null, null, null, null, null, null, null, null, null, null)));
 
@@ -89,7 +92,7 @@ public class JoueursControllerTest {
 	}
 
 	@Test
-	@WithMockUser(roles={"BUREAU"})
+	@WithMockUser(roles={"Bureau"})
 	public void testAddJoueur() throws Exception {		
 		Joueurs joueur = new Joueurs(0, "Toto", "Test", "Andro", "123", 22, "rue lointaine", 99999, "Fort-Fort", "mm@mm.fr", "00.00.00.00.01", "", new Date(2019-01-29),
 				new Users(0, "username", "mdp", null), 
@@ -109,19 +112,23 @@ public class JoueursControllerTest {
 	}
 
 	@Test
-	@WithMockUser(roles={"BUREAU"})
+	@WithMockUser(roles={"Bureau"})
 	public void testDeleteJoueur() throws Exception {
-		this.mockMvc.perform(delete("/joueurs/delete/3"));
 		
-		joueurRepo.findById(3);
+//		doNothing().when(this.joueurRepo).deleteById(1);
+		
+		this.mockMvc.perform(delete("/joueurs/delete/10")).andExpect(status().isOk());
+		
+		joueurRepo.findById(10);
 		assertTrue(Optional.empty() != null);
 		
 	}
 
 	@Test
+	@WithMockUser(roles={"Bureau"})
 	public void testUpdateJoueur() throws Exception {
 		Joueurs joueur = new Joueurs(4, "GUERIN", "Julie", "Féminin", "123", 1, "chemin des gassinieres", 33380, "MIOS", "jujuly69@free.fr", "607193344", "", new Date(1989-01-29),
-				new Users(4, "jujuly69@free.fr", "$2a$10$gu0/JMAOkR8H2Gwqp57BVuhqSZ00ztEDkuty5cFUZ7o.DVS8Gtudu", null), 
+				new Users(4, "jujuly69@free.fr", "$2a$10$gu0/JMAOkR8H2Gwqp57BVuhqSZ00ztEDkuty5cFUZ7o.DVS8Gtudu", new Fonctions(1, "licencie")), 
 				new Avoir(4, 2018, true, 
 						new Licence(4, "1839663", 90.00, 
 								new Categories(6, "Adultes", 80), "formulaire", "certificat", true, "102938", 90.00)), null);

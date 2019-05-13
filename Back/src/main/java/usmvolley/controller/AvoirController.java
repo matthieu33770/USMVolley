@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,7 @@ public class AvoirController {
 	 * @return liste de tout Avoir
 	 */
 	@GetMapping("/get/avoir")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<List<Avoir>> getListeAvoir() {
 		
 		List<Avoir> listeAvoir = null;
@@ -50,6 +52,7 @@ public class AvoirController {
 	 * @return liste un Avoir
 	 */
 	@GetMapping("/get/unAvoir/{idAvoir}")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> getUnAvoir(@PathVariable Integer idAvoir) {
 		
 		Optional<Avoir> avoir = null;
@@ -92,6 +95,7 @@ public class AvoirController {
 	 * @return supprime un avoir
 	 */
 	@DeleteMapping("/delete/{idAvoir}")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> deleteAvoir(@PathVariable Integer idAvoir)
 	{
 		try
@@ -110,6 +114,7 @@ public class AvoirController {
 	 * @return modifie un Avoir
 	 */
 	@PutMapping("/update/{idAvoir}")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
 	public ResponseEntity<?> updateAvoir(@RequestBody Avoir avoir, @PathVariable Integer idAvoir) throws Exception
 	{
 		

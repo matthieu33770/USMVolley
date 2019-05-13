@@ -13,14 +13,55 @@
     font-family: Muli; 
 }
 
-.article {
+/* .article1 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-family: Muli;
+} */
+
+/* .article-card {
+    flex-direction: column;
+    margin-left: 1px;
+    margin-right: 1px;
+    max-width: 300px;
+    max-height: 600px;
+    border-radius: 3px;
+    background: rgb(224, 226, 221);
+    border-style: groove;
+    border-color: rgb(246, 250, 5);
+    border-width: 2px;
+} */
+
+/* .entete {
+    display: block;
+    margin-left: 5%;
+    font-size: 30px;
+    height: 1em;
+    overflow: hidden;
+} */
+
+/* .contenu {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 25%;
+    max-width: 50%;
+    max-height: 50%;
+} */
+
+/* .texte{
+    max-height: 50px;
+    overflow: hidden;
+} */
+
+.articles {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     font-family: Muli;
 }
 
-.article-card {
+.article {
     flex-direction: column;
     margin-left: 1px;
     margin-right: 1px;
@@ -33,23 +74,6 @@
     border-width: 2px;
 }
 
-.entete {
-    display: block;
-    margin-left: 5%;
-    font-size: 30px;
-    height: 1em;
-    overflow: hidden;
-}
-
-/* .contenu {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: 25%;
-    max-width: 50%;
-    max-height: 50%;
-} */
-
-.texte{
-    max-height: 50px;
-    overflow: hidden;
+.image {
+    max-width: 295px;
 }

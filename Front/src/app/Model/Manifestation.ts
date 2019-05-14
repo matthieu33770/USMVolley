@@ -8,12 +8,9 @@ export class Manifestation {
 
     constructor(public idManifestation: number,
                 public title: string,
-                public periodiciteManifestation: String,
+                public start: Date,
                 public equipe: Equipe,
                 public lieu: Lieu,
                 public statut: Statut,
-                public horaire: Horaire,
-                public creneau: Creneau,
-                public start: Date,
     ) {}
 }

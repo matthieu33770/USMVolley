@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { Lieu } from '../Model/Lieu';
 
@@ -20,8 +20,7 @@ export class DetailLieuxComponent implements OnInit {
   editionLieu: Lieu = new Lieu(0, '');
 
   constructor(private route: ActivatedRoute,
-              private lieuService: LieuxService,
-              private router: Router) { }
+              private lieuService: LieuxService) { }
 
   ngOnInit() {
     this.idLieu = Number(this.route.snapshot.params.idLieu);

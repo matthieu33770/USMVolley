@@ -81,12 +81,8 @@ public class ManifestationController {
 		
 		Manifestations newManifestation = null;
 		String libelleManifestation = manifestation.getTitle();
-		String periodiciteManifestation = manifestation.getPeriodicite();
 		
 		if ((libelleManifestation == null) || (libelleManifestation.isEmpty())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque la disponibilité du joueur");
-		}
-		if ((periodiciteManifestation == null) || (periodiciteManifestation.isEmpty())) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque la disponibilité du joueur");
 		}
 		
@@ -125,12 +121,8 @@ public class ManifestationController {
 		
 		Manifestations modificationManifestation = null;
 		String libelleManifestation = manifestation.getTitle();
-		String periodiciteManifestation = manifestation.getPeriodicite();
 		
 		if ((libelleManifestation == null) || (libelleManifestation.isEmpty())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque la disponibilité du joueur");
-		}
-		if ((periodiciteManifestation == null) || (periodiciteManifestation.isEmpty())) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque la disponibilité du joueur");
 		}
 		

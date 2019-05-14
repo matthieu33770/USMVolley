@@ -10,6 +10,8 @@
   margin-bottom: 40px;
 }
 
-.fullcalendrier {
-  width: 100% !important;
+.calendrier {
+  display: flex;
+  margin-left: 10%;
+  width: 80%;
 }

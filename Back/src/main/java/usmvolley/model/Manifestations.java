@@ -27,9 +27,6 @@ public class Manifestations implements Serializable {
 	@Column(name = "date")
 	private Date start;
 	
-	@Column(name = "periodicite")
-	private String periodicite;
-	
 	@ManyToOne
 	@JoinColumn(name = "id_equipe")
 	private Equipes equipe;
@@ -41,31 +38,20 @@ public class Manifestations implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "id_statut")
 	private Statuts statut;
-	
-	@ManyToOne
-	@JoinColumn(name = "id_horaire")
-	private Horaire horaire;
-	
-	@ManyToOne
-	@JoinColumn(name = "id_creneau")
-	private Creneau creneau;
 
 	public Manifestations() {
 	}
 	
 
-	public Manifestations(Integer idManifestation, String title, Date start, String periodicite, Equipes equipe,
-			Lieux lieu, Statuts statut, Horaire horaire, Creneau creneau) {
+	public Manifestations(Integer idManifestation, String title, Date start, Equipes equipe,
+			Lieux lieu, Statuts statut) {
 		super();
 		this.idManifestation = idManifestation;
 		this.title = title;
 		this.start = start;
-		this.periodicite = periodicite;
 		this.equipe = equipe;
 		this.lieu = lieu;
 		this.statut = statut;
-		this.horaire = horaire;
-		this.creneau = creneau;
 	}
 
 	public Date getStart() {
@@ -93,14 +79,6 @@ public class Manifestations implements Serializable {
 		this.title = title;
 	}
 
-	public String getPeriodicite() {
-		return periodicite;
-	}
-
-	public void setPeriodicite(String periodicite) {
-		this.periodicite = periodicite;
-	}
-
 	public Equipes getEquipe() {
 		return equipe;
 	}
@@ -125,27 +103,11 @@ public class Manifestations implements Serializable {
 		this.statut = statut;
 	}
 
-	public Horaire getHoraire() {
-		return horaire;
-	}
-
-	public void setHoraire(Horaire horaire) {
-		this.horaire = horaire;
-	}
-
-	public Creneau getCreneau() {
-		return creneau;
-	}
-
-	public void setCreneau(Creneau creneau) {
-		this.creneau = creneau;
-	}
-
 	@Override
 	public String toString() {
 		return "Manifestations [idManifestation=" + idManifestation + ", title=" + title + ", start=" + start
-				+ ", periodicite=" + periodicite + ", equipe=" + equipe + ", lieu=" + lieu + ", statut=" + statut
-				+ ", horaire=" + horaire + ", creneau=" + creneau + "]";
+				+ ", equipe=" + equipe + ", lieu=" + lieu + ", statut=" + statut
+				+ "]";
 	}
 
 }

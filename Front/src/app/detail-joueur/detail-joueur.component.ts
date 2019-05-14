@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { User } from '../Model/User';
-import { Role } from '../Model/Role';
 import { Fonction } from '../Model/Fonction';
 import { Equipe } from '../Model/Equipe';
 import { Joueur } from '../Model/Joueur';

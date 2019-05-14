@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 import { Manifestation } from '../Model/Manifestation';
+import { ParticipationPK } from '../model/ParticipationPK';
+import { Participation } from '../model/Participation';
 
 @Injectable({
   providedIn: 'root'
@@ -42,7 +44,7 @@ export class ManifestationService {
        }
        return of(this.availableManifestation.find(manifestation => manifestation.idManifestation === idManifestation));
      } else {
-       return of(new Manifestation(0, '', '' , null, null, null, null, null, new Date()));
+       return of(new Manifestation(0, '', new Date(), null, null, null));
      }
    }
 
@@ -81,4 +83,15 @@ export class ManifestationService {
      this.availableManifestation = this.availableManifestation.filter( manifestation => manifestation.idManifestation !== idManifestation ).slice();
      return this.availableManifestation;
    }
+
+    /**
+    * Fonction d'enregistrement à une manifestation.
+    * Elle met à jour notre liste des participants.
+    * @param newParticipation contient idJoueur, idManifestation et idDisponibilite
+    */
+   public createParticipation(newParticipation: ParticipationPK) {
+    console.log('départ' + newParticipation.joueur.nom);
+    const participation = new Participation(newParticipation);
+    this.httpClient.post<Manifestation>('http://localhost:8080/participation/create', participation).subscribe();
+  }
 }

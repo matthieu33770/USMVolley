@@ -62,7 +62,7 @@
               <th mat-header-cell *matHeaderCellDef>N° Licence</th>
               <td mat-cell *matCellDef="let joueur">{{ joueur.avoir.licence.numeroLicence }}</td>
             </ng-container>
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
           </div>
@@ -103,7 +103,7 @@
             <th mat-header-cell *matHeaderCellDef>N° Licence</th>
             <td mat-cell *matCellDef="let joueurAdulte">{{ joueurAdulte.avoir.licence.numeroLicence }}</td>
           </ng-container>
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
         </div>

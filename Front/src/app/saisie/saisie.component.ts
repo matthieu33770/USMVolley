@@ -33,7 +33,7 @@ export class SaisieComponent implements OnInit {
   user;
   formulaire: string;
   certificat: string;
-  editionUser: User = new User(0, '', '', new Fonction(1, 'ROLE_LICENCIE'));
+  editionUser: User = new User(0, '', '', new Fonction(1, 'Licencie'));
   editionLicence: Licence = new Licence(0, '', 0, '', '', false, '', 0, null);
   editionAvoir: Avoir = new Avoir(0, 2099, false, null);
   editionJoueur: Joueur = new Joueur(0, '', '', '', 0, '', 0, '', '', '', '', null, null, null, null);

@@ -28,6 +28,8 @@ import { ListeCategoriesComponent } from './liste-categories/liste-categories.co
 import { DetailCategorieComponent } from './detail-categorie/detail-categorie.component';
 import { ChangementMdpComponent } from './changement-mdp/changement-mdp.component';
 import { EnvoyerMailComponent } from './envoyer-mail/envoyer-mail.component';
+import { DetailManifestationComponent } from './detail-manifestation/detail-manifestation.component';
+import { InscriptionManifestationComponent } from './inscription-manifestation/inscription-manifestation.component';
 
 const routes: Routes = [
   {path: 'equipes', component: EquipesComponent},
@@ -37,7 +39,10 @@ const routes: Routes = [
   {path: 'partenaires', component: PartenairesComponent},
   {path: 'connexion', component: ConnexionComponent},
   {path: 'connexion/chgtMdp/:idUser', component: ChangementMdpComponent},
-  {path: 'manifestations', component: ListeManifestationComponent},
+  {path: 'gestion/manifestations', component: ListeManifestationComponent},
+  {path: 'gestion/manifestations/detailmanifestation/:idManifestation', component: DetailManifestationComponent},
+  {path: 'gestion/manifestations/detailmanifestation/newManifestation', component: DetailManifestationComponent},
+  {path: 'inscriptionmanifestation/:idManifestation', component: InscriptionManifestationComponent},
   {path: 'gestion', component: GestionComponent},
   {path: 'envoyerMail', component: EnvoyerMailComponent},
   {path: 'gestion/joueurs', component: ListeJoueursComponent},

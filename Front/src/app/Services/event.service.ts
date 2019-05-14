@@ -16,11 +16,16 @@ export class EventService {
     const evt = new Event(0, '', '', '', '');
 
     evt.idEvent = manifestation.idManifestation;
-    evt.title = `${manifestation.title}:${manifestation.equipe.libelleEquipe}`;
-    // evt.title = manifestation.title;
+
+    if (manifestation.title === 'Match' || manifestation.title === 'match') {
+      evt.title = 'M : ' + `${manifestation.equipe.libelleEquipe}`;
+      evt.color = manifestation.equipe.couleur;
+    } else {
+      evt.title = 'Entrainement';
+      evt.color = '#989392';
+    }
     evt.start = manifestation.start + '';
-    evt.color = manifestation.equipe.couleur;
-    evt.url = `http://localhost:4200/manifestations/${manifestation.idManifestation}`;
+    evt.url = `http://localhost:4200/inscriptionmanifestation/${manifestation.idManifestation}`;
 console.log(evt);
     return evt;
   }

@@ -27,8 +27,12 @@ table {
 
 .joueurEquipe {
     margin-right: 40px;
+    height: 400px;
+    overflow: auto;
 }
 
 .joueurDispo {
     margin-left: 40px;
+    height: 400px;
+    overflow: auto;
 }

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -12,10 +12,8 @@ import { NgxPayPalModule } from 'ngx-paypal';
 import { FullCalendarModule } from 'primeng/fullcalendar';
 import { CalendarModule } from 'primeng/primeng';
 
-import { DateAdapter } from 'angular-calendar';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 
@@ -47,13 +45,14 @@ import { DetailCreneauxComponent } from './detail-creneaux/detail-creneaux.compo
 import { DetailDisponibilitesComponent } from './detail-disponibilites/detail-disponibilites.component';
 import { ListeCategoriesComponent } from './liste-categories/liste-categories.component';
 import { DetailCategorieComponent } from './detail-categorie/detail-categorie.component';
-import {LicencieGuard} from './guards/licencie.guards';
-import {CapitaineGuard} from './guards/capitaine.guards';
-import {BureauGuard} from './guards/bureau.guards';
-import {JwtInterceptor} from './http-interceptor/jwt.interceptor';
+import { LicencieGuard } from './guards/licencie.guards';
+import { CapitaineGuard } from './guards/capitaine.guards';
+import { BureauGuard } from './guards/bureau.guards';
+import { JwtInterceptor } from './http-interceptor/jwt.interceptor';
 import { ConsultationArticleComponent } from './consultation-article/consultation-article.component';
 import { ChangementMdpComponent } from './changement-mdp/changement-mdp.component';
 import { EnvoyerMailComponent } from './envoyer-mail/envoyer-mail.component';
+import { InscriptionManifestationComponent } from './inscription-manifestation/inscription-manifestation.component';
 
 registerLocaleData(localeFr);
 
@@ -89,7 +88,8 @@ registerLocaleData(localeFr);
     DetailCategorieComponent,
     ConsultationArticleComponent,
     ChangementMdpComponent,
-    EnvoyerMailComponent
+    EnvoyerMailComponent,
+    InscriptionManifestationComponent
   ],
   imports: [
     BrowserModule,
@@ -113,10 +113,6 @@ registerLocaleData(localeFr);
       }
     }),
     FlatpickrModule.forRoot(),
-    // CalendarModule.forRoot({
-    //   provide: DateAdapter,
-    //   useFactory: adapterFactory
-    // }),
     FullCalendarModule,
     CalendarModule
   ],

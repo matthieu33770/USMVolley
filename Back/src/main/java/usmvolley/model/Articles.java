@@ -24,7 +24,7 @@ public class Articles implements Serializable {
 	@Column(name = "photo_Article")
 	private String photoArticle;
 	
-	@Column(name = "contenu_Article")
+	@Column(name = "contenu_Article", length= 650000)
 	private String contenuArticle;
 
 	public Articles() {

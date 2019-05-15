@@ -26,7 +26,9 @@ export class ListeLieuxComponent implements OnInit, OnDestroy {
 
   subLieu: Subscription;
 
-  constructor(private router: Router, private lieuService: LieuxService, private excelService: ExcelService) { }
+  constructor(private router: Router,
+              private lieuService: LieuxService,
+              private excelService: ExcelService) { }
 
   ngOnInit() {
     this.subLieu = this.lieuService.availableLieu$.subscribe(Lieux => {

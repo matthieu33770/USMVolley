@@ -1,84 +1,54 @@
-<h3>
-    Edit events
-    <button class="btn btn-primary pull-right" (click)="addEvent()">
-      Add new
-    </button>
-    <div class="clearfix"></div>
-  </h3>
-  
-  <div class="table-responsive">
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Primary color</th>
-          <th>Secondary color</th>
-          <th>Starts at</th>
-          <th>Ends at</th>
-          <th>Remove</th>
-        </tr>
-      </thead>
-  
-      <tbody>
-        <tr *ngFor="let event of events">
-          <td>
-            <input
-              type="text"
-              class="form-control"
-              [(ngModel)]="event.title"
-              (keyup)="refresh.next()"
-            />
-          </td>
-          <td>
-            <input
-              type="color"
-              [(ngModel)]="event.color.primary"
-              (change)="refresh.next()"
-            />
-          </td>
-          <td>
-            <input
-              type="color"
-              [(ngModel)]="event.color.secondary"
-              (change)="refresh.next()"
-            />
-          </td>
-          <td>
-            <input
-              class="form-control"
-              type="text"
-              mwlFlatpickr
-              [(ngModel)]="event.start"
-              (ngModelChange)="refresh.next()"
-              [altInput]="true"
-              [convertModelValue]="true"
-              [enableTime]="true"
-              dateFormat="Y-m-dTH:i"
-              altFormat="F j, Y H:i"
-              placeholder="Not set"
-            />
-          </td>
-          <td>
-            <input
-              class="form-control"
-              type="text"
-              mwlFlatpickr
-              [(ngModel)]="event.end"
-              (ngModelChange)="refresh.next()"
-              [altInput]="true"
-              [convertModelValue]="true"
-              [enableTime]="true"
-              dateFormat="Y-m-dTH:i"
-              altFormat="F j, Y H:i"
-              placeholder="Not set"
-            />
-          </td>
-          <td>
-            <button class="btn btn-danger" (click)="deleteEvent(event)">
-              Delete
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+<div class="manifestation">
+  <div class="titre">
+    <h1 *ngIf="isModification">Edition d'une manifestation</h1>
+    <h1 *ngIf="!isModification">Création d'une manifestation</h1>
   </div>
+
+  <div class="data">
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="Titre" [(ngModel)]="editionManifestation.title" name="title">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Date de la manifestation" [(ngModel)]="editionManifestation.start" [value]="editionManifestation.start" name="date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <input matInput type="heure" [(ngModel)]="editionManifestation.heure" name="heure">
+    </div>
+
+    <div>
+      <mat-form-field>
+        <mat-select placeholder="Equipe" [(ngModel)]="editionManifestation.equipe.idEquipe" name="equipe.libelleEquipe">
+          <mat-option *ngFor="let equipe of equipeList" [value]="equipe.idEquipe">
+            {{equipe.libelleEquipe}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="Lieu" [(ngModel)]="editionManifestation.lieu.idLieu" name="lieu.lieu">
+          <mat-option *ngFor="let lieu of lieuList" [value]="lieu.idLieu">
+            {{lieu.lieu}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="Statut" [(ngModel)]="editionManifestation.statut.idStatut" name="statut.libelleStatut">
+          <mat-option *ngFor="let statut of statutList" [value]="statut.idStatut">
+            {{statut.libelleStatut}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="boutons">
+    <button *ngIf="isModification" mat-raised-button color="primary" (click)="onSave()" routerLink="/manifestations">Modifier</button>
+    <button *ngIf="!isModification" mat-raised-button color="primary" (click)="onSave()" routerLink="/manifestations">Enregistrer</button>
+    <button mat-raised-button color="accent" routerLink="/manifestations">Retour</button>
+  </div>
+</div>

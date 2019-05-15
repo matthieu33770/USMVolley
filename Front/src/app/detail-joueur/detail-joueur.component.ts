@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 
 import { User } from '../modeles/user';
 import { Fonction } from '../modeles/fonction';
@@ -12,7 +14,10 @@ import { EquipesService } from '../services/equipes.service';
 @Component({
   selector: 'app-detail-joueur',
   templateUrl: './detail-joueur.component.html',
-  styleUrls: ['./detail-joueur.component.css']
+  styleUrls: ['./detail-joueur.component.css'],
+  providers: [{provide: MAT_DATE_LOCALE, useValue: 'fr'},
+              {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+              {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS}]
 })
 export class DetailJoueurComponent implements OnInit {
 

@@ -3,8 +3,11 @@ import { Lieu } from './Lieu';
 import { Statut } from './Statut';
 import { Horaire } from './Horaire';
 import { Creneau } from './Creneau';
+import { Time } from '@angular/common';
 
 export class Manifestation {
+
+    heure: Time;
 
     constructor(public idManifestation: number,
                 public title: string,

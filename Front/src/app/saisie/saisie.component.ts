@@ -5,6 +5,8 @@ import { BehaviorSubject } from 'rxjs';
 import * as jwt_decode from 'jwt-decode';
 import { FileInformation } from '../file-information';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
+import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 
 import { LoginService } from '../services/login.service';
 import { JoueursService } from '../services/joueurs.service';
@@ -21,7 +23,10 @@ import { Fonction } from '../modeles/fonction';
 @Component({
   selector: 'app-saisie',
   templateUrl: './saisie.component.html',
-  styleUrls: ['./saisie.component.css']
+  styleUrls: ['./saisie.component.css'],
+  providers: [{provide: MAT_DATE_LOCALE, useValue: 'fr'},
+              {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+              {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS}]
 })
 export class SaisieComponent implements OnInit {
 
@@ -195,8 +200,13 @@ export class SaisieComponent implements OnInit {
       this.joueursService.createJoueur(this.editionJoueur);
       console.log(this.editionJoueur);
     } else {
+      this.editionAvoir.licence = this.editionLicence;
+      this.editionJoueur.avoir = this.editionAvoir;
+      this.editionJoueur.user = this.editionUser;
       this.onRegisterF();
       this.onRegisterC();
+      this.editionJoueur.avoir.licence.formulaire = this.formulaire;
+      this.editionJoueur.avoir.licence.certificatMedical = this.certificat;
       this.editionJoueur.avoir.licence.formulaire = this.formulaire;
       this.editionJoueur.avoir.licence.certificatMedical = this.certificat;
       this.joueursService.updateJoueur(this.editionJoueur);

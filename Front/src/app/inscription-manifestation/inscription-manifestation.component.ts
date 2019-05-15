@@ -7,11 +7,11 @@ import { ManifestationService } from '../Services/manifestation.service';
 import { JoueursService } from '../Services/joueurs.service';
 import { DisponibiliteService } from '../Services/disponibilite.service';
 
-import { Manifestation } from '../model/manifestation';
-import { User } from '../Model/User';
-import { Fonction } from '../Model/Fonction';
-import { Joueur } from '../Model/Joueur';
-import { Disponibilite } from '../Model/Disponibilite';
+import { Manifestation } from '../model/Manifestation';
+import { User } from '../model/User';
+import { Fonction } from '../model/Fonction';
+import { Joueur } from '../model/Joueur';
+import { Disponibilite } from '../model/Disponibilite';
 import { ParticipationPK } from '../model/ParticipationPK';
 
 @Component({

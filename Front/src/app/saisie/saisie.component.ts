@@ -12,7 +12,7 @@ import { UsersService } from '../Services/users.service';
 import { CategorieService } from '../Services/categorie.service';
 
 import { Joueur } from '../Model/Joueur';
-import { User } from '../model/User';
+import { User } from '../Model/User';
 import { Categorie } from '../Model/Categorie';
 import { Licence } from '../Model/Licence';
 import { Avoir } from '../Model/Avoir';

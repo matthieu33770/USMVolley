@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material';
 import {environment} from '../../environments/environment';
 
 import { MailService } from '../services/mail.service';
-import { UsersService } from '../Services/users.service';
+import { UsersService } from '../services/users.service';
 
 import { User } from '../model/User';
 

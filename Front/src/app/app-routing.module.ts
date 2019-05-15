@@ -41,7 +41,7 @@ const routes: Routes = [
   {path: 'connexion', component: ConnexionComponent},
   {path: 'connexion/envoiMail', component: EnvoiMailComponent},
   {path: 'connexion/chgtMdp/:idUser', component: ChangementMdpComponent},
-  {path: 'gestion/manifestations', component: ListeManifestationComponent},
+  {path: 'manifestations', component: ListeManifestationComponent},
   {path: 'gestion/manifestations/detailmanifestation/:idManifestation', component: DetailManifestationComponent},
   {path: 'gestion/manifestations/detailmanifestation/newManifestation', component: DetailManifestationComponent},
   {path: 'inscriptionmanifestation/:idManifestation', component: InscriptionManifestationComponent},

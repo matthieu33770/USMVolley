@@ -3,95 +3,83 @@
     <h1>Les Manifestations</h1>
   </div>
 
-  <div class="listeManifestation">
-    <!-- <div class="right">
-      <button mat-raised-button color="accent" routerLink="/new">Nouvelle Manifestation</button>
-      <button mat-raised-button (click)="onEdit(selection.selected)">Modifier</button>
-      <button mat-raised-button color="warn" (click)="delete(selection.selected)">Supprimer</button>
-    </div> -->
-    <div>
-      <h3>
-        Liste des Manifestations
-        <button class="btn btn-primary pull-right" (click)="addEvent()">
-          Ajouter
-        </button>
-        <div class="clearfix"></div>
-      </h3>
-    </div>  
-      <div class="table-responsive">
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>Titre</th>
-              <th>Couleur</th>
-              <th>Début</th>
-              <th>Fin</th>
-              <th>Supprimer</th>
-            </tr>
-          </thead>
+  <div class="choix">
+    <h3>Choix du type de manifestations :  </h3>
+    <section class="typemanifestation">
+      <mat-radio-group [(ngModel)]="choix">
+        <mat-radio-button class="match" value="Match">Match</mat-radio-button>
+        <mat-radio-button class="entrainement" value="Entrainement">Entraînement</mat-radio-button>
+      </mat-radio-group> 
+      <button mat-icon-button>
+        <mat-icon aria-label="Valider son choix" (click)="choixFait()">search</mat-icon>
+      </button>
+    </section>
+  </div>
+  <br>
+  <div *ngIf="isChoix" class="listemanifestation">
+    <div class="boutons">
+      <button mat-raised-button (click)="exportAsXLSX()">Exporter</button>
+      <button mat-raised-button color="accent" routerLink="/gestion/equipes/detailequipe/newEquipe">Nouveau</button>
+      <button mat-raised-button (click)="onEdit(selection.selected)">Editer</button>
+      <span *ngIf="confirmDelete">
+        <span>Etes vous sûr de vouloir supprimer cette équipe ?</span>
+        <button mat-raised-button color="warn" (click)="delete(selection.selected); confirmDelete=false">Oui</button>
+        <button mat-raised-button color="accent" (click)="confirmDelete=false">Non</button>
+      </span>  
+      <button *ngIf="!confirmDelete" mat-raised-button color="warn" (click)="confirmDelete=true">Supprimer</button>
+    </div>
+
+    <br>
+
+    <div class="tablemanifestation">
+      <table mat-table [dataSource]="dataSource" class="tableau">
+    
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+  
+      <!-- Titre Column -->
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef>Titre de la manifestation</th>
+        <td mat-cell *matCellDef="let manifestation">{{manifestation.title}}</td>
+      </ng-container>
+
+      <!-- Date Column -->
+      <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef>Date</th>
+          <td mat-cell *matCellDef="let manifestation">{{manifestation.start}}</td>
+        </ng-container>
       
-          <tbody>
-            <tr *ngFor="let event of events">
-              <td>
-                <input
-                  type="text"
-                  class="form-control"
-                  [(ngModel)]="event.title"
-                  (keyup)="refresh.next()"
-                />
-              </td>
-              <td>
-                <input
-                  type="color"
-                  [(ngModel)]="event.color.primary"
-                  (change)="refresh.next()"
-                />
-              </td>
-              <td>
-                <input
-                  type="color"
-                  [(ngModel)]="event.color.secondary"
-                  (change)="refresh.next()"
-                />
-              </td>
-              <td>
-                <input
-                  class="form-control"
-                  type="text"
-                  mwlFlatpickr
-                  [(ngModel)]="event.start"
-                  (ngModelChange)="refresh.next()"
-                  [altInput]="true"
-                  [convertModelValue]="true"
-                  [enableTime]="true"
-                  dateFormat="Y-m-dTH:i"
-                  altFormat="F j, Y H:i"
-                  placeholder="Not set"
-                />
-              </td>
-              <td>
-                <input
-                  class="form-control"
-                  type="text"
-                  mwlFlatpickr
-                  [(ngModel)]="event.end"
-                  (ngModelChange)="refresh.next()"
-                  [altInput]="true"
-                  [convertModelValue]="true"
-                  [enableTime]="true"
-                  dateFormat="Y-m-dTH:i"
-                  altFormat="F j, Y H:i"
-                  placeholder="Not set"
-                />
-              </td>
-              <td>
-                <button class="btn btn-danger" (click)="deleteEvent(event)">
-                  Delete
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <!-- Equipe Column -->
+      <ng-container matColumnDef="equipe">
+          <th mat-header-cell *matHeaderCellDef>Equipe concernée</th>
+          <td mat-cell *matCellDef="let manifestation">{{manifestation.equipe.libelleEquipe}}</td>
+        </ng-container>
+      
+      <!-- Lieu Column -->
+      <ng-container matColumnDef="lieu">
+          <th mat-header-cell *matHeaderCellDef>Lieu</th>
+          <td mat-cell *matCellDef="let manifestation">{{manifestation.lieu.lieu}}</td>
+        </ng-container>
+      
+      <!-- Statut Column -->
+      <ng-container matColumnDef="statut">
+          <th mat-header-cell *matHeaderCellDef>Statut</th>
+          <td mat-cell *matCellDef="let manifestation">{{manifestation.statut.libelleStatut}}</td>
+        </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
   </div>
 </div>

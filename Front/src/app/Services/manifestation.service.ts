@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
-import { Manifestation } from '../Model/Manifestation';
+import { Manifestation } from '../model/Manifestation';
 import { ParticipationPK } from '../model/ParticipationPK';
 import { Participation } from '../model/Participation';
 

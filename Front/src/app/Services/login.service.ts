@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {User} from '../model/User';
-import {JsonWebToken} from '../model/jwt';
 import {Router} from '@angular/router';
 import {environment} from '../../environments/environment';
 import * as jwt_decode from 'jwt-decode';
 import {BehaviorSubject} from 'rxjs';
-import { Location } from '@angular/common';
 import { MatSnackBar } from '@angular/material';
+
+import { User } from '../model/User';
+import { JsonWebToken } from '../model/Jwt';
 
 @Injectable({
   providedIn: 'root'

@@ -30,7 +30,7 @@ export class InscriptionManifestationComponent implements OnInit {
   joueur: Joueur = new Joueur(0, '', '', '', 0, '', 0, '', '', '', '', null, null, null, null);
   disponibiliteList: Disponibilite [];
   disponibilite: Disponibilite;
-  newParticipation: ParticipationPK = new ParticipationPK(null, null, new Disponibilite(1, '', 0));
+  newParticipation: ParticipationPK = new ParticipationPK(0, 0, 0);
 
   constructor(private route: ActivatedRoute,
               private manifestationService: ManifestationService,
@@ -48,7 +48,7 @@ export class InscriptionManifestationComponent implements OnInit {
   getManifestation(): void {
     this.manifestationService.findManifestation(this.idManifestation).subscribe(manifestation => {
       this.inscriptionManifestation = manifestation;
-      this.newParticipation.manifestation = manifestation;
+      this.newParticipation.idManifestation = manifestation.idManifestation;
       if (this.inscriptionManifestation.title === 'entrainement' || this.inscriptionManifestation.title === 'Entrainement') {
         this.isEntrainement = true;
       }
@@ -59,7 +59,7 @@ export class InscriptionManifestationComponent implements OnInit {
     this.username = jwt_decode(sessionStorage.getItem(environment.accessToken)).sub;
     this.joueurService.findByUsername(this.username).subscribe(joueur => {
       this.joueur = joueur;
-      this.newParticipation.joueur = joueur;
+      this.newParticipation.idJoueur = joueur.idJoueur;
     });
   }
 
@@ -70,11 +70,13 @@ export class InscriptionManifestationComponent implements OnInit {
   }
 
   onSave() {
-    console.log('Joueur : ' + this.newParticipation.joueur.nom);
-    console.log('Manifestation : ' + this.newParticipation.manifestation.title);
-    console.log('Dispo : ' + this.disponibilite);
-    this.newParticipation.disponibilite = this.disponibiliteList.find(disponibilite => disponibilite.idDisponibilite === this.newParticipation.disponibilite.idDisponibilite);
-    console.log('Dispo bis : ' + this.newParticipation.disponibilite.libelleDisponibilite);
+    console.log('Joueur : ' + this.newParticipation.idJoueur);
+    console.log('Manifestation : ' + this.newParticipation.idManifestation);
+    console.log('Dispo : ' + this.newParticipation.idDisponibilite);
+    // this.newParticipation.disponibilite = this.disponibiliteList.find(disponibilite => disponibilite.idDisponibilite === this.newParticipation.disponibilite.idDisponibilite);
+    // this.newParticipation.idDisponibilite = this.disponibilite.idDisponibilite;
+    this.disponibilite = this.disponibiliteList.find(disponibilite => disponibilite.idDisponibilite === this.newParticipation.idDisponibilite);
+    console.log('Dispo bis : ' + this.newParticipation.idDisponibilite);
     this.manifestationService.createParticipation(this.newParticipation);
   }
 

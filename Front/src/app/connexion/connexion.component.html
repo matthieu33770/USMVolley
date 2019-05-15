@@ -25,18 +25,11 @@
             </mat-form-field>
           </div>
         </div>
-        <!-- <div class="row">
-          <div class="col">
-            <sub>
-              Mot de passe oublié ?
-            </sub>
-          </div>
-        </div> -->
       </mat-card-content>
       <mat-card-actions>
         <div class="bouton">
             <button mat-raised-button color="accent" type="submit" (click)="onSubmit()">Se Connecter</button>
-            <button mat-raised-button color="primary" type="submit" (click)="oubli()">Mot de passe oublié</button>
+            <button mat-raised-button color="primary" routerLink="/connexion/envoiMail/">Mot de passe oublié</button>
         </div>
       </mat-card-actions>
     </mat-card>

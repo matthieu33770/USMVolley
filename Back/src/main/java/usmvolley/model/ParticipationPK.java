@@ -8,47 +8,38 @@ import javax.persistence.Embeddable;
 public class ParticipationPK implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-	private Joueurs joueur;
-	private Manifestations manifestation;
-	private Disponibilite disponibilite;
 	
-	public ParticipationPK() {}
-
-	public Joueurs getJoueur() {
-		return joueur;
+	private int idJoueur;
+	private int idManifestation;
+	private int idDisponibilite;
+	
+	public int getIdJoueur() {
+		return idJoueur;
 	}
-
-	public void setJoueur(Joueurs joueur) {
-		this.joueur = joueur;
+	public void setIdJoueur(int idJoueur) {
+		this.idJoueur = idJoueur;
 	}
-
-	public Manifestations getManifestation() {
-		return manifestation;
+	public int getIdManifestation() {
+		return idManifestation;
 	}
-
-	public void setManifestation(Manifestations manifestation) {
-		this.manifestation = manifestation;
+	public void setIdManifestation(int idManifestation) {
+		this.idManifestation = idManifestation;
 	}
-
-	public Disponibilite getDisponibilite() {
-		return disponibilite;
+	public int getIdDisponibilite() {
+		return idDisponibilite;
 	}
-
-	public void setDisponibilite(Disponibilite disponibilite) {
-		this.disponibilite = disponibilite;
+	public void setIdDisponibilite(int idDisponibilite) {
+		this.idDisponibilite = idDisponibilite;
 	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((disponibilite == null) ? 0 : disponibilite.hashCode());
-		result = prime * result + ((joueur == null) ? 0 : joueur.hashCode());
-		result = prime * result + ((manifestation == null) ? 0 : manifestation.hashCode());
+		result = prime * result + idDisponibilite;
+		result = prime * result + idJoueur;
+		result = prime * result + idManifestation;
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -58,23 +49,12 @@ public class ParticipationPK implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		ParticipationPK other = (ParticipationPK) obj;
-		if (disponibilite == null) {
-			if (other.disponibilite != null)
-				return false;
-		} else if (!disponibilite.equals(other.disponibilite))
+		if (idDisponibilite != other.idDisponibilite)
 			return false;
-		if (joueur == null) {
-			if (other.joueur != null)
-				return false;
-		} else if (!joueur.equals(other.joueur))
+		if (idJoueur != other.idJoueur)
 			return false;
-		if (manifestation == null) {
-			if (other.manifestation != null)
-				return false;
-		} else if (!manifestation.equals(other.manifestation))
+		if (idManifestation != other.idManifestation)
 			return false;
 		return true;
 	}
-
-	
 }

@@ -53,6 +53,7 @@ import { ConsultationArticleComponent } from './consultation-article/consultatio
 import { ChangementMdpComponent } from './changement-mdp/changement-mdp.component';
 import { EnvoyerMailComponent } from './envoyer-mail/envoyer-mail.component';
 import { InscriptionManifestationComponent } from './inscription-manifestation/inscription-manifestation.component';
+import { EnvoiMailComponent } from './envoi-mail/envoi-mail.component';
 
 registerLocaleData(localeFr);
 
@@ -89,7 +90,8 @@ registerLocaleData(localeFr);
     ConsultationArticleComponent,
     ChangementMdpComponent,
     EnvoyerMailComponent,
-    InscriptionManifestationComponent
+    InscriptionManifestationComponent,
+    EnvoiMailComponent
   ],
   imports: [
     BrowserModule,

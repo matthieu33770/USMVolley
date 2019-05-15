@@ -1,0 +1,26 @@
+<div class="envoimail">
+    <form [formGroup]="loginForm" novalidate>
+      <mat-card class="login-card">
+        <mat-card-header>
+          <mat-card-title>Changer son mot de passe</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="row">
+            <div class="col">
+                <mat-form-field>
+                  <input matInput placeholder="Utilisateur" [(ngModel)]="editionUser.username" formControlName="username">
+                  <mat-error *ngIf="loginForm.controls['username'].hasError('required')">
+                    Le username est <strong>obligatoire</strong>
+                  </mat-error>
+                </mat-form-field>
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <div class="bouton">
+            <button mat-raised-button color="accent" type="submit" (click)="oubli()">Envoyer un mail</button>
+          </div>
+        </mat-card-actions>
+      </mat-card>
+    </form>
+  </div>

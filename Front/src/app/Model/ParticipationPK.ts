@@ -4,8 +4,8 @@ import { Disponibilite } from './Disponibilite';
 
 export class ParticipationPK {
 
-    constructor(public joueur: Joueur,
-                public manifestation: Manifestation,
-                public disponibilite: Disponibilite,
+    constructor(public idJoueur: number,
+                public idManifestation: number,
+                public idDisponibilite: number,
                 ) {}
 }

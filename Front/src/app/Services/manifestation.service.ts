@@ -90,7 +90,7 @@ export class ManifestationService {
     * @param newParticipation contient idJoueur, idManifestation et idDisponibilite
     */
    public createParticipation(newParticipation: ParticipationPK) {
-    console.log('départ' + newParticipation.joueur.nom);
+    console.log('départ' + newParticipation.idJoueur);
     const participation = new Participation(newParticipation);
     this.httpClient.post<Manifestation>('http://localhost:8080/participation/create', participation).subscribe();
   }

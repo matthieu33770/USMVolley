@@ -11,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
@@ -72,10 +71,6 @@ public class Joueurs implements Serializable {
 	@ManyToMany(mappedBy = "joueurs")
 	private Collection<Equipes> equipes;
 	
-//	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH })
-//	@JoinTable(name = "joueur_equipe", joinColumns = @JoinColumn(name = "idJoueur"), inverseJoinColumns = @JoinColumn(name = "idEquipe"))
-//	private Collection<Equipes> equipes;
-
 	public Joueurs() {
 	}
 

@@ -14,7 +14,6 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.util.matcher.AnyRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -61,6 +60,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/articles/get/articles").permitAll()
                 .antMatchers("/email/changeMdp").permitAll()
                 .antMatchers("/manifestations/get/manifestations").permitAll()
+                .antMatchers("/users/get/users").permitAll()
+                .antMatchers("/users/update/**").permitAll()
                 
                 // Disallow everything else...
                 .anyRequest().authenticated();

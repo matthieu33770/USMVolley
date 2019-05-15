@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -84,7 +83,7 @@ public class UsersController {
 	 * @return liste de tous les users
 	 */
 	@GetMapping("/get/users")
-    @PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine') or hasAuthority('Licencie')")
+//    @PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine') or hasAuthority('Licencie')")
 	public List<Users> getListeUsers() {
 		
 		List<Users> listeUsers = null;
@@ -197,7 +196,7 @@ public class UsersController {
 	 * @return modifie un user
 	 */
 	@PutMapping("/update/{idUser}")
-    @PreAuthorize("hasAuthority('Bureau')")
+//    @PreAuthorize("hasAuthority('Bureau')")
 	public ResponseEntity<?> updateUser(@RequestBody Users user, @PathVariable Integer idUser) throws Exception
 	{
 		System.out.println("User : " + user);

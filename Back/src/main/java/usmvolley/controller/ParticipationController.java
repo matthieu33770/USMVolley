@@ -1,7 +1,6 @@
 package usmvolley.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,9 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import usmvolley.model.Disponibilite;
-import usmvolley.model.Joueurs;
-import usmvolley.model.Manifestations;
 import usmvolley.model.Participation;
 import usmvolley.model.ParticipationPK;
 import usmvolley.repository.ParticipationRepository;
@@ -50,22 +46,22 @@ public class ParticipationController {
 	 * Methode Voir une participation
 	 * @return liste une participation
 	 */
-	@GetMapping("/get/uneParticipation/{participationPK}")
-	public ResponseEntity<?> getUneParticipation(@PathVariable ParticipationPK participationPK) {
+	@GetMapping("/get/participationManifestation/{idManifestation}")
+	public ResponseEntity<?> getParticipationByManifestation(@PathVariable int idManifestation) {
 		
-		Optional<Participation> participation = null;
+		List<Participation> listParticipation = null;
 		
 		try {
-			participation = participationRepo.findById(participationPK);
+			listParticipation = participationRepo.findAllParManifestation(idManifestation);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
 		
-		if (participation == null) {
+		if (listParticipation == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		}
 		
-		return ResponseEntity.status(HttpStatus.OK).body(participation);
+		return ResponseEntity.status(HttpStatus.OK).body(listParticipation);
 	}
 	
 	/**
@@ -74,30 +70,26 @@ public class ParticipationController {
 	 * @return ajoute une participation
 	 */
 	@PostMapping("/create")
-	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine') or hasAuthority('Licencie')")
 	public ResponseEntity<?> addParticipation(@RequestBody Participation participation) {
 		
-		System.out.println("arrivée Joueur: " + participation.getParticipationPK().getJoueur());
-		System.out.println("arrivée Manif: " + participation.getParticipationPK().getManifestation());
-		System.out.println("arrivée Dispo: " + participation.getParticipationPK().getDisponibilite());
 		Participation newParticipation = null;
-		Joueurs idJoueur = participation.getParticipationPK().getJoueur();
-		Manifestations idManifestation = participation.getParticipationPK().getManifestation();
-		Disponibilite idDisponibilite = participation.getParticipationPK().getDisponibilite();
+		int idJoueur = participation.getParticipationPK().getIdJoueur();
+		int idManifestation = participation.getParticipationPK().getIdManifestation();
+		int idDisponibilite = participation.getParticipationPK().getIdDisponibilite();
 		
-		System.out.println(idJoueur);
-		
-		if ((idJoueur == null)) {
+		if ((idJoueur == 0)) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Id Joueur incorrecte");
 		}
-		if ((idManifestation == null)) {
+		if ((idManifestation == 0)) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Id Manifestation incorrecte");
 		}
-		if ((idDisponibilite == null)) {
+		if ((idDisponibilite == 0)) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Id Disponibilite incorrecte");
 		}
 		
 		newParticipation = participationRepo.save(participation);
+		System.out.println(newParticipation);
 		return ResponseEntity.status(HttpStatus.CREATED).body(newParticipation);
 	}
 	

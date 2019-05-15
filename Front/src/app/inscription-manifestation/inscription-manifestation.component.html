@@ -8,7 +8,7 @@
     <p *ngIf="!isEntrainement">{{ inscriptionManifestation.title | uppercase}} pour {{ inscriptionManifestation.equipe.libelleEquipe }}</p>
     <p>{{ joueur.nom }} {{ joueur.prenom }}</p>
     <mat-form-field>
-      <mat-select placeholder="Disponibilite" [(ngModel)]="newParticipation.disponibilite.idDisponibilite" name="disponibilite">
+      <mat-select placeholder="Disponibilite" [(ngModel)]="newParticipation.idDisponibilite" name="disponibilite">
         <mat-option *ngFor="let disponibilite of disponibiliteList" [value]="disponibilite.idDisponibilite">
           {{disponibilite.libelleDisponibilite}}
         </mat-option>

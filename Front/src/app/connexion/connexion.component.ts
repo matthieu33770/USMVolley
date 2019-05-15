@@ -23,9 +23,7 @@ export class ConnexionComponent {
   });
 
   constructor(private fb: FormBuilder,
-              private loginService: LoginService,
-              private mailService: MailService,
-              private snackBar: MatSnackBar) { }
+              private loginService: LoginService) { }
 
   onSubmit() {
     const user = new User(0, '', '', null);
@@ -36,13 +34,13 @@ export class ConnexionComponent {
     console.log(user.fonction);
   }
 
-  oubli() {
-    const username = this.loginForm.value.username;
-    const lien = 'http://localhost:4200/connexion/chgtMdp/';
-    this.mailService.sendMailMdP(username, lien);
-    this.snackBar.open('Un mail vous a été envoyé pour réinitialiser votre mot de passe.', 'Info', {
-      duration: environment.durationSnackBar
-    });
-  }
+  // oubli() {
+  //   // const username = this.loginForm.value.username;
+  //   const lien = 'http://localhost:4200/connexion/chgtMdp/';
+  //   this.mailService.sendMailMdP(username, lien);
+  //   this.snackBar.open('Un mail vous a été envoyé pour réinitialiser votre mot de passe.', 'Info', {
+  //     duration: environment.durationSnackBar
+  //   });
+  // }
 
 }

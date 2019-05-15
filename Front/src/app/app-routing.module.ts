@@ -30,6 +30,7 @@ import { ChangementMdpComponent } from './changement-mdp/changement-mdp.componen
 import { EnvoyerMailComponent } from './envoyer-mail/envoyer-mail.component';
 import { DetailManifestationComponent } from './detail-manifestation/detail-manifestation.component';
 import { InscriptionManifestationComponent } from './inscription-manifestation/inscription-manifestation.component';
+import { EnvoiMailComponent } from './envoi-mail/envoi-mail.component';
 
 const routes: Routes = [
   {path: 'equipes', component: EquipesComponent},
@@ -38,6 +39,7 @@ const routes: Routes = [
   {path: 'saisie', component: SaisieComponent},
   {path: 'partenaires', component: PartenairesComponent},
   {path: 'connexion', component: ConnexionComponent},
+  {path: 'connexion/envoiMail', component: EnvoiMailComponent},
   {path: 'connexion/chgtMdp/:idUser', component: ChangementMdpComponent},
   {path: 'gestion/manifestations', component: ListeManifestationComponent},
   {path: 'gestion/manifestations/detailmanifestation/:idManifestation', component: DetailManifestationComponent},

@@ -16,12 +16,13 @@ public class Participation implements Serializable {
 		this.participationPK = new ParticipationPK();
 	}
 	
-	public Participation (Joueurs joueur, Manifestations manifestation, Disponibilite disponibilite) {
+	public Participation (int idJoueur, int idManifestation, int idDisponibilite) {
+		
 		this.participationPK = new ParticipationPK();
-		participationPK.setJoueur(joueur);
-		participationPK.setManifestation(manifestation);
-		participationPK.setDisponibilite(disponibilite);
-//		setParticipationPK(participationPK);
+		
+		participationPK.setIdJoueur(idJoueur);
+		participationPK.setIdManifestation(idManifestation);
+		participationPK.setIdDisponibilite(idDisponibilite);
 	}
 	
 	@EmbeddedId

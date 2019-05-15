@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material';
 import {environment} from '../../environments/environment';
 
 import { UsersService } from '../Services/users.service';
+import { MailService } from '../services/mail.service';
 
 import { User } from '../Model/User';
 
@@ -46,5 +47,4 @@ export class ChangementMdpComponent implements OnInit {
       duration: environment.durationSnackBar
     });
   }
-
 }

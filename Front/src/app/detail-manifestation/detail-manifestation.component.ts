@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import {CalendarModule} from 'primeng/calendar';
 
 import { Manifestation } from '../modeles/manifestation';
 import { Equipe } from '../modeles/equipe';
@@ -72,6 +73,7 @@ export class DetailManifestationComponent implements OnInit {
   }
 
   onSave() {
+    // console.log(date);
     console.log(this.editionManifestation.heure);
     console.log(this.editionManifestation.start);
     // const date = new Date(this.editionManifestation.start + this.editionManifestation.heure);
@@ -82,7 +84,7 @@ export class DetailManifestationComponent implements OnInit {
     console.log(this.editionManifestation.heure.hours);
     const min = +(this.editionManifestation.heure.minutes);
     const x = yy + '-' + mm + '-' + dd + 'T' + hh + ':' + min + ':00.000+0000';
-    const date = new Date(yy, mm, dd, hh, mm);
+    // const date = new Date(yy, mm, dd, hh, mm);
     console.log(yy, mm, dd, this.editionManifestation.heure);
     // Vérifier si on est en édition ou en création
     // if (!this.editionManifestation) {

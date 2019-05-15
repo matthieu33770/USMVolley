@@ -16,6 +16,10 @@
   justify-content: center;
 }
 
+.heure {
+  background-color: blue;
+}
+
 .boutons {
   display: flex;
   justify-content: flex-end;

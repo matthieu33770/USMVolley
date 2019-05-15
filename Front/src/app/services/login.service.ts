@@ -59,7 +59,7 @@ export class LoginService {
       const authority: string = decodedToken.auth.libelleFonction;
       console.log(authority);
       this.userRole.next(authority);
-      console.log(this.userRole);
+      console.log(this.userRole.value);
     }
   }
 }

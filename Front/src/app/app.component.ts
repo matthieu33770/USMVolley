@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {environment} from './../environments/environment';
-import {LoginService} from './Services/login.service';
+
+import {LoginService} from './services/login.service';
 
 @Component({
   selector: 'app-root',
@@ -24,8 +24,8 @@ export class AppComponent implements OnInit {
       map(result => result.matches)
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private loginService: LoginService) {
-  }
+  constructor(private breakpointObserver: BreakpointObserver,
+              private loginService: LoginService) { }
 
   ngOnInit() {
     this.getConnection();
@@ -39,20 +39,10 @@ export class AppComponent implements OnInit {
       this.isBureau = userRole.includes('Bureau');
       this.isLoggedin = userRole.length > 0;
     });
-    if (this.isLoggedin) {
-      this.formulaire = 'Renouvellement';
-    } else if (!this.isLoggedin) {
-      this.formulaire = 'Inscription';
-    }
   }
 
   onDeconnect() {
     this.loginService.signOut();
     this.isLoggedin = false;
-    if (this.isLoggedin) {
-      this.formulaire = 'Renouvellement';
-    } else if (!this.isLoggedin) {
-      this.formulaire = 'Inscription';
-    }
   }
 }

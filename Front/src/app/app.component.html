@@ -21,7 +21,8 @@
       <img class="img" src="assets/images/logo_usm_mios.png" routerLink="">
     </div>
     <div class="menu2">
-      <button mat-flat-button routerLink="/saisie">{{formulaire}}</button>
+      <button *ngIf="!isLoggedin" mat-flat-button routerLink="/saisie">Inscription</button>
+      <button *ngIf="isLoggedin" mat-flat-button routerLink="/saisie">Renouvellement</button>
       <button mat-flat-button routerLink="/partenaires">Les Partenaires</button>
       <button *ngIf="!isLoggedin" mat-flat-button routerLink="/connexion">Connexion</button>
       <button *ngIf="isLoggedin && isLicencie" mat-flat-button [matMenuTriggerFor]="menuL">Licencié</button>
@@ -61,7 +62,8 @@
       <button mat-menu-item routerLink="/agenda">Agenda</button>
       <button mat-menu-item routerLink="/calendrier">Calendrier</button>
       <button mat-menu-item routerLink="/lieux">Les Lieux</button>
-      <button mat-menu-item routerLink="/saisie">{{formulaire}}</button>
+      <button *ngIf="!isLoggedin" mat-flat-button routerLink="/saisie">Inscription</button>
+      <button *ngIf="isLoggedin" mat-flat-button routerLink="/saisie">Renouvellement</button>
       <button mat-menu-item routerLink="/partenaires">Les Partenaires</button>
 
       <button *ngIf="!isLoggedin" mat-flat-button routerLink="/connexion">Connexion</button>

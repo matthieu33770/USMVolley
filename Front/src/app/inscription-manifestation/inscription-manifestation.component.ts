@@ -3,16 +3,16 @@ import { ActivatedRoute } from '@angular/router';
 import * as jwt_decode from 'jwt-decode';
 import { environment } from 'src/environments/environment';
 
-import { ManifestationService } from '../Services/manifestation.service';
-import { JoueursService } from '../Services/joueurs.service';
-import { DisponibiliteService } from '../Services/disponibilite.service';
+import { ManifestationService } from '../services/manifestation.service';
+import { JoueursService } from '../services/joueurs.service';
+import { DisponibiliteService } from '../services/disponibilite.service';
 
-import { Manifestation } from '../model/Manifestation';
-import { User } from '../model/User';
-import { Fonction } from '../model/Fonction';
-import { Joueur } from '../model/Joueur';
-import { Disponibilite } from '../model/Disponibilite';
-import { ParticipationPK } from '../model/ParticipationPK';
+import { Manifestation } from '../modeles/manifestation';
+import { User } from '../modeles/user';
+import { Fonction } from '../modeles/fonction';
+import { Joueur } from '../modeles/joueur';
+import { Disponibilite } from '../modeles/disponibilite';
+import { ParticipationPK } from '../modeles/participationPK';
 
 @Component({
   selector: 'app-inscription-manifestation',

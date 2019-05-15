@@ -1,15 +1,13 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatTableDataSource } from '@angular/material';
-import { SelectionModel } from '@angular/cdk/collections';
 
 import { FileInformation } from '../file-information';
 
-import { Article } from '../Model/Article';
+import { Article } from '../modeles/article';
 
-import { ExcelService } from '../Services/excel.service';
-import { ArticlesService } from '../Services/articles.service';
+import { ExcelService } from '../services/excel.service';
+import { ArticlesService } from '../services/articles.service';
 
 const chem = 'assets/photos';
 

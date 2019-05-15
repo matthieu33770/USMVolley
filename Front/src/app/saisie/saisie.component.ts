@@ -6,17 +6,17 @@ import * as jwt_decode from 'jwt-decode';
 import { FileInformation } from '../file-information';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 
-import { LoginService } from '../Services/login.service';
-import { JoueursService } from '../Services/joueurs.service';
-import { UsersService } from '../Services/users.service';
-import { CategorieService } from '../Services/categorie.service';
+import { LoginService } from '../services/login.service';
+import { JoueursService } from '../services/joueurs.service';
+import { UsersService } from '../services/users.service';
+import { CategorieService } from '../services/categorie.service';
 
-import { Joueur } from '../Model/Joueur';
-import { User } from '../Model/User';
-import { Categorie } from '../Model/Categorie';
-import { Licence } from '../Model/Licence';
-import { Avoir } from '../Model/Avoir';
-import { Fonction } from '../Model/Fonction';
+import { Joueur } from '../modeles/joueur';
+import { User } from '../modeles/user';
+import { Categorie } from '../modeles/categorie';
+import { Licence } from '../modeles/licence';
+import { Avoir } from '../modeles/avoir';
+import { Fonction } from '../modeles/fonction';
 
 @Component({
   selector: 'app-saisie',
@@ -233,7 +233,6 @@ export class SaisieComponent implements OnInit {
 
   onRegisterF() {
     const dataF: FormData = new FormData();
-    console.log(this.file);
 
     if (this.file !== undefined) {
       this.formulaireTest = this.formulaire;
@@ -244,7 +243,6 @@ export class SaisieComponent implements OnInit {
 
   onRegisterC() {
     const dataC: FormData = new FormData();
-    console.log(this.file);
 
     if (this.file !== undefined) {
       this.certificatTest = this.certificat;

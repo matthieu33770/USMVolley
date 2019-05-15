@@ -4,10 +4,10 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material';
 
-import { Creneau } from '../Model/Creneau';
+import { Creneau } from '../modeles/creneau';
 
-import { CreneauxService } from '../Services/creneaux.service';
-import { ExcelService } from '../Services/excel.service';
+import { CreneauxService } from '../services/creneaux.service';
+import { ExcelService } from '../services/excel.service';
 
 @Component({
   selector: 'app-liste-creneaux',

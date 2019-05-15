@@ -4,10 +4,10 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material';
 
-import { Statut } from '../Model/Statut';
+import { Statut } from '../modeles/statut';
 
-import { StatutService } from '../Services/statut.service';
-import { ExcelService } from '../Services/excel.service';
+import { StatutService } from '../services/statut.service';
+import { ExcelService } from '../services/excel.service';
 
 @Component({
   selector: 'app-liste-statut',

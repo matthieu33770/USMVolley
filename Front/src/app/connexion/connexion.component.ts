@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 
 import { LoginService } from '../services/login.service';
 
-import { User } from '../model/User';
+import { User } from '../modeles/user';
 
 @Component({
   selector: 'app-connexion',

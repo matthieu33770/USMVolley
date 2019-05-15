@@ -4,10 +4,10 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material';
 
-import { Disponibilite } from '../Model/Disponibilite';
+import { Disponibilite } from '../modeles/disponibilite';
 
-import { DisponibiliteService } from '../Services/disponibilite.service';
-import { ExcelService } from '../Services/excel.service';
+import { DisponibiliteService } from '../services/disponibilite.service';
+import { ExcelService } from '../services/excel.service';
 
 @Component({
   selector: 'app-liste-disponibilites',

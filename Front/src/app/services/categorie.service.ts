@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { Categorie } from '../Model/Categorie';
+
+import { Categorie } from '../modeles/categorie';
 
 @Injectable({
   providedIn: 'root'

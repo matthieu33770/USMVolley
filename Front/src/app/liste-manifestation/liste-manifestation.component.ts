@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ManifestationService } from '../Services/manifestation.service';
+import { Component } from '@angular/core';
+
+import { ManifestationService } from '../services/manifestation.service';
 
 @Component({
   selector: 'app-liste-manifestation',

@@ -4,9 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import {environment} from '../../environments/environment';
 
-import { UsersService } from '../Services/users.service';
+import { UsersService } from '../services/users.service';
 
-import { User } from '../Model/User';
+import { User } from '../modeles/user';
 
 @Component({
   selector: 'app-changement-mdp',

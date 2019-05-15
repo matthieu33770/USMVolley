@@ -4,10 +4,10 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material';
 
-import { Article } from '../Model/Article';
+import { Article } from '../modeles/article';
 
-import { ArticlesService } from '../Services/articles.service';
-import { ExcelService } from '../Services/excel.service';
+import { ArticlesService } from '../services/articles.service';
+import { ExcelService } from '../services/excel.service';
 
 @Component({
   selector: 'app-liste-articles',

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Categorie } from '../Model/Categorie';
+import { Categorie } from '../modeles/categorie';
 
-import { CategorieService } from '../Services/categorie.service';
+import { CategorieService } from '../services/categorie.service';
 
 @Component({
   selector: 'app-detail-categorie',

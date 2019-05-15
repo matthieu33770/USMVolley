@@ -6,7 +6,7 @@ import {environment} from '../../environments/environment';
 import { MailService } from '../services/mail.service';
 import { UsersService } from '../services/users.service';
 
-import { User } from '../model/User';
+import { User } from '../modeles/user';
 
 @Component({
   selector: 'app-envoi-mail',

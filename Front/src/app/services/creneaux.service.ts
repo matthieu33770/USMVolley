@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
-import { Creneau } from '../Model/Creneau';
+import { Creneau } from '../modeles/creneau';
 
 @Injectable({
   providedIn: 'root'

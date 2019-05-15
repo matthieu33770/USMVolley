@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
-import { Disponibilite } from '../Model/Disponibilite';
+import { Disponibilite } from '../modeles/disponibilite';
 
 @Injectable({
   providedIn: 'root'

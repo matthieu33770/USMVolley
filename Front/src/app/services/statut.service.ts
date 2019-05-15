@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
-import { Statut } from '../Model/Statut';
+import { Statut } from '../modeles/statut';
 
 @Injectable({
   providedIn: 'root'

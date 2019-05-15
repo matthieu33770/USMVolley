@@ -6,8 +6,8 @@ import * as jwt_decode from 'jwt-decode';
 import {BehaviorSubject} from 'rxjs';
 import { MatSnackBar } from '@angular/material';
 
-import { User } from '../model/User';
-import { JsonWebToken } from '../model/Jwt';
+import { User } from '../modeles/user';
+import { JsonWebToken } from '../modeles/jwt';
 
 @Injectable({
   providedIn: 'root'

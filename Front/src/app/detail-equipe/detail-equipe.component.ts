@@ -3,14 +3,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 
-import { Equipe } from '../Model/Equipe';
-import { Joueur } from '../Model/Joueur';
-import { Categorie } from '../Model/Categorie';
+import { Equipe } from '../modeles/equipe';
+import { Joueur } from '../modeles/joueur';
+import { Categorie } from '../modeles/categorie';
 
-import { EquipesService } from '../Services/equipes.service';
-import { JoueursService } from '../Services/joueurs.service';
-import { ExcelService } from '../Services/excel.service';
-import { CategorieService } from '../Services/categorie.service';
+import { EquipesService } from '../services/equipes.service';
+import { JoueursService } from '../services/joueurs.service';
+import { ExcelService } from '../services/excel.service';
+import { CategorieService } from '../services/categorie.service';
 
 @Component({
   selector: 'app-detail-equipe',

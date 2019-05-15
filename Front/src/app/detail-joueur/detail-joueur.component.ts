@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { User } from '../Model/User';
-import { Fonction } from '../Model/Fonction';
-import { Equipe } from '../Model/Equipe';
-import { Joueur } from '../Model/Joueur';
+import { User } from '../modeles/user';
+import { Fonction } from '../modeles/fonction';
+import { Equipe } from '../modeles/equipe';
+import { Joueur } from '../modeles/joueur';
 
-import { JoueursService } from '../Services/joueurs.service';
-import { EquipesService } from '../Services/equipes.service';
+import { JoueursService } from '../services/joueurs.service';
+import { EquipesService } from '../services/equipes.service';
 
 @Component({
   selector: 'app-detail-joueur',

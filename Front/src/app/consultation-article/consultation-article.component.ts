@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Article } from '../Model/Article';
+import { Article } from '../modeles/article';
 
-import { ArticlesService } from '../Services/articles.service';
+import { ArticlesService } from '../services/articles.service';
 
 @Component({
   selector: 'app-consultation-article',

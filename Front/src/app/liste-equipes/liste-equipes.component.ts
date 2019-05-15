@@ -2,12 +2,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { BehaviorSubject, Subscription } from 'rxjs';
-
 import { Router } from '@angular/router';
-import { EquipesService } from '../Services/equipes.service';
-import { ExcelService } from '../Services/excel.service';
 
-import { Equipe } from '../Model/Equipe';
+import { EquipesService } from '../services/equipes.service';
+import { ExcelService } from '../services/excel.service';
+
+import { Equipe } from '../modeles/equipe';
 
 @Component({
   selector: 'app-liste-equipes',

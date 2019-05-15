@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Statut } from '../Model/Statut';
+import { Statut } from '../modeles/statut';
 
-import { StatutService } from '../Services/statut.service';
+import { StatutService } from '../services/statut.service';
 
 
 @Component({

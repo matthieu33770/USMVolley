@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Equipe } from '../Model/Equipe';
-import { Categorie } from '../Model/Categorie';
+import { Equipe } from '../modeles/equipe';
+import { Categorie } from '../modeles/categorie';
 
-import { EquipesService } from '../Services/equipes.service';
-import { CategorieService } from '../Services/categorie.service';
+import { EquipesService } from '../services/equipes.service';
+import { CategorieService } from '../services/categorie.service';
 
 @Component({
   selector: 'app-envoyer-mail',

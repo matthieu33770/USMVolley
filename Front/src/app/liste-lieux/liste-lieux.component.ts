@@ -4,10 +4,10 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material';
 
-import { Lieu } from '../Model/Lieu';
+import { Lieu } from '../modeles/lieu';
 
-import { LieuxService } from '../Services/lieux.service';
-import { ExcelService } from '../Services/excel.service';
+import { LieuxService } from '../services/lieux.service';
+import { ExcelService } from '../services/excel.service';
 
 @Component({
   selector: 'app-liste-lieux',

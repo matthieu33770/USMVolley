@@ -2,13 +2,12 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-
 import {environment} from '../../environments/environment';
 
-import { Joueur } from '../Model/Joueur';
-import { User } from '../Model/User';
-import { Role } from '../Model/Role';
-import { Fonction } from '../Model/Fonction';
+import { Joueur } from '../modeles/joueur';
+import { User } from '../modeles/user';
+import { Role } from '../modeles/role';
+import { Fonction } from '../modeles/fonction';
 
 @Injectable({
   providedIn: 'root'

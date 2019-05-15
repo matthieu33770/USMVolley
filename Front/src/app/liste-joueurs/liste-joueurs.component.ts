@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
-import { BehaviorSubject, Observable } from 'rxjs';
-
+import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
-import { JoueursService } from '../Services/joueurs.service';
-import { ExcelService } from '../Services/excel.service';
 
-import { User } from '../Model/User';
-import { Role } from '../Model/Role';
-import { Joueur } from '../Model/Joueur';
-import { Fonction } from '../Model/Fonction';
+import { JoueursService } from '../services/joueurs.service';
+import { ExcelService } from '../services/excel.service';
+
+import { User } from '../modeles/user';
+import { Role } from '../modeles/role';
+import { Joueur } from '../modeles/joueur';
+import { Fonction } from '../modeles/fonction';
 
 @Component({
   selector: 'app-liste-joueurs',

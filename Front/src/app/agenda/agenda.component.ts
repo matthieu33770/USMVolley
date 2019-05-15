@@ -4,7 +4,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import frLocale from '@fullcalendar/core/locales/fr';
 
-import { EventService } from '../Services/event.service';
+import { EventService } from '../services/event.service';
 
 @Component({
   selector: 'app-agenda',

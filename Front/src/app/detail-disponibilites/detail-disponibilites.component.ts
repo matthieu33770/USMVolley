@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Disponibilite } from '../Model/Disponibilite';
+import { Disponibilite } from '../modeles/disponibilite';
 
-import { DisponibiliteService } from '../Services/disponibilite.service';
+import { DisponibiliteService } from '../services/disponibilite.service';
 
 @Component({
   selector: 'app-detail-disponibilites',

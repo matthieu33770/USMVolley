@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Lieu } from '../Model/Lieu';
+import { Lieu } from '../modeles/lieu';
 
-import { LieuxService } from '../Services/lieux.service';
+import { LieuxService } from '../services/lieux.service';
 
 @Component({
   selector: 'app-detail-lieux',

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-import { ArticlesService } from '../Services/articles.service';
+import { ArticlesService } from '../services/articles.service';
 
-import { Article } from '../Model/Article';
+import { Article } from '../modeles/article';
 
 
 @Component({

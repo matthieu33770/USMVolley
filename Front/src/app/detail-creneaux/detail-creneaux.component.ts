@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Creneau } from '../Model/Creneau';
-import { Categorie } from '../Model/Categorie';
+import { Creneau } from '../modeles/creneau';
+import { Categorie } from '../modeles/categorie';
 
-import { CreneauxService } from '../Services/creneaux.service';
-import { CategorieService } from '../Services/categorie.service';
+import { CreneauxService } from '../services/creneaux.service';
+import { CategorieService } from '../services/categorie.service';
 
 @Component({
   selector: 'app-detail-creneaux',

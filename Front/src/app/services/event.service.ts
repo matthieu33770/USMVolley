@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { Manifestation } from '../model/Manifestation';
-import { Event } from '../model/Event';
+import { Manifestation } from '../modeles/manifestation';
+import { Event } from '../modeles/event';
 
 import { ManifestationService } from './manifestation.service';
 

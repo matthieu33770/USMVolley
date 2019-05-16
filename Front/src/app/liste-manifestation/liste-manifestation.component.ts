@@ -7,6 +7,10 @@ import { Router } from '@angular/router';
 import { ManifestationService } from '../services/manifestation.service';
 
 import { Manifestation } from '../modeles/manifestation';
+import { EquipesService } from '../services/equipes.service';
+import { Equipe } from '../modeles/Equipe';
+import { ParticipationService } from '../services/participation.service';
+import { Participation } from '../modeles/participation';
 
 
 @Component({
@@ -18,28 +22,39 @@ export class ListeManifestationComponent implements OnInit, OnDestroy  {
 
   choix = '';
   titre: string;
-  isChoix = false;
   manifestations: Manifestation [] = [];
   manifestationList: Manifestation [] = [];
   dataSource = new MatTableDataSource<Manifestation>();
-  displayedColumns: string[] = ['select', 'title', 'date', 'equipe', 'lieu', 'statut'];
+  displayedColumns: string[] = ['select', 'title', 'date', 'equipe', 'lieu', 'statut', 'present', 'absent', 'nonRepondu'];
   selection = new SelectionModel<Manifestation>(false, []);
 
+  equipes: Equipe [] = [];
+  nbreJoueur: number;
+  nbreParticipation: number;
+
+  participations: Participation [] = [];
+  participationList: Participation [] = [];
+
+  participationManifList: Participation [] = [];
+
   subManifestation: Subscription;
+  subEquipe: Subscription;
+  subParticipation: Subscription;
 
   constructor(private router: Router,
-              private manifestationService: ManifestationService) { }
+              private manifestationService: ManifestationService,
+              private participationService: ParticipationService,
+              private equipeService: EquipesService) { }
 
   ngOnInit() {
     this.subManifestation = this.manifestationService.availableManifestation$.subscribe(Manifestations => {
       this.manifestations = Manifestations;
     });
-  }
-
-  choixFait () {
-    this.isChoix = true;
-    console.log(this.choix);
     this.getManifestation();
+    // this.subParticipation = this.participationService.availableParticipation$.subscribe(Participations => {
+    //   this.participations = Participations;
+    // });
+    // this.getParticipation();
   }
 
   getManifestation(): void {
@@ -50,11 +65,31 @@ export class ListeManifestationComponent implements OnInit, OnDestroy  {
     }
     this.manifestationService.getManifestations().subscribe(Manifestations => {
                                                             Manifestations.forEach( manifestation => {
-                                                            if (manifestation.title.toLowerCase() === this.choix.toLowerCase()) {
-                                                              this.manifestationList.push(manifestation); }
+                                                              this.manifestationList.push(manifestation);
+                                                              manifestation.nbrePasRepondu = manifestation.equipe.joueurs.length;
+                                                              this.participationService.getParticipations().subscribe(Participations => {
+                                                                Participations.forEach( participation => {
+                                                                  if (participation.participationPK.idManifestation === manifestation.idManifestation) {
+                                                                    this.participationManifList.push(participation);
+                                                                    // manifestation.nbrePasRepondu = manifestation.nbrePasRepondu - this.participationManifList.length;
+                                                                    this.nbreParticipation = this.participationManifList.length;
+                                                                    console.log(this.nbreParticipation);
+                                                                  }
+                                                                });
+                                                              });
                                                             });
                                                             this.dataSource = new MatTableDataSource<Manifestation>(this.manifestationList);
                                                             console.log(this.dataSource);
+                                                            console.log(this.participationManifList);
+    });
+  }
+
+  getParticipation(): void {
+    this.participationService.getParticipations().subscribe(Participations => {
+                                                            Participations.forEach( participation => {
+                                                              this.participationList.push(participation);
+                                                            });
+                                                            console.log(this.participationList);
     });
   }
 

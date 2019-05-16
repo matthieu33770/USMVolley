@@ -4,7 +4,15 @@
     <h1 *ngIf="!isModification">Création d'une manifestation</h1>
   </div>
 
-  <div class="data">
+  <div *ngIf="!isModification" class="choix">
+      <h4>Choix du type de manifestation à créer : </h4>
+      <section class="typemanifestation">
+          <button mat-stroked-button (click)="periodique=true; ponctuelle=false">Periodique</button>
+          <button mat-stroked-button (click)="periodique=false; ponctuelle=true">Ponctuelle</button>
+      </section>
+  </div>
+
+  <div *ngIf="ponctuelle || isModification" class="data">
     <div>
       <mat-form-field>
         <input matInput placeholder="Titre" [(ngModel)]="editionManifestation.title" name="title">
@@ -40,6 +48,47 @@
       </mat-form-field>
     </div>
   </div>
+
+  <div *ngIf="periodique" class="data">
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Titre" [(ngModel)]="editionManifestation.title" name="title">
+        </mat-form-field>
+      </div>
+      <div>
+        <p-calendar placeholder="Date de la manifestation" [(ngModel)]="date" [showTime]="true"></p-calendar>
+      </div>
+      <div>
+        <p>Sur X semaines</p><input matInput placeholder="Semaines" [(ngModel)]="semaines" name="semaines">
+      </div>
+  
+      <div>
+        <mat-form-field>
+          <mat-select placeholder="Equipe" [(ngModel)]="editionManifestation.equipe.idEquipe" name="equipe.libelleEquipe">
+            <mat-option *ngFor="let equipe of equipeList" [value]="equipe.idEquipe">
+              {{equipe.libelleEquipe}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field>
+          <mat-select placeholder="Lieu" [(ngModel)]="editionManifestation.lieu.idLieu" name="lieu.lieu">
+            <mat-option *ngFor="let lieu of lieuList" [value]="lieu.idLieu">
+              {{lieu.lieu}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field>
+          <mat-select placeholder="Statut" [(ngModel)]="editionManifestation.statut.idStatut" name="statut.libelleStatut">
+            <mat-option *ngFor="let statut of statutList" [value]="statut.idStatut">
+              {{statut.libelleStatut}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
   <div class="boutons">
     <button *ngIf="isModification" mat-raised-button color="primary" (click)="onSave()" routerLink="/manifestations">Modifier</button>
     <button *ngIf="!isModification" mat-raised-button color="primary" (click)="onSave()" routerLink="/manifestations">Enregistrer</button>

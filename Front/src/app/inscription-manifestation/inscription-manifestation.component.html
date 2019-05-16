@@ -1,19 +1,26 @@
 <div class="inscription">
   <div class="titre">
     <h1>Inscription à la manifestation</h1>
+    <h3 *ngIf="isEntrainement">{{ inscriptionManifestation.title | uppercase}}</h3>
+    <h3 *ngIf="!isEntrainement">{{ inscriptionManifestation.title | uppercase}} pour l'équipe {{ inscriptionManifestation.equipe.libelleEquipe }}</h3>
   </div>
 
   <div class="corps">
-    <p *ngIf="isEntrainement">{{ inscriptionManifestation.title | uppercase}}</p>
-    <p *ngIf="!isEntrainement">{{ inscriptionManifestation.title | uppercase}} pour {{ inscriptionManifestation.equipe.libelleEquipe }}</p>
-    <p>{{ joueur.nom }} {{ joueur.prenom }}</p>
-    <mat-form-field>
-      <mat-select placeholder="Disponibilite" [(ngModel)]="newParticipation.idDisponibilite" name="disponibilite">
-        <mat-option *ngFor="let disponibilite of disponibiliteList" [value]="disponibilite.idDisponibilite">
-          {{disponibilite.libelleDisponibilite}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div>
+      <mat-form-field>
+        <input matInput [(ngModel)]="joueur.nom">
+      </mat-form-field>
+      <mat-form-field>
+          <input matInput [(ngModel)]="joueur.prenom">
+        </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Disponibilite" [(ngModel)]="newParticipation.idDisponibilite" name="disponibilite">
+          <mat-option *ngFor="let disponibilite of disponibiliteList" [value]="disponibilite.idDisponibilite">
+            {{disponibilite.libelleDisponibilite}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
   </div>
 
   <div class="boutons">

@@ -23,6 +23,7 @@ export class DetailEquipeComponent implements OnInit {
   isModification: Boolean = false;
   idEquipe: number;
   equipe;
+  couleur: string;
   equipeList: Equipe [];
   joueurAdulte: Joueur [] = [];
   joueurEquipe: Joueur[] = [];
@@ -48,9 +49,11 @@ export class DetailEquipeComponent implements OnInit {
     this.idEquipe = +this.route.snapshot.params.idEquipe;
     this.getEquipe();
     this.equipeService.findEquipe(this.idEquipe).subscribe(equipe => {
-      this.editionEquipe = equipe; });
+      this.editionEquipe = equipe;
+      this.couleur = this.editionEquipe.couleur; });
     if (this.editionEquipe.categorie === null) {
       this.editionEquipe.categorie = new Categorie(0, 'Choisir', 0);
+      this.couleur = '';
     }
     if (this.editionEquipe.idEquipe) {
       this.isModification = true;
@@ -61,7 +64,7 @@ export class DetailEquipeComponent implements OnInit {
   }
 
   getEquipe(): void {
-    this.equipeService.getEquipes().subscribe(Equipes => this.equipe = Equipes);
+    this.equipeService.getEquipes().subscribe(Equipes => {this.equipe = Equipes; });
   }
 
   getAdulte(): void {
@@ -104,10 +107,12 @@ export class DetailEquipeComponent implements OnInit {
       }
     });
     this.editionEquipe.categorie = this.categorie[0];
+    console.log(this.editionEquipe);
 
     // Vérifier si on est en édition ou en création
-    if (this.editionEquipe.idEquipe === 0) {
-      this.idEquipe = null;
+    if (this.editionEquipe.idEquipe === 0 || this.editionEquipe.idEquipe === null) {
+      this.editionEquipe.couleur = this.couleur;
+      console.log(this.editionEquipe);
       this.equipeService.createEquipe(this.editionEquipe);
     } else {
       this.equipeService.updateEquipe(this.editionEquipe);

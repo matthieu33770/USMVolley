@@ -100,4 +100,17 @@ export class ManifestationService {
     const participation = new Participation(newParticipation);
     this.httpClient.post<Manifestation>('http://localhost:8080/participation/create', participation).subscribe();
   }
+
+  public getParticipations(): Observable<Participation[]> {
+    return this.httpClient.get<Participation[]>('http://localhost:8080/participation/get/participation');
+  }
+
+   /**
+    * Cette fonction permet de trouver une manifestation dans la liste des manifestations chargées par l'application
+    * grâce à son ID.
+    * @param idManifestation l'id qu'il faut rechercher dans la liste.
+    */
+   public findParticipation(idManifestation: number) {
+    this.httpClient.get<Manifestation>('http://localhost:8080/participation/get/participation').subscribe();
+  }
 }

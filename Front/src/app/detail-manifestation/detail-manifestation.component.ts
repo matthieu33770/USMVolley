@@ -25,6 +25,8 @@ import { StatutService } from '../services/statut.service';
 export class DetailManifestationComponent implements OnInit {
 
   isModification: Boolean = false;
+  semaines = 0;
+  boucle: number;
   date: Date;
   titre: String;
   idManifestation: number;
@@ -48,14 +50,22 @@ export class DetailManifestationComponent implements OnInit {
     this.manifestationService.findManifestation(this.idManifestation).subscribe(manifestation => {
       this.editionManifestation = manifestation;
       this.date = new Date(this.editionManifestation.start); });
-    console.log(this.idManifestation);
-    console.log(this.isModification);
     if (this.idManifestation) {
       this.isModification = true;
     }
     this.getEquipe();
     this.getLieu();
     this.getStatut();
+
+    if (this.editionManifestation.equipe === null) {
+      this.editionManifestation.equipe = new Equipe(0, 'Choisir', '', null, null);
+    }
+    if (this.editionManifestation.lieu === null) {
+      this.editionManifestation.lieu = new Lieu(0, 'Choisir');
+    }
+    if (this.editionManifestation.statut === null) {
+      this.editionManifestation.statut = new Statut(0, 'Choisir');
+    }
   }
 
   getManifestation(): void {
@@ -75,16 +85,20 @@ export class DetailManifestationComponent implements OnInit {
   }
 
   onSave() {
-    console.log(this.date);
     this.editionManifestation.start = this.date;
-    console.log(this.editionManifestation);
 
     // Vérifier si on est en édition ou en création
     if (this.editionManifestation.idManifestation === 0) {
-      // this.idManifestation = null;
-      this.manifestationService.createManifestation(this.editionManifestation);
+      if (this.semaines === 0) {
+        this.manifestationService.createManifestation(this.editionManifestation);
+      } else {
+        for (this.boucle = 0; this.boucle < this.semaines; this.boucle ++) {
+          this.manifestationService.createManifestation(this.editionManifestation);
+          this.editionManifestation.start.setDate(this.editionManifestation.start.getDate() + 7);
+          console.log('boucle : ', this.boucle);
+        }
+      }
     } else {
-    console.log(this.editionManifestation);
     this.manifestationService.updateManifestation(this.editionManifestation);
     }
   }

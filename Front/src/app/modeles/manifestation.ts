@@ -7,7 +7,9 @@ import { Time } from '@angular/common';
 
 export class Manifestation {
 
-    heure: Time;
+    nbrePresent: number;
+    nbreAbsent: number;
+    nbrePasRepondu: number;
 
     constructor(public idManifestation: number,
                 public title: string,

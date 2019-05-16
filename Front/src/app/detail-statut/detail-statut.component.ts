@@ -42,8 +42,7 @@ export class DetailStatutComponent implements OnInit {
 
   onSave() {
     // Vérifier si on est en édition ou en création
-    if (!this.editionStatut) {
-      // this.idStatut = null;
+    if (this.editionStatut.idStatut === 0) {
       this.statutService.createStatut(this.editionStatut);
     } else {
     console.log(this.editionStatut);

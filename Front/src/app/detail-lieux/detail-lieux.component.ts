@@ -40,7 +40,7 @@ export class DetailLieuxComponent implements OnInit {
 
   onSave() {
     // Vérifier si on est en édition ou en création
-    if (!this.editionLieu) {
+    if (this.editionLieu.idLieu === 0) {
       this.idLieu = null;
       this.lieuService.createLieu(this.editionLieu);
     } else {

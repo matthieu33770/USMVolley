@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -89,7 +88,6 @@ public class ArticlesController {
 		
 		Articles newArticle = null;
 		String titreArticle = article.getTitreArticle();
-		String photoArticle = article.getPhotoArticle();
 		String contenuArticle = article.getContenuArticle();
 		
 		if ((titreArticle == null) || (titreArticle.isEmpty())) {
@@ -135,10 +133,6 @@ public class ArticlesController {
 		Articles modificationArticle = null;
 		String titreArticle = article.getTitreArticle();
 		String contenuArticle = article.getContenuArticle();
-		
-		if (article.getPhotoArticle() != null ) {
-			String photoArticle = article.getPhotoArticle();
-		}
 		
 		System.out.println("Article Modifié : " + article);
 		

@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import usmvolley.model.Avoir;
@@ -22,6 +23,7 @@ import usmvolley.model.Users;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
+@SpringBootTest(classes=JoueursRepository.class)
 public class JoueursRepositoryTest {
 	
 	@Autowired

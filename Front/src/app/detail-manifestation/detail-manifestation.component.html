@@ -11,14 +11,14 @@
       </mat-form-field>
     </div>
     <div>
-      <mat-form-field>
+      <!-- <mat-form-field>
         <input matInput [matDatepicker]="picker" placeholder="Date de la manifestation" [(ngModel)]="editionManifestation.start" [value]="editionManifestation.start.value" name="date">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
+      </mat-form-field> -->
 
       <p-calendar placeholder="Date de la manifestation" [(ngModel)]="date" [showTime]="true"></p-calendar>
-      <!-- <input class="heure" matInput type="heure" [(ngModel)]="editionManifestation.heure" name="heure"> -->
+      <!-- <input matInput type="heure" [(ngModel)]="editionManifestation.heure" name="heure"> -->
     </div>
 
     <div>

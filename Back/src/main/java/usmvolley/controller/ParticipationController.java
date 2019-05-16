@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import usmvolley.model.Participation;
-import usmvolley.model.ParticipationPK;
 import usmvolley.repository.ParticipationRepository;
 
 @RestController

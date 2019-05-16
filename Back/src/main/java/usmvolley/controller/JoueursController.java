@@ -22,15 +22,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import usmvolley.model.Avoir;
-import usmvolley.model.Categories;
 import usmvolley.model.Joueurs;
-import usmvolley.model.Licence;
 import usmvolley.model.Users;
-import usmvolley.repository.AvoirRepository;
-import usmvolley.repository.CategoriesRepository;
 import usmvolley.repository.JoueursRepository;
-import usmvolley.repository.LicenceRepository;
 import usmvolley.service.FileStorageService;
 import usmvolley.upload.FileInformation;
 import usmvolley.upload.exception.UploadFileException;
@@ -41,15 +35,6 @@ public class JoueursController {
 
 	@Autowired
 	private JoueursRepository joueursRepo;
-	
-	@Autowired
-	private LicenceRepository licenceRepo;
-	
-	@Autowired
-	private AvoirRepository avoirRepo;
-	
-	@Autowired
-	private CategoriesRepository categorieRepo;
 	
 	@Autowired
 	private FileStorageService fileStorageService;
@@ -134,9 +119,6 @@ public class JoueursController {
 	public ResponseEntity<?> addJoueur(@RequestBody Joueurs joueur) {
 		
 		Joueurs newJoueur = null;
-		Licence newLicence = null;
-		Avoir newAvoir = null;
-		Categories newCategorie = null;
 		String nomJoueur = joueur.getNom();
 		String prenomJoueur = joueur.getPrenom();
 		Integer numeroAdresseJoueur = joueur.getNumeroAdresse();
@@ -228,8 +210,6 @@ public class JoueursController {
 		String telephone1Joueur = joueur.getTelephone1();
 		Date dateJoueur = joueur.getDateNaissance();
 		Users userJoueur = joueur.getUser();
-		
-		Boolean valide = true;
 		
 		if ((nomJoueur == null) || (nomJoueur.isEmpty())) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le nom du joueur");

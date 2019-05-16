@@ -25,6 +25,7 @@ import { StatutService } from '../services/statut.service';
 export class DetailManifestationComponent implements OnInit {
 
   isModification: Boolean = false;
+  date: Date;
   titre: String;
   idManifestation: number;
   manifestations: Manifestation [] = [];
@@ -45,7 +46,8 @@ export class DetailManifestationComponent implements OnInit {
     this.idManifestation = Number(this.route.snapshot.params.idManifestation);
     this.getManifestation();
     this.manifestationService.findManifestation(this.idManifestation).subscribe(manifestation => {
-      this.editionManifestation = manifestation; });
+      this.editionManifestation = manifestation;
+      this.date = new Date(this.editionManifestation.start); });
     console.log(this.idManifestation);
     console.log(this.isModification);
     if (this.idManifestation) {
@@ -73,21 +75,9 @@ export class DetailManifestationComponent implements OnInit {
   }
 
   onSave() {
-    // console.log(date);
-    console.log(this.editionManifestation.heure);
-    console.log(this.editionManifestation.start);
-    // const date = new Date(this.editionManifestation.start + this.editionManifestation.heure);
-    const dd = new Date(this.editionManifestation.start).getDate();
-    const mm = new Date(this.editionManifestation.start).getMonth() + 1;
-    const yy = new Date(this.editionManifestation.start).getFullYear();
-    const hh = Number(this.editionManifestation.heure.hours);
-    console.log(this.editionManifestation.heure.hours);
-    const min = +(this.editionManifestation.heure.minutes);
-    const x = yy + '-' + mm + '-' + dd + 'T' + hh + ':' + min + ':00.000+0000';
-    // const date = new Date(yy, mm, dd, hh, mm);
-    console.log(yy, mm, dd, this.editionManifestation.heure);
+    console.log(this.date);
     // Vérifier si on est en édition ou en création
-    // if (!this.editionManifestation) {
+    // if (this.editionManifestation.idManifestation === 0) {
     //   this.idManifestation = null;
     //   this.manifestationService.createManifestation(this.editionManifestation);
     // } else {

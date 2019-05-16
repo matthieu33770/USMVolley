@@ -1,7 +1,5 @@
 package usmvolley.dto;
 
-import java.util.List;
-
 import javax.validation.constraints.NotNull;
 
 import usmvolley.model.Fonctions;
@@ -11,15 +9,11 @@ import usmvolley.model.Fonctions;
  */
 public class AppUserDto {
 
-    private Integer id;
-
     private String username;
 
     private Fonctions fonction;
 
-    private AppUserDto() {
-
-    }
+    private AppUserDto() {}
 
     public AppUserDto(@NotNull String username) {
         this.username = username;

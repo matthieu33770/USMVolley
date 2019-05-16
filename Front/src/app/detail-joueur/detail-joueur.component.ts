@@ -27,7 +27,6 @@ export class DetailJoueurComponent implements OnInit {
   idEquipe: number;
   users: User [] = [];
   userList: User [];
-  // roles: Role [] = [];
   fonctions: Fonction [] = [];
   fonctionList: Fonction [];
   // roleList: any = [];

@@ -80,8 +80,14 @@ export class ManifestationService {
     * @param idManifestation de la Manifestation à supprimer
     */
    supprimerManifestation(idManifestation: number): Manifestation[] {
-     this.availableManifestation = this.availableManifestation.filter( manifestation => manifestation.idManifestation !== idManifestation ).slice();
-     return this.availableManifestation;
+    this.httpClient.delete('http://localhost:8080/manifestations/delete/' + idManifestation).subscribe(
+      () => { console.log('suppression lieu OK : ', idManifestation);
+          },
+      (error) => console.log('suppression lieu pb : ', error)
+    );
+    this.availableManifestation = this.availableManifestation.filter( manifestation => manifestation.idManifestation !== idManifestation ).slice();
+    this.availableManifestation$.next(this.availableManifestation);
+    return this.availableManifestation;
    }
 
     /**

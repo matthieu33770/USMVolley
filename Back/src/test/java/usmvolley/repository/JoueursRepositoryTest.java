@@ -11,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import usmvolley.UsmVolleyApplication;
 import usmvolley.model.Avoir;
 import usmvolley.model.Categories;
 import usmvolley.model.Fonctions;
@@ -22,6 +24,7 @@ import usmvolley.model.Users;
 
 
 @RunWith(SpringRunner.class)
+@ContextConfiguration(classes = {UsmVolleyApplication.class})
 @DataJpaTest
 @SpringBootTest(classes=JoueursRepository.class)
 public class JoueursRepositoryTest {

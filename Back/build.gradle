@@ -10,8 +10,14 @@ buildscript {
 	}
 }
 
+plugins {
+	id 'org.springframework.boot' version '2.1.5.RELEASE'
+}
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'java-library'
 
 
 group = 'co.simplon.eval3'

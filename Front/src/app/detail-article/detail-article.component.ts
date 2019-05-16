@@ -95,8 +95,7 @@ export class DetailArticleComponent implements OnInit {
 
   onSave() {
     // Vérifier si on est en édition ou en création
-    if (!this.editionArticle.idArticle) {
-      this.idArticle = null;
+    if (this.editionArticle.idArticle === 0) {
       this.onRegister();
       this.editionArticle.photoArticle = chem + '/' + this.photoArticle;
       this.articleService.createArticle(this.editionArticle);

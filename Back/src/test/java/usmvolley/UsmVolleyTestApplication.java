@@ -12,11 +12,13 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -27,6 +29,9 @@ import usmvolley.service.UserService;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @SpringBootTest
+
+@EnableAutoConfiguration
+@ComponentScan("test.builder")
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 public class UsmVolleyTestApplication {
 	 

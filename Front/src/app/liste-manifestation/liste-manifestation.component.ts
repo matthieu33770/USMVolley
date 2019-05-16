@@ -62,6 +62,10 @@ export class ListeManifestationComponent implements OnInit, OnDestroy  {
     this.router.navigate(['gestion/manifestations/detailmanifestation/' + selected[0].idManifestation]);
   }
 
+  delete(selected: Manifestation[]) {
+    this.manifestationService.supprimerManifestation(selected[0].idManifestation);
+  }
+
   ngOnDestroy() {
     if (this.subManifestation) {
       this.subManifestation.unsubscribe();

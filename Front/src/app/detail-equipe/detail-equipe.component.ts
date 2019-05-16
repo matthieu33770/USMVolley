@@ -106,7 +106,7 @@ export class DetailEquipeComponent implements OnInit {
     this.editionEquipe.categorie = this.categorie[0];
 
     // Vérifier si on est en édition ou en création
-    if (!this.editionEquipe.idEquipe) {
+    if (this.editionEquipe.idEquipe === 0) {
       this.idEquipe = null;
       this.equipeService.createEquipe(this.editionEquipe);
     } else {

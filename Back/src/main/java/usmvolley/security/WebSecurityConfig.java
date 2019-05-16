@@ -62,6 +62,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/manifestations/get/manifestations").permitAll()
                 .antMatchers("/users/get/users").permitAll()
                 .antMatchers("/users/update/**").permitAll()
+                .antMatchers(
+                        "/",
+                        "/favicon.ico",
+                        "/*.png",
+                        "/.gif",
+                        "/**/.svg",
+                        "/*.jpg",
+                        "/.html",
+                        "/**/.css",
+                        "/*/.js"
+                ).permitAll()
                 
                 // Disallow everything else...
                 .anyRequest().authenticated();

@@ -70,8 +70,8 @@ export class DetailCreneauxComponent implements OnInit {
     this.editionCreneau.categorie = this.categorie[0];
 
     // Vérifier si on est en édition ou en création
-    if (!this.editionCreneau) {
-      this.idCreneau = null;
+    if (this.editionCreneau.idCreneau === 0) {
+      // this.idCreneau = null;
       this.creneauService.createCreneau(this.editionCreneau);
     } else {
       console.log(this.editionCreneau);

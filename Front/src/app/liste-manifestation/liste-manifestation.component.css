@@ -39,3 +39,8 @@
     height: 400px;
     overflow: auto;
   }
+
+  img {
+    max-height: 35px; 
+    margin-left: 50px;
+  }

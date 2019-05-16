@@ -33,7 +33,7 @@ export class DetailManifestationComponent implements OnInit {
   equipeList: Equipe [];
   lieuList: Lieu [];
   statutList: Statut [];
-  editionManifestation: Manifestation = new Manifestation(0, '', new Date(), null, null, null);
+  editionManifestation: Manifestation = new Manifestation(0, '', new Date(), new Equipe(0, '', '', null, null), null, null);
 
   constructor(private route: ActivatedRoute,
               private manifestationService: ManifestationService,
@@ -76,14 +76,17 @@ export class DetailManifestationComponent implements OnInit {
 
   onSave() {
     console.log(this.date);
+    this.editionManifestation.start = this.date;
+    console.log(this.editionManifestation);
+
     // Vérifier si on est en édition ou en création
-    // if (this.editionManifestation.idManifestation === 0) {
-    //   this.idManifestation = null;
-    //   this.manifestationService.createManifestation(this.editionManifestation);
-    // } else {
-    // console.log(this.editionManifestation);
-    // this.manifestationService.updateManifestation(this.editionManifestation);
-    // }
+    if (this.editionManifestation.idManifestation === 0) {
+      // this.idManifestation = null;
+      this.manifestationService.createManifestation(this.editionManifestation);
+    } else {
+    console.log(this.editionManifestation);
+    this.manifestationService.updateManifestation(this.editionManifestation);
+    }
   }
 
 }

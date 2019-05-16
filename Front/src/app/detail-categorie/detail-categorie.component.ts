@@ -41,8 +41,7 @@ export class DetailCategorieComponent implements OnInit {
 
   onSave() {
     // Vérifier si on est en édition ou en création
-    if (!this.editionCategorie) {
-      this.idCategorie = null;
+    if (this.editionCategorie.idCategorie === 0) {
       this.categorieService.createCategorie(this.editionCategorie);
     } else {
     console.log(this.editionCategorie);

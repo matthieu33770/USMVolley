@@ -41,8 +41,8 @@ export class DetailDisponibilitesComponent implements OnInit {
 
   onSave() {
     // Vérifier si on est en édition ou en création
-    if (!this.editionDisponibilite) {
-      this.idDisponibilite = null;
+    if (this.editionDisponibilite.idDisponibilite === 0) {
+      // this.idDisponibilite = null;
       this.disponibiliteService.createDisponibilite(this.editionDisponibilite);
     } else {
     console.log(this.editionDisponibilite);

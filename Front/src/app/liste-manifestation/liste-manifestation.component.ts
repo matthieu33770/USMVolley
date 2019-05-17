@@ -8,7 +8,7 @@ import { ManifestationService } from '../services/manifestation.service';
 
 import { Manifestation } from '../modeles/manifestation';
 import { EquipesService } from '../services/equipes.service';
-import { Equipe } from '../modeles/Equipe';
+import { Equipe } from '../modeles/equipe';
 import { ParticipationService } from '../services/participation.service';
 import { Participation } from '../modeles/participation';
 

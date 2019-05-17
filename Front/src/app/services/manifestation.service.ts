@@ -6,6 +6,8 @@ import { map } from 'rxjs/operators';
 import { Manifestation } from '../modeles/manifestation';
 import { ParticipationPK } from '../modeles/participationPK';
 import { Participation } from '../modeles/participation';
+import { LoginService } from './login.service';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -18,10 +20,16 @@ export class ManifestationService {
    // La liste observable que l'on rend visible partout dans l'application
    availableManifestation$: BehaviorSubject<Manifestation[]> = new BehaviorSubject(this.availableManifestation);
 
-   constructor(private httpClient: HttpClient) { }
+   constructor(private httpClient: HttpClient,
+              private loginService: LoginService,
+              private router: Router) { }
 
    public getManifestations(): Observable<Manifestation[]> {
+    if (this.loginService.logged) {
      return this.httpClient.get<Manifestation[]>('http://localhost:8080/manifestations/get/manifestations');
+    } else {
+      this.router.navigate(['']);
+    }
    }
 
    public publishManifestations() {

@@ -150,7 +150,7 @@ export class JoueursService {
 
   /**
    * Uploader les documents pour la licence
-   * @param data
+   * param data
    */
   public addDocument(data) {
     this.httpClient.post('http://localhost:8080/joueurs/upload', data).subscribe(

@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 import { Equipe } from '../modeles/equipe';
+import { LoginService } from './login.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +18,16 @@ export class EquipesService {
   // La liste observable que l'on rend visible partout dans l'application
   availableEquipe$: BehaviorSubject<Equipe[]> = new BehaviorSubject(this.availableEquipe);
 
-  constructor(private httpClient: HttpClient) {  }
+  constructor(private httpClient: HttpClient,
+              private loginService: LoginService,
+              private router: Router) {  }
 
   public getEquipes(): Observable<Equipe[]> {
-    return this.httpClient.get<Equipe[]>('http://localhost:8080/equipes/get/equipes');
+    if (this.loginService.logged) {
+      return this.httpClient.get<Equipe[]>('http://localhost:8080/equipes/get/equipes');
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 
   getTeams(): Observable<Equipe[]> {

@@ -6,7 +6,7 @@
   </div>
 
   <div class="corps">
-    <div>
+    <div *ngIf="isInscriptionPossible">
       <mat-form-field>
         <input matInput [(ngModel)]="joueur.nom">
       </mat-form-field>
@@ -21,7 +21,12 @@
         </mat-select>
       </mat-form-field>
     </div>
+    <div *ngIf="!isInscriptionPossible">
+      <h3>Vous ne pouvez pas vous inscrire à cet évènement.</h3>
+    </div>
   </div>
+
+
 
   <div class="boutons">
     <button mat-raised-button color="primary" type="submit" (click)="onSave()">Enregistrer</button>

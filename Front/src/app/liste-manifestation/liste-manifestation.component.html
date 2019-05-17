@@ -92,6 +92,12 @@
         <th mat-header-cell *matHeaderCellDef>Absents</th>
         <td mat-cell *matCellDef="let manifestation">{{manifestation.nbreAbsent}}</td>
       </ng-container>
+
+      <!-- nombre de Ne Sais Pas Column -->
+      <ng-container matColumnDef="?">
+        <th mat-header-cell *matHeaderCellDef>?</th>
+        <td mat-cell *matCellDef="let manifestation">{{manifestation.nbreNeSaitPas}}</td>
+      </ng-container>
   
       <!-- Nombre de non répondu Column -->
       <ng-container matColumnDef="nonRepondu">

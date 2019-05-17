@@ -22,10 +22,11 @@ export class ListeManifestationComponent implements OnInit, OnDestroy  {
 
   choix = '';
   titre: string;
+  date: string;
   manifestations: Manifestation [] = [];
   manifestationList: Manifestation [] = [];
   dataSource = new MatTableDataSource<Manifestation>();
-  displayedColumns: string[] = ['select', 'title', 'date', 'equipe', 'lieu', 'statut', 'present', 'absent', 'nonRepondu'];
+  displayedColumns: string[] = ['select', 'title', 'date', 'equipe', 'lieu', 'statut', 'present', 'absent', '?', 'nonRepondu'];
   selection = new SelectionModel<Manifestation>(false, []);
 
   equipes: Equipe [] = [];
@@ -51,10 +52,6 @@ export class ListeManifestationComponent implements OnInit, OnDestroy  {
       this.manifestations = Manifestations;
     });
     this.getManifestation();
-    // this.subParticipation = this.participationService.availableParticipation$.subscribe(Participations => {
-    //   this.participations = Participations;
-    // });
-    // this.getParticipation();
   }
 
   getManifestation(): void {
@@ -65,22 +62,40 @@ export class ListeManifestationComponent implements OnInit, OnDestroy  {
     }
     this.manifestationService.getManifestations().subscribe(Manifestations => {
                                                             Manifestations.forEach( manifestation => {
+                                                              this.date = '' + manifestation.start;
+                                                              // const yy = '' + manifestation.start.getFullYear();
+                                                              console.log(this.date);
+                                                              manifestation.participation = [];
                                                               this.manifestationList.push(manifestation);
-                                                              manifestation.nbrePasRepondu = manifestation.equipe.joueurs.length;
+                                                              this.nbreJoueur = manifestation.equipe.joueurs.length;
                                                               this.participationService.getParticipations().subscribe(Participations => {
                                                                 Participations.forEach( participation => {
                                                                   if (participation.participationPK.idManifestation === manifestation.idManifestation) {
-                                                                    this.participationManifList.push(participation);
-                                                                    // manifestation.nbrePasRepondu = manifestation.nbrePasRepondu - this.participationManifList.length;
-                                                                    this.nbreParticipation = this.participationManifList.length;
-                                                                    console.log(this.nbreParticipation);
+                                                                    manifestation.participation.push(participation);
+                                                                    manifestation.nbrePresent = 0;
+                                                                    manifestation.nbreAbsent = 0;
+                                                                    manifestation.nbreNeSaitPas = 0;
+                                                                    manifestation.nbrePasRepondu = 0;
+                                                                    if (participation.participationPK.idDisponibilite === 1 || participation.participationPK.idDisponibilite === 2 || participation.participationPK.idDisponibilite === 7 || participation.participationPK.idDisponibilite === 8) {
+                                                                      manifestation.nbrePresent = manifestation.nbrePresent + 1;
+                                                                    }
+                                                                    if (participation.participationPK.idDisponibilite === 8) {
+                                                                      manifestation.nbrePresent = manifestation.nbrePresent + 2;
+                                                                    }
+                                                                    if (participation.participationPK.idDisponibilite === 3 || participation.participationPK.idDisponibilite === 5) {
+                                                                      manifestation.nbreAbsent = manifestation.nbreAbsent + 1;
+                                                                    }
+                                                                    if (participation.participationPK.idDisponibilite === 6) {
+                                                                      manifestation.nbreNeSaitPas = manifestation.nbreNeSaitPas + 1;
+                                                                    }
+                                                                    this.nbreParticipation = manifestation.nbrePresent + manifestation.nbreAbsent + manifestation.nbreNeSaitPas;
                                                                   }
                                                                 });
                                                               });
+                                                              manifestation.nbrePasRepondu = this.nbreJoueur - this.nbreParticipation;
+                                                              console.log(manifestation.participation);
                                                             });
                                                             this.dataSource = new MatTableDataSource<Manifestation>(this.manifestationList);
-                                                            console.log(this.dataSource);
-                                                            console.log(this.participationManifList);
     });
   }
 

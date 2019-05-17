@@ -23,6 +23,7 @@ export class InscriptionManifestationComponent implements OnInit {
 
   idManifestation: number;
   isEntrainement = false;
+  isInscriptionPossible = false;
   manifestationsList: Manifestation [];
   inscriptionManifestation: Manifestation = new Manifestation(0, '', new Date(), null, null, null);
   username: String;
@@ -41,7 +42,7 @@ export class InscriptionManifestationComponent implements OnInit {
     console.log(this.newParticipation);
     this.idManifestation = Number(this.route.snapshot.params.idManifestation);
     this.getManifestation();
-    this.getJoueur();
+    // this.getJoueur();
     this.getDisponibilite();
   }
 
@@ -52,7 +53,15 @@ export class InscriptionManifestationComponent implements OnInit {
       if (this.inscriptionManifestation.title === 'entrainement' || this.inscriptionManifestation.title === 'Entrainement') {
         this.isEntrainement = true;
       }
+      this.username = jwt_decode(sessionStorage.getItem(environment.accessToken)).sub;
+     this.joueurService.findByUsername(this.username).subscribe(joueur => {
+       this.joueur = joueur;
+       this.newParticipation.idJoueur = joueur.idJoueur;
+       this.inscriptionManifestation.equipe.joueurs.forEach(Joueurs => {
+        this.isInscriptionPossible = Joueurs.idJoueur === this.joueur.idJoueur;
+       });
      });
+    });
   }
 
   getJoueur(): void {
@@ -60,6 +69,7 @@ export class InscriptionManifestationComponent implements OnInit {
     this.joueurService.findByUsername(this.username).subscribe(joueur => {
       this.joueur = joueur;
       this.newParticipation.idJoueur = joueur.idJoueur;
+      console.log(this.joueur);
     });
   }
 

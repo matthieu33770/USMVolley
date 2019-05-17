@@ -9,7 +9,7 @@ export class BureauGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (!this.loginService.isLoggedin) {
+    if (!this.loginService.logged) {
       this.router.navigate(['login']);
       return false;
     } else if (this.loginService.userRole.getValue().includes('Bureau')) {

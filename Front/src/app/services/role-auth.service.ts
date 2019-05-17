@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 import { Role } from '../modeles/role';
+import { Router } from '@angular/router';
+import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +15,16 @@ export class RoleAuthService {
   private availableRoleAuth: Role [];
   availableRoleAuth$: BehaviorSubject<Role []> = new BehaviorSubject(this.availableRoleAuth);
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,
+              private loginService: LoginService,
+              private router: Router) { }
 
   public getRoleAuth(): Observable<Role[]> {
-    return this.httpClient.get<Role[]>('http://localhost:8080/roles/get/roles');
+    if (this.loginService.logged) {
+      return this.httpClient.get<Role[]>('http://localhost:8080/roles/get/roles');
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 
   public publishRoleAuth() {
@@ -66,12 +74,16 @@ export class RoleAuthService {
    * @param newRoleAuth le nouveau role à créer
    */
   public createRoleAuth(newRoleAuth: Role) {
+    if (this.loginService.logged) {
     this.httpClient.post<Role>('http://localhost:8080/roles/create', newRoleAuth).subscribe(
       newRole => {
         this.availableRoleAuth.push(newRole);
         this.availableRoleAuth$.next(this.availableRoleAuth);
       }
     );
+  } else {
+    this.router.navigate(['connexion']);
+  }
   }
 
    /**
@@ -79,12 +91,16 @@ export class RoleAuthService {
    * @param roleAuth le role à mettre à jour
    */
   public updateRoleAuth(roleAuth: Role) {
+    if (this.loginService.logged) {
     this.httpClient.put<Role>('http://localhost:8080/roles/update/' + roleAuth.idRole, roleAuth).subscribe(
       updateRoleAuth => {
         this.availableRoleAuth.splice(this.availableRoleAuth.indexOf(roleAuth), 1, roleAuth);
         this.availableRoleAuth$.next(this.availableRoleAuth);
       }
     );
+  } else {
+    this.router.navigate(['connexion']);
+  }
   }
 
   /**
@@ -92,6 +108,7 @@ export class RoleAuthService {
    * @param idRole le role à supprimer
    */
   public deleteRoleAuth(idRole: number) {
+    if (this.loginService.logged) {
     this.httpClient.delete<Role>('http:localhost:8080/roles/delete/' + idRole).subscribe(
       deleteRoleAuth => {
         this.availableRoleAuth.splice(this.availableRoleAuth.indexOf(
@@ -99,6 +116,9 @@ export class RoleAuthService {
         this.availableRoleAuth$.next(this.availableRoleAuth);
       }
     );
+  } else {
+    this.router.navigate(['connexion']);
+  }
   }
 
 }

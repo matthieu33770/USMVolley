@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 import { Article } from '../modeles/article';
+import { LoginService } from './login.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -18,14 +20,24 @@ export class ArticlesService {
   availableArticle$: BehaviorSubject<Article[]> = new BehaviorSubject(this.availableArticle);
   reverseAvailableArticle$: BehaviorSubject<Article[]> = new BehaviorSubject(this.reverseAvailableArticle);
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,
+              private loginService: LoginService,
+              private router: Router) { }
 
   public getArticles(): Observable<Article[]> {
-    return this.httpClient.get<Article[]>('http://localhost:8080/articles/get/articles');
+    if (this.loginService.logged) {
+      return this.httpClient.get<Article[]>('http://localhost:8080/articles/get/articles');
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 
   getArt(): Observable<Article[]> {
-    return this.httpClient.get<Article[]>('http://localhost:8080/articles/get/articles');
+    if (this.loginService.logged) {
+      return this.httpClient.get<Article[]>('http://localhost:8080/articles/get/articles');
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 
   public publishArticles() {
@@ -60,12 +72,16 @@ export class ArticlesService {
    * @param newArticle le nouvel article à créer
    */
   public createArticle(newArticle: Article) {
-    this.httpClient.post<Article>('http://localhost:8080/articles/create', newArticle).subscribe(
-      createArticle => {
-        this.availableArticle.push(createArticle);
-        this.availableArticle$.next(this.availableArticle);
-      }
-    );
+    if (this.loginService.logged) {
+      this.httpClient.post<Article>('http://localhost:8080/articles/create', newArticle).subscribe(
+        createArticle => {
+          this.availableArticle.push(createArticle);
+          this.availableArticle$.next(this.availableArticle);
+        }
+      );
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 
   /**
@@ -73,12 +89,16 @@ export class ArticlesService {
    * @param article l'article à mettre à jour
    */
   public updateArticle(article: Article) {
-    this.httpClient.put<Article>(`http://localhost:8080/articles/update/${article.idArticle}`, article).subscribe(
-      updateArticle => {
-        this.availableArticle.splice(this.availableArticle.indexOf(article), 1, updateArticle);
-        this.availableArticle$.next(this.availableArticle);
-      }
-    );
+    if (this.loginService.logged) {
+      this.httpClient.put<Article>(`http://localhost:8080/articles/update/${article.idArticle}`, article).subscribe(
+        updateArticle => {
+          this.availableArticle.splice(this.availableArticle.indexOf(article), 1, updateArticle);
+          this.availableArticle$.next(this.availableArticle);
+        }
+      );
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 
   /**
@@ -87,24 +107,32 @@ export class ArticlesService {
    * @param idArticle de l'article à supprimer
    */
   supprimerArticle(idArticle: number): Article[] {
-    this.httpClient.delete('http://localhost:8080/articles/delete/' + idArticle).subscribe(
-          () => { console.log('suppression article OK : ', idArticle);
-                  this.availableArticle.splice(this.availableArticle.indexOf(this.availableArticle.find(article => article.idArticle === idArticle), 1));
-                  this.availableArticle$.next(this.availableArticle);
-              },
-          (error) => console.log('suppression article pb : ', error)
-      );
-    return this.availableArticle;
+    if (this.loginService.logged) {
+      this.httpClient.delete('http://localhost:8080/articles/delete/' + idArticle).subscribe(
+            () => { console.log('suppression article OK : ', idArticle);
+                    this.availableArticle.splice(this.availableArticle.indexOf(this.availableArticle.find(article => article.idArticle === idArticle), 1));
+                    this.availableArticle$.next(this.availableArticle);
+                },
+            (error) => console.log('suppression article pb : ', error)
+        );
+      return this.availableArticle;
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 
   /**
    * Uploader les photos d'un article
-   * @param data
+   * param data
    */
   public addPhoto(data) {
-    this.httpClient.post('http://localhost:8080/articles/upload', data).subscribe(
-      () => { console.log('dedans'); },
-      (error) => {console.log('error : ', error); }
-    );
+    if (this.loginService.logged) {
+      this.httpClient.post('http://localhost:8080/articles/upload', data).subscribe(
+        () => { console.log('dedans'); },
+        (error) => {console.log('error : ', error); }
+      );
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 }

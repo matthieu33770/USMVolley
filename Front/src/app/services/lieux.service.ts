@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 import { Lieu } from '../modeles/lieu';
+import { LoginService } from './login.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +18,16 @@ export class LieuxService {
   // La liste observable que l'on rend visible partout dans l'application
   availableLieu$: BehaviorSubject<Lieu[]> = new BehaviorSubject(this.availableLieu);
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,
+              private loginService: LoginService,
+              private router: Router) { }
 
   public getLieux(): Observable<Lieu[]> {
-    return this.httpClient.get<Lieu[]>('http://localhost:8080/lieux/get/lieux');
+    if (this.loginService.logged) {
+      return this.httpClient.get<Lieu[]>('http://localhost:8080/lieux/get/lieux');
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 
   public publishLieux() {
@@ -52,12 +60,16 @@ export class LieuxService {
    * @param newLieu le nouveau lieu à créer
    */
   public createLieu(newLieu: Lieu) {
-    this.httpClient.post<Lieu>('http://localhost:8080/lieux/create', newLieu).subscribe(
-      createLieu => {
-        this.availableLieu.push(createLieu);
-        this.availableLieu$.next(this.availableLieu);
-      }
-    );
+    if (this.loginService.logged) {
+      this.httpClient.post<Lieu>('http://localhost:8080/lieux/create', newLieu).subscribe(
+        createLieu => {
+          this.availableLieu.push(createLieu);
+          this.availableLieu$.next(this.availableLieu);
+        }
+      );
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 
   /**
@@ -65,12 +77,16 @@ export class LieuxService {
    * @param lieu le lieu à mettre à jour
    */
   public updateLieu(lieu: Lieu) {
-    this.httpClient.put<Lieu>(`http://localhost:8080/lieux/update/${lieu.idLieu}`, lieu).subscribe(
-      updateLieu => {
-        this.availableLieu.splice(this.availableLieu.indexOf(lieu), 1, updateLieu);
-        this.availableLieu$.next(this.availableLieu);
-      }
-    );
+    if (this.loginService.logged) {
+      this.httpClient.put<Lieu>(`http://localhost:8080/lieux/update/${lieu.idLieu}`, lieu).subscribe(
+        updateLieu => {
+          this.availableLieu.splice(this.availableLieu.indexOf(lieu), 1, updateLieu);
+          this.availableLieu$.next(this.availableLieu);
+        }
+      );
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 
   /**
@@ -79,13 +95,17 @@ export class LieuxService {
    * @param idLieu du lieu à supprimer
    */
   supprimerLieu(idLieu: number): Lieu[] {
-    this.httpClient.delete('http://localhost:8080/lieux/delete/' + idLieu).subscribe(
-          () => { console.log('suppression lieu OK : ', idLieu);
-              },
-          (error) => console.log('suppression lieu pb : ', error)
-      );
-    this.availableLieu = this.availableLieu.filter( lieu => lieu.idLieu !== idLieu ).slice();
-    this.availableLieu$.next(this.availableLieu);
-    return this.availableLieu;
+    if (this.loginService.logged) {
+      this.httpClient.delete('http://localhost:8080/lieux/delete/' + idLieu).subscribe(
+            () => { console.log('suppression lieu OK : ', idLieu);
+                },
+            (error) => console.log('suppression lieu pb : ', error)
+        );
+      this.availableLieu = this.availableLieu.filter( lieu => lieu.idLieu !== idLieu ).slice();
+      this.availableLieu$.next(this.availableLieu);
+      return this.availableLieu;
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 }

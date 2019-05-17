@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 import { User } from '../modeles/user';
+import { LoginService } from './login.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +18,16 @@ export class UsersService {
   // La liste observable que l'on rend visible partout dans l'application
   availableUser$: BehaviorSubject<User[]> = new BehaviorSubject(this.availableUser);
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,
+              private loginService: LoginService,
+              private router: Router) { }
 
   public getUsers(): Observable<User[]> {
-    return this.httpClient.get<User[]>('http://localhost:8080/users/get/users');
+    if (this.loginService.logged) {
+      return this.httpClient.get<User[]>('http://localhost:8080/users/get/users');
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 
   public publishUsers() {
@@ -74,12 +82,16 @@ export class UsersService {
    * @param newUser le nouvel user à créer
    */
   public createUser(newUser: User) {
-    this.httpClient.post<User>('http://localhost:8080/users/create', newUser).subscribe(
-      createEquipe => {
-        this.availableUser.push(createEquipe);
-        this.availableUser$.next(this.availableUser);
-      }
-    );
+    if (this.loginService.logged) {
+      this.httpClient.post<User>('http://localhost:8080/users/create', newUser).subscribe(
+        createEquipe => {
+          this.availableUser.push(createEquipe);
+          this.availableUser$.next(this.availableUser);
+        }
+      );
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 
   /**
@@ -87,9 +99,11 @@ export class UsersService {
    * @param user le user à mettre à jour
    */
   public updateUser(user: User) {
-    console.log(user);
-    console.log('http://localhost:8080/users/update/' + user.idUser + user.username);
-    return this.httpClient.put<User>(`http://localhost:8080/users/update/${user.idUser}`, user);
+    if (this.loginService.logged) {
+      return this.httpClient.put<User>(`http://localhost:8080/users/update/${user.idUser}`, user);
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 
   /**
@@ -97,8 +111,18 @@ export class UsersService {
    * Elle met à jour notre liste de user et notre liste observable.
    * @param idUser du user à supprimer
    */
-  supprimerEquipe(idUser: number): User[] {
-    this.availableUser = this.availableUser.filter( user => user.idUser !== idUser ).slice();
-    return this.availableUser;
+  supprimerUser(idUser: number): User[] {
+    if (this.loginService.logged) {
+      this.httpClient.delete('http://localhost:8080/users/delete/' + idUser).subscribe(
+      () => { console.log('suppression statut OK : ', idUser);
+          },
+      (error) => console.log('suppression statut pb : ', error)
+      );
+      this.availableUser = this.availableUser.filter( user => user.idUser !== idUser ).slice();
+      this.availableUser$.next(this.availableUser);
+      return this.availableUser;
+    } else {
+    this.router.navigate(['connexion']);
+    }
   }
 }

@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 import { Statut } from '../modeles/statut';
+import { LoginService } from './login.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +18,16 @@ export class StatutService {
   // La liste observable que l'on rend visible partout dans l'application
   availableStatut$: BehaviorSubject<Statut[]> = new BehaviorSubject(this.availableStatut);
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,
+              private loginService: LoginService,
+              private router: Router) { }
 
   public getStatuts(): Observable<Statut[]> {
-    return this.httpClient.get<Statut[]>('http://localhost:8080/statuts/get/statuts');
+    if (this.loginService.logged) {
+      return this.httpClient.get<Statut[]>('http://localhost:8080/statuts/get/statuts');
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 
   public publishStatuts() {
@@ -52,12 +60,16 @@ export class StatutService {
    * @param newStatut le nouveau lieu à créer
    */
   public createStatut(newStatut: Statut) {
-    this.httpClient.post<Statut>('http://localhost:8080/statuts/create', newStatut).subscribe(
-      createStatut => {
-        this.availableStatut.push(createStatut);
-        this.availableStatut$.next(this.availableStatut);
-      }
-    );
+    if (this.loginService.logged) {
+      this.httpClient.post<Statut>('http://localhost:8080/statuts/create', newStatut).subscribe(
+        createStatut => {
+          this.availableStatut.push(createStatut);
+          this.availableStatut$.next(this.availableStatut);
+        }
+      );
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 
   /**
@@ -65,12 +77,16 @@ export class StatutService {
    * @param statut le statut à mettre à jour
    */
   public updateStatut(statut: Statut) {
-    this.httpClient.put<Statut>(`http://localhost:8080/statuts/update/${statut.idStatut}`, statut).subscribe(
-      updateStatut => {
-        this.availableStatut.splice(this.availableStatut.indexOf(statut), 1, updateStatut);
-        this.availableStatut$.next(this.availableStatut);
-      }
-    );
+    if (this.loginService.logged) {
+      this.httpClient.put<Statut>(`http://localhost:8080/statuts/update/${statut.idStatut}`, statut).subscribe(
+        updateStatut => {
+          this.availableStatut.splice(this.availableStatut.indexOf(statut), 1, updateStatut);
+          this.availableStatut$.next(this.availableStatut);
+        }
+      );
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 
   /**
@@ -79,27 +95,17 @@ export class StatutService {
    * @param idStatut du statut à supprimer
    */
   supprimerStatut(idStatut: number): Statut[] {
-    this.httpClient.delete('http://localhost:8080/statuts/delete/' + idStatut).subscribe(
-          () => { console.log('suppression statut OK : ', idStatut);
-              },
-          (error) => console.log('suppression statut pb : ', error)
-      );
-    this.availableStatut = this.availableStatut.filter( statut => statut.idStatut !== idStatut ).slice();
-    this.availableStatut$.next(this.availableStatut);
-    return this.availableStatut;
+    if (this.loginService.logged) {
+      this.httpClient.delete('http://localhost:8080/statuts/delete/' + idStatut).subscribe(
+            () => { console.log('suppression statut OK : ', idStatut);
+                },
+            (error) => console.log('suppression statut pb : ', error)
+        );
+      this.availableStatut = this.availableStatut.filter( statut => statut.idStatut !== idStatut ).slice();
+      this.availableStatut$.next(this.availableStatut);
+      return this.availableStatut;
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
-
-
-  /**
-   * Fonction de suppression d'un statut.
-   * Elle met à jour notre liste de statut et notre liste observable.
-   * @param statut de l'équipe à supprimer
-   */
-  // public idStatut(idStatut: number): Statut[] {
-  //   this.httpClient.delete<Statut>(`http://localhost:8080/statuts/delete/${idStatut}`, statut).subscribe(
-  //     deleteStatut => {
-  //       this.availableStatut$.next(this.availableStatut);
-  //     }
-  //   );
-  // }
 }

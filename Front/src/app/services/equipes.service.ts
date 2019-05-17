@@ -31,7 +31,11 @@ export class EquipesService {
   }
 
   getTeams(): Observable<Equipe[]> {
-    return this.httpClient.get<Equipe[]>('http://localhost:8080/equipes/get/equipes');
+    if (this.loginService.logged) {
+      return this.httpClient.get<Equipe[]>('http://localhost:8080/equipes/get/equipes');
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 
   public publishEquipes() {
@@ -69,12 +73,16 @@ export class EquipesService {
    */
   public createEquipe(newEquipe: Equipe) {
     console.log(newEquipe);
-    this.httpClient.post<Equipe>('http://localhost:8080/equipes/create', newEquipe).subscribe(
-      createEquipe => {
-        this.availableEquipe.push(createEquipe);
-        this.availableEquipe$.next(this.availableEquipe);
-      }
-    );
+    if (this.loginService.logged) {
+      this.httpClient.post<Equipe>('http://localhost:8080/equipes/create', newEquipe).subscribe(
+        createEquipe => {
+          this.availableEquipe.push(createEquipe);
+          this.availableEquipe$.next(this.availableEquipe);
+        }
+      );
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 
   /**
@@ -82,12 +90,16 @@ export class EquipesService {
    * @param equipe l'équipe à mettre à jour
    */
   public updateEquipe(equipe: Equipe) {
-    this.httpClient.put<Equipe>(`http://localhost:8080/equipes/update/${equipe.idEquipe}`, equipe).subscribe(
-      updateEquipe => {
-        this.availableEquipe.splice(this.availableEquipe.indexOf(equipe), 1, updateEquipe);
-        this.availableEquipe$.next(this.availableEquipe);
-      }
-    );
+    if (this.loginService.logged) {
+      this.httpClient.put<Equipe>(`http://localhost:8080/equipes/update/${equipe.idEquipe}`, equipe).subscribe(
+        updateEquipe => {
+          this.availableEquipe.splice(this.availableEquipe.indexOf(equipe), 1, updateEquipe);
+          this.availableEquipe$.next(this.availableEquipe);
+        }
+      );
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 
   /**
@@ -96,13 +108,17 @@ export class EquipesService {
    * @param idEquipe de l'équipe à supprimer
    */
   supprimerEquipe(idEquipe: number): Equipe[] {
-    this.httpClient.delete('http://localhost:8080/equipes/delete/' + idEquipe).subscribe(
-          () => { console.log('suppression equipe OK : ', idEquipe);
-                  this.availableEquipe.splice(this.availableEquipe.indexOf(this.availableEquipe.find(equipe => equipe.idEquipe === idEquipe), 1));
-                  this.availableEquipe$.next(this.availableEquipe);
-              },
-          (error) => console.log('suppression watchCategory pb : ', error)
-      );
-    return this.availableEquipe;
+    if (this.loginService.logged) {
+      this.httpClient.delete('http://localhost:8080/equipes/delete/' + idEquipe).subscribe(
+            () => { console.log('suppression equipe OK : ', idEquipe);
+                    this.availableEquipe.splice(this.availableEquipe.indexOf(this.availableEquipe.find(equipe => equipe.idEquipe === idEquipe), 1));
+                    this.availableEquipe$.next(this.availableEquipe);
+                },
+            (error) => console.log('suppression watchCategory pb : ', error)
+        );
+      return this.availableEquipe;
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 }

@@ -8,6 +8,8 @@ import { Joueur } from '../modeles/joueur';
 import { User } from '../modeles/user';
 import { Role } from '../modeles/role';
 import { Fonction } from '../modeles/fonction';
+import { LoginService } from './login.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -20,27 +22,48 @@ export class JoueursService {
   // La liste observable que l'on rend visible partout dans l'application
   availableJoueur$: BehaviorSubject<Joueur[]> = new BehaviorSubject(this.availableJoueur);
 
-  constructor(private httpClient: HttpClient) {  }
+  constructor(private httpClient: HttpClient,
+              private loginService: LoginService,
+              private router: Router) {  }
 
   getUsers(): Observable<User[]> {
-    return this.httpClient.get<User[]>(environment.apiUrl + 'users/get/users');
+    if (this.loginService.logged) {
+      return this.httpClient.get<User[]>(environment.apiUrl + 'users/get/users');
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 
   getRoles(): Observable<Role[]> {
-    return this.httpClient.get<Role[]>(environment.apiUrl + 'roles/get/roles');
+    if (this.loginService.logged) {
+      return this.httpClient.get<Role[]>(environment.apiUrl + 'roles/get/roles');
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 
   getFonctions(): Observable<Fonction[]> {
-    return this.httpClient.get<Fonction[]>(environment.apiUrl + 'fonctions/get/fonctions');
+    if (this.loginService.logged) {
+      return this.httpClient.get<Fonction[]>(environment.apiUrl + 'fonctions/get/fonctions');
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 
   getPlayers(): Observable<Joueur[]> {
-    return this.httpClient.get<Joueur[]>(environment.apiUrl + 'joueurs/get/joueurs');
+    if (this.loginService.logged) {
+      return this.httpClient.get<Joueur[]>(environment.apiUrl + 'joueurs/get/joueurs');
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 
   public getJoueurs(): Observable<Joueur[]> {
-    console.log(this.httpClient);
-    return this.httpClient.get<Joueur[]>(environment.apiUrl + 'joueurs/get/joueurs');
+    if (this.loginService.logged) {
+      return this.httpClient.get<Joueur[]>(environment.apiUrl + 'joueurs/get/joueurs');
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 
   public publishJoueurs() {
@@ -73,13 +96,16 @@ export class JoueursService {
    * @param newJoueur le nouveau joueur à créer
    */
   public createJoueur(newJoueur: Joueur) {
-    console.log(newJoueur);
-    this.httpClient.post<Joueur>('http://localhost:8080/joueurs/create', newJoueur).subscribe(
-      createJoueur => {
-        this.availableJoueur.push(createJoueur);
-        this.availableJoueur$.next(this.availableJoueur);
-      }
-    );
+    if (this.loginService.logged) {
+      this.httpClient.post<Joueur>('http://localhost:8080/joueurs/create', newJoueur).subscribe(
+        createJoueur => {
+          this.availableJoueur.push(createJoueur);
+          this.availableJoueur$.next(this.availableJoueur);
+        }
+      );
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 
   /**
@@ -125,12 +151,15 @@ export class JoueursService {
    * @param joueur le joueur à mettre à jour
    */
   public updateJoueur(joueur: Joueur) {
-    console.log(joueur);
-    this.httpClient.put<Joueur>(`http://localhost:8080/joueurs/update/${joueur.idJoueur}`, joueur).subscribe(
-      updateJoueur => {
-        this.availableJoueur$.next(this.availableJoueur);
-      }
-    );
+    if (this.loginService.logged) {
+      this.httpClient.put<Joueur>(`http://localhost:8080/joueurs/update/${joueur.idJoueur}`, joueur).subscribe(
+        updateJoueur => {
+          this.availableJoueur$.next(this.availableJoueur);
+        }
+      );
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 
   /**
@@ -139,13 +168,17 @@ export class JoueursService {
    * @param idJoueur du joueur à supprimer
    */
   supprimerJoueur(idJoueur: number): Joueur[] {
-    this.httpClient.delete('http://localhost:8080/joueurs/delete/' + idJoueur).subscribe(
-          () => { console.log('suppression joueur OK : ', idJoueur);
-              },
-          (error) => console.log('suppression joueur pb : ', error)
-      );
-      this.availableJoueur$.next(this.availableJoueur);
-    return this.availableJoueur;
+    if (this.loginService.logged) {
+      this.httpClient.delete('http://localhost:8080/joueurs/delete/' + idJoueur).subscribe(
+            () => { console.log('suppression joueur OK : ', idJoueur);
+                },
+            (error) => console.log('suppression joueur pb : ', error)
+        );
+        this.availableJoueur$.next(this.availableJoueur);
+      return this.availableJoueur;
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 
   /**
@@ -153,9 +186,13 @@ export class JoueursService {
    * param data
    */
   public addDocument(data) {
-    this.httpClient.post('http://localhost:8080/joueurs/upload', data).subscribe(
-      () => { console.log('dedans'); },
-      (error) => {console.log('error : ', error); }
-    );
+    if (this.loginService.logged) {
+      this.httpClient.post('http://localhost:8080/joueurs/upload', data).subscribe(
+        () => { console.log('dedans'); },
+        (error) => {console.log('error : ', error); }
+      );
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 }

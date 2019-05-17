@@ -5,6 +5,8 @@ import { map } from 'rxjs/operators';
 import { ParticipationPK } from '../modeles/participationPK';
 import { Participation } from '../modeles/participation';
 import { Manifestation } from '../modeles/manifestation';
+import { LoginService } from './login.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +19,16 @@ export class ParticipationService {
   // La liste observable que l'on rend visible partout dans l'application
   availableParticipation$: BehaviorSubject<Participation[]> = new BehaviorSubject(this.availableParticipation);
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,
+              private loginService: LoginService,
+              private router: Router) { }
 
   public getParticipations(): Observable<Participation[]> {
-    return this.httpClient.get<Participation[]>('http://localhost:8080/participation/get/participation');
+    if (this.loginService.logged) {
+      return this.httpClient.get<Participation[]>('http://localhost:8080/participation/get/participation');
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 
   public publishParticipations() {
@@ -53,9 +61,13 @@ export class ParticipationService {
     * @param newParticipation contient idJoueur, idManifestation et idDisponibilite
     */
    public createParticipation(newParticipation: ParticipationPK) {
-    console.log('départ' + newParticipation.idJoueur);
-    const participation = new Participation(newParticipation);
-    this.httpClient.post<Manifestation>('http://localhost:8080/participation/create', participation).subscribe();
+    if (this.loginService.logged) {
+      console.log('départ' + newParticipation.idJoueur);
+      const participation = new Participation(newParticipation);
+      this.httpClient.post<Manifestation>('http://localhost:8080/participation/create', participation).subscribe();
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 
 }

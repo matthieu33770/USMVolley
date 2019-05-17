@@ -26,9 +26,9 @@ export class ManifestationService {
 
    public getManifestations(): Observable<Manifestation[]> {
     if (this.loginService.logged) {
-     return this.httpClient.get<Manifestation[]>('http://localhost:8080/manifestations/get/manifestations');
+      return this.httpClient.get<Manifestation[]>('http://localhost:8080/manifestations/get/manifestations');
     } else {
-      this.router.navigate(['']);
+      this.router.navigate(['connexion']);
     }
    }
 
@@ -62,12 +62,16 @@ export class ManifestationService {
     * @param newManifestation la nouvelle manifestation à créer
     */
    public createManifestation(newManifestation: Manifestation) {
+    if (this.loginService.logged) {
      this.httpClient.post<Manifestation>('http://localhost:8080/manifestations/create', newManifestation).subscribe(
        createManifestation => {
          this.availableManifestation.push(createManifestation);
          this.availableManifestation$.next(this.availableManifestation);
        }
      );
+    } else {
+      this.router.navigate(['connexion']);
+    }
    }
 
    /**
@@ -75,11 +79,15 @@ export class ManifestationService {
     * @param manifestation la manifestation à mettre à jour
     */
    public updateManifestation(manifestation: Manifestation) {
+    if (this.loginService.logged) {
      this.httpClient.put<Manifestation>(`http://localhost:8080/manifestations/update/${manifestation.idManifestation}`, manifestation).subscribe(
        updateManifestation => {
          this.availableManifestation$.next(this.availableManifestation);
        }
      );
+    } else {
+      this.router.navigate(['connexion']);
+    }
    }
 
    /**
@@ -88,14 +96,18 @@ export class ManifestationService {
     * @param idManifestation de la Manifestation à supprimer
     */
    supprimerManifestation(idManifestation: number): Manifestation[] {
-    this.httpClient.delete('http://localhost:8080/manifestations/delete/' + idManifestation).subscribe(
-      () => { console.log('suppression lieu OK : ', idManifestation);
-          },
-      (error) => console.log('suppression lieu pb : ', error)
-    );
-    this.availableManifestation = this.availableManifestation.filter( manifestation => manifestation.idManifestation !== idManifestation ).slice();
-    this.availableManifestation$.next(this.availableManifestation);
-    return this.availableManifestation;
+    if (this.loginService.logged) {
+      this.httpClient.delete('http://localhost:8080/manifestations/delete/' + idManifestation).subscribe(
+        () => { console.log('suppression lieu OK : ', idManifestation);
+            },
+        (error) => console.log('suppression lieu pb : ', error)
+      );
+      this.availableManifestation = this.availableManifestation.filter( manifestation => manifestation.idManifestation !== idManifestation ).slice();
+      this.availableManifestation$.next(this.availableManifestation);
+      return this.availableManifestation;
+    } else {
+      this.router.navigate(['connexion']);
+    }
    }
 
     /**
@@ -104,9 +116,13 @@ export class ManifestationService {
     * @param newParticipation contient idJoueur, idManifestation et idDisponibilite
     */
    public createParticipation(newParticipation: ParticipationPK) {
-    console.log('départ' + newParticipation.idJoueur);
-    const participation = new Participation(newParticipation);
-    this.httpClient.post<Manifestation>('http://localhost:8080/participation/create', participation).subscribe();
+    if (this.loginService.logged) {
+      console.log('départ' + newParticipation.idJoueur);
+      const participation = new Participation(newParticipation);
+      this.httpClient.post<Manifestation>('http://localhost:8080/participation/create', participation).subscribe();
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 
   public getParticipations(): Observable<Participation[]> {
@@ -119,6 +135,10 @@ export class ManifestationService {
     * @param idManifestation l'id qu'il faut rechercher dans la liste.
     */
    public findParticipation(idManifestation: number) {
-    this.httpClient.get<Manifestation>('http://localhost:8080/participation/get/participation').subscribe();
+    if (this.loginService.logged) {
+      this.httpClient.get<Manifestation>('http://localhost:8080/participation/get/participation').subscribe();
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 }

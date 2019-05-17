@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 import { Creneau } from '../modeles/creneau';
+import { LoginService } from './login.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +18,16 @@ export class CreneauxService {
   // La liste observable que l'on rend visible partout dans l'application
   availableCreneau$: BehaviorSubject<Creneau[]> = new BehaviorSubject(this.availableCreneau);
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,
+              private loginService: LoginService,
+              private router: Router) { }
 
   public getCreneaux(): Observable<Creneau[]> {
-    return this.httpClient.get<Creneau[]>('http://localhost:8080/creneaux/get/creneaux');
+    if (this.loginService.logged) {
+      return this.httpClient.get<Creneau[]>('http://localhost:8080/creneaux/get/creneaux');
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 
   public publishCreneaux() {
@@ -52,12 +60,16 @@ export class CreneauxService {
    * @param newCreneau la nouvelle creneau à créer
    */
   public createCreneau(newCreneau: Creneau) {
-    this.httpClient.post<Creneau>('http://localhost:8080/creneaux/create', newCreneau).subscribe(
-      createCreneau => {
-        this.availableCreneau.push(createCreneau);
-        this.availableCreneau$.next(this.availableCreneau);
-      }
-    );
+    if (this.loginService.logged) {
+      this.httpClient.post<Creneau>('http://localhost:8080/creneaux/create', newCreneau).subscribe(
+        createCreneau => {
+          this.availableCreneau.push(createCreneau);
+          this.availableCreneau$.next(this.availableCreneau);
+        }
+      );
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 
   /**
@@ -65,12 +77,16 @@ export class CreneauxService {
    * @param creneau la creneau à mettre à jour
    */
   public updateCreneau(creneau: Creneau) {
-    this.httpClient.put<Creneau>(`http://localhost:8080/creneaux/update/${creneau.idCreneau}`, creneau).subscribe(
-      updateCreneau => {
-        this.availableCreneau.splice(this.availableCreneau.indexOf(creneau), 1, updateCreneau);
-        this.availableCreneau$.next(this.availableCreneau);
-      }
-    );
+    if (this.loginService.logged) {
+      this.httpClient.put<Creneau>(`http://localhost:8080/creneaux/update/${creneau.idCreneau}`, creneau).subscribe(
+        updateCreneau => {
+          this.availableCreneau.splice(this.availableCreneau.indexOf(creneau), 1, updateCreneau);
+          this.availableCreneau$.next(this.availableCreneau);
+        }
+      );
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 
   /**
@@ -79,13 +95,17 @@ export class CreneauxService {
    * @param idCreneau de le Creneau à supprimer
    */
   supprimerCreneau(idCreneau: number): Creneau[] {
-    this.httpClient.delete('http://localhost:8080/creneaux/delete/' + idCreneau).subscribe(
-          () => { console.log('suppression créneau OK : ', idCreneau);
-                  this.availableCreneau.splice(this.availableCreneau.indexOf(this.availableCreneau.find(equipe => equipe.idCreneau === idCreneau), 1));
-                  this.availableCreneau$.next(this.availableCreneau);
-              },
-          (error) => console.log('suppression créneau pb : ', error)
-      );
-    return this.availableCreneau;
+    if (this.loginService.logged) {
+      this.httpClient.delete('http://localhost:8080/creneaux/delete/' + idCreneau).subscribe(
+            () => { console.log('suppression créneau OK : ', idCreneau);
+                    this.availableCreneau.splice(this.availableCreneau.indexOf(this.availableCreneau.find(equipe => equipe.idCreneau === idCreneau), 1));
+                    this.availableCreneau$.next(this.availableCreneau);
+                },
+            (error) => console.log('suppression créneau pb : ', error)
+        );
+      return this.availableCreneau;
+    } else {
+      this.router.navigate(['connexion']);
+    }
   }
 }

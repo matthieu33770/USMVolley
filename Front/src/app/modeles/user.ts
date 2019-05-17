@@ -1,4 +1,4 @@
-import { Fonction } from './Fonction';
+import { Fonction } from './fonction';
 
 export class User {
 

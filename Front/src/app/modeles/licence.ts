@@ -1,4 +1,4 @@
-import { Categorie } from './Categorie';
+import { Categorie } from './categorie';
 
 export class Licence {
 

@@ -1,5 +1,5 @@
-import { Joueur } from './Joueur';
-import { Categorie } from './Categorie';
+import { Joueur } from './joueur';
+import { Categorie } from './categorie';
 
 export class Equipe {
 

@@ -1,6 +1,6 @@
-import { Avoir } from './Avoir';
-import { User } from './User';
-import { Equipe } from './Equipe';
+import { Avoir } from './avoir';
+import { User } from './user';
+import { Equipe } from './equipe';
 
 export class Joueur {
 

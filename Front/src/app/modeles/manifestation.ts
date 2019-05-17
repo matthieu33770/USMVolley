@@ -1,9 +1,6 @@
-import { Equipe } from './Equipe';
-import { Lieu } from './Lieu';
-import { Statut } from './Statut';
-import { Horaire } from './Horaire';
-import { Creneau } from './Creneau';
-import { Time } from '@angular/common';
+import { Equipe } from './equipe';
+import { Lieu } from './lieu';
+import { Statut } from './statut';
 
 export class Manifestation {
 

@@ -1,4 +1,4 @@
-import { ParticipationPK } from './ParticipationPK';
+import { ParticipationPK } from './participationPK';
 
 export class Participation {
 

@@ -2,12 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-import {CalendarModule} from 'primeng/calendar';
 
 import { Manifestation } from '../modeles/manifestation';
 import { Equipe } from '../modeles/equipe';
 import { Lieu } from '../modeles/lieu';
-import { Statut } from '../modeles/Statut';
+import { Statut } from '../modeles/statut';
 
 import { ManifestationService } from '../services/manifestation.service';
 import { EquipesService } from '../services/equipes.service';

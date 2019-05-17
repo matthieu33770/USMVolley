@@ -1,4 +1,4 @@
-import { Licence } from './Licence';
+import { Licence } from './licence';
 
 export class Avoir {
 

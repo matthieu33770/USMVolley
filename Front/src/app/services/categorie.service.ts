@@ -23,11 +23,7 @@ export class CategorieService {
               private router: Router) { }
 
   getCategories(): Observable<Categorie[]> {
-    if (this.loginService.logged) {
       return this.httpClient.get<Categorie[]>('http://localhost:8080/categories/get/categories');
-    } else {
-      this.router.navigate(['connexion']);
-    }
   }
 
   public getCategorie(): Observable<Categorie[]> {

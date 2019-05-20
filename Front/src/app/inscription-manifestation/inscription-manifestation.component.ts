@@ -83,8 +83,6 @@ export class InscriptionManifestationComponent implements OnInit {
     console.log('Joueur : ' + this.newParticipation.idJoueur);
     console.log('Manifestation : ' + this.newParticipation.idManifestation);
     console.log('Dispo : ' + this.newParticipation.idDisponibilite);
-    // this.newParticipation.disponibilite = this.disponibiliteList.find(disponibilite => disponibilite.idDisponibilite === this.newParticipation.disponibilite.idDisponibilite);
-    // this.newParticipation.idDisponibilite = this.disponibilite.idDisponibilite;
     this.disponibilite = this.disponibiliteList.find(disponibilite => disponibilite.idDisponibilite === this.newParticipation.idDisponibilite);
     console.log('Dispo bis : ' + this.newParticipation.idDisponibilite);
     this.manifestationService.createParticipation(this.newParticipation);

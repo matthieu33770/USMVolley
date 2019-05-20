@@ -25,11 +25,7 @@ export class ArticlesService {
               private router: Router) { }
 
   public getArticles(): Observable<Article[]> {
-    if (this.loginService.logged) {
       return this.httpClient.get<Article[]>('http://localhost:8080/articles/get/articles');
-    } else {
-      this.router.navigate(['connexion']);
-    }
   }
 
   getArt(): Observable<Article[]> {

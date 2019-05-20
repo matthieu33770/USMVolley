@@ -27,43 +27,23 @@ export class JoueursService {
               private router: Router) {  }
 
   getUsers(): Observable<User[]> {
-    if (this.loginService.logged) {
       return this.httpClient.get<User[]>(environment.apiUrl + 'users/get/users');
-    } else {
-      this.router.navigate(['connexion']);
-    }
   }
 
   getRoles(): Observable<Role[]> {
-    if (this.loginService.logged) {
       return this.httpClient.get<Role[]>(environment.apiUrl + 'roles/get/roles');
-    } else {
-      this.router.navigate(['connexion']);
-    }
   }
 
   getFonctions(): Observable<Fonction[]> {
-    if (this.loginService.logged) {
       return this.httpClient.get<Fonction[]>(environment.apiUrl + 'fonctions/get/fonctions');
-    } else {
-      this.router.navigate(['connexion']);
-    }
   }
 
   getPlayers(): Observable<Joueur[]> {
-    if (this.loginService.logged) {
       return this.httpClient.get<Joueur[]>(environment.apiUrl + 'joueurs/get/joueurs');
-    } else {
-      this.router.navigate(['connexion']);
-    }
   }
 
   public getJoueurs(): Observable<Joueur[]> {
-    if (this.loginService.logged) {
       return this.httpClient.get<Joueur[]>(environment.apiUrl + 'joueurs/get/joueurs');
-    } else {
-      this.router.navigate(['connexion']);
-    }
   }
 
   public publishJoueurs() {
@@ -96,16 +76,12 @@ export class JoueursService {
    * @param newJoueur le nouveau joueur à créer
    */
   public createJoueur(newJoueur: Joueur) {
-    if (this.loginService.logged) {
       this.httpClient.post<Joueur>('http://localhost:8080/joueurs/create', newJoueur).subscribe(
         createJoueur => {
           this.availableJoueur.push(createJoueur);
           this.availableJoueur$.next(this.availableJoueur);
         }
       );
-    } else {
-      this.router.navigate(['connexion']);
-    }
   }
 
   /**
@@ -186,13 +162,9 @@ export class JoueursService {
    * param data
    */
   public addDocument(data) {
-    if (this.loginService.logged) {
       this.httpClient.post('http://localhost:8080/joueurs/upload', data).subscribe(
         () => { console.log('dedans'); },
         (error) => {console.log('error : ', error); }
       );
-    } else {
-      this.router.navigate(['connexion']);
-    }
   }
 }

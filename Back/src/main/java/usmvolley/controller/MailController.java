@@ -62,10 +62,50 @@ public class MailController {
 	        helper.setTo(email);
 	        
 	        helper.setText("Bonjour " + prenom + " " + nom + ",\n\nVous venez de faire une demande de changement de mot de passe.\r\n"  
-	        						+ "Merci de cliquer sur le lien ci dessous pour le réinitialiser :\r\n" + url +"\r\n\r\n" 
-	        						+ "Si vous n'etes pas à l'origine de cette demande, merci de nous en informer\n\n"
+	        						+ "Merci de cliquer sur le lien ci dessous pour le rï¿½initialiser :\r\n" + url +"\r\n\r\n" 
+	        						+ "Si vous n'etes pas ï¿½ l'origine de cette demande, merci de nous en informer\n\n"
 	        						+ "USM Volley Ball\nunionsallesmios.volley@gmail.com");
 	        helper.setSubject("Votre lien");
+	        
+	        System.out.println(message);
+	        
+	        sender.send(message);
+	    }
+	    
+	    @PostMapping("/sendMailEquipe")
+	    public ResponseEntity<?> sendEmaiEquipe(@RequestParam(value= "username", required=true) String username , @RequestParam(value= "sujetMail", required=true) String sujetMail, @RequestParam(value= "contenuMail", required=true) String contenuMail) {
+	    	
+	    	Users user = null;
+	    	Joueurs joueur = null;
+	    	
+			user = userRepo.findUserByUsername(username);
+			joueur = joueurRepo.findJoueurByUser(user);
+	    	
+	        try {
+	            
+	            sendEmailEquipe(user.getIdUser(), joueur.getNom(), joueur.getPrenom(), joueur.getMail(), sujetMail, contenuMail);
+	            
+	            return ResponseEntity.status(HttpStatus.OK).body(null);
+	        }catch(Exception ex) {
+	        	System.out.println(ex);
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+	        }
+	    }
+	    
+	    private void sendEmailEquipe(Integer idUser, String nom, String prenom, String email, String sujetMail, String contenuMail) throws Exception{
+	        MimeMessage message = sender.createMimeMessage();
+	        MimeMessageHelper helper = new MimeMessageHelper(message);
+	        
+//	        String url = lien + idUser;
+	          
+	        helper.setTo(email);
+	        
+//	        helper.setText(contenuMail);
+	        
+	        helper.setText("Bonjour " + prenom + " " + nom + ",\n\nVous avez reÃ§u un message de votre club de volley favori :\r\n"  
+					+ contenuMail);
+	        
+	        helper.setSubject(sujetMail);
 	        
 	        System.out.println(message);
 	        

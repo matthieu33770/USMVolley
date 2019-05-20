@@ -8,3 +8,21 @@
     display: flex;
     justify-content: center;
 }
+
+.choix {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+.contenu {
+    display: flex;
+    flex-direction: column;
+    max-width: 50%;
+    margin-left: 25%;
+}
+
+.boutons {
+    display: flex;
+    justify-content: center;
+}

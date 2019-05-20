@@ -25,11 +25,7 @@ export class ManifestationService {
               private router: Router) { }
 
    public getManifestations(): Observable<Manifestation[]> {
-    if (this.loginService.logged) {
       return this.httpClient.get<Manifestation[]>('http://localhost:8080/manifestations/get/manifestations');
-    } else {
-      this.router.navigate(['connexion']);
-    }
    }
 
    public publishManifestations() {

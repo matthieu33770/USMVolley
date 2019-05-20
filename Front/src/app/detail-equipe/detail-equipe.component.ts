@@ -69,7 +69,9 @@ export class DetailEquipeComponent implements OnInit {
 
   getAdulte(): void {
     this.joueurService.getJoueurs().subscribe(Joueurs => {
+                                              console.log(Joueurs);
                                               Joueurs.forEach( joueur => {
+                                                console.log(joueur);
                                               if (joueur.avoir.licence.categories.libelleCategorie === this.editionEquipe.categorie.libelleCategorie) {
                                                 this.joueurAdulte.push(joueur); }
                                               joueur.equipes.forEach(equipe => { if (equipe.idEquipe === this.idEquipe) {

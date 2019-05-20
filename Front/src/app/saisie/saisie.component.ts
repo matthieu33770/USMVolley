@@ -262,7 +262,6 @@ export class SaisieComponent implements OnInit {
   }
 
 private initConfig(): void {
-  // const prixAchatTotal = '' + this.commande.total.toFixed(2); // arrondi à deux chiffres aprés la virgule et convertion en string.
     this.payPalConfig = {
         currency: 'EUR',
         clientId: 'sb',   // ID Marchand du compte PayPal PRO 7J7WYEZGY648W

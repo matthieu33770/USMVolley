@@ -1,23 +1,43 @@
 <div class="envoyerMail">
-    <div class="titre">
+  <div class="titre">
     <h1>Envoyer un mail</h1>
-    </div>
+  </div>
 
-    <div>
-      <mat-form-field>
+  <div class="choix">
+    <h4>A quelle équipe envoyer le mail ?</h4>
+    <section class="typemail">
+      <button mat-stroked-button (click)="categorie=true; equipe=false">Catégorie</button>
+      <button mat-stroked-button (click)="categorie=false; equipe=true">Equipe</button>
+      <br>
+      <mat-form-field *ngIf="categorie">
         <mat-select placeholder="Libellé de la catégorie" [(ngModel)]="categorie.libelleCategorie" name="categorie">
           <mat-option *ngFor="let categorie of categoriesList" [value]="categorie.libelleCategorie">
             {{categorie.libelleCategorie}}
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field>
-        <mat-select placeholder="Libellé de l'équipe" [(ngModel)]="equipe.libelleEquipe" name="equipe">
-          <mat-option *ngFor="let equipe of equipesList" [value]="equipe.libelleEquipe">
+      
+      <mat-form-field *ngIf="equipe">
+        <mat-select placeholder="Libellé de l'équipe" [(ngModel)]="equipe.idEquipe" name="equipe.libelleEquipe">
+          <mat-option *ngFor="let equipe of equipesList" [value]="equipe.idEquipe">
             {{equipe.libelleEquipe}}
           </mat-option>
        </mat-select>
       </mat-form-field>
-    </div>
+    </section>
+  </div>
+
+  <div class="contenu">
+    <mat-form-field>
+      <input matInput placeholder="Sujet du mail" [(ngModel)]="sujetMail" type="text" name="sujetMail">
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput placeholder="Contenu du mail" [(ngModel)]="contenuMail" type="text" name="contenuMail"></textarea>
+    </mat-form-field>
+  </div>
+
+  <div class="boutons">
+    <button mat-stroked-button color="primary" type="submit" (click)="envoyer()">Envoyer le mail</button>
+  </div>
 
 </div>

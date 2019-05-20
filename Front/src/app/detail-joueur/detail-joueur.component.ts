@@ -73,7 +73,6 @@ export class DetailJoueurComponent implements OnInit {
     console.log(this.paye);
     console.log(this.editionJoueur.avoir.licence.certificatMedical);
     console.log(this.editionJoueur.avoir.licence.formulaire);
-    // console.log();
     this.editionJoueur.avoir.licence.isPayeLicence = this.paye;
     if (!this.editionJoueur.avoir.licence.certificatMedical && !this.editionJoueur.avoir.licence.formulaire && this.editionJoueur.avoir.licence.isPayeLicence === true) {
       this.editionJoueur.avoir.isValide = true;

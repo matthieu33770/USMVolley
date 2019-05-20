@@ -17,4 +17,14 @@ export class MailService {
                               console.log(username);
                 });
   }
+
+  public sendMailEquipe(username: String, sujetMail: string, contenuMail: string) {
+    this.httpClient.post<string>('http://localhost:8080/email/envoieEquipe?username=' + username + '&sujetMail=' + sujetMail, + '&contenuMail=' + contenuMail).subscribe(
+                  (res) => {console.log('send email ok');
+                            console.log(username);
+                   },
+                  (error) => {console.log('send email pb', error);
+                              console.log(username);
+                });
+  }
 }

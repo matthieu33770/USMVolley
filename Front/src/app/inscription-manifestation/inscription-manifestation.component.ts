@@ -13,6 +13,7 @@ import { Fonction } from '../modeles/fonction';
 import { Joueur } from '../modeles/joueur';
 import { Disponibilite } from '../modeles/disponibilite';
 import { ParticipationPK } from '../modeles/participationPK';
+import { Equipe } from '../modeles/equipe';
 
 @Component({
   selector: 'app-inscription-manifestation',
@@ -49,6 +50,7 @@ export class InscriptionManifestationComponent implements OnInit {
   getManifestation(): void {
     this.manifestationService.findManifestation(this.idManifestation).subscribe(manifestation => {
       this.inscriptionManifestation = manifestation;
+      console.log(this.inscriptionManifestation);
       this.newParticipation.idManifestation = manifestation.idManifestation;
       if (this.inscriptionManifestation.title === 'entrainement' || this.inscriptionManifestation.title === 'Entrainement') {
         this.isEntrainement = true;
@@ -56,9 +58,14 @@ export class InscriptionManifestationComponent implements OnInit {
       this.username = jwt_decode(sessionStorage.getItem(environment.accessToken)).sub;
      this.joueurService.findByUsername(this.username).subscribe(joueur => {
        this.joueur = joueur;
+       console.log(this.joueur);
        this.newParticipation.idJoueur = joueur.idJoueur;
+       this.inscriptionManifestation.equipe.joueurs.find(joueur => joueur.idJoueur === this.joueur.idJoueur);
        this.inscriptionManifestation.equipe.joueurs.forEach(Joueurs => {
         this.isInscriptionPossible = Joueurs.idJoueur === this.joueur.idJoueur;
+        console.log(Joueurs.idJoueur);
+        console.log(this.joueur.idJoueur);
+        console.log(this.isInscriptionPossible);
        });
      });
     });

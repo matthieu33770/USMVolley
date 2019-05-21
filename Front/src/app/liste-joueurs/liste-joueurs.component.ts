@@ -72,4 +72,8 @@ export class ListeJoueursComponent implements OnInit {
   exportAsXLSX(): void {
     this.excelService.exportAsExcelFile(this.players, 'Export');
   }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 }

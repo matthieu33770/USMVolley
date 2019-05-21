@@ -83,16 +83,13 @@ public class LicenceController {
 		Categories categorieLicence = licence.getCategories();
 		String formulaireLicence = licence.getFormulaire();
 		String certificatMedicalLicence = licence.getCertificatMedical();
-		//Boolean isPayeLicence = licence.getIsPaye();
-		String idPaiementLicence =licence.getIdPaiement();
-		Double montantPayeLicence = licence.getMontantPaye();
 		
 		if (prixLicence == null) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le prix de la licence");
 		}
 		if (categorieLicence == null)
 		{
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque la catégorie de la licence");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque la catï¿½gorie de la licence");
 		}
 		if ((formulaireLicence == null) || (formulaireLicence.isEmpty()))
 		{
@@ -100,14 +97,7 @@ public class LicenceController {
 		}
 		if ((certificatMedicalLicence == null) || (certificatMedicalLicence.isEmpty()))
 		{
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le certificat médical");
-		}
-		if ((idPaiementLicence == null) || (idPaiementLicence.isEmpty()))
-		{
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque l'identifiant de la transaction");
-		}
-		if (montantPayeLicence == null) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le montant réglé");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le certificat mï¿½dical");
 		}
 		
 		newLicence = licenceRepo.save(licence);
@@ -147,16 +137,13 @@ public class LicenceController {
 		Categories categorieLicence = licence.getCategories();
 		String formulaireLicence = licence.getFormulaire();
 		String certificatMedicalLicence = licence.getCertificatMedical();
-		//Boolean isPayeLicence = licence.getIsPaye();
-		String idPaiementLicence =licence.getIdPaiement();
-		Double montantPayeLicence = licence.getMontantPaye();
 		
 		if (prixLicence == null) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le prix de la licence");
 		}
 		if (categorieLicence == null)
 		{
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque la catégorie de la licence");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque la catï¿½gorie de la licence");
 		}
 		if ((formulaireLicence == null) || (formulaireLicence.isEmpty()))
 		{
@@ -164,14 +151,7 @@ public class LicenceController {
 		}
 		if ((certificatMedicalLicence == null) || (certificatMedicalLicence.isEmpty()))
 		{
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le certificat médical");
-		}
-		if ((idPaiementLicence == null) || (idPaiementLicence.isEmpty()))
-		{
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque l'identifiant de la transaction");
-		}
-		if (montantPayeLicence == null) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le montant réglé");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le certificat mï¿½dical");
 		}
 		
 		try

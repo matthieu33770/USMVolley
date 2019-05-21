@@ -39,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-    	// Permet de se passer du CrossOrigin dans les controllers se rapporte à corsConfigurationSource()
+    	// Permet de se passer du CrossOrigin dans les controllers se rapporte ï¿½ corsConfigurationSource()
         http.cors();
 
         // Disable CSRF (cross site request forgery as our token will be stored in session storage) pour stocker le JWT dans le session storage
@@ -55,6 +55,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/users/sign-up").permitAll()
                 .antMatchers("/users/update/**").permitAll()
                 .antMatchers("/joueurs/create").permitAll()
+                .antMatchers("/joueurs/get/joueurs").permitAll()
+                .antMatchers("/categories/get/categories").permitAll()
                 .antMatchers("/joueurs/upload").permitAll()
                 .antMatchers("/avoir/create").permitAll()
                 .antMatchers("/articles/get/articles").permitAll()
@@ -77,7 +79,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // Disallow everything else...
                 .anyRequest().authenticated();
         
-//      // Apply JWT vérifie la requete avant envoie vers le controller
+//      // Apply JWT vï¿½rifie la requete avant envoie vers le controller
         http.addFilterBefore(new JwtTokenFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
     }
 

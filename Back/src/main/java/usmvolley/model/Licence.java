@@ -36,20 +36,11 @@ public class Licence implements Serializable {
 	@Column(name = "certificat_medical")
 	private String certificatMedical;
 	
-	@Column(name = "is_paye")
-	private Boolean isPaye;
-	
-	@Column(name = "id_paiement")
-	private String idPaiement;
-	
-	@Column(name = "montant_paye")
-	private Double montantPaye;
-
 	public Licence() {
 	}
 
 	public Licence(Integer idLicence, String numeroLicence, Double prixLicence, Categories categories,
-			String formulaire, String certificatMedical, Boolean isPaye, String idPaiement, Double montantPaye) {
+			String formulaire, String certificatMedical) {
 		super();
 		this.idLicence = idLicence;
 		this.numeroLicence = numeroLicence;
@@ -57,9 +48,6 @@ public class Licence implements Serializable {
 		this.categories = categories;
 		this.formulaire = formulaire;
 		this.certificatMedical = certificatMedical;
-		this.isPaye = isPaye;
-		this.idPaiement = idPaiement;
-		this.montantPaye = montantPaye;
 	}
 
 	public Integer getIdLicence() {
@@ -102,30 +90,6 @@ public class Licence implements Serializable {
 		this.certificatMedical = certificatMedical;
 	}
 
-	public Boolean getIsPaye() {
-		return isPaye;
-	}
-
-	public void setIsPaye(Boolean isPaye) {
-		this.isPaye = isPaye;
-	}
-
-	public String getIdPaiement() {
-		return idPaiement;
-	}
-
-	public void setIdPaiement(String idPaiement) {
-		this.idPaiement = idPaiement;
-	}
-
-	public Double getMontantPaye() {
-		return montantPaye;
-	}
-
-	public void setMontantPaye(Double montantPaye) {
-		this.montantPaye = montantPaye;
-	}
-
 	public String getNumeroLicence() {
 		return numeroLicence;
 	}
@@ -138,7 +102,6 @@ public class Licence implements Serializable {
 	public String toString() {
 		return "Licence [idLicence=" + idLicence + ", numeroLicence=" + numeroLicence + ", prixLicence=" + prixLicence
 				+ ", categories=" + categories + ", formulaire=" + formulaire + ", certificatMedical="
-				+ certificatMedical + ", isPaye=" + isPaye + ", idPaiement=" + idPaiement + ", montantPaye="
-				+ montantPaye + "]";
+				+ certificatMedical + "]";
 	}
 }

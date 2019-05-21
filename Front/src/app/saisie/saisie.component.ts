@@ -34,12 +34,14 @@ export class SaisieComponent implements OnInit {
   userRoles: BehaviorSubject<string[]> = new BehaviorSubject([]);
 
   isLoggedin = false;
+  isFormulaire = false;
+  isCertificat = false;
   username: String;
   user;
   formulaire: string;
   certificat: string;
   editionUser: User = new User(0, '', '', new Fonction(1, 'Licencie'));
-  editionLicence: Licence = new Licence(0, '', 0, '', '', false, '', 0, null);
+  editionLicence: Licence = new Licence(0, '', 0, '', '', null);
   editionAvoir: Avoir = new Avoir(0, 2099, false, null);
   editionJoueur: Joueur = new Joueur(0, '', '', '', 0, '', 0, '', '', '', '', null, null, null, null);
   userList: BehaviorSubject<User[]>;
@@ -183,6 +185,7 @@ export class SaisieComponent implements OnInit {
       }
       this.idCat = this.categorie.length;
     });
+    this.editionAvoir.anneeAvoir = this.annee;
     console.log(this.idCat);
     // Vérifier si on est en édition ou en création
     if (!this.username) {
@@ -193,22 +196,29 @@ export class SaisieComponent implements OnInit {
       this.editionAvoir.licence = this.editionLicence;
       this.editionJoueur.avoir = this.editionAvoir;
       this.editionJoueur.user = this.editionUser;
-      this.onRegisterF();
-      this.onRegisterC();
-      this.editionJoueur.avoir.licence.formulaire = this.formulaire;
-      this.editionJoueur.avoir.licence.certificatMedical = this.certificat;
+      if (this.isFormulaire) {
+        this.onRegisterF();
+        this.editionJoueur.avoir.licence.formulaire = this.formulaire;
+      }
+      if (this.isCertificat) {
+        this.onRegisterC();
+        this.editionJoueur.avoir.licence.certificatMedical = this.certificat;
+      }
       this.joueursService.createJoueur(this.editionJoueur);
       console.log(this.editionJoueur);
     } else {
+      console.log('UPADATEEEEEEEEE');
       this.editionAvoir.licence = this.editionLicence;
       this.editionJoueur.avoir = this.editionAvoir;
       this.editionJoueur.user = this.editionUser;
-      this.onRegisterF();
-      this.onRegisterC();
-      this.editionJoueur.avoir.licence.formulaire = this.formulaire;
-      this.editionJoueur.avoir.licence.certificatMedical = this.certificat;
-      this.editionJoueur.avoir.licence.formulaire = this.formulaire;
-      this.editionJoueur.avoir.licence.certificatMedical = this.certificat;
+      if (this.isFormulaire) {
+        this.onRegisterF();
+        this.editionJoueur.avoir.licence.formulaire = this.formulaire;
+      }
+      if (this.isCertificat) {
+        this.onRegisterC();
+        this.editionJoueur.avoir.licence.certificatMedical = this.certificat;
+      }
       this.joueursService.updateJoueur(this.editionJoueur);
     }
   }
@@ -220,6 +230,7 @@ export class SaisieComponent implements OnInit {
       console.log(`file: ${JSON.stringify(this.file.name)}`);
       console.log(`file: ${JSON.stringify(this.file.size)}`);
       this.fileInformation = null;
+      this.isFormulaire = true;
     }
   }
 
@@ -230,6 +241,7 @@ export class SaisieComponent implements OnInit {
       console.log(`file: ${JSON.stringify(this.file.name)}`);
       console.log(`file: ${JSON.stringify(this.file.size)}`);
       this.fileInformation = null;
+      this.isCertificat = true;
     }
   }
 

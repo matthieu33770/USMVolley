@@ -47,7 +47,7 @@ export class EnvoyerMailComponent implements OnInit {
     this.mailEquipe.joueurs.forEach(Joueur => {
       // this.mailService.sendMailMdP();
       console.log(Joueur.user.username);
-      console.log('this.mailService.sendMailMdP(', Joueur.user.username, this.sujetMail, this.contenuMail, ')');
+      console.log('this.mailService.sendMailEquipe(', Joueur.user.username, this.sujetMail, this.contenuMail, ')');
       this.mailService.sendMailEquipe(Joueur.user.username, this.sujetMail, this.contenuMail);
     });
   }

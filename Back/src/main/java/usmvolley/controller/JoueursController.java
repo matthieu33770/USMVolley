@@ -50,7 +50,7 @@ public class JoueursController {
 	 * @return liste de tous les joueurs
 	 */
 	@GetMapping("/get/joueurs")
-	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine') or hasAuthority('Licencie')")
+//	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine') or hasAuthority('Licencie')")
 	public ResponseEntity<List<Joueurs>> getListeJoueurs() {
 		
 		List<Joueurs> listeJoueurs = null;
@@ -138,7 +138,7 @@ public class JoueursController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le prenom du joueur");
 		}
 		if (numeroAdresseJoueur == null) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le numéro de la rue");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le numï¿½ro de la rue");
 		}
 		if ((rueJoueur == null) || (rueJoueur.isEmpty())) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le nom de la rue");
@@ -153,7 +153,7 @@ public class JoueursController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le mail");
 		}
 		if ((telephone1Joueur == null) || (telephone1Joueur.isEmpty())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le numérode telephone 1");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le numï¿½rode telephone 1");
 		}
 		if (dateJoueur == null) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque la date de naissance");
@@ -196,7 +196,7 @@ public class JoueursController {
 	 * @return modifie un joueur
 	 */
 	@PutMapping("/update/{idJoueur}")
-	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine') or hasAuthority('Licencie')")
 	public ResponseEntity<?> updateJoueur(@RequestBody Joueurs joueur, @PathVariable Integer idJoueur) throws Exception
 	{
 		Joueurs modificationJoueur = null;
@@ -211,6 +211,8 @@ public class JoueursController {
 		Date dateJoueur = joueur.getDateNaissance();
 		Users userJoueur = joueur.getUser();
 		
+		System.out.println("joueur : " + joueur.getAvoir().getLicence());
+		
 		if ((nomJoueur == null) || (nomJoueur.isEmpty())) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le nom du joueur");
 		}
@@ -218,7 +220,7 @@ public class JoueursController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le prenom du joueur");
 		}
 		if (numeroAdresseJoueur == null) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le numéro de la rue");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le numï¿½ro de la rue");
 		}
 		if ((rueJoueur == null) || (rueJoueur.isEmpty())) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le nom de la rue");
@@ -233,7 +235,7 @@ public class JoueursController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le mail");
 		}
 		if ((telephone1Joueur == null) || (telephone1Joueur.isEmpty())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le numérode telephone 1");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le numï¿½rode telephone 1");
 		}
 		if (dateJoueur == null) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque la date de naissance");
@@ -249,9 +251,6 @@ public class JoueursController {
 		{
 			System.out.println("test modification joueur : " + joueur.getAvoir().getLicence());
 			System.out.println("test avoir : " + joueur.getAvoir().getIsValide());
-//			modificationCategorie = categorieRepo.save(joueur.getAvoir().getLicence().getCategories());
-//			modificationLicence = licenceRepo.save(joueur.getAvoir().getLicence());
-//			modificationAvoir = avoirRepo.save(joueur.getAvoir());
 			modificationJoueur = joueursRepo.save(joueur);
 		} catch (Exception e)
 		{

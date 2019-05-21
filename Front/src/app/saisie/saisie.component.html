@@ -92,7 +92,7 @@
             Télécharger le formulaire Fédération
           </a>
         </div>
-        <div>
+        <div *ngIf="!editionLicence.formulaire">
           <input type="file" id="userFormulaire" (change)="onSelectFormulaire($event)" #fileInputF style="display: none">
           <mat-form-field class="watch-category-full-width">
             <input matInput formControlName="formulaireTest" placeholder="Formulaire à charger" readonly>

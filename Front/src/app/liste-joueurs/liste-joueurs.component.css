@@ -14,19 +14,23 @@
     justify-content: flex-end;
 }
 
+.tablejoueur {
+    display: flex;
+    justify-content: center;
+    height: 400px;
+    overflow: auto;
+}
+
+table {
+    width: 100%;
+}
+
 th.mat-header-cell {
     text-align: center;
 }
 
 td {
     text-align: center;
-}
-
-.mat-elevation-z8 {
-    display: flex;
-    justify-content: center;
-    height: 400px;
-    overflow: auto;
 }
 
 .tableau {

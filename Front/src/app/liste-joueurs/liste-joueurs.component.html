@@ -1,6 +1,6 @@
 <div class="joueurs">
   <div class="titre">
-  <h1>Les joueurs et les droits</h1>
+  <h1>Les joueurs</h1>
   </div>
   
   <div class="boutons">
@@ -15,7 +15,10 @@
     <button *ngIf="!confirmDelete" mat-raised-button color="warn" (click)="confirmDelete=true">Supprimer</button>
   </div>
   <br>
-  <div class="mat-elevation-z8">
+  <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtre">
+    </mat-form-field>
+  <div class="tablejoueur">
     <table mat-table [dataSource]="dataSource" class="tableau">
   
     <!-- Checkbox Column -->

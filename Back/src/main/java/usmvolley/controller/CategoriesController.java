@@ -27,11 +27,11 @@ public class CategoriesController {
 	private CategoriesRepository categorieRepo;
 	
 	/**
-	 * Methode Voir toutes les catégories
-	 * @return liste de toutes les catégories
+	 * Methode Voir toutes les catï¿½gories
+	 * @return liste de toutes les catï¿½gories
 	 */
 	@GetMapping("/get/categories")
-	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine') or hasAuthority('Licencie')")
+//	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine') or hasAuthority('Licencie')")
 	public ResponseEntity<List<Categories>> getListeCategories() {
 		
 		List<Categories> listeCategories = null;
@@ -46,8 +46,8 @@ public class CategoriesController {
 	}
 	
 	/**
-	 * Methode Voir une catégorie
-	 * @return liste une catégorie
+	 * Methode Voir une catï¿½gorie
+	 * @return liste une catï¿½gorie
 	 */
 	@GetMapping("/get/uneCategorie/{idCategorie}")
 	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
@@ -70,8 +70,8 @@ public class CategoriesController {
 	
 	/**
 	 * Methode CREATE
-	 * @param information catégorie
-	 * @return ajoute une catégorie
+	 * @param information catï¿½gorie
+	 * @return ajoute une catï¿½gorie
 	 */
 	@PostMapping("/create")
 	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
@@ -81,7 +81,7 @@ public class CategoriesController {
 		String libelleCategorie = categorie.getLibelleCategorie();
 		
 		if ((libelleCategorie == null) || (libelleCategorie.isEmpty())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le libellé de la catégorie");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le libellï¿½ de la catï¿½gorie");
 		}
 		
 		newCategorie = categorieRepo.save(categorie);
@@ -91,7 +91,7 @@ public class CategoriesController {
 	/**
 	 * Methode DELETE
 	 * @param idRole
-	 * @return supprime une catégorie
+	 * @return supprime une catï¿½gorie
 	 */
 	@DeleteMapping("/delete/{idCategorie}")
 	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
@@ -109,8 +109,8 @@ public class CategoriesController {
 	
 	/**
 	 * Methode UPDATE
-	 * @param information catégorie et idCatégorie
-	 * @return modifie une catégorie
+	 * @param information catï¿½gorie et idCatï¿½gorie
+	 * @return modifie une catï¿½gorie
 	 */
 	@PutMapping("/update/{idCategorie}")
 	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
@@ -120,7 +120,7 @@ public class CategoriesController {
 		String libelleCategorie = categorie.getLibelleCategorie();
 		if ((libelleCategorie == null) || (libelleCategorie.isEmpty()))
 		{
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le libellé de la catégorie");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le libellï¿½ de la catï¿½gorie");
 		}
 		try
 		{

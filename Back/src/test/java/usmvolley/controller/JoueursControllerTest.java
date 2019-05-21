@@ -97,7 +97,7 @@ public class JoueursControllerTest {
 				new Users(0, "username", "mdp", null), 
 				new Avoir(0, 2019, true, 
 						new Licence(0, "12233", 90.00, 
-								new Categories(1, "M11", 11), "formulaire", "certificat", true, "102938", 90.00)), null);
+								new Categories(1, "M11", 11), "formulaire", "certificat")), null);
 		System.out.println(joueur);
 		
 		when(this.joueurRepo.save(any())).thenReturn(joueur);
@@ -126,11 +126,11 @@ public class JoueursControllerTest {
 	@Test
 	@WithMockUser(authorities="Bureau")
 	public void testUpdateJoueur() throws Exception {
-		Joueurs joueur = new Joueurs(4, "GUERIN", "Julie", "Féminin", "123", 1, "chemin des gassinieres", 33380, "MIOS", "jujuly69@free.fr", "607193344", "", new Date(1989-01-29),
+		Joueurs joueur = new Joueurs(4, "GUERIN", "Julie", "Fï¿½minin", "123", 1, "chemin des gassinieres", 33380, "MIOS", "jujuly69@free.fr", "607193344", "", new Date(1989-01-29),
 				new Users(4, "jujuly69@free.fr", "$2a$10$gu0/JMAOkR8H2Gwqp57BVuhqSZ00ztEDkuty5cFUZ7o.DVS8Gtudu", new Fonctions(1, "licencie")), 
 				new Avoir(4, 2018, true, 
 						new Licence(4, "1839663", 90.00, 
-								new Categories(6, "Adultes", 80), "formulaire", "certificat", true, "102938", 90.00)), null);
+								new Categories(6, "Adultes", 80), "formulaire", "certificat")), null);
 		
 		when(this.joueurRepo.save(any())).thenReturn(joueur);
 

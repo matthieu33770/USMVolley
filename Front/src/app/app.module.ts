@@ -54,6 +54,7 @@ import { ChangementMdpComponent } from './changement-mdp/changement-mdp.componen
 import { EnvoyerMailComponent } from './envoyer-mail/envoyer-mail.component';
 import { InscriptionManifestationComponent } from './inscription-manifestation/inscription-manifestation.component';
 import { EnvoiMailComponent } from './envoi-mail/envoi-mail.component';
+import { SelectionJoueurComponent } from './selection-joueur/selection-joueur.component';
 
 registerLocaleData(localeFr);
 
@@ -91,7 +92,8 @@ registerLocaleData(localeFr);
     ChangementMdpComponent,
     EnvoyerMailComponent,
     InscriptionManifestationComponent,
-    EnvoiMailComponent
+    EnvoiMailComponent,
+    SelectionJoueurComponent
   ],
   imports: [
     BrowserModule,

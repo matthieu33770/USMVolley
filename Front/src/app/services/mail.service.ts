@@ -19,7 +19,8 @@ export class MailService {
   }
 
   public sendMailEquipe(username: String, sujetMail: string, contenuMail: string) {
-    this.httpClient.post<string>('http://localhost:8080/email/envoieEquipe?username=' + username + '&sujetMail=' + sujetMail, + '&contenuMail=' + contenuMail).subscribe(
+    console.log('je suis dans la fonction du service');
+    this.httpClient.post<string>('http://localhost:8080/email/sendMailEquipe?username=' + username + '&sujetMail=' + sujetMail + '&contenuMail=' + contenuMail, '').subscribe(
                   (res) => {console.log('send email ok');
                             console.log(username);
                    },

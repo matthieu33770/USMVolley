@@ -73,10 +73,14 @@ public class MailController {
 	    }
 	    
 	    @PostMapping("/sendMailEquipe")
-	    public ResponseEntity<?> sendEmaiEquipe(@RequestParam(value= "username", required=true) String username , @RequestParam(value= "sujetMail", required=true) String sujetMail, @RequestParam(value= "contenuMail", required=true) String contenuMail) {
+	    public ResponseEntity<?> sendMaiEquipe(@RequestParam(value= "username", required=true) String username , @RequestParam(value= "sujetMail", required=true) String sujetMail, @RequestParam(value= "contenuMail", required=true) String contenuMail) {
 	    	
 	    	Users user = null;
 	    	Joueurs joueur = null;
+	    	
+	    	System.out.println(username);
+	    	System.out.println("sujet " + sujetMail);
+	    	System.out.println("contenu " + contenuMail);
 	    	
 			user = userRepo.findUserByUsername(username);
 			joueur = joueurRepo.findJoueurByUser(user);

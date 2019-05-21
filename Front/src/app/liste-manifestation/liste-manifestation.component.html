@@ -3,25 +3,17 @@
     <h1>Les Manifestations</h1>
   </div>
 
-  <!-- <div class="choix">
-    <h3>Choix du type de manifestations :  </h3>
-    <section class="typemanifestation">
-      <mat-radio-group [(ngModel)]="choix">
-        <mat-radio-button class="match" value="Match">Match</mat-radio-button>
-        <mat-radio-button class="entrainement" value="Entrainement">Entraînement</mat-radio-button>
-      </mat-radio-group> 
-      <button mat-icon-button>
-        <mat-icon aria-label="Valider son choix" (click)="choixFait()">search</mat-icon>
-      </button>
-      <button mat-icon-button>
-        <a routerLink="/gestion/manifestations/detailmanifestation/newManifestation">
-        <img src="../../assets/icone/calendrierplus.png" alt="ajout"></a>
-      </button>
-    </section>
-  </div> -->
+  <div *ngIf="!isModification" class="choix">
+      <h4>Type de manifestation : </h4>
+      <section class="typemanifestation">
+          <button mat-stroked-button (click)="filterMatch(); match=true; entrainement=false">Match</button>
+          <button mat-stroked-button (click)="filterEnt(); match=false; entrainement=true">Entrainement</button>
+      </section>
+  </div>
   <br>
-  <div class="listemanifestation">
+  <div *ngIf="match || entrainement" class="listemanifestation">
     <div class="boutons">
+      <button *ngIf="match" mat-raised-button color="primary" (click)="onSelection(selection.selected)">Faire une sélection</button>
       <button mat-raised-button (click)="exportAsXLSX()">Exporter</button>
       <button mat-raised-button color="accent" routerLink="/gestion/manifestations/detailmanifestation/newManifestation">Nouveau</button>
       <button mat-raised-button (click)="onEdit(selection.selected)">Editer</button>
@@ -60,7 +52,7 @@
       <!-- Date Column -->
       <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef>Date</th>
-        <td mat-cell *matCellDef="let manifestation">{{manifestation.start}}</td>
+        <td mat-cell *matCellDef="let manifestation">{{manifestation.start | date : 'dd/MM/yyyy - HH:mm'}}</td>
       </ng-container>
       
       <!-- Equipe Column -->

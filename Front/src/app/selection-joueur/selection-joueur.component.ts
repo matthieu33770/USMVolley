@@ -60,13 +60,18 @@ export class SelectionJoueurComponent implements OnInit {
             this.joueurDispo.dispoJoueurDispo = disponibilite.libelleDisponibilite;
             console.log(this.joueurDispo.dispoJoueurDispo);
             this.joueurService.findJoueur(participation.participationPK.idJoueur).subscribe(joueur => {
+              const listeTest = new JoueurDispo('', '', '');
               this.joueurList.push(joueur);
-              this.joueurDispo.nomJoueurDispo = joueur.nom;
+              // this.joueurDispo.nomJoueurDispo = joueur.nom;
+              listeTest.nomJoueurDispo = joueur.nom;
               console.log(joueur.nom);
-              this.joueurDispo.prenomJoueurDispo = joueur.prenom;
+              // this.joueurDispo.prenomJoueurDispo = joueur.prenom;
+              listeTest.prenomJoueurDispo = joueur.prenom;
+              console.log(listeTest);
               console.log(this.joueurDispo.prenomJoueurDispo);
               console.log(this.joueurDispo);
-              this.joueurDispoList.push(this.joueurDispo);
+              // this.joueurDispoList.push(this.joueurDispo);
+              this.joueurDispoList.push(listeTest);
               console.log(this.joueurDispoList);
             });
           });

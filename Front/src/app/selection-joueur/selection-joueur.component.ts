@@ -6,11 +6,15 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { ManifestationService } from '../services/manifestation.service';
 import { ParticipationService } from '../services/participation.service';
 import { JoueursService } from '../services/joueurs.service';
+import { DisponibiliteService } from '../services/disponibilite.service';
 
 import { Manifestation } from '../modeles/manifestation';
 import { Equipe } from '../modeles/equipe';
 import { Participation } from '../modeles/participation';
 import { Joueur } from '../modeles/joueur';
+import { JoueurDispo } from '../modeles/joueursDispo';
+import { Disponibilite } from '../modeles/disponibilite';
+import { JoueurDispoTest } from '../modeles/joueurDispoTest';
 
 @Component({
   selector: 'app-selection-joueur',
@@ -23,14 +27,21 @@ export class SelectionJoueurComponent implements OnInit {
   editionManifestation: Manifestation = new Manifestation(0, '', new Date(), new Equipe(0, '', '', null, null), null, null);
   participationList: Participation [] = [];
   joueurList: Joueur [] = [];
-  displayedColumns: string[] = ['select', 'nomJoueur', 'prenomJoueur', 'licenceJoueur'];
-  dataDispo = new MatTableDataSource<Joueur>();
-  selection = new SelectionModel<Joueur>(true, []);
+  joueur = new Joueur(0, '', '', '', 0, '', 0, '', '', '', '', new Date(), null, null, null);
+  disponibiliteList: Disponibilite [] = [];
+  displayedColumns: string[] = ['select', 'nomJoueur', 'prenomJoueur'];
+  dataDispo = new MatTableDataSource<JoueurDispo>();
+  selection = new SelectionModel<JoueurDispo>(true, []);
+  joueurDispo = new JoueurDispo('', '', '');
+  joueurDispoList: JoueurDispo [] = [];
+  joueurDispoTest = new JoueurDispoTest(0, 0, 0, 0);
+  joueurDispoTestList: JoueurDispoTest [] = [];
 
   constructor(private route: ActivatedRoute,
               private manifestationService: ManifestationService,
               private participationService: ParticipationService,
-              private joueurService: JoueursService) { }
+              private joueurService: JoueursService,
+              private disponibiliteService: DisponibiliteService) { }
 
   ngOnInit() {
     this.idManifestation = Number(this.route.snapshot.params.idManifestation);
@@ -42,20 +53,30 @@ export class SelectionJoueurComponent implements OnInit {
   getParticipation() {
     this.participationService.getParticipations().subscribe(Participations => {
       Participations.forEach( participation => {
-        // if (participation.participationPK.idManifestation === this.idManifestation) {
-        //   this.participationList.push(participation);
-        // }
-        this.joueurService.getJoueurs().subscribe(Joueurs => {
-          Joueurs.forEach( joueur => {
-            if (joueur.idJoueur === participation.participationPK.idJoueur && this.idManifestation === participation.participationPK.idManifestation) {
+        if (participation.participationPK.idManifestation === this.idManifestation) {
+          this.participationList.push(participation);
+          this.disponibiliteService.findDisponibilite(participation.participationPK.idDisponibilite).subscribe(disponibilite => {
+            this.disponibiliteList.push(disponibilite);
+            this.joueurDispo.dispoJoueurDispo = disponibilite.libelleDisponibilite;
+            console.log(this.joueurDispo.dispoJoueurDispo);
+            this.joueurService.findJoueur(participation.participationPK.idJoueur).subscribe(joueur => {
               this.joueurList.push(joueur);
-            }
+              this.joueurDispo.nomJoueurDispo = joueur.nom;
+              console.log(joueur.nom);
+              this.joueurDispo.prenomJoueurDispo = joueur.prenom;
+              console.log(this.joueurDispo.prenomJoueurDispo);
+              console.log(this.joueurDispo);
+              this.joueurDispoList.push(this.joueurDispo);
+              console.log(this.joueurDispoList);
+            });
           });
-        });
+        }
       });
     });
-    this.dataDispo = new MatTableDataSource<Joueur>(this.joueurList);
     console.log(this.participationList);
     console.log(this.joueurList);
+    console.log(this.disponibiliteList);
+    console.log(this.joueurDispoList);
   }
+
 }

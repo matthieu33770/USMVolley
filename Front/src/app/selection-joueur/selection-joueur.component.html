@@ -4,43 +4,35 @@
       <h3>Match pour l'équipe {{ editionManifestation.equipe.libelleEquipe }} du {{ editionManifestation.start | date : 'dd/MM/yyyy à HH:mm' }} </h3>
     </div>
 
-    <div class="joueurDispo">
-        <h3>Joueurs participants</h3>
-        <div >
-          <table mat-table [dataSource]="dataDispo" class="tableau">
+    <div class="tablejoueur">
+      <table mat-table [dataSource]="dataSource" class="tableau">
+      
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation()"
+                          (change)="$event ? selection.toggle(row) : null"
+                          [checked]="selection.isSelected(row)">
+            </mat-checkbox>
+          </td>
+        </ng-container>
+    
+        <!-- Nom Column -->
+        <ng-container matColumnDef="nomJoueur">
+          <th mat-header-cell *matHeaderCellDef>Nom</th>
+          <td mat-cell *matCellDef="let joueur">{{joueur.nom}}</td>
+        </ng-container>
         
-          <ng-container matColumnDef="select">
-            <th mat-header-cell *matHeaderCellDef>
-              
-            </th>
-            <td mat-cell *matCellDef="let row">
-              <mat-checkbox (click)="$event.stopPropagation()"
-                            (change)="$event ? selection.toggle(row) : null"
-                            [checked]="selection.isSelected(row)">
-              </mat-checkbox>
-            </td>
-          </ng-container>
-  
-          <!-- Nom Column -->
-          <ng-container matColumnDef="nomJoueur">
-            <th mat-header-cell *matHeaderCellDef>Nom</th>
-            <td mat-cell *matCellDef="let joueur">{{ joueur.nom }}</td>
-          </ng-container>
-  
-          <!-- Prenom Column -->
-          <ng-container matColumnDef="prenomJoueur">
-              <th mat-header-cell *matHeaderCellDef>Prénom</th>
-              <td mat-cell *matCellDef="let joueur">{{ joueur.prenom }}</td>
-            </ng-container>
-  
-          <!-- Licence Column -->
-          <ng-container matColumnDef="licenceJoueur">
-            <th mat-header-cell *matHeaderCellDef>N° Licence</th>
-            <td mat-cell *matCellDef="let joueur">{{ joueur.avoir.licence.numeroLicence }}</td>
-          </ng-container>
-          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
-        </div>
-      </div>
+        <!-- Prénom Column -->
+        <ng-container matColumnDef="prenomJoueur">
+          <th mat-header-cell *matHeaderCellDef>Prénom</th>
+          <td mat-cell *matCellDef="let joueur">{{joueur.prenom}}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
   </div>

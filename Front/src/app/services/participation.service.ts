@@ -31,6 +31,16 @@ export class ParticipationService {
     }
   }
 
+  public getParticipationByManifestation(idManifestation: number): Observable<Participation[]> {
+    if (this.loginService.logged) {
+      if (idManifestation) {
+        return this.httpClient.get<Participation[]>(`http://localhost:8080/participation/get/participationManifestation/${idManifestation}`);
+      }
+    } else {
+      this.router.navigate(['connexion']);
+    }
+  }
+
   public publishParticipations() {
     this.getParticipations().subscribe(
      manifestationList => {

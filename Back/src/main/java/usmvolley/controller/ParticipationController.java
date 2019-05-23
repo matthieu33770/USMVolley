@@ -46,6 +46,7 @@ public class ParticipationController {
 	 * @return liste une participation
 	 */
 	@GetMapping("/get/participationManifestation/{idManifestation}")
+	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine') or hasAuthority('Licencie')")
 	public ResponseEntity<?> getParticipationByManifestation(@PathVariable int idManifestation) {
 		
 		List<Participation> listParticipation = null;

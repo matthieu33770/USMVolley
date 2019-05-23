@@ -24,6 +24,7 @@ import { JoueurDispoTest } from '../modeles/joueurDispoTest';
 export class SelectionJoueurComponent implements OnInit {
 
   idManifestation: number;
+  long: number;
   editionManifestation: Manifestation = new Manifestation(0, '', new Date(), new Equipe(0, '', '', null, null), null, null);
   participationList: Participation [] = [];
   joueurList: Joueur [] = [];
@@ -33,6 +34,7 @@ export class SelectionJoueurComponent implements OnInit {
   dataDispo = new MatTableDataSource<JoueurDispo>();
   selection = new SelectionModel<JoueurDispo>(true, []);
   joueurDispo = new JoueurDispo('', '', '');
+  dispoList: JoueurDispo [] = [];
   joueurDispoList: JoueurDispo [] = [];
   joueurDispoTest = new JoueurDispoTest(0, 0, 0, 0);
   joueurDispoTestList: JoueurDispoTest [] = [];
@@ -47,41 +49,58 @@ export class SelectionJoueurComponent implements OnInit {
     this.idManifestation = Number(this.route.snapshot.params.idManifestation);
     this.manifestationService.findManifestation(this.idManifestation).subscribe(manifestation => {
       this.editionManifestation = manifestation; });
+    // this.getParticipation();
     this.getParticipation();
+    console.log(this.participationList);
+    console.log(this.joueurDispoList);
+    console.log(this.long);
+  }
+
+  getTest() {
+    this.participationService.getParticipationByManifestation(this.idManifestation).subscribe(Participations => {
+      this.participationList = Participations;
+      console.log(this.participationList);
+    });
   }
 
   getParticipation() {
-    this.participationService.getParticipations().subscribe(Participations => {
-      Participations.forEach( participation => {
-        if (participation.participationPK.idManifestation === this.idManifestation) {
-          this.participationList.push(participation);
-          this.disponibiliteService.findDisponibilite(participation.participationPK.idDisponibilite).subscribe(disponibilite => {
-            this.disponibiliteList.push(disponibilite);
-            this.joueurDispo.dispoJoueurDispo = disponibilite.libelleDisponibilite;
-            console.log(this.joueurDispo.dispoJoueurDispo);
-            this.joueurService.findJoueur(participation.participationPK.idJoueur).subscribe(joueur => {
-              const listeTest = new JoueurDispo('', '', '');
-              this.joueurList.push(joueur);
-              // this.joueurDispo.nomJoueurDispo = joueur.nom;
-              listeTest.nomJoueurDispo = joueur.nom;
-              console.log(joueur.nom);
-              // this.joueurDispo.prenomJoueurDispo = joueur.prenom;
-              listeTest.prenomJoueurDispo = joueur.prenom;
-              console.log(listeTest);
-              console.log(this.joueurDispo.prenomJoueurDispo);
-              console.log(this.joueurDispo);
-              // this.joueurDispoList.push(this.joueurDispo);
-              this.joueurDispoList.push(listeTest);
-              console.log(this.joueurDispoList);
-            });
-          });
-        }
+    this.participationService.getParticipationByManifestation(this.idManifestation).subscribe(Participations => {
+      this.participationList = Participations;
+      this.getDispo(this.participationList);
+      // this.getJoueur(this.participationList);
+    });
+  }
+
+  getDispo(participationList: Participation [] ) {
+    participationList.forEach(participation => {
+      this.disponibiliteService.findDisponibilite(participation.participationPK.idDisponibilite).subscribe(disponibilite => {
+        const listeDispo = new JoueurDispo('', '', '');
+        listeDispo.dispoJoueurDispo = disponibilite.libelleDisponibilite;
+        this.dispoList.push(listeDispo);
+        this.getJoueur(this.participationList, this.dispoList);
       });
     });
-    console.log(this.participationList);
-    console.log(this.joueurList);
-    console.log(this.disponibiliteList);
-    console.log(this.joueurDispoList);
+  }
+
+  getJoueur(participationList: Participation [], dispoList) {
+    const liste: number = participationList.length;
+    console.log(liste);
+    console.log(dispoList);
+    console.log(participationList);
+    participationList.forEach(participation => {
+      console.log(participation);
+      this.joueurService.findJoueur(participation.participationPK.idJoueur).subscribe(joueur => {
+        console.log(joueur);
+        const listeJoueurs = new JoueurDispo('', '', '');
+        listeJoueurs.nomJoueurDispo = joueur.nom;
+        listeJoueurs.prenomJoueurDispo = joueur.prenom;
+        console.log(listeJoueurs);
+        this.joueurDispoList.push(listeJoueurs);
+      });
+    });
+    for ( let i = 0; i < liste; i++ ) {
+      this.joueurDispoList[i].dispoJoueurDispo = dispoList[i].dispoJoueurDispo;
+    }
   }
 
 }

@@ -80,4 +80,22 @@ export class ParticipationService {
     }
   }
 
+  /**
+    * Fonction de suppression d'une Participation.
+    * Elle met à jour notre liste de Participation et notre liste observable.
+    * @param idManifestation, idJoueur, idDisponibilite  de la Participation à supprimer
+    */
+   supprimerParticipation(idManifestation: number, idJoueur: number, idDisponibilite: number) {
+    if (this.loginService.logged) {
+      this.httpClient.delete('http://localhost:8080/participation/delete?idManifestation=' + idManifestation + '&idJoueur=' + idJoueur + '&idDisponibilite=' + idDisponibilite).subscribe(
+        () => { console.log('suppression participation OK : ', idManifestation);
+            },
+        (error) => console.log('suppression participation pb : ', error)
+      );
+    } else {
+      this.router.navigate(['connexion']);
+    }
+   }
+
+
 }

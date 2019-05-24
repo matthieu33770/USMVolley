@@ -65,6 +65,14 @@ export class ListeJoueursComponent implements OnInit {
     this.router.navigate(['gestion/joueurs/detailjoueur/' + selected[0].idJoueur]);
   }
 
+  nouvelleAnnee() {
+    const formulaire = null;
+    const certificat = null;
+    const isValide = false;
+    this.joueurList[9].avoir.licence.formulaire = formulaire;
+    console.log(this.joueurList[9]);
+  }
+
   onDelete(selected: Joueur[]) {
     this.joueurService.supprimerJoueur(selected[0].idJoueur);
   }

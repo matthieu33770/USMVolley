@@ -1,38 +1,98 @@
 <div class="selection">
     <div class="titre">
       <h1>Sélection des Joueurs</h1>
-      <h3>Match pour l'équipe {{ editionManifestation.equipe.libelleEquipe }} du {{ editionManifestation.start | date : 'dd/MM/yyyy à HH:mm' }} </h3>
+      <h3>Match pour l'équipe {{ editionManifestation.equipe.libelleEquipe }} du {{ editionManifestation.start | date : 'dd/MM/yyyy à HH:mm' }} contre {{ editionManifestation.adversaire }}</h3>
     </div>
 
-    <div class="tablejoueur">
-      <table mat-table [dataSource]="dataSource" class="tableau">
-      
-        <!-- Checkbox Column -->
-        <ng-container matColumnDef="select">
-          <th mat-header-cell *matHeaderCellDef>
-          </th>
-          <td mat-cell *matCellDef="let row">
-            <mat-checkbox (click)="$event.stopPropagation()"
-                          (change)="$event ? selection.toggle(row) : null"
-                          [checked]="selection.isSelected(row)">
-            </mat-checkbox>
-          </td>
-        </ng-container>
-    
-        <!-- Nom Column -->
-        <ng-container matColumnDef="nomJoueur">
-          <th mat-header-cell *matHeaderCellDef>Nom</th>
-          <td mat-cell *matCellDef="let joueur">{{joueur.nom}}</td>
-        </ng-container>
+    <div class="boutons">
+      <button mat-raised-button (click)="exportAsXLSX()">Exporter</button>
+      <button mat-raised-button color="primary" (click)="ajouter(selection.selected)">Ajouter</button>
+      <button mat-raised-button color="warn" (click)="enlever(selection.selected)">Enlever</button>
+    </div>
+
+    <div class="tab">
+      <div class="tablejoueurdispo">
+        <h4>Joueurs inscits</h4>
+        <table mat-table [dataSource]="dataSource" class="tableau">
         
-        <!-- Prénom Column -->
-        <ng-container matColumnDef="prenomJoueur">
-          <th mat-header-cell *matHeaderCellDef>Prénom</th>
-          <td mat-cell *matCellDef="let joueur">{{joueur.prenom}}</td>
-        </ng-container>
+          <!-- Checkbox Column -->
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox (click)="$event.stopPropagation()"
+                            (change)="$event ? selection.toggle(row) : null"
+                            [checked]="selection.isSelected(row)">
+              </mat-checkbox>
+            </td>
+          </ng-container>
+      
+          <!-- Nom Column -->
+          <ng-container matColumnDef="nomJoueur">
+            <th mat-header-cell *matHeaderCellDef>Nom</th>
+            <td mat-cell *matCellDef="let joueur">{{joueur.nomJoueurDispo}}</td>
+          </ng-container>
+          
+          <!-- Prénom Column -->
+          <ng-container matColumnDef="prenomJoueur">
+            <th mat-header-cell *matHeaderCellDef>Prénom</th>
+            <td mat-cell *matCellDef="let joueur">{{joueur.prenomJoueurDispo}}</td>
+          </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
+          <!-- Dispo Column -->
+          <ng-container matColumnDef="dispoJoueur">
+            <th mat-header-cell *matHeaderCellDef>Disponibilité</th>
+            <td mat-cell *matCellDef="let joueur">{{joueur.dispoJoueurDispo}}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+
+      <div class="tablejoueurselec">
+        <h4>Joueurs sélectionnés</h4>
+          <table mat-table [dataSource]="dataSelectionne" class="tableau">
+          
+            <!-- Checkbox Column -->
+            <ng-container matColumnDef="select">
+              <th mat-header-cell *matHeaderCellDef>
+              </th>
+              <td mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()"
+                              (change)="$event ? selection.toggle(row) : null"
+                              [checked]="selection.isSelected(row)">
+                </mat-checkbox>
+              </td>
+            </ng-container>
+        
+            <!-- Nom Column -->
+            <ng-container matColumnDef="nomJoueur">
+              <th mat-header-cell *matHeaderCellDef>Nom</th>
+              <td mat-cell *matCellDef="let joueur">{{joueur.nomJoueurDispo}}</td>
+            </ng-container>
+            
+            <!-- Prénom Column -->
+            <ng-container matColumnDef="prenomJoueur">
+              <th mat-header-cell *matHeaderCellDef>Prénom</th>
+              <td mat-cell *matCellDef="let joueur">{{joueur.prenomJoueurDispo}}</td>
+            </ng-container>
+    
+            <!-- Dispo Column -->
+            <ng-container matColumnDef="dispoJoueur">
+              <th mat-header-cell *matHeaderCellDef>Disponibilité</th>
+              <td mat-cell *matCellDef="let joueur">{{joueur.dispoJoueurDispo}}</td>
+            </ng-container>
+    
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+      </div>
+    </div> 
+    
+    <div class="boutons">
+      <button *ngIf="!isModification" mat-raised-button color="primary" (click)="onSave()">Enregistrer</button>
+      <button mat-raised-button color="accent" routerLink="/manifestations">Retour</button>
     </div>
+    <br>
   </div>

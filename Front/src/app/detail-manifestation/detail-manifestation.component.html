@@ -19,6 +19,11 @@
       </mat-form-field>
     </div>
     <div>
+        <mat-form-field>
+          <input matInput placeholder="Adversaire" [(ngModel)]="editionManifestation.adversaire" name="adversaire">
+        </mat-form-field>
+      </div>
+    <div>
       <p-calendar placeholder="Date de la manifestation" [(ngModel)]="date" [showTime]="true"></p-calendar>
     </div>
 

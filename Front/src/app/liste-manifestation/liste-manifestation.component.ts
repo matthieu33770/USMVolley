@@ -27,7 +27,7 @@ export class ListeManifestationComponent implements OnInit, OnDestroy  {
   manifestations: Manifestation [] = [];
   manifestationList: Manifestation [] = [];
   dataSource = new MatTableDataSource<Manifestation>();
-  displayedColumns: string[] = ['select', 'title', 'date', 'equipe', 'lieu', 'statut', 'present', 'absent', '?', 'nonRepondu'];
+  displayedColumns: string[] = ['select', 'title', 'adversaire', 'date', 'equipe', 'lieu', 'statut', 'present', 'absent', '?', 'nonRepondu'];
   selection = new SelectionModel<Manifestation>(false, []);
 
   equipes: Equipe [] = [];

@@ -34,14 +34,13 @@ export class DetailManifestationComponent implements OnInit {
   equipeList: Equipe [];
   lieuList: Lieu [];
   statutList: Statut [];
-  editionManifestation: Manifestation = new Manifestation(0, '', new Date(), new Equipe(0, '', '', null, null), null, null);
+  editionManifestation: Manifestation = new Manifestation(0, '', '', new Date(), new Equipe(0, '', '', null, null), null, null);
 
   constructor(private route: ActivatedRoute,
               private manifestationService: ManifestationService,
               private equipeService: EquipesService,
               private lieuService: LieuxService,
-              private statutService: StatutService,
-              private adapter: DateAdapter<any>) { }
+              private statutService: StatutService) { }
 
   ngOnInit() {
     this.idManifestation = Number(this.route.snapshot.params.idManifestation);

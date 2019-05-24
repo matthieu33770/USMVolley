@@ -7,14 +7,15 @@ import { ManifestationService } from '../services/manifestation.service';
 import { ParticipationService } from '../services/participation.service';
 import { JoueursService } from '../services/joueurs.service';
 import { DisponibiliteService } from '../services/disponibilite.service';
+import { MailService } from '../services/mail.service';
 
 import { Manifestation } from '../modeles/manifestation';
 import { Equipe } from '../modeles/equipe';
 import { Participation } from '../modeles/participation';
-import { Joueur } from '../modeles/joueur';
 import { JoueurDispo } from '../modeles/joueursDispo';
 import { Disponibilite } from '../modeles/disponibilite';
-import { JoueurDispoTest } from '../modeles/joueurDispoTest';
+import { Joueur } from '../modeles/joueur';
+import { ParticipationPK } from '../modeles/participationPK';
 
 @Component({
   selector: 'app-selection-joueur',
@@ -24,83 +25,87 @@ import { JoueurDispoTest } from '../modeles/joueurDispoTest';
 export class SelectionJoueurComponent implements OnInit {
 
   idManifestation: number;
-  long: number;
-  editionManifestation: Manifestation = new Manifestation(0, '', new Date(), new Equipe(0, '', '', null, null), null, null);
+  editionManifestation: Manifestation = new Manifestation(0, '', '', new Date(), new Equipe(0, '', '', null, null), null, null);
+  joueur: Joueur = new Joueur(0, '', '', '', 0, '', 0, '', '', '', '', new Date(), null, null, null);
   participationList: Participation [] = [];
-  joueurList: Joueur [] = [];
-  joueur = new Joueur(0, '', '', '', 0, '', 0, '', '', '', '', new Date(), null, null, null);
-  disponibiliteList: Disponibilite [] = [];
-  displayedColumns: string[] = ['select', 'nomJoueur', 'prenomJoueur'];
-  dataDispo = new MatTableDataSource<JoueurDispo>();
+  displayedColumns: string[] = ['select', 'nomJoueur', 'prenomJoueur', 'dispoJoueur'];
+  dataSource = new MatTableDataSource<JoueurDispo>();
+  dataSelectionne = new MatTableDataSource<JoueurDispo>();
   selection = new SelectionModel<JoueurDispo>(true, []);
-  joueurDispo = new JoueurDispo('', '', '');
-  dispoList: JoueurDispo [] = [];
   joueurDispoList: JoueurDispo [] = [];
-  joueurDispoTest = new JoueurDispoTest(0, 0, 0, 0);
-  joueurDispoTestList: JoueurDispoTest [] = [];
+  joueurSelectionneList: JoueurDispo [] = [];
 
   constructor(private route: ActivatedRoute,
               private manifestationService: ManifestationService,
               private participationService: ParticipationService,
               private joueurService: JoueursService,
-              private disponibiliteService: DisponibiliteService) { }
+              private disponibiliteService: DisponibiliteService,
+              private mailService: MailService) { }
 
   ngOnInit() {
     this.idManifestation = Number(this.route.snapshot.params.idManifestation);
+    this.disponibiliteService.publishDisponibilites();
+    this.joueurService.publishJoueurs();
     this.manifestationService.findManifestation(this.idManifestation).subscribe(manifestation => {
       this.editionManifestation = manifestation; });
-    // this.getParticipation();
     this.getParticipation();
-    console.log(this.participationList);
-    console.log(this.joueurDispoList);
-    console.log(this.long);
-  }
-
-  getTest() {
-    this.participationService.getParticipationByManifestation(this.idManifestation).subscribe(Participations => {
-      this.participationList = Participations;
-      console.log(this.participationList);
-    });
   }
 
   getParticipation() {
     this.participationService.getParticipationByManifestation(this.idManifestation).subscribe(Participations => {
       this.participationList = Participations;
-      this.getDispo(this.participationList);
-      // this.getJoueur(this.participationList);
+      this.getJoueur(this.participationList);
     });
   }
 
-  getDispo(participationList: Participation [] ) {
+  getJoueur(participationList: Participation []) {
     participationList.forEach(participation => {
-      this.disponibiliteService.findDisponibilite(participation.participationPK.idDisponibilite).subscribe(disponibilite => {
-        const listeDispo = new JoueurDispo('', '', '');
-        listeDispo.dispoJoueurDispo = disponibilite.libelleDisponibilite;
-        this.dispoList.push(listeDispo);
-        this.getJoueur(this.participationList, this.dispoList);
-      });
-    });
-  }
-
-  getJoueur(participationList: Participation [], dispoList) {
-    const liste: number = participationList.length;
-    console.log(liste);
-    console.log(dispoList);
-    console.log(participationList);
-    participationList.forEach(participation => {
-      console.log(participation);
       this.joueurService.findJoueur(participation.participationPK.idJoueur).subscribe(joueur => {
-        console.log(joueur);
         const listeJoueurs = new JoueurDispo('', '', '');
         listeJoueurs.nomJoueurDispo = joueur.nom;
         listeJoueurs.prenomJoueurDispo = joueur.prenom;
-        console.log(listeJoueurs);
-        this.joueurDispoList.push(listeJoueurs);
+        const dispo: Disponibilite = this.disponibiliteService.availableDisponibilite.find(disponibilite => disponibilite.idDisponibilite === participation.participationPK.idDisponibilite);
+        listeJoueurs.dispoJoueurDispo = dispo.libelleDisponibilite;
+        if (listeJoueurs.dispoJoueurDispo === 'Sélectionné(e)') {
+          this.joueurSelectionneList.push(listeJoueurs);
+        } else {
+          this.joueurDispoList.push(listeJoueurs);
+        }
+        this.dataSource = new MatTableDataSource<JoueurDispo>(this.joueurDispoList);
+        this.dataSelectionne = new MatTableDataSource<JoueurDispo>(this.joueurSelectionneList);
       });
     });
-    for ( let i = 0; i < liste; i++ ) {
-      this.joueurDispoList[i].dispoJoueurDispo = dispoList[i].dispoJoueurDispo;
+  }
+
+  ajouter(selected: JoueurDispo[]) {
+    for (let i = 0; i < selected.length; i ++) {
+      this.joueurSelectionneList.push(selected[i]);
+      this.joueurDispoList.splice(this.joueurDispoList.indexOf(selected[i]), 1);
+      this.dataSource = new MatTableDataSource<JoueurDispo>(this.joueurDispoList);
+      this.dataSelectionne = new MatTableDataSource<JoueurDispo>(this.joueurSelectionneList);
     }
   }
 
+  enlever(selected: JoueurDispo[]) {
+    for (let i = 0; i < selected.length; i ++) {
+      this.joueurSelectionneList.splice(this.joueurSelectionneList.indexOf(selected[i]), 1);
+      this.joueurDispoList.push(selected[i]);
+      this.dataSource = new MatTableDataSource<JoueurDispo>(this.joueurDispoList);
+      this.dataSelectionne = new MatTableDataSource<JoueurDispo>(this.joueurSelectionneList);
+    }
+  }
+
+  onSave() {
+    const idSelectionne = 4;
+    const newParticipation: ParticipationPK = new ParticipationPK(0, 0, 0);
+    const dispo: Disponibilite = this.disponibiliteService.availableDisponibilite.find(disponibilite => disponibilite.libelleDisponibilite === this.joueurSelectionneList[0].dispoJoueurDispo);
+    this.joueur = this.joueurService.availableJoueur.find(joueur => joueur.nom === this.joueurSelectionneList[0].nomJoueurDispo);
+    newParticipation.idManifestation = this.idManifestation;
+    newParticipation.idDisponibilite = idSelectionne;
+    newParticipation.idJoueur = this.joueur.idJoueur;
+    this.participationService.createParticipation(newParticipation);
+    this.participationService.supprimerParticipation(this.idManifestation, newParticipation.idJoueur, dispo.idDisponibilite);
+
+    this.mailService.sendMailSelectionne(this.joueur.idJoueur, this.idManifestation);
+  }
 }

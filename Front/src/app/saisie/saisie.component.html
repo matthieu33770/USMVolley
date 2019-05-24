@@ -99,7 +99,7 @@
           </mat-form-field>
           <button mat-raised-button (click)="selectFormulaire()">Selectionner</button>
         </div>
-        <div>
+        <div *ngIf="!editionLicence.certificatMedical">
           <input type="file" id="userCertificat" (change)="onSelectCertificat($event)" #fileInputC style="display: none">
           <mat-form-field class="watch-category-full-width">
             <input matInput formControlName="certificatTest" placeholder="Certificat à charger" readonly>

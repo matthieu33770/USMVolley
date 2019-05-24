@@ -22,9 +22,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import usmvolley.model.Avoir;
 import usmvolley.model.Joueurs;
+import usmvolley.model.Licence;
 import usmvolley.model.Users;
 import usmvolley.repository.JoueursRepository;
+import usmvolley.repository.LicenceRepository;
 import usmvolley.service.FileStorageService;
 import usmvolley.upload.FileInformation;
 import usmvolley.upload.exception.UploadFileException;
@@ -35,6 +38,9 @@ public class JoueursController {
 
 	@Autowired
 	private JoueursRepository joueursRepo;
+	
+	@Autowired
+	private LicenceRepository licenceRepo;
 	
 	@Autowired
 	private FileStorageService fileStorageService;
@@ -161,9 +167,6 @@ public class JoueursController {
 		if (userJoueur == null) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque l'identifiant");
 		}
-		if (joueur.getAvoir().getLicence().getCertificatMedical() != null && joueur.getAvoir().getLicence().getFormulaire() != null && joueur.getAvoir().getLicence().getCategories() != null) {
-			joueur.getAvoir().setIsValide(true);
-		}
 		
 		joueur.getUser().setMdp(userJoueurMdp);
 	
@@ -200,6 +203,8 @@ public class JoueursController {
 	public ResponseEntity<?> updateJoueur(@RequestBody Joueurs joueur, @PathVariable Integer idJoueur) throws Exception
 	{
 		Joueurs modificationJoueur = null;
+		Licence modifLicence = null;
+		
 		String nomJoueur = joueur.getNom();
 		String prenomJoueur = joueur.getPrenom();
 		Integer numeroAdresseJoueur = joueur.getNumeroAdresse();
@@ -210,8 +215,7 @@ public class JoueursController {
 		String telephone1Joueur = joueur.getTelephone1();
 		Date dateJoueur = joueur.getDateNaissance();
 		Users userJoueur = joueur.getUser();
-		
-		System.out.println("joueur : " + joueur.getAvoir().getLicence());
+		Avoir avoirJoueur = joueur.getAvoir();
 		
 		if ((nomJoueur == null) || (nomJoueur.isEmpty())) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le nom du joueur");
@@ -243,14 +247,9 @@ public class JoueursController {
 		if (userJoueur == null) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque l'identifiant");
 		}
-//		if (joueur.getAvoir().getLicence().getCertificatMedical() != null && joueur.getAvoir().getLicence().getFormulaire() != null && joueur.getAvoir().getLicence().getCategories() != null) {
-//			joueur.getAvoir().setIsValide(true);
-//		}
 		
 		try
 		{
-			System.out.println("test modification joueur : " + joueur.getAvoir().getLicence());
-			System.out.println("test avoir : " + joueur.getAvoir().getIsValide());
 			modificationJoueur = joueursRepo.save(joueur);
 		} catch (Exception e)
 		{

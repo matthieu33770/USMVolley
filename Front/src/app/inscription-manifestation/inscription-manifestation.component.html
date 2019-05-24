@@ -2,7 +2,7 @@
   <div class="titre">
     <h1>Inscription à la manifestation</h1>
     <h3 *ngIf="isEntrainement">{{ inscriptionManifestation.title | uppercase}}</h3>
-    <h3 *ngIf="!isEntrainement">{{ inscriptionManifestation.title | uppercase}} pour l'équipe {{ inscriptionManifestation.equipe.libelleEquipe }}</h3>
+    <h3 *ngIf="!isEntrainement">{{ inscriptionManifestation.title | uppercase}} contre {{ inscriptionManifestation.adversaire }} pour l'équipe {{ inscriptionManifestation.equipe.libelleEquipe }}</h3>
   </div>
 
   <div class="corps">

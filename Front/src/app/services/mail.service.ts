@@ -19,7 +19,6 @@ export class MailService {
   }
 
   public sendMailEquipe(username: String, sujetMail: string, contenuMail: string) {
-    console.log('je suis dans la fonction du service');
     this.httpClient.post<string>('http://localhost:8080/email/sendMailEquipe?username=' + username + '&sujetMail=' + sujetMail + '&contenuMail=' + contenuMail, '').subscribe(
                   (res) => {console.log('send email ok');
                             console.log(username);
@@ -27,5 +26,14 @@ export class MailService {
                   (error) => {console.log('send email pb', error);
                               console.log(username);
                 });
+  }
+
+  public sendMailSelectionne(idJoueur: number, idManifestation: number) {
+    this.httpClient.post<string>('http://localhost:8080/email/selection?idJoueur=' + idJoueur + '&idManifestation=' + idManifestation, '').subscribe(
+                  (res) => {console.log('send email ok');
+                   },
+                  (error) => {console.log('send email pb', error);
+                });
+
   }
 }

@@ -12,7 +12,7 @@ INSERT INTO equipes_joueurs VALUES (1, 1), (1, 2), (3, 3), (3, 5);
 INSERT INTO horaire VALUES (1, '2019-05-19 20:00:00'), (2, '2018-03-09 20:30:00');
 INSERT INTO creneau VALUES (1, 'mercredi',4), (2, 'vendredi',5);
 INSERT INTO agenda VALUES (1), (2);
-INSERT INTO manifestations VALUES (1, '2019-05-13 20:30:00', 'match', 3, 1, 1), (2, '2019-05-15 20:20:00', 'entrainement', 1, 2, 2), (3, '2019-05-18 21:00:00', 'match', 1, 2, 1);
+INSERT INTO manifestations VALUES (1, '', '2019-05-13 20:30:00', 'match', 3, 1, 1), (2, '', '2019-05-15 20:20:00', 'entrainement', 1, 2, 2), (3, '', '2019-05-18 21:00:00', 'match', 1, 2, 1);
 INSERT INTO disponibilite VALUES (1, 'Disponible', 1), (2, 'Disponible si nécessaire', 1), (3, 'Indisponible', 0), (4, 'Sélectionné(e)', 1), (5, 'Absent(e)', 0), (6, 'Ne sait pas encore', 1), (7, 'Présent(e)', 1), (8, 'Présent(e) à 2', 2);
 TRUNCATE TABLE hibernate_sequence;
 INSERT INTO hibernate_sequence VALUES (200);

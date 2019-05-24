@@ -24,6 +24,9 @@ public class Manifestations implements Serializable {
 	@Column(name = "title")
 	private String title;
 	
+	@Column(name = "adversaire")
+	private String adversaire;
+	
 	@Column(name = "date")
 	private Date start;
 	
@@ -43,11 +46,12 @@ public class Manifestations implements Serializable {
 	}
 	
 
-	public Manifestations(Integer idManifestation, String title, Date start, Equipes equipe,
+	public Manifestations(Integer idManifestation, String title, String adversaire, Date start, Equipes equipe,
 			Lieux lieu, Statuts statut) {
 		super();
 		this.idManifestation = idManifestation;
 		this.title = title;
+		this.adversaire = adversaire;
 		this.start = start;
 		this.equipe = equipe;
 		this.lieu = lieu;
@@ -77,6 +81,14 @@ public class Manifestations implements Serializable {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getAdversaire() {
+		return adversaire;
+	}
+
+	public void setAdversaire(String adversaire) {
+		this.adversaire = adversaire;
 	}
 
 	public Equipes getEquipe() {

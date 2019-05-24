@@ -48,7 +48,7 @@ export class ManifestationService {
        }
        return of(this.availableManifestation.find(manifestation => manifestation.idManifestation === idManifestation));
      } else {
-       return of(new Manifestation(0, '', new Date(), null, null, null));
+       return of(new Manifestation(0, '', '', new Date(), null, null, null));
      }
    }
 
@@ -94,9 +94,9 @@ export class ManifestationService {
    supprimerManifestation(idManifestation: number): Manifestation[] {
     if (this.loginService.logged) {
       this.httpClient.delete('http://localhost:8080/manifestations/delete/' + idManifestation).subscribe(
-        () => { console.log('suppression lieu OK : ', idManifestation);
+        () => { console.log('suppression manifestation OK : ', idManifestation);
             },
-        (error) => console.log('suppression lieu pb : ', error)
+        (error) => console.log('suppression manifestation pb : ', error)
       );
       this.availableManifestation = this.availableManifestation.filter( manifestation => manifestation.idManifestation !== idManifestation ).slice();
       this.availableManifestation$.next(this.availableManifestation);

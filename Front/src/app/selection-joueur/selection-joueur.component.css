@@ -8,3 +8,25 @@
     text-align: center;
     margin-bottom: 40px;
   }
+
+  .boutons {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .tab{
+    display: flex;
+    justify-content: center;
+  }
+
+.tablejoueurdispo {
+  margin-right: 40px;
+  height: 400px;
+  overflow: auto;
+}
+
+.tablejoueurselec {
+  margin-left: 40px;
+  height: 400px;
+  overflow: auto;
+}

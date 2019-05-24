@@ -19,6 +19,8 @@ import { Categorie } from '../modeles/categorie';
 import { Licence } from '../modeles/licence';
 import { Avoir } from '../modeles/avoir';
 import { Fonction } from '../modeles/fonction';
+import { AvoirService } from '../services/avoir.service';
+import { LicenceService } from '../services/licence.service';
 
 @Component({
   selector: 'app-saisie',
@@ -76,25 +78,25 @@ export class SaisieComponent implements OnInit {
               private joueursService: JoueursService,
               private userService: UsersService,
               private categorieService: CategorieService,
+              private avoirService: AvoirService,
+              private licenceServide: LicenceService,
               private formBuilder: FormBuilder) {
   }
 
   ngOnInit() {
     this.loginService.userRole.subscribe(userRole => {
       this.isLoggedin = userRole.length > 0;
-      console.log(this.isLoggedin);
     });
     this.joueursService.publishJoueurs();
     this.initConfig(); //Fonction Paypal
     if (this.isLoggedin) {
+      this.avoirService.publishAvoir();
+      this.licenceServide.publishLicence();
       this.username = jwt_decode(sessionStorage.getItem(environment.accessToken)).sub;
-      console.log(this.username);
       this.getUser();
       this.userService.findByUsername(this.username).subscribe(user => {
         this.editionUser = user; });
       this.getJoueur();
-      console.log(this.player);
-      console.log(this.editionJoueur);
     }
     this.getJoueurs();
     this.getCategories();
@@ -150,7 +152,6 @@ export class SaisieComponent implements OnInit {
 
   getJoueurs() {
     this.joueursService.getJoueurs().subscribe(Joueurs => {this.joueurList = Joueurs;
-                                                          console.log(this.joueurList);
                                                           this.idJoueurExistant = this.joueurList[this.joueurList.length - 1].idJoueur;
                                                         });
   }
@@ -162,6 +163,8 @@ export class SaisieComponent implements OnInit {
                                                 if (joueur.user.username === this.username) {
                                                   this.player.push(joueur);
                                                   this.editionJoueur = this.player[0];
+                                                  this.editionAvoir = this.avoirService.availableAvoir.find(avoir => avoir.idAvoir === this.editionJoueur.avoir.idAvoir);
+                                                  this.editionLicence = this.licenceServide.availableLicence.find(licence => licence.idLicence === this.editionJoueur.avoir.licence.idLicence);
                                                   this.formulaire = this.player[0].nom + ' ' + this.player[0].prenom + ' - Formulaire.pdf';
                                                   this.certificat = this.player[0].nom + ' ' + this.player[0].prenom + ' - ' + this.annee + ' - Certificat.pdf';
                                                 }
@@ -207,18 +210,17 @@ export class SaisieComponent implements OnInit {
       this.joueursService.createJoueur(this.editionJoueur);
       console.log(this.editionJoueur);
     } else {
-      console.log('UPADATEEEEEEEEE');
-      this.editionAvoir.licence = this.editionLicence;
-      this.editionJoueur.avoir = this.editionAvoir;
-      this.editionJoueur.user = this.editionUser;
       if (this.isFormulaire) {
         this.onRegisterF();
-        this.editionJoueur.avoir.licence.formulaire = this.formulaire;
+        this.editionLicence.formulaire = this.formulaire;
       }
       if (this.isCertificat) {
         this.onRegisterC();
-        this.editionJoueur.avoir.licence.certificatMedical = this.certificat;
+        this.editionLicence.certificatMedical = this.certificat;
       }
+      this.editionAvoir.licence = this.editionLicence;
+      this.editionJoueur.avoir = this.editionAvoir;
+      this.editionJoueur.user = this.editionUser;
       this.joueursService.updateJoueur(this.editionJoueur);
     }
   }

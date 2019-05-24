@@ -13,6 +13,7 @@ export class Manifestation {
 
     constructor(public idManifestation: number,
                 public title: string,
+                public adversaire: string,
                 public start: Date,
                 public equipe: Equipe,
                 public lieu: Lieu,

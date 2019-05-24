@@ -26,7 +26,7 @@ export class InscriptionManifestationComponent implements OnInit {
   isEntrainement = false;
   isInscriptionPossible = false;
   manifestationsList: Manifestation [];
-  inscriptionManifestation: Manifestation = new Manifestation(0, '', new Date(), null, null, null);
+  inscriptionManifestation: Manifestation = new Manifestation(0, '', '', new Date(), null, null, null);
   username: String;
   editionUser: User = new User(0, '', '', new Fonction(1, ''));
   joueur: Joueur = new Joueur(0, '', '', '', 0, '', 0, '', '', '', '', null, null, null, null);

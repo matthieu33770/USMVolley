@@ -30,6 +30,7 @@ import { ChangementMdpComponent } from './changement-mdp/changement-mdp.componen
 import { EnvoyerMailComponent } from './envoyer-mail/envoyer-mail.component';
 import { DetailManifestationComponent } from './detail-manifestation/detail-manifestation.component';
 import { InscriptionManifestationComponent } from './inscription-manifestation/inscription-manifestation.component';
+import { InscriptionMultiple } from './inscription-multiple/inscription-multiple.component';
 import { EnvoiMailComponent } from './envoi-mail/envoi-mail.component';
 import { SelectionJoueurComponent } from './selection-joueur/selection-joueur.component';
 
@@ -47,6 +48,7 @@ const routes: Routes = [
   {path: 'gestion/manifestations/detailmanifestation/newManifestation', component: DetailManifestationComponent},
   {path: 'gestion/manifestations/detailmanifestation/selectionjoueurs/:idManifestation', component: SelectionJoueurComponent},
   {path: 'inscriptionmanifestation/:idManifestation', component: InscriptionManifestationComponent},
+  {path: 'inscriptionmultiple', component: InscriptionMultiple},
   {path: 'gestion', component: GestionComponent},
   {path: 'envoyerMail', component: EnvoyerMailComponent},
   {path: 'gestion/joueurs', component: ListeJoueursComponent},

@@ -55,6 +55,7 @@ import { EnvoyerMailComponent } from './envoyer-mail/envoyer-mail.component';
 import { InscriptionManifestationComponent } from './inscription-manifestation/inscription-manifestation.component';
 import { EnvoiMailComponent } from './envoi-mail/envoi-mail.component';
 import { SelectionJoueurComponent } from './selection-joueur/selection-joueur.component';
+import { InscriptionMultipleComponent } from './inscription-multiple/inscription-multiple.component';
 
 registerLocaleData(localeFr);
 
@@ -93,7 +94,8 @@ registerLocaleData(localeFr);
     EnvoyerMailComponent,
     InscriptionManifestationComponent,
     EnvoiMailComponent,
-    SelectionJoueurComponent
+    SelectionJoueurComponent,
+    InscriptionMultipleComponent
   ],
   imports: [
     BrowserModule,

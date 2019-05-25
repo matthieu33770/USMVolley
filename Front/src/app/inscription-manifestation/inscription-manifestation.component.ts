@@ -43,14 +43,12 @@ export class InscriptionManifestationComponent implements OnInit {
     console.log(this.newParticipation);
     this.idManifestation = Number(this.route.snapshot.params.idManifestation);
     this.getManifestation();
-    // this.getJoueur();
     this.getDisponibilite();
   }
 
   getManifestation(): void {
     this.manifestationService.findManifestation(this.idManifestation).subscribe(manifestation => {
       this.inscriptionManifestation = manifestation;
-      console.log(this.inscriptionManifestation);
       this.newParticipation.idManifestation = manifestation.idManifestation;
       if (this.inscriptionManifestation.title === 'entrainement' || this.inscriptionManifestation.title === 'Entrainement') {
         this.isEntrainement = true;

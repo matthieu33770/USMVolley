@@ -97,15 +97,18 @@ export class SelectionJoueurComponent implements OnInit {
 
   onSave() {
     const idSelectionne = 4;
-    const newParticipation: ParticipationPK = new ParticipationPK(0, 0, 0);
-    const dispo: Disponibilite = this.disponibiliteService.availableDisponibilite.find(disponibilite => disponibilite.libelleDisponibilite === this.joueurSelectionneList[0].dispoJoueurDispo);
-    this.joueur = this.joueurService.availableJoueur.find(joueur => joueur.nom === this.joueurSelectionneList[0].nomJoueurDispo);
-    newParticipation.idManifestation = this.idManifestation;
-    newParticipation.idDisponibilite = idSelectionne;
-    newParticipation.idJoueur = this.joueur.idJoueur;
-    this.participationService.createParticipation(newParticipation);
-    this.participationService.supprimerParticipation(this.idManifestation, newParticipation.idJoueur, dispo.idDisponibilite);
-
-    this.mailService.sendMailSelectionne(this.joueur.idJoueur, this.idManifestation);
+    console.log(this.joueurSelectionneList);
+    console.log(this.joueurSelectionneList.length);
+    for (let i = 0; i < this.joueurSelectionneList.length; i++) {
+      const newParticipation: ParticipationPK = new ParticipationPK(0, 0, 0);
+      const dispo: Disponibilite = this.disponibiliteService.availableDisponibilite.find(disponibilite => disponibilite.libelleDisponibilite === this.joueurSelectionneList[0].dispoJoueurDispo);
+      this.joueur = this.joueurService.availableJoueur.find(joueur => joueur.nom === this.joueurSelectionneList[0].nomJoueurDispo);
+      newParticipation.idManifestation = this.idManifestation;
+      newParticipation.idDisponibilite = idSelectionne;
+      newParticipation.idJoueur = this.joueur.idJoueur;
+      this.participationService.createParticipation(newParticipation);
+      this.participationService.supprimerParticipation(this.idManifestation, newParticipation.idJoueur, dispo.idDisponibilite);
+      this.mailService.sendMailSelectionne(this.joueur.idJoueur, this.idManifestation);
+    }
   }
 }

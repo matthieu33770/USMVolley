@@ -10,6 +10,7 @@ export class Manifestation {
     nbreNeSaitPas: number;
     nbrePasRepondu: number;
     participation: Participation[];
+    idDispo: number;
 
     constructor(public idManifestation: number,
                 public title: string,

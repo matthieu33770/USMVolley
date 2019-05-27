@@ -58,9 +58,9 @@ export class EquipesService {
   public findEquipe(idEquipe: number): Observable<Equipe> {
     if (idEquipe) {
       if (!this.availableEquipe) {
-        return this.getEquipes().pipe(map(joueurs => joueurs.find(joueur => joueur.idEquipe === idEquipe)));
+        return this.getEquipes().pipe(map(equipes => equipes.find(equipe => equipe.idEquipe === idEquipe)));
       }
-      return of(this.availableEquipe.find(joueur => joueur.idEquipe === idEquipe));
+      return of(this.availableEquipe.find(equipe => equipe.idEquipe === idEquipe));
     } else {
       return of(new Equipe(null, '', '', null, null));
     }

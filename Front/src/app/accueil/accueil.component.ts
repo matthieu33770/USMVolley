@@ -22,8 +22,4 @@ export class AccueilComponent implements OnInit {
     this.articleList = this.articleService.reverseAvailableArticle$;
   }
 
-  filterBy(idArticle: number) {
-    return this.articleService.availableArticle.sort((a, b) => a[idArticle] > b[idArticle] ? 1 : a[idArticle] === b[idArticle] ? 0 : -1);
-  }
-
 }

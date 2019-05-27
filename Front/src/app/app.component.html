@@ -28,14 +28,14 @@
       <button *ngIf="isLoggedin && isLicencie" mat-flat-button [matMenuTriggerFor]="menuL">Licencié</button>
         <mat-menu #menuL="matMenu">
           <button mat-menu-item routerLink="/saisie">Mon Profil</button>
-          <button mat-menu-item routerLink="/inscriptionmultiple">S'inscrire aux entraînements</button>
+          <button mat-menu-item routerLink="/inscriptionsmultiple">Mettre à jour sa participation</button>
           <button mat-menu-item type="submit" (click)="onDeconnect()">Se déconnecter</button>
         </mat-menu>
       <button *ngIf="isLoggedin && isCapitaine" mat-menu-item [matMenuTriggerFor]="menuC">Capitaine</button>
         <mat-menu #menuC="matMenu">
           <button mat-menu-item routerLink="/saisie">Mon Profil</button>
           <button mat-menu-item routerLink="/gestion/articles/redactionArticle/newArticle">Publier un Article</button>
-          <button mat-menu-item routerLink="/inscriptionmultiple">S'inscrire aux entraînements</button>
+          <button mat-menu-item routerLink="/inscriptionsmultiple">Mettre à jour sa participation</button>
           <button mat-menu-item routerLink="/manifestations">Gérer les Manifestations</button>
           <button mat-menu-item routerLink="/envoyerMail">Envoyer un Mail</button>
           <button mat-menu-item routerLink="/gestion">Gérer les Données</button>
@@ -45,7 +45,7 @@
         <mat-menu #menuB="matMenu">
           <button mat-menu-item routerLink="/saisie">Mon Profil</button>
           <button mat-menu-item routerLink="/gestion/articles/redactionArticle/newArticle">Publier un Article</button>
-          <button mat-menu-item routerLink="/inscriptionmultiple">S'inscrire aux entraînements</button>
+          <button mat-menu-item routerLink="/inscriptionsmultiple">Mettre à jour sa participation</button>
           <button mat-menu-item routerLink="/manifestations">Gérer les Manifestations</button>
           <button mat-menu-item routerLink="/envoyerMail">Envoyer un Mail</button>
           <button mat-menu-item routerLink="/gestion">Gérer les Données</button>
@@ -70,14 +70,14 @@
       <button *ngIf="isLoggedin && isLicencie" mat-menu-item [matMenuTriggerFor]="menuL">Licencié</button>
         <mat-menu #menuL="matMenu">
           <button mat-menu-item routerLink="/saisie">Mon Profil</button>
-          <button mat-menu-item routerLink="/inscriptionmultiple">S'inscrire aux entraînements</button>
+          <button mat-menu-item routerLink="/inscriptionsmultiple">Mettre à jour sa participation</button>
           <button mat-menu-item type="submit" (click)="onDeconnect()">Se déconnecter</button>
         </mat-menu>
         <button *ngIf="isLoggedin && isCapitaine" mat-menu-item [matMenuTriggerFor]="menuC">Bureau</button>
         <mat-menu #menuC="matMenu">
           <button mat-menu-item routerLink="/saisie">Mon Profil</button>
           <button mat-menu-item routerLink="/gestion/articles/redactionArticle/newArticle">Publier un Article</button>
-          <button mat-menu-item routerLink="/inscriptionmultiple">S'inscrire aux entraînements</button>
+          <button mat-menu-item routerLink="/inscriptionsmultiple">Mettre à jour sa participation</button>
           <button mat-menu-item routerLink="/manifestations">Gérer une Manifestation</button>
           <button mat-menu-item routerLink="/envoyerMail">Envoyer un Mail</button>
           <button mat-menu-item routerLink="/gestion">Gérer les Données</button>
@@ -87,7 +87,7 @@
         <mat-menu #menuB="matMenu">
           <button mat-menu-item routerLink="/saisie">Mon Profil</button>
           <button mat-menu-item routerLink="/gestion/articles/redactionArticle/newArticle">Publier un Article</button>
-          <button mat-menu-item routerLink="/inscriptionmultiple">S'inscrire aux entraînements</button>
+          <button mat-menu-item routerLink="/inscriptionsmultiple">Mettre à jour sa participation</button>
           <button mat-menu-item routerLink="/manifestations">Gérer une Manifestation</button>
           <button mat-menu-item routerLink="/envoyerMail">Envoyer un Mail</button>
           <button mat-menu-item routerLink="/gestion">Gérer les Données</button>
@@ -106,18 +106,15 @@
     </div>
     <div class="president">
       <p>Bruno MENAGER</p>
-      <p>06 66 16 06 31</p>
       <a href="mailto:unionsallesmios.volley@gmail.com">unionsallesmios.volley@gmail.com</a>
     </div>
     <div class="entraineur1">
       <p>Dominique BRANDELON</p>
       <p>M15F - M17F - M20F</p>
-      <p>06 63 66 16 90</p>
     </div>
     <div class="entraineur2">
       <p>Jean Noel BERTHEUIL</p>
       <p>M11 - M13F</p>
-      <p>06 35 53 55 34</p>
     </div>
     <div class="entraineur3">
       <p>Matthieu RAES</p>
@@ -137,17 +134,14 @@
         </mat-menu>
 
         <mat-menu #president="matMenu">
-          <button mat-menu-item>06 66 16 06 31</button>
           <button mat-menu-item><a href="mailto:unionsallesmios.volley@gmail.com">unionsallesmios.volley@gmail.com</a></button>
         </mat-menu>
 
         <mat-menu #entraineur1="matMenu">
-          <button mat-menu-item>06 63 66 16 90</button>
           <button mat-menu-item>M15F - M17F - M20F</button>
         </mat-menu>
 
         <mat-menu #entraineur2="matMenu">
-          <button mat-menu-item>06 35 53 55 34</button>
           <button mat-menu-item>M11 - M13F</button>
         </mat-menu>
 

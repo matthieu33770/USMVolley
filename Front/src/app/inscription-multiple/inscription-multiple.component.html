@@ -1,3 +1,66 @@
-<p>
-  inscription-multiple works!
-</p>
+<div class="multiple">
+  <div class= "titre">
+    <h1>Inscription à plusieurs manifestations</h1>
+  </div>
+
+  <div class="tableinscription">
+    <table mat-table [dataSource]="dataSource" class="tableau">
+      
+    <!-- Titre Column -->
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef>Titre de la manifestation</th>
+      <td mat-cell *matCellDef="let manifestation">{{manifestation.title}}</td>
+    </ng-container>
+    
+    <!-- Adversaire Column -->
+    <ng-container matColumnDef="adversaire">
+      <th mat-header-cell *matHeaderCellDef>Adversaire</th>
+      <td mat-cell *matCellDef="let manifestation">{{manifestation.adversaire}}</td>
+    </ng-container>
+    
+    <!-- Date Column -->
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef>Date</th>
+      <td mat-cell *matCellDef="let manifestation">{{manifestation.start | date : 'dd/MM/yyyy - HH:mm'}}</td>
+    </ng-container>
+      
+    <!-- Equipe Column -->
+    <ng-container matColumnDef="equipe">
+      <th mat-header-cell *matHeaderCellDef>Equipe concernée</th>
+      <td mat-cell *matCellDef="let manifestation">{{manifestation.equipe.libelleEquipe}}</td>
+    </ng-container>
+          
+    <!-- Lieu Column -->
+    <ng-container matColumnDef="lieu">
+      <th mat-header-cell *matHeaderCellDef>Lieu</th>
+      <td mat-cell *matCellDef="let manifestation">{{manifestation.lieu.lieu}}</td>
+    </ng-container>
+          
+    <!-- Statut Column -->
+    <ng-container matColumnDef="statut">
+      <th mat-header-cell *matHeaderCellDef>Statut</th>
+      <td mat-cell *matCellDef="let manifestation">{{manifestation.statut.libelleStatut}}</td>
+    </ng-container>
+
+    <!-- Disponibilité Column -->
+    <ng-container matColumnDef="dispo">
+      <th mat-header-cell *matHeaderCellDef>Disponibilité</th>
+      <td mat-cell *matCellDef="let manifestation">
+        <mat-select placeholder="Disponibilite" [(ngModel)]="manifestation.idDispo" name="disponibilite">
+          <mat-option *ngFor="let disponibilite of disponibiliteList" [value]="disponibilite.idDisponibilite">
+            {{disponibilite.libelleDisponibilite}}
+          </mat-option>
+        </mat-select>
+      </td>
+    </ng-container>
+    
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <div class="boutons">
+    <button mat-raised-button color="primary" type="submit" (click)="onSave()">Enregistrer</button>
+  </div>
+  <br>
+</div>

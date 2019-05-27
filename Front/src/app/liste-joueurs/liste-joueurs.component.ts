@@ -41,6 +41,7 @@ export class ListeJoueursComponent implements OnInit {
     this.getFonction();
     this.getPlayer();
     this.joueurService.getJoueurs().subscribe(Joueurs => {this.dataSource = new MatTableDataSource<Joueur>(Joueurs);
+                                              this.joueur = Joueurs;
                                               this.nbreMasculin = Joueurs.filter(joueur => {if (joueur.sexe === 'Masculin') { return true; }} );
                                               this.nbreFeminin = Joueurs.filter(joueur => {if (joueur.sexe === 'Féminin') {return true; }} );
                                               console.log(this.nbreMasculin, this.nbreFeminin); }
@@ -69,8 +70,12 @@ export class ListeJoueursComponent implements OnInit {
     const formulaire = null;
     const certificat = null;
     const isValide = false;
-    this.joueurList[9].avoir.licence.formulaire = formulaire;
-    console.log(this.joueurList[9]);
+    for (let i = 0; i < this.joueur.length; i ++) {
+      this.joueur[i].avoir.licence.formulaire = formulaire;
+      this.joueur[i].avoir.licence.certificatMedical = certificat;
+      this.joueur[i].avoir.isValide = isValide;
+      this.joueurService.updateJoueur(this.joueur[i]);
+    }
   }
 
   onDelete(selected: Joueur[]) {

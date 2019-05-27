@@ -7,27 +7,6 @@
 
   <br>
 
-  <!-- <div class="article1">
-    <mat-card class="article-card" *ngFor="let article of articleList | async">
-      <div class="entete">
-        <mat-card-header>
-          <mat-card-title>{{ article.titreArticle }}</mat-card-title>
-        </mat-card-header>
-      </div>
-      <div class="contenu">
-        <mat-card-content>
-          <img mat-card-image class="image" src="{{ article.photoArticle }}" alt="Photo de l'article"/>
-          <p class="texte">{{ article.contenuArticle }}</p>
-        </mat-card-content>  
-      </div>
-      <div class="bouton">
-        <mat-card-actions>
-            <button mat-raised-button><a routerLink="/article/{{ article.idArticle }}">Lire l'article</a></button>
-        </mat-card-actions>
-      </div>
-    </mat-card>
-  </div> -->
-
   <div class="articles">
     <div class="article" *ngFor="let article of articleList | async">
       <div class="entete">

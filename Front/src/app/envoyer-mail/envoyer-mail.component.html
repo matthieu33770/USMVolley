@@ -6,9 +6,6 @@
   <div class="choix">
     <h4>A quelle équipe envoyer le mail ?</h4>
     <section class="typemail">
-      <button mat-stroked-button (click)="categorie=true; equipe=false">Catégorie</button>
-      <button mat-stroked-button (click)="categorie=false; equipe=true">Equipe</button>
-      <br>
       <mat-form-field *ngIf="categorie">
         <mat-select placeholder="Libellé de la catégorie" [(ngModel)]="categorie.libelleCategorie" name="categorie">
           <mat-option *ngFor="let categorie of categoriesList" [value]="categorie.libelleCategorie">

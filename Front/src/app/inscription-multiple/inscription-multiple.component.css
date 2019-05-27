@@ -1,0 +1,44 @@
+.multiple {
+    font-family: Maven Pro;
+}
+
+.titre {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.data {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.tableinscription {
+  display: flex;
+  justify-content: center;
+  height: 400px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+.tableau {
+  border-spacing: 10px;
+}
+
+th.mat-header-cell {
+  text-align: center;
+}
+
+td {
+  text-align: center;
+}
+
+.boutons {
+  display: flex;
+  justify-content: flex-end;
+}

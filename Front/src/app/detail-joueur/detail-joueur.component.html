@@ -1,75 +1,117 @@
-<div class="edition"></div>
-<h1 class="titre">Edition du profil de <strong>{{ editionJoueur.nom }} {{ editionJoueur.prenom }}</strong></h1>
-<div class="identification">
-  <mat-form-field>
-      <input matInput placeholder="Nom" [(ngModel)]="editionJoueur.nom" name="nom">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Prénom" [(ngModel)]="editionJoueur.prenom" name="prenom">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Taille" [(ngModel)]="editionJoueur.taille" name="taille">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Sexe" [(ngModel)]="editionJoueur.sexe" name="sexe">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput [matDatepicker]="picker" placeholder="Date de Naissance" [(ngModel)]="editionJoueur.dateNaissance" name="dateNaissance">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-</div>
-<div class="adresse">
-  <mat-form-field>
-    <input matInput placeholder="Numéro" [(ngModel)]="editionJoueur.numeroAdresse" name="numeroAdresse">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Rue" [(ngModel)]="editionJoueur.rue" name="rue">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Code Postal" [(ngModel)]="editionJoueur.codePostal" name="codePostal">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Ville" [(ngModel)]="editionJoueur.ville" name="ville">
-  </mat-form-field>
-</div>
-<div class="contact">
-  <mat-form-field>
-    <input matInput placeholder="@ Mail" [(ngModel)]="editionJoueur.mail" name="mail">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Téléphone Fixe" [(ngModel)]="editionJoueur.telephone1" name="telephone1">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Téléphone Portable" [(ngModel)]="editionJoueur.telephone2" name="telephone2">
-  </mat-form-field>
-  <mat-form-field>
-      <input matInput placeholder="username" [(ngModel)]="editionJoueur.user.username" name="username">
-    </mat-form-field>
-<div class="donneesClub">  
-  <mat-form-field>
-    <mat-select placeholder="Fonction" [(ngModel)]="editionJoueur.user.fonction.idFonction" name="fonction.libelleFonction">
-      <mat-option *ngFor="let fonction of fonctionList" [value]="fonction.idFonction">
-        {{fonction.libelleFonction}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field>
-      <input matInput placeholder="Formulaire" [(ngModel)]="editionJoueur.avoir.licence.formulaire" name="formulaire">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Certificat Médical" [(ngModel)]="editionJoueur.avoir.licence.certificatMedical" name="certificat">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Numero de Licence" [(ngModel)]="editionJoueur.avoir.licence.numeroLicence" name="numeroLicence">
-  </mat-form-field>
-  <section>
-    <p>Licence payée</p>
-    <mat-checkbox class="paiement" [(ngModel)]="paye">Payé</mat-checkbox>
-  </section>
-</div>
-<div class="boutons">
-  <button mat-raised-button color="primary" type="submit" (click)="onSave()">Enregistrer</button>
-  <button mat-raised-button color="accent" routerLink="/gestion/joueurs">Retour</button>
-</div>
+<div class="edition">
+  <div class= "titre">
+    <h1>Edition du profil de <strong>{{ editionJoueur.nom }} {{ editionJoueur.prenom }}</strong></h1>
+  </div>
+
+  <div class="data">
+    <div class="identification dimension">
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Nom" [(ngModel)]="editionJoueur.nom" name="nom">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Prénom" [(ngModel)]="editionJoueur.prenom" name="prenom">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Taille" [(ngModel)]="editionJoueur.taille" name="taille">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Sexe" [(ngModel)]="editionJoueur.sexe" name="sexe">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Date de Naissance" [(ngModel)]="editionJoueur.dateNaissance" name="dateNaissance">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="@ Mail" [(ngModel)]="editionJoueur.mail" name="mail">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="adresse dimension">
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Numéro" [(ngModel)]="editionJoueur.numeroAdresse" name="numeroAdresse">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Rue" [(ngModel)]="editionJoueur.rue" name="rue">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Code Postal" [(ngModel)]="editionJoueur.codePostal" name="codePostal">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Ville" [(ngModel)]="editionJoueur.ville" name="ville">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Téléphone Fixe" [(ngModel)]="editionJoueur.telephone1" name="telephone1">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Téléphone Portable" [(ngModel)]="editionJoueur.telephone2" name="telephone2">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="contact dimension">
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="username" [(ngModel)]="editionJoueur.user.username" name="username">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-select placeholder="Fonction" [(ngModel)]="editionJoueur.user.fonction.idFonction" name="fonction.libelleFonction">
+            <mat-option *ngFor="let fonction of fonctionList" [value]="fonction.idFonction">
+              {{fonction.libelleFonction}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+            <input matInput placeholder="Formulaire" [(ngModel)]="editionJoueur.avoir.licence.formulaire" name="formulaire">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Certificat Médical" [(ngModel)]="editionJoueur.avoir.licence.certificatMedical" name="certificat">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="Numero de Licence" [(ngModel)]="editionJoueur.avoir.licence.numeroLicence" name="numeroLicence">
+        </mat-form-field>
+      </div>
+      <div *ngIf="!editionJoueur.avoir.isValide">
+        <section>
+          <p>Licence payée</p>
+          <mat-checkbox class="paiement" [(ngModel)]="paye">Payé</mat-checkbox>
+        </section>
+      </div>
+    </div>
+  </div>  
+
+  <div class="boutons">
+    <button mat-raised-button color="primary" type="submit" (click)="onSave()" routerLink="/gestion/joueurs">Enregistrer</button>
+    <button mat-raised-button color="accent" routerLink="/gestion/joueurs">Retour</button>
+  </div>
+  <br>
 </div>

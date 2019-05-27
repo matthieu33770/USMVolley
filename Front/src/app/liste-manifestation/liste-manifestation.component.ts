@@ -110,13 +110,11 @@ export class ListeManifestationComponent implements OnInit, OnDestroy  {
 
   filterMatch() {
     const filtre = 'match';
-    console.log(filtre);
     this.dataSource.filter = filtre.trim().toLowerCase();
   }
 
   filterEnt() {
     const filtre = 'entrainement';
-    console.log(filtre);
     this.dataSource.filter = filtre.trim().toLowerCase();
   }
 

@@ -9,24 +9,39 @@
   margin-bottom: 40px;
 }
 
-.joueurForm {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+@media only screen and (min-width: 600px) {
+  .joueurForm {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .dimension {
+    width: 33%;
+    display: flex;
+    flex-direction: column;
+    
+  }
+    
+  .left {    
+    margin-left: 10px;
+  }
+
+  .boutons {
+    display: flex;
+    justify-content: flex-end;
+  }
 }
 
-.dimension {
-  width: 33%;
-  display: flex;
-  flex-direction: column;
-  
-}
-  
-.left {    
-  margin-left: 10px;
-}
+@media only screen and (max-width: 600px) {
+  .dimension {    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;    
+  }
 
-.boutons {
-  display: flex;
-  justify-content: flex-end;
+  .boutons {
+    display: flex;
+    justify-content: center;
+  }
 }

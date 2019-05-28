@@ -8,7 +8,30 @@
   <br>
 
   <div class="articles">
-    <div class="article" *ngFor="let article of articleList | async">
+    <!-- <p-toast [style]="{marginTop: '80px'}"></p-toast>  -->
+
+    <p-carousel headerText="Articles" [value]="articleList | async">
+        <ng-template let-article pTemplate="item">
+            <div class="ui-grid ui-grid-responsive">
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-6">{{ article.titreArticle }}</div>
+                </div>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-6">{{ article.photoArticle }}</div>
+                </div>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-6">{{ article.contenuArticle }}</div>
+                </div>
+                <div class="ui-grid-row">
+                    <div class="ui-grid-col-12">
+                        <button mat-raised-button><a routerLink="/article/{{ article.idArticle }}">Lire l'article</a></button>
+                        <button type="button" pButton icon="pi pi-search" (click)="selectCar(car)"></button>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </p-carousel>
+    <!-- <div class="article" *ngFor="let article of articleList | async">
       <div class="entete">
         <h4>{{ article.titreArticle }}</h4>
       </div>
@@ -24,6 +47,6 @@
       <div class="bouton">
         <button mat-raised-button><a routerLink="/article/{{ article.idArticle }}">Lire l'article</a></button>
       </div>
-    </div>
+    </div> -->
   </div>
 <br>

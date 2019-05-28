@@ -91,6 +91,15 @@ export class InscriptionMultipleComponent implements OnInit, OnDestroy {
           }
         }
       });
+
+      this.manifestationList.sort((a: any, b: any) => {
+
+        const left = Number(new Date(a.start));
+        const right = Number(new Date(b.start));
+
+        return this.manifestationList ? left - right : right - left;
+      });
+
       this.dataSource = new MatTableDataSource<Manifestation>(this.manifestationList);
   }
 

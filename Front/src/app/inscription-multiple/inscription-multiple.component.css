@@ -42,3 +42,10 @@ td {
   display: flex;
   justify-content: flex-end;
 }
+
+@media screen and (max-width: 600px) {
+  .table thead { display: none; }
+  .table tr{ display: block; margin-bottom: 40px; }
+  .table td { display: block; text-align: right; }
+  .table td:before { content: attr(data-label); float: left; font-weight: bold; }
+}

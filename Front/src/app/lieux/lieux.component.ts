@@ -10,6 +10,6 @@ export class LieuxComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-  }
 
+  }
 }

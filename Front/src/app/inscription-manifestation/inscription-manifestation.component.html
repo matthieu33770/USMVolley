@@ -1,6 +1,5 @@
 <div class="inscription">
   <div class="titre">
-    <h1>Inscription à la manifestation</h1>
     <h3 *ngIf="isEntrainement">{{ inscriptionManifestation.title | uppercase}}</h3>
     <h3 *ngIf="!isEntrainement">{{ inscriptionManifestation.title | uppercase}} contre {{ inscriptionManifestation.adversaire }} pour l'équipe {{ inscriptionManifestation.equipe.libelleEquipe }}</h3>
   </div>
@@ -22,7 +21,7 @@
       </mat-form-field>
     </div>
     <div *ngIf="!isInscriptionPossible">
-      <h3>Vous ne pouvez pas vous inscrire à cet évènement.</h3>
+      <h4>Vous ne pouvez pas vous inscrire à cet évènement.</h4>
     </div>
   </div>
 
@@ -32,4 +31,5 @@
     <button mat-raised-button color="primary" type="submit" (click)="onSave()" routerLink="/agenda">Enregistrer</button>
     <button mat-raised-button color="accent" routerLink="/agenda">Retour</button>
   </div>
+  <br>
 </div>

@@ -93,8 +93,16 @@ export class ListeManifestationComponent implements OnInit, OnDestroy  {
                                                                   });
                                                                 });
                                                               manifestation.nbrePasRepondu = this.nbreJoueur - this.nbreParticipation;
-                                                              console.log(manifestation.participation);
                                                             });
+
+                                                            this.manifestationList.sort((a: any, b: any) => {
+
+                                                              const left = Number(new Date(a.start));
+                                                              const right = Number(new Date(b.start));
+
+                                                              return this.manifestationList ? left - right : right - left;
+                                                            });
+
                                                             this.dataSource = new MatTableDataSource<Manifestation>(this.manifestationList);
     });
   }

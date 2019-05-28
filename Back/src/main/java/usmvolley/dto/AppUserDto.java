@@ -13,14 +13,28 @@ public class AppUserDto {
 
     private Fonctions fonction;
 
-    private AppUserDto() {}
-
     public AppUserDto(@NotNull String username) {
-        this.username = username;
+        this.setUsername(username);
     }
 
     public AppUserDto(@NotNull String username, Fonctions fonction) {
-        this.username = username;
-        this.fonction = fonction;
+        this.setUsername(username);
+        this.setFonction(fonction);
     }
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public Fonctions getFonction() {
+		return fonction;
+	}
+
+	public void setFonction(Fonctions fonction) {
+		this.fonction = fonction;
+	}
 }

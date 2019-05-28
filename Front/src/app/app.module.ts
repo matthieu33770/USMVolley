@@ -11,6 +11,11 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { FullCalendarModule } from 'primeng/fullcalendar';
 import { CalendarModule } from 'primeng/primeng';
+import { PasswordModule } from 'primeng/password';
+import { ColorPickerModule } from 'primeng/colorpicker';
+import { CarouselModule } from 'primeng/carousel';
+import { ToastModule } from 'primeng/toast';
+import { GMapModule } from 'primeng/gmap';
 
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
@@ -120,7 +125,12 @@ registerLocaleData(localeFr);
     }),
     FlatpickrModule.forRoot(),
     FullCalendarModule,
-    CalendarModule
+    CalendarModule,
+    PasswordModule,
+    ColorPickerModule,
+    CarouselModule,
+    ToastModule,
+    GMapModule
   ],
   providers: [LicencieGuard, CapitaineGuard, BureauGuard,
     {

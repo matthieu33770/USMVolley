@@ -9,12 +9,26 @@
     margin-bottom: 40px;
   }
 
-  .corps {
-    display: flex;
-    justify-content: center;
+  @media only screen and (min-width: 600px) {
+    .corps {
+      display: flex;
+      justify-content: center;
+    }
+    
+    .boutons {
+      display: flex;
+      justify-content: flex-end;
+    }
   }
-  
-  .boutons {
-    display: flex;
-    justify-content: flex-end;
-}
+
+  @media only screen and (max-width: 600px) {
+    .corps {
+      display: flex;
+      text-align: center;
+    }
+    
+    .boutons {
+      display: flex;
+      justify-content: center;
+    }
+  }

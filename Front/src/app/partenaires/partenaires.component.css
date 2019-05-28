@@ -10,27 +10,53 @@
   margin-bottom: 40px;
 }
 
-.communes {
-  margin-left: 20px;
-  margin-right: 20px;
+@media only screen and (min-width: 600px) {
+  .communes {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .villes {
+    display: flex;
+    justify-content: center;
+  }
+
+  .mios {
+    width: auto;
+    height: 208px;
+    margin-right: 50px;
+  }
+
+  .salles {
+    margin-left: 50px;
+  }
+
+  .autres {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
 }
 
-.villes {
-  display: flex;
-  justify-content: center;
-}
+@media only screen and (max-width: 600px) {
+  .communes {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
 
-.mios {
-  width: auto;
-  height: 208px;
-  margin-right: 50px;
-}
+  .villes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 
-.salles {
-  margin-left: 50px;
-}
+  .mios {
+    width: auto;
+    height: 208px;
+    margin-right: 20px;
+  }
 
-.autres {
-  margin-left: 20px;
-  margin-right: 20px;
+  .autres {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
 }

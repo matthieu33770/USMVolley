@@ -13,13 +13,17 @@ import { Article } from '../modeles/article';
 })
 export class AccueilComponent implements OnInit {
 
-  articleList: BehaviorSubject<Article[]>;
+  articleList: Article [] = [];
+  // BehaviorSubject<Article[]>;
 
   constructor(private articleService: ArticlesService) { }
 
   ngOnInit() {
     this.articleService.publishArticles();
-    this.articleList = this.articleService.reverseAvailableArticle$;
+    this.articleService.getArticles().subscribe(Articles =>
+      this.articleList === Articles
+    );
+    // this.articleList = this.articleService.reverseAvailableArticle$;
   }
 
 }

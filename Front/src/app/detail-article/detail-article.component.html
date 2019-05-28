@@ -4,7 +4,7 @@
     <h1 *ngIf="!isModification">Rédaction d'un article</h1>
   </div>
 
-  <div class="pad">
+  <div class="data">
     <form [formGroup]="articleForm" >        
       <div formGroupName="articleGroup">
           <mat-form-field class="watch-category-full-width">
@@ -22,13 +22,16 @@
         <mat-form-field class="watch-category-full-width">
           <input matInput formControlName="photoArticle" placeholder="Photo à charger" readonly>
         </mat-form-field>
+        <br>
         <button mat-raised-button (click)="select()">Selectionner</button>
       </div>
     </form>
   </div>
+<br>
   <div class="boutons">
     <button *ngIf="isModification" mat-raised-button color="primary" (click)="onSave()" routerLink="/gestion/articles">Modifier</button>
     <button *ngIf="!isModification" mat-raised-button color="primary" (click)="onSave()" routerLink="/gestion/articles">Enregistrer</button>
     <button mat-raised-button color="accent" routerLink="/gestion/articles">Retour</button>
   </div>
+  <br>
 </div>

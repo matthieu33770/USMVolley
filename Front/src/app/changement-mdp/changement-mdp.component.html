@@ -7,22 +7,20 @@
         <mat-card-content>
           <div class="row">
             <div class="col">
-                <mat-form-field>
-                  <input matInput placeholder="Utilisateur" [(ngModel)]="editionUser.username" formControlName="username">
-                  <mat-error *ngIf="loginForm.controls['username'].hasError('required')">
-                    Le username est <strong>obligatoire</strong>
-                  </mat-error>
-                </mat-form-field>
+              <input id="float-input" type="text" size="30" pInputText placeholder="Utilisateur" formControlName="username">
+              <br>
+              <mat-error *ngIf="loginForm.controls['username'].hasError('required')">
+                L'utilisateur est <strong>obligatoire</strong>
+              </mat-error>>
             </div>
           </div>
           <div class="row">
             <div class="col">
-              <mat-form-field>
-                <input matInput type="newMdp" placeholder="Nouveau Mot de Passe" formControlName="newMdp">
-                <mat-error *ngIf="loginForm.controls['newMdp'].hasError('required')">
-                  Le mot de passe est <strong>obligatoire</strong>
-                </mat-error>
-              </mat-form-field>
+              <input type="password" pPassword formControlName="mdp"/>
+              <br>
+              <mat-error *ngIf="loginForm.controls['mdp'].hasError('required')">
+                Le mot de passe est <strong>obligatoire</strong>
+              </mat-error>
             </div>
           </div>
         </mat-card-content>

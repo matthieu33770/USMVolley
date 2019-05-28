@@ -10,31 +10,49 @@
     margin-bottom: 40px;
   }
   
-  .gymnases {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .texte {
-    width: 40%;
-    margin-left: 100px;
-    flex-direction: column;
+  @media only screen and (min-width: 600px) {
+    .data {
+      display: flex;
+      justify-content: center;
+    }
+
+    .gymnase {
+      font-size: 20px;
+      font-weight: bold;
+      text-decoration: underline;
+      justify-content: center;
+    }
+
+    .salles {
+      margin-right: 25px;
+    }
+
+    .mios {
+      margin-left: 25px;
+    }
+
+    .plan {
+      width: 600px;
+      height: 450px;
+    }
   }
 
-  .gymnase {
-    font-size: 20px;
-    font-weight: bold;
-    text-decoration: underline;
-  }
+  @media only screen and (max-width: 600px) {
+    .data {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
 
-  .salles{
-    margin-top: 200px;
-  }
-  
-  .mios {
-    margin-top: 300px;
-  }
+    .gymnase {
+      font-size: 20px;
+      font-weight: bold;
+      text-decoration: underline;
+      justify-content: center;
+    }
 
-  .cartes {
-    width: 40%;
+    .plan {
+      width: 220px;
+      height: auto;
+    }
   }

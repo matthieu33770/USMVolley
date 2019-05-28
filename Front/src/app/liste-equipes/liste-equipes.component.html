@@ -16,7 +16,7 @@
   </div>
   <br>
   <div class="tableequipe">
-    <table mat-table [dataSource]="dataSource" class="tableau">
+    <table mat-table [dataSource]="dataSource" class="tableau" [class.isMobile]="isMobile">
   
     <!-- Checkbox Column -->
     <ng-container matColumnDef="select">

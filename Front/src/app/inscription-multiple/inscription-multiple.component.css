@@ -44,8 +44,19 @@ td {
 }
 
 @media screen and (max-width: 600px) {
-  .table thead { display: none; }
-  .table tr{ display: block; margin-bottom: 40px; }
-  .table td { display: block; text-align: right; }
-  .table td:before { content: attr(data-label); float: left; font-weight: bold; }
+    .mobile-label {
+      width: 80px;
+      display: inline-block;
+          font-weight: bold;
+    }
+  
+    .mat-header-row {
+      display: none;
+    }
+  
+    .mat-row { 
+      flex-direction: column;
+      align-items: start;
+      padding: 8px 24px;
+    }
 }

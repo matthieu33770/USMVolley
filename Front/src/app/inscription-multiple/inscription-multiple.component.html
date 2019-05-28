@@ -3,8 +3,8 @@
     <h1>Inscription à plusieurs manifestations</h1>
   </div>
 
-  <div class="tableinscription">
-    <table mat-table [dataSource]="dataSource" class="tableau">
+  <div class="tableinscription.responsive">
+    <table mat-table [dataSource]="dataSource" class="tableau" [class.isMobile]="isMobile">
       
     <!-- Titre Column -->
     <ng-container matColumnDef="title">

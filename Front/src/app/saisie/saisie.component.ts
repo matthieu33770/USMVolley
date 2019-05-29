@@ -189,7 +189,7 @@ export class SaisieComponent implements OnInit {
       this.idCat = this.categorie.length;
     });
     this.editionAvoir.anneeAvoir = this.annee;
-    console.log(this.idCat);
+
     // Vérifier si on est en édition ou en création
     if (!this.username) {
       this.idJoueur = null;
@@ -333,6 +333,5 @@ private initConfig(): void {
             console.log('onClick');
         },
     };
-    console.log(this.payPalConfig);
   }
 }

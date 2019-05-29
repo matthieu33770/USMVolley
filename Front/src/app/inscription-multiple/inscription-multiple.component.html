@@ -46,7 +46,7 @@
     <ng-container matColumnDef="dispo">
       <th mat-header-cell *matHeaderCellDef>Disponibilité</th>
       <td mat-cell *matCellDef="let manifestation">
-        <mat-select placeholder="Disponibilite" [(ngModel)]="manifestation.idDispo" name="disponibilite">
+        <mat-select placeholder="Disponibilite" [(ngModel)]="manifestation.libelleDispo" name="disponibilite">
           <mat-option *ngFor="let disponibilite of disponibiliteList" [value]="disponibilite.idDisponibilite">
             {{disponibilite.libelleDisponibilite}}
           </mat-option>

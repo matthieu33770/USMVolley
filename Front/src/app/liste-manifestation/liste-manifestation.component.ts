@@ -11,6 +11,8 @@ import { EquipesService } from '../services/equipes.service';
 import { Equipe } from '../modeles/equipe';
 import { ParticipationService } from '../services/participation.service';
 import { Participation } from '../modeles/participation';
+import { DisponibiliteService } from '../services/disponibilite.service';
+import { Disponibilite } from '../modeles/disponibilite';
 
 
 @Component({
@@ -36,15 +38,16 @@ export class ListeManifestationComponent implements OnInit, OnDestroy  {
 
   participations: Participation [] = [];
   participationList: Participation [] = [];
-
   participationManifList: Participation [] = [];
+
+  dispo = new Disponibilite(0, '', 0);
 
   subManifestation: Subscription;
 
   constructor(private router: Router,
               private manifestationService: ManifestationService,
               private participationService: ParticipationService,
-              private equipeService: EquipesService) { }
+              private disponibiliteService: DisponibiliteService) { }
 
   ngOnInit() {
     this.subManifestation = this.manifestationService.availableManifestation$.subscribe(Manifestations => {
@@ -68,31 +71,38 @@ export class ListeManifestationComponent implements OnInit, OnDestroy  {
                                                                   this.manifestationList.push(manifestation);
                                                                 }
                                                                 this.nbreJoueur = manifestation.equipe.joueurs.length;
+                                                                console.log(this.nbreJoueur);
+                                                                manifestation.nbrePresent = 0;
+                                                                manifestation.nbreAbsent = 0;
+                                                                manifestation.nbreNeSaitPas = 0;
+                                                                manifestation.nbrePasRepondu = 0;
                                                                 this.participationService.getParticipations().subscribe(Participations => {
                                                                   Participations.forEach( participation => {
                                                                     if (participation.participationPK.idManifestation === manifestation.idManifestation) {
                                                                       manifestation.participation.push(participation);
-                                                                      manifestation.nbrePresent = 0;
-                                                                      manifestation.nbreAbsent = 0;
-                                                                      manifestation.nbreNeSaitPas = 0;
-                                                                      manifestation.nbrePasRepondu = 0;
-                                                                      if (participation.participationPK.idDisponibilite === 1 || participation.participationPK.idDisponibilite === 2 || participation.participationPK.idDisponibilite === 7 || participation.participationPK.idDisponibilite === 8) {
-                                                                        manifestation.nbrePresent = manifestation.nbrePresent + 1;
+                                                                      this.disponibiliteService.findDisponibilite(participation.participationPK.idDisponibilite).subscribe(disponibilite => {
+                                                                        this.dispo = disponibilite;
+                                                                        if (this.dispo.nbrePersonne === null) {
+                                                                          manifestation.nbreNeSaitPas++;
+                                                                        } else {
+                                                                          if (this.dispo.nbrePersonne === 0) {
+                                                                            manifestation.nbreAbsent++;
+                                                                          } else {
+                                                                            manifestation.nbrePresent += this.dispo.nbrePersonne;
+                                                                          }
+                                                                        }
+                                                                      });
+                                                                      this.nbreParticipation = manifestation.participation.length;
+                                                                      console.log(this.nbreParticipation);
+                                                                      console.log(this.nbreJoueur);
+                                                                      if (this.nbreParticipation) {
+                                                                        manifestation.nbrePasRepondu = this.nbreJoueur - this.nbreParticipation;
+                                                                      } else {
+                                                                        manifestation.nbrePasRepondu = this.nbreJoueur;
                                                                       }
-                                                                      if (participation.participationPK.idDisponibilite === 8) {
-                                                                        manifestation.nbrePresent = manifestation.nbrePresent + 2;
-                                                                      }
-                                                                      if (participation.participationPK.idDisponibilite === 3 || participation.participationPK.idDisponibilite === 5) {
-                                                                        manifestation.nbreAbsent = manifestation.nbreAbsent + 1;
-                                                                      }
-                                                                      if (participation.participationPK.idDisponibilite === 6) {
-                                                                        manifestation.nbreNeSaitPas = manifestation.nbreNeSaitPas + 1;
-                                                                      }
-                                                                      this.nbreParticipation = manifestation.nbrePresent + manifestation.nbreAbsent + manifestation.nbreNeSaitPas;
                                                                     }
                                                                   });
                                                                 });
-                                                              manifestation.nbrePasRepondu = this.nbreJoueur - this.nbreParticipation;
                                                             });
 
                                                             this.manifestationList.sort((a: any, b: any) => {

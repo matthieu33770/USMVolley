@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import {environment} from '../../environments/environment';
+import { MatSnackBar } from '@angular/material';
 
 import { Joueur } from '../modeles/joueur';
 import { User } from '../modeles/user';
@@ -24,7 +25,8 @@ export class JoueursService {
 
   constructor(private httpClient: HttpClient,
               private loginService: LoginService,
-              private router: Router) {  }
+              private router: Router,
+              private snackBar: MatSnackBar) {  }
 
   getUsers(): Observable<User[]> {
       return this.httpClient.get<User[]>(environment.apiUrl + 'users/get/users');
@@ -80,6 +82,10 @@ export class JoueursService {
         createJoueur => {
           this.availableJoueur.push(createJoueur);
           this.availableJoueur$.next(this.availableJoueur);
+          // pop-up ok
+          this.snackBar.open('Compte créé', 'Ok', {
+          duration: environment.durationSnackBar
+          });
         }
       );
   }
@@ -130,7 +136,12 @@ export class JoueursService {
     if (this.loginService.logged) {
       this.httpClient.put<Joueur>(`http://localhost:8080/joueurs/update/${joueur.idJoueur}`, joueur).subscribe(
         updateJoueur => {
+          this.availableJoueur.splice(this.availableJoueur.indexOf(joueur), 1, updateJoueur);
           this.availableJoueur$.next(this.availableJoueur);
+          // pop-up ok
+          this.snackBar.open('Compte utilisateur modifié', 'Ok', {
+            duration: environment.durationSnackBar
+            });
         }
       );
     } else {

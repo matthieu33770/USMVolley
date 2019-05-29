@@ -30,6 +30,7 @@ export class InscriptionManifestationComponent implements OnInit {
   username: String;
   editionUser: User = new User(0, '', '', new Fonction(1, ''));
   joueur: Joueur = new Joueur(0, '', '', '', 0, '', 0, '', '', '', '', null, null, null, null);
+  joueurEquipe: Joueur = new Joueur(0, '', '', '', 0, '', 0, '', '', '', '', null, null, null, null);
   disponibiliteList: Disponibilite [];
   disponibilite: Disponibilite;
   newParticipation: ParticipationPK = new ParticipationPK(0, 0, 0);
@@ -49,34 +50,41 @@ export class InscriptionManifestationComponent implements OnInit {
   getManifestation(): void {
     this.manifestationService.findManifestation(this.idManifestation).subscribe(manifestation => {
       this.inscriptionManifestation = manifestation;
-      this.newParticipation.idManifestation = manifestation.idManifestation;
+      console.log(this.inscriptionManifestation);
+      this.newParticipation.idManifestation = this.inscriptionManifestation.idManifestation;
       if (this.inscriptionManifestation.title === 'entrainement' || this.inscriptionManifestation.title === 'Entrainement') {
         this.isEntrainement = true;
       }
       this.username = jwt_decode(sessionStorage.getItem(environment.accessToken)).sub;
-     this.joueurService.findByUsername(this.username).subscribe(joueur => {
-       this.joueur = joueur;
-       console.log(this.joueur);
-       this.newParticipation.idJoueur = joueur.idJoueur;
-       this.inscriptionManifestation.equipe.joueurs.find(joueur => joueur.idJoueur === this.joueur.idJoueur);
-       this.inscriptionManifestation.equipe.joueurs.forEach(Joueurs => {
-        this.isInscriptionPossible = Joueurs.idJoueur === this.joueur.idJoueur;
-        console.log(Joueurs.idJoueur);
-        console.log(this.joueur.idJoueur);
-        console.log(this.isInscriptionPossible);
-       });
+      this.joueurService.findByUsername(this.username).subscribe(joueur => {
+        this.joueur = joueur;
+        console.log(this.joueur);
+        this.newParticipation.idJoueur = joueur.idJoueur;
+        this.joueurEquipe = this.inscriptionManifestation.equipe.joueurs.find(joueur => joueur.idJoueur === this.joueur.idJoueur);
+        this.isInscriptionPossible = this.joueurEquipe.idJoueur === this.joueur.idJoueur;
+
+        // this.nbreMasculin = equipe.joueurs.filter(joueur => {if (joueur.sexe === 'Masculin') { return true; }} );
+
+        console.log(this.inscriptionManifestation.equipe.joueurs.find(Joueur => {if (Joueur.idJoueur === this.joueur.idJoueur) {return true; }}));
+
+        // this.inscriptionManifestation.equipe.joueurs.forEach(Joueurs => {
+        //   this.isInscriptionPossible = Joueurs.idJoueur === this.joueur.idJoueur;
+          // console.log(Joueurs.idJoueur);
+          console.log(this.joueur.idJoueur);
+          console.log(this.isInscriptionPossible);
+        // });
      });
     });
   }
 
-  getJoueur(): void {
-    this.username = jwt_decode(sessionStorage.getItem(environment.accessToken)).sub;
-    this.joueurService.findByUsername(this.username).subscribe(joueur => {
-      this.joueur = joueur;
-      this.newParticipation.idJoueur = joueur.idJoueur;
-      console.log(this.joueur);
-    });
-  }
+  // getJoueur(): void {
+  //   this.username = jwt_decode(sessionStorage.getItem(environment.accessToken)).sub;
+  //   this.joueurService.findByUsername(this.username).subscribe(joueur => {
+  //     this.joueur = joueur;
+  //     this.newParticipation.idJoueur = joueur.idJoueur;
+  //     console.log(this.joueur);
+  //   });
+  // }
 
   getDisponibilite(): void {
     this.disponibiliteService.getDisponibilites().subscribe(Disponibilites => {

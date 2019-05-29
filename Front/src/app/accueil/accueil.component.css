@@ -5,7 +5,7 @@
 }
 
 .titre {
-    margin-top: 50px;
+    /* margin-top: 50px; */
     margin-bottom: 50px;
     font-size: 26px; 
     justify-content: center;
@@ -21,6 +21,20 @@
 }
 .ui-grid-row > div {
     padding: 4px 10px;
+}
+
+.img {
+    max-height: 200px;
+}
+
+.beach {
+    max-height: 100px;
+    margin-right: 50px;
+}
+
+.volley {
+    max-height: 100px;
+    margin-left: 50px;
 }
 
 .articles {

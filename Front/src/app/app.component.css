@@ -3,8 +3,28 @@ header {
     border-top-right-radius: 15px;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
-    background-color: #F9E63A;
-    max-height: 90px;
+    background-image: linear-gradient(#F9E63A, #FFFFFF);
+    /* height: 120px; */
+}
+
+.titre {
+    display: flex;
+    justify-content: center;
+}
+
+.usm {
+    /* opacity: 0.3; */
+    max-height: 200px;
+}
+
+.beach {
+    max-height: 100px;
+    margin-right: 50px;
+}
+
+.volley {
+    max-height: 100px;
+    margin-left: 50px;
 }
 
 .maxmenu {
@@ -20,6 +40,7 @@ header {
 
 .img {
     max-height: 90px;
+    opacity: 10%;
 }
 
 .menu1 {
@@ -32,13 +53,13 @@ header {
     flex-grow: 1;
     margin-top: 25px;
  }
-
+ 
  footer {
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
-    background-color: #F9E63A;
+    background-image: linear-gradient(#FFFFFF, #F9E63A);
     position: relative;
 }
 

@@ -130,7 +130,6 @@ public class MailController {
 	            
 	            return ResponseEntity.status(HttpStatus.OK).body(null);
 	        }catch(Exception ex) {
-	        	System.out.println(ex);
 				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 	        }
 	    }

@@ -3,9 +3,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- Bootstrap CSS
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
-
   <title>{{title}}</title>
 </head>
 
@@ -18,7 +15,7 @@
       <button mat-button routerLink="/lieux">Les Lieux</button>
     </div>
     <div class="logo">
-      <img class="img" src="assets/images/logo_usm_mios.png" routerLink="">
+      <img class="img" src="assets/images/USM2.png" routerLink="">
     </div>
     <div class="menu2">
       <button *ngIf="!isLoggedin" mat-flat-button routerLink="/saisie">Inscription</button>
@@ -53,7 +50,13 @@
       </mat-menu>
     </div>
   </div>
-
+  <br>
+  <div class="titre">
+    <img class="beach" src="assets/icone/beach1.png">
+    <img class="usm" src="assets/icone/USM logo simple coeur1.png">
+    <img class="volley" src="assets/icone/volley1.png">
+  </div>
+ 
   <div class="minmenu">
     <button mat-button [matMenuTriggerFor]="menu">Menu</button>
 

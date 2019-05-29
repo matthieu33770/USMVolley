@@ -98,12 +98,10 @@ public class JoueursControllerTest {
 				new Avoir(0, 2019, true, 
 						new Licence(0, "12233", 90.00, 
 								new Categories(1, "M11", 11), "formulaire", "certificat")), null);
-		System.out.println(joueur);
 		
 		when(this.joueurRepo.save(any())).thenReturn(joueur);
 
 		String jsonContent = joueurJacksonTester.write(joueur).getJson();
-		System.out.println(jsonContent);
 
 		this.mockMvc.perform(post("/joueurs/create").contentType(MediaType.APPLICATION_JSON_UTF8).content(jsonContent))
 				.andExpect(status().isCreated()).andExpect(jsonPath("nom").value(joueur.getNom()))

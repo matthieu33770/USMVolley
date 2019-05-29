@@ -44,9 +44,7 @@ import { DetailStatutComponent } from './detail-statut/detail-statut.component';
 import { ListeStatutComponent } from './liste-statut/liste-statut.component';
 import { ListeLieuxComponent } from './liste-lieux/liste-lieux.component';
 import { ListeDisponibilitesComponent } from './liste-disponibilites/liste-disponibilites.component';
-import { ListeCreneauxComponent } from './liste-creneaux/liste-creneaux.component';
 import { DetailLieuxComponent } from './detail-lieux/detail-lieux.component';
-import { DetailCreneauxComponent } from './detail-creneaux/detail-creneaux.component';
 import { DetailDisponibilitesComponent } from './detail-disponibilites/detail-disponibilites.component';
 import { ListeCategoriesComponent } from './liste-categories/liste-categories.component';
 import { DetailCategorieComponent } from './detail-categorie/detail-categorie.component';
@@ -88,9 +86,7 @@ registerLocaleData(localeFr);
     ListeStatutComponent,
     ListeLieuxComponent,
     ListeDisponibilitesComponent,
-    ListeCreneauxComponent,
     DetailLieuxComponent,
-    DetailCreneauxComponent,
     DetailDisponibilitesComponent,
     ListeCategoriesComponent,
     DetailCategorieComponent,

@@ -22,8 +22,6 @@ import { ListeDisponibilitesComponent } from './liste-disponibilites/liste-dispo
 import { DetailDisponibilitesComponent } from './detail-disponibilites/detail-disponibilites.component';
 import { ListeLieuxComponent } from './liste-lieux/liste-lieux.component';
 import { DetailLieuxComponent } from './detail-lieux/detail-lieux.component';
-import { ListeCreneauxComponent } from './liste-creneaux/liste-creneaux.component';
-import { DetailCreneauxComponent } from './detail-creneaux/detail-creneaux.component';
 import { ListeCategoriesComponent } from './liste-categories/liste-categories.component';
 import { DetailCategorieComponent } from './detail-categorie/detail-categorie.component';
 import { ChangementMdpComponent } from './changement-mdp/changement-mdp.component';
@@ -70,9 +68,6 @@ const routes: Routes = [
   {path: 'gestion/disponibilites', component: ListeDisponibilitesComponent},
   {path: 'gestion/disponibilites/detaildisponibilite/:idDisponibilite', component: DetailDisponibilitesComponent},
   {path: 'gestion/disponibilites/detaildisponibilite/newDisponibilite', component: DetailDisponibilitesComponent},
-  {path: 'gestion/creneaux', component: ListeCreneauxComponent},
-  {path: 'gestion/creneaux/detailcreneau/:idCreneau', component: DetailCreneauxComponent},
-  {path: 'gestion/creneaux/detailcreneau/newCreneau', component: DetailCreneauxComponent},
   {path: 'gestion/categories', component: ListeCategoriesComponent},
   {path: 'gestion/categories/detailcategorie/:idCategorie', component: DetailCategorieComponent},
   {path: 'gestion/categories/detailcategorie/newCategorie', component: DetailCategorieComponent},

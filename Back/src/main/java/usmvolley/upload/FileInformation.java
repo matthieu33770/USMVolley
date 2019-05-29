@@ -7,8 +7,6 @@ public class FileInformation {
   private long size;
 
 	public FileInformation() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public FileInformation(String filename, long size) {

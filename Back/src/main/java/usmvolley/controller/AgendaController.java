@@ -103,7 +103,7 @@ public class AgendaController {
 	 * @return modifie un agenda
 	 */
 	@PutMapping("/update/{idAgenda}")
-	public ResponseEntity<?> updateAgenda(@RequestBody Agenda agenda, @PathVariable Integer idAgenda) throws Exception
+	public ResponseEntity<?> updateAgenda(@RequestBody Agenda agenda, @PathVariable Integer idAgenda)
 	{
 		Agenda modificationAgenda = null;
 

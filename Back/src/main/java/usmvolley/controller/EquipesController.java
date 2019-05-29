@@ -27,8 +27,8 @@ public class EquipesController {
 	private EquipesRepository equipesRepo;
 	
 	/**
-	 * Methode Voir toutes les équipes
-	 * @return liste de toutes les équipes
+	 * Methode Voir toutes les ï¿½quipes
+	 * @return liste de toutes les ï¿½quipes
 	 */
 	@GetMapping("/get/equipes")
 	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
@@ -46,8 +46,8 @@ public class EquipesController {
 	}
 	
 	/**
-	 * Methode Voir une équipe
-	 * @return liste une équipe
+	 * Methode Voir une ï¿½quipe
+	 * @return liste une ï¿½quipe
 	 */
 	@GetMapping("/get/uneEquipe/{idEquipe}")
 	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
@@ -70,8 +70,8 @@ public class EquipesController {
 	
 	/**
 	 * Methode CREATE
-	 * @param information équipe
-	 * @return ajoute une équipe
+	 * @param information ï¿½quipe
+	 * @return ajoute une ï¿½quipe
 	 */
 	@PostMapping("/create")
 	@PreAuthorize("hasAuthority('Bureau')")
@@ -79,14 +79,12 @@ public class EquipesController {
 		
 		Equipes newEquipe = null;
 		String libelleEquipe = equipe.getLibelleEquipe();
-		System.out.println("équipe du Front : " + equipe);
 		
 		if ((libelleEquipe == null) || (libelleEquipe.isEmpty())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le nom de l'équipe");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le nom de l'ï¿½quipe");
 		}
 		
 		newEquipe = equipesRepo.save(equipe);
-		System.out.println("création équipe : " + newEquipe);
 		return ResponseEntity.status(HttpStatus.CREATED).body(newEquipe);
 	}
 	
@@ -122,13 +120,12 @@ public class EquipesController {
 		String libelleEquipe = equipe.getLibelleEquipe();
 		if ((libelleEquipe == null) || (libelleEquipe.isEmpty()))
 		{
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le nom de l'équipe");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le nom de l'ï¿½quipe");
 		}
 		
 		try
 		{
 			modificationEquipe = equipesRepo.save(equipe);
-			System.out.println("Equipe modifiée : " + modificationEquipe);
 		} catch (Exception e)
 		{
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());

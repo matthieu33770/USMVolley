@@ -112,7 +112,6 @@ public class ArticlesController {
 	{
 		try
 		{
-			System.out.println("article supprimé : " + idArticle);
 			articlesRepo.deleteById(idArticle);
 		} catch (Exception e)
 		{
@@ -128,13 +127,12 @@ public class ArticlesController {
 	 */
 	@PutMapping("/update/{idArticle}")	
 	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine')")
-	public ResponseEntity<?> updateArticle(@RequestBody Articles article, @PathVariable Integer idArticle) throws Exception
+	public ResponseEntity<?> updateArticle(@RequestBody Articles article, @PathVariable Integer idArticle)
 	{
 		Articles modificationArticle = null;
 		String titreArticle = article.getTitreArticle();
 		String contenuArticle = article.getContenuArticle();
 		
-		System.out.println("Article Modifié : " + article);
 		
 		if ((titreArticle == null) || (titreArticle.isEmpty())) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le titre de l'article");
@@ -164,8 +162,6 @@ public class ArticlesController {
 			    }
 			    
 			    this.photoStorageService.storeFile(multipartFile);
-			    System.out.println(multipartFile.getOriginalFilename());
-			    System.out.println(multipartFile.getSize());
 			    
 //			    multipartFile.transferTo(new File("D:\\eclipse-workspace\\USMVolley\\Front\\src\\assets\\documents\\" + multipartFile.getOriginalFilename()));
 			    return new ResponseEntity<>(new FileInformation(multipartFile.getOriginalFilename(), multipartFile.getSize()), HttpStatus.CREATED);

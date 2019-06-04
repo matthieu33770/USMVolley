@@ -4,18 +4,18 @@
     <h1 *ngIf="isModification" class="equipe">Edition de l'équipe <strong>{{ editionEquipe.libelleEquipe }}</strong></h1>
     <h1 *ngIf="!isModification" class="equipe">Création d'une nouvelle équipe</h1>
     <div>
-    <mat-form-field>
-      <input matInput placeholder="Nom de l'équipe" [(ngModel)]="editionEquipe.libelleEquipe" name="libelleEquipe">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-select placeholder="Libellé de la catégorie" [(ngModel)]="editionEquipe.categorie.libelleCategorie" name="categorie">
-        <mat-option *ngFor="let categorie of categoriesList" [value]="categorie.libelleCategorie">
-          {{categorie.libelleCategorie}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <p-colorPicker placeholder="Couleur" [(ngModel)]="editionEquipe.couleur" name="couleur"></p-colorPicker>
-  </div>
+      <mat-form-field>
+        <input matInput placeholder="Nom de l'équipe" [(ngModel)]="editionEquipe.libelleEquipe" name="libelleEquipe">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Libellé de la catégorie" [(ngModel)]="editionEquipe.categorie.libelleCategorie" name="categorie">
+          <mat-option *ngFor="let categorie of categoriesList" [value]="categorie.libelleCategorie">
+            {{categorie.libelleCategorie}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <p-colorPicker placeholder="Couleur" [(ngModel)]="editionEquipe.couleur" name="couleur"></p-colorPicker>
+    </div>
   </div>
 
   <div *ngIf="isModification" class="boutons">
@@ -25,15 +25,13 @@
   </div>
 
   <div *ngIf="isModification" class="tab">
-      <div class="joueurEquipe">
+      <div class="joueurEquipe-responsive">
           <h3>Joueurs de l'équipe</h3>
           <div >
             <table mat-table [dataSource]="dataEquipe" class="tableau">
           
             <ng-container matColumnDef="select">
-              <th mat-header-cell *matHeaderCellDef>
-                
-              </th>
+              <th mat-header-cell *matHeaderCellDef></th>
               <td mat-cell *matCellDef="let row">
                 <mat-checkbox (click)="$event.stopPropagation()"
                               (change)="$event ? selection.toggle(row) : null"
@@ -65,7 +63,7 @@
           </div>
         </div>
 
-    <div class="joueurDispo">
+    <div class="joueurDispo-responsive">
         <h3>Joueurs disponibles</h3>
         <div>
           <table mat-table [dataSource]="dataAdulte" class="tableau">

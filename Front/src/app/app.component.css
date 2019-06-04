@@ -1,10 +1,7 @@
 header {
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
     background-image: linear-gradient(#F9E63A, #FFFFFF);
-    /* height: 120px; */
 }
 
 .titre {
@@ -13,18 +10,19 @@ header {
 }
 
 .usm {
-    /* opacity: 0.3; */
     max-height: 200px;
 }
 
 .beach {
     max-height: 100px;
-    margin-right: 50px;
+    margin-right: 100px;
+    margin-top: 40px;
 }
 
 .volley {
     max-height: 100px;
-    margin-left: 50px;
+    margin-left: 100px;
+    margin-top: 40px;
 }
 
 .maxmenu {
@@ -44,19 +42,19 @@ header {
 }
 
 .menu1 {
-    justify-content: flex-end !important;
+    /* justify-content: flex-end !important; */
     flex-grow: 1;
-    margin-top: 25px;
+    /* margin-top: 25px; */
  }
 
  .menu2 {
     flex-grow: 1;
-    margin-top: 25px;
+    display: flex;
+    justify-content: flex-end;
+    /* margin-top: 15px; */
  }
  
  footer {
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     background-image: linear-gradient(#FFFFFF, #F9E63A);
@@ -118,5 +116,19 @@ header, footer {font-family: Muli; }
     }
     .maxcontact {
         display: none;
+    }
+
+    .volley {
+        display: none;
+    }
+
+    .beach {
+        display: none;
+    }
+
+    .usm {
+        margin-top: 0px;
+        width: 280px;
+        height: 160px;
     }
 }

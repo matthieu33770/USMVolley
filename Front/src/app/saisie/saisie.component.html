@@ -1,6 +1,7 @@
 <div class="saisie">
   <div class="titre">
-    <h1>Edition des données de <strong>{{ editionJoueur.prenom }} {{ editionJoueur.nom }}</strong></h1>
+    <h1 *ngIf="!isLoggedin">Création d'un compte</h1>
+    <h1 *ngIf="isLoggedin">Profil de <strong>{{editionJoueur.prenom}} {{editionJoueur.nom}}</strong></h1>
   </div>
 
   <div class="data">

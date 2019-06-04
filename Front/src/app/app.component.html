@@ -10,25 +10,21 @@
   <div class="maxmenu">
     <div class="menu1">
       <button mat-button routerLink="">Accueil</button>
+      <button *ngIf="!isLoggedin" mat-button routerLink="/saisie">Inscription</button>
       <button mat-button routerLink="/equipes">Les Equipes</button>
       <button mat-button routerLink="/agenda">Agenda</button>
       <button mat-button routerLink="/lieux">Les Lieux</button>
-    </div>
-    <div class="logo">
-      <img class="img" src="assets/images/USM2.png" routerLink="">
+      <button mat-button routerLink="/partenaires">Les Partenaires</button>
     </div>
     <div class="menu2">
-      <button *ngIf="!isLoggedin" mat-flat-button routerLink="/saisie">Inscription</button>
-      <button *ngIf="isLoggedin" mat-flat-button routerLink="/saisie">Renouvellement</button>
-      <button mat-flat-button routerLink="/partenaires">Les Partenaires</button>
-      <button *ngIf="!isLoggedin" mat-flat-button routerLink="/connexion">Connexion</button>
-      <button *ngIf="isLoggedin && isLicencie" mat-flat-button [matMenuTriggerFor]="menuL">Licencié</button>
+      <button *ngIf="!isLoggedin" mat-button routerLink="/connexion">Se connecter</button>
+      <button *ngIf="isLoggedin && isLicencie" mat-button [matMenuTriggerFor]="menuL">Licencié</button>
         <mat-menu #menuL="matMenu">
           <button mat-menu-item routerLink="/saisie">Mon Profil</button>
           <button mat-menu-item routerLink="/inscriptionsmultiple">Mettre à jour sa participation</button>
           <button mat-menu-item type="submit" (click)="onDeconnect()">Se déconnecter</button>
         </mat-menu>
-      <button *ngIf="isLoggedin && isCapitaine" mat-menu-item [matMenuTriggerFor]="menuC">Capitaine</button>
+      <button *ngIf="isLoggedin && isCapitaine" mat-button [matMenuTriggerFor]="menuC">Capitaine</button>
         <mat-menu #menuC="matMenu">
           <button mat-menu-item routerLink="/saisie">Mon Profil</button>
           <button mat-menu-item routerLink="/gestion/articles/redactionArticle/newArticle">Publier un Article</button>
@@ -38,7 +34,7 @@
           <button mat-menu-item routerLink="/gestion">Gérer les Données</button>
           <button mat-menu-item type="submit" (click)="onDeconnect()">Se déconnecter</button>
         </mat-menu>
-      <button *ngIf="isLoggedin && isBureau" mat-flat-button [matMenuTriggerFor]="menuB">Bureau</button>
+      <button *ngIf="isLoggedin && isBureau" mat-button [matMenuTriggerFor]="menuB">Bureau</button>
         <mat-menu #menuB="matMenu">
           <button mat-menu-item routerLink="/saisie">Mon Profil</button>
           <button mat-menu-item routerLink="/gestion/articles/redactionArticle/newArticle">Publier un Article</button>
@@ -53,7 +49,7 @@
   <br>
   <div class="titre">
     <img class="beach" src="assets/icone/beach1.png">
-    <img class="usm" src="assets/icone/USM logo simple coeur1.png">
+    <img class="usm" src="assets/icone/USM logo simple coeur2.png" routerLink="">
     <img class="volley" src="assets/icone/volley1.png">
   </div>
  

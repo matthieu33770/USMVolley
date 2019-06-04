@@ -50,7 +50,6 @@ public class JoueursController {
 	 * @return liste de tous les joueurs
 	 */
 	@GetMapping("/get/joueurs")
-//	@PreAuthorize("hasAuthority('Bureau') or hasAuthority('Capitaine') or hasAuthority('Licencie')")
 	public ResponseEntity<List<Joueurs>> getListeJoueurs() {
 		
 		List<Joueurs> listeJoueurs = null;
@@ -138,7 +137,7 @@ public class JoueursController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le prenom du joueur");
 		}
 		if (numeroAdresseJoueur == null) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le num�ro de la rue");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le numéro de la rue");
 		}
 		if ((rueJoueur == null) || (rueJoueur.isEmpty())) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Il manque le nom de la rue");

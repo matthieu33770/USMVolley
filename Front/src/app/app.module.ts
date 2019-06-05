@@ -16,6 +16,7 @@ import { ColorPickerModule } from 'primeng/colorpicker';
 import { CarouselModule } from 'primeng/carousel';
 import { ToastModule } from 'primeng/toast';
 import { GMapModule } from 'primeng/gmap';
+import { InputMaskModule } from 'primeng/inputmask';
 
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
@@ -126,7 +127,8 @@ registerLocaleData(localeFr);
     ColorPickerModule,
     CarouselModule,
     ToastModule,
-    GMapModule
+    GMapModule,
+    InputMaskModule
   ],
   providers: [LicencieGuard, CapitaineGuard, BureauGuard,
     {

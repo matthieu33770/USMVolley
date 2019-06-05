@@ -27,7 +27,6 @@ public class PhotoStorageService {
     public PhotoStorageService(FileStorageProperties fileStorageProperties) {
         this.fileStorageLocationPh = Paths.get(fileStorageProperties.getUploadPh())
             .toAbsolutePath().normalize();
-        System.out.println("TestPhoto : " + fileStorageLocationPh);
         
         try {
             Files.createDirectories(this.fileStorageLocationPh);

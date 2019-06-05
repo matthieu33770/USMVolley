@@ -9,18 +9,6 @@
     justify-content: center;
 }
 
-.boutons {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.tablejoueur {
-    display: flex;
-    justify-content: center;
-    height: 400px;
-    overflow: auto;
-}
-
 table {
     width: 100%;
 }
@@ -36,3 +24,45 @@ td {
 .tableau {
     border-spacing: 10px;
 }
+
+@media only screen and (min-width: 600px) {
+    .boutons {
+        display: flex;
+        justify-content: flex-end;
+    }
+    
+    .menu {
+        display: none;
+    }   
+    
+    .bouton {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .tablejoueurmax {
+        display: flex;
+        justify-content: center;
+        height: 400px;
+        overflow: auto;
+    }
+
+    .tablejoueur {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .boutons {
+        display: none;
+    }
+  
+    .bouton {
+      display: flex;
+      justify-content: center;
+    }
+
+    .tablejoueurmax {
+        display: none;
+    }
+  }

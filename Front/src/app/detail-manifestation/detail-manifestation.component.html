@@ -12,61 +12,30 @@
       </section>
   </div>
 
+  <br>
+
   <div *ngIf="ponctuelle || isModification" class="data">
-    <div>
-      <mat-form-field>
-        <input matInput placeholder="Titre" [(ngModel)]="editionManifestation.title" name="title">
-      </mat-form-field>
-    </div>
-    <div>
-        <mat-form-field>
-          <input matInput placeholder="Adversaire" [(ngModel)]="editionManifestation.adversaire" name="adversaire">
-        </mat-form-field>
-      </div>
-    <div>
-      <p-calendar placeholder="Date de la manifestation" [(ngModel)]="date" [showTime]="true"></p-calendar>
-    </div>
-
-    <div>
-      <mat-form-field>
-        <mat-select placeholder="Equipe" [(ngModel)]="editionManifestation.equipe.idEquipe" name="equipe.libelleEquipe">
-          <mat-option *ngFor="let equipe of equipeList" [value]="equipe.idEquipe">
-            {{equipe.libelleEquipe}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field>
-        <mat-select placeholder="Lieu" [(ngModel)]="editionManifestation.lieu.idLieu" name="lieu.lieu">
-          <mat-option *ngFor="let lieu of lieuList" [value]="lieu.idLieu">
-            {{lieu.lieu}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field>
-        <mat-select placeholder="Statut" [(ngModel)]="editionManifestation.statut.idStatut" name="statut.libelleStatut">
-          <mat-option *ngFor="let statut of statutList" [value]="statut.idStatut">
-            {{statut.libelleStatut}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-  </div>
-
-  <div *ngIf="periodique" class="data">
+    <div class="entete"> 
       <div>
-        <mat-form-field>
-          <input matInput placeholder="Titre" [(ngModel)]="editionManifestation.title" name="title">
+        <span>Titre : </span>
+        <mat-form-field>          
+          <input matInput [(ngModel)]="editionManifestation.title" name="title">
         </mat-form-field>
       </div>
       <div>
+        <span>Date : </span>
         <p-calendar placeholder="Date de la manifestation" [(ngModel)]="date" [showTime]="true"></p-calendar>
       </div>
-      <div>
-        <p>Sur X semaines</p><input matInput placeholder="Semaines" [(ngModel)]="semaines" name="semaines">
-      </div>
-  
+    </div>
+
+    <div class="corps1">
+      <span>Adversaire : </span>
+      <mat-form-field>
+        <input matInput [(ngModel)]="editionManifestation.adversaire" name="adversaire">
+      </mat-form-field>
+    </div>    
+
+    <div class="corps2">
       <div>
         <mat-form-field>
           <mat-select placeholder="Equipe" [(ngModel)]="editionManifestation.equipe.idEquipe" name="equipe.libelleEquipe">
@@ -75,7 +44,8 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-  
+      </div>
+      <div>
         <mat-form-field>
           <mat-select placeholder="Lieu" [(ngModel)]="editionManifestation.lieu.idLieu" name="lieu.lieu">
             <mat-option *ngFor="let lieu of lieuList" [value]="lieu.idLieu">
@@ -83,7 +53,8 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-  
+      </div>
+      <div>
         <mat-form-field>
           <mat-select placeholder="Statut" [(ngModel)]="editionManifestation.statut.idStatut" name="statut.libelleStatut">
             <mat-option *ngFor="let statut of statutList" [value]="statut.idStatut">
@@ -93,6 +64,61 @@
         </mat-form-field>
       </div>
     </div>
+  </div>
+
+  <div *ngIf="periodique" class="data">
+    <div class="entete">
+      <div>
+        <span>Titre : </span>
+        <mat-form-field>          
+          <input matInput [(ngModel)]="editionManifestation.title" name="title">
+        </mat-form-field>
+      </div>
+      <div>
+        <span>Date : </span>
+        <p-calendar placeholder="Date de la manifestation" [(ngModel)]="date" [showTime]="true"></p-calendar>
+      </div>
+    </div>  
+    <div class="corps1">
+        <span>Sur : </span>
+        <mat-form-field>
+          <input matInput [(ngModel)]="editionManifestation.adversaire" name="adversaire">
+        </mat-form-field>
+        <span>semaines.</span>
+    </div>
+  
+      <div class="corps2">
+        <div>
+          <mat-form-field>
+            <mat-select placeholder="Equipe" [(ngModel)]="editionManifestation.equipe.idEquipe" name="equipe.libelleEquipe">
+              <mat-option *ngFor="let equipe of equipeList" [value]="equipe.idEquipe">
+                {{equipe.libelleEquipe}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <mat-select placeholder="Lieu" [(ngModel)]="editionManifestation.lieu.idLieu" name="lieu.lieu">
+              <mat-option *ngFor="let lieu of lieuList" [value]="lieu.idLieu">
+                {{lieu.lieu}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <mat-select placeholder="Statut" [(ngModel)]="editionManifestation.statut.idStatut" name="statut.libelleStatut">
+              <mat-option *ngFor="let statut of statutList" [value]="statut.idStatut">
+                {{statut.libelleStatut}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <br>
 
   <div class="boutons">
     <button *ngIf="isModification" mat-raised-button color="primary" (click)="onSave()" routerLink="/manifestations">Modifier</button>

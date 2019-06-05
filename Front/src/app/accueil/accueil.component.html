@@ -1,38 +1,36 @@
 <div class="accueil">
 </div>
 
-  <!-- <div class="titre">
-    <img class="beach" src="assets/icone/beach.jpg">
-    <img class="img" src="assets/icone/USM logo simple coeur.jpg">
-    <img class="volley" src="assets/icone/volley.jpg">
-  </div> -->
-
   <br>
 
   <div class="articles">
-    <!-- <p-toast [style]="{marginTop: '80px'}"></p-toast>  -->
 
-    <p-carousel headerText="Articles" [value]="articleList | async">
-        <ng-template let-article pTemplate="item">
+    <p-carousel class="carousel" headerText="News" [value]="articles">
+        <ng-template class="article" let-article pTemplate="item">
             <div class="ui-grid ui-grid-responsive">
                 <div class="ui-grid-row">
-                    <div class="ui-grid-col-6">{{ article.titreArticle }}</div>
+                    <div class="ui-grid-col-12"><strong>{{ article.titreArticle }}</strong></div>
                 </div>
+                <br>
                 <div class="ui-grid-row">
-                    <div class="ui-grid-col-6">{{ article.photoArticle }}</div>
+                    <div class="ui-grid-col-12"><img class="image" src="{{ article.photoArticle }}" alt="Photo de l'article"></div>
                 </div>
+                <br>
                 <div class="ui-grid-row">
-                    <div class="ui-grid-col-6">{{ article.contenuArticle }}</div>
+                    <div class="ui-grid-col-12">{{ article.contenuArticle }}</div>
                 </div>
+                <br>
                 <div class="ui-grid-row">
                     <div class="ui-grid-col-12">
-                        <button mat-raised-button><a routerLink="/article/{{ article.idArticle }}">Lire l'article</a></button>
-                        <button type="button" pButton icon="pi pi-search" (click)="selectCar(car)"></button>
+                      <button mat-raised-button><a routerLink="/article/{{ article.idArticle }}">Lire l'article</a></button>
                     </div>
                 </div>
             </div>
         </ng-template>
     </p-carousel>
+
+
+
     <!-- <div class="article" *ngFor="let article of articleList | async">
       <div class="entete">
         <h4>{{ article.titreArticle }}</h4>

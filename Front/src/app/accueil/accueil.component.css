@@ -4,44 +4,27 @@
     font-family: Muli;
 }
 
-.titre {
-    /* margin-top: 50px; */
-    margin-bottom: 50px;
-    font-size: 26px; 
-    justify-content: center;
-    text-align: center !important;
-    font-family: Muli; 
-}
-
-.ui-grid-row {
-    text-align: center;
-}
-.ui-grid {
-    margin: 10px 0px;
-}
-.ui-grid-row > div {
-    padding: 4px 10px;
-}
-
-.img {
-    max-height: 200px;
-}
-
-.beach {
-    max-height: 100px;
-    margin-right: 50px;
-}
-
-.volley {
-    max-height: 100px;
-    margin-left: 50px;
-}
-
 .articles {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     font-family: Muli;
+}
+
+.carousel {
+    width: 85%;
+}
+
+.ui-grid-row {
+    text-align: center;
+}
+
+.ui-grid {
+    margin: 10px 0px;
+}
+
+.ui-grid-row > div {
+    padding: 4px 10px;
 }
 
 .article {
@@ -53,10 +36,10 @@
     border-radius: 3px;
     background: rgb(224, 226, 221);
     border-style: groove;
-    border-color: rgb(246, 250, 5);
+    border-color: rgb(252, 252, 251);
     border-width: 2px;
 }
 
 .image {
-    max-width: 295px;
+    max-width: 200px;
 }

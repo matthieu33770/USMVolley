@@ -8,24 +8,28 @@
     <form [formGroup]="joueurForm" class="joueurForm"> 
       <div class="left dimension">       
         <div formGroupName="joueurGroup">
-            <mat-form-field class="watch-category-full-width">
-                <input matInput required placeholder="Nom du joueur" type="text" formControlName="nom" [errorStateMatcher]="confirmValidParentMatcher" [(ngModel)]="editionJoueur.nom">
+            <mat-form-field>
+              <span>Nom</span>
+                <input matInput required type="text" formControlName="nom" [errorStateMatcher]="confirmValidParentMatcher" [(ngModel)]="editionJoueur.nom">
             </mat-form-field>
         </div>
         <div>
-          <mat-form-field class="watch-category-full-width">
-            <input matInput required placeholder="Prénom" type="text" formControlName="prenom" [(ngModel)]="editionJoueur.prenom">
-          </mat-form-field>
-        </div>
-        <div>
-          <mat-form-field class="watch-category-full-width">
-            <input matInput placeholder="Taille en cm" type="text" formControlName="taille" [(ngModel)]="editionJoueur.taille">
+          <mat-form-field>
+            <span>Prénom</span>
+            <input matInput required type="text" formControlName="prenom" [(ngModel)]="editionJoueur.prenom">
           </mat-form-field>
         </div>
         <div>
           <mat-form-field>
-            <input *ngIf="editionJoueur.sexe" matInput placeholder="Sexe" [(ngModel)]="editionJoueur.sexe" formControlName="sexe">
-            <mat-select *ngIf="!editionJoueur.sexe" placeholder="Sexe" [(ngModel)]="editionJoueur.sexe" formControlName="sexe">
+            <span>Taille en cm</span>
+            <input matInput required type="text" formControlName="taille" [(ngModel)]="editionJoueur.taille">
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <span>Genre</span>
+            <input *ngIf="editionJoueur.sexe" matInput required [(ngModel)]="editionJoueur.sexe" formControlName="sexe">
+            <mat-select *ngIf="!editionJoueur.sexe" [(ngModel)]="editionJoueur.sexe" formControlName="sexe">
                 <mat-option value="vide">  </mat-option>
                 <mat-option value="Masculin">Masculin</mat-option>
                 <mat-option value="Féminin">Féminin</mat-option>
@@ -34,73 +38,83 @@
         </div>
         <div>
           <mat-form-field>
-            <input matInput [matDatepicker]="picker" placeholder="Date de Naissance" [(ngModel)]="editionJoueur.dateNaissance" [value]="editionJoueur.dateNaissance" formControlName="dateNaissance">
+            <span>Date de Naissance</span>
+            <input matInput [matDatepicker]="picker" required [(ngModel)]="editionJoueur.dateNaissance" [value]="editionJoueur.dateNaissance" formControlName="dateNaissance">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
         </div>
         <div>
           <mat-form-field>
-            <input matInput placeholder="Adresse Mail" [(ngModel)]="editionJoueur.mail" formControlName="mail">
+            <span>Adresse Mail</span>
+            <input matInput required [(ngModel)]="editionJoueur.mail" formControlName="mail">
           </mat-form-field>
         </div>
       </div>
       <div class="center dimension">
         <div> 
           <mat-form-field>
-            <input matInput placeholder="Numéro" [(ngModel)]="editionJoueur.numeroAdresse" formControlName="numeroAdresse">
+            <span>Numéro</span>
+            <input matInput required [(ngModel)]="editionJoueur.numeroAdresse" formControlName="numeroAdresse">
           </mat-form-field>
         </div>
         <div>
           <mat-form-field>
-            <input matInput placeholder="Rue" [(ngModel)]="editionJoueur.rue" formControlName="rue">
+            <span>Rue</span>
+            <input matInput required [(ngModel)]="editionJoueur.rue" formControlName="rue">
           </mat-form-field>
         </div>
         <div>
           <mat-form-field>
-            <input matInput placeholder="Code Postal" [(ngModel)]="editionJoueur.codePostal" formControlName="codePostal">
+            <span>Code postal</span>
+            <input matInput required [(ngModel)]="editionJoueur.codePostal" formControlName="codePostal">
           </mat-form-field>
         </div>
         <div>
           <mat-form-field>
-            <input matInput placeholder="Ville" [(ngModel)]="editionJoueur.ville" formControlName="ville">
+            <span>Ville</span>
+            <input matInput required [(ngModel)]="editionJoueur.ville" formControlName="ville">
           </mat-form-field>
         </div>
-        <div>  
-          <mat-form-field>
-            <input matInput placeholder="N° de téléphone" [(ngModel)]="editionJoueur.telephone1" formControlName="telephone1">
-          </mat-form-field>
+        <div>
+          <span>N° de téléphone</span><br>
+          <p-inputMask mask="99.99.99.99.99" [(ngModel)]="editionJoueur.telephone1" placeholder="99.99.99.99.99" formControlName="telephone1"></p-inputMask>
         </div>   
-        <div>   
-          <mat-form-field>
-            <input matInput placeholder="N° de portable" [(ngModel)]="editionJoueur.telephone2" formControlName="telephone2">
-          </mat-form-field>   
+        <br>
+        <div>  
+          <span>N° de portable</span><br>
+          <p-inputMask mask="99.99.99.99.99" [(ngModel)]="editionJoueur.telephone2" placeholder="99.99.99.99.99" formControlName="telephone2"></p-inputMask> 
         </div>
       </div>
       <div class="right dimension">
         <div>
           <mat-form-field>
-            <input matInput placeholder="Nom d'utilisateur" formControlName="username" [(ngModel)]="editionUser.username" >
+            <span>Nom d'utilisateur</span>
+            <input matInput formControlName="username" [(ngModel)]="editionUser.username" >
           </mat-form-field>
         </div>
-        <div  *ngIf="!isLoggedin">    
-          <mat-form-field>
-            <input matInput placeholder="Mot de passe" [(ngModel)]="editionUser.mdp" formControlName="mdp">
-          </mat-form-field>
+        <div  *ngIf="!isLoggedin">
+            <span>Mot de passe</span><br>
+            <input type="password" pPassword [(ngModel)]="editionUser.mdp" formControlName="mdp">
         </div> 
+        <br>
         <div>
           <a download="Formulaire" target="_blank" href="/assets/documents/Formulaire.pdf">
             Télécharger le formulaire Fédération
           </a>
         </div>
+        <br>
         <div *ngIf="!editionLicence.formulaire">
+          <span>Formulaire fédération :</span><br>
           <input type="file" id="userFormulaire" (change)="onSelectFormulaire($event)" #fileInputF style="display: none">
           <mat-form-field class="watch-category-full-width">
             <input matInput formControlName="formulaireTest" placeholder="Formulaire à charger" readonly>
           </mat-form-field>
           <button mat-raised-button (click)="selectFormulaire()">Selectionner</button>
+          <br>
         </div>
         <div *ngIf="!editionLicence.certificatMedical">
+          <span>Certificat médical :</span><br>
           <input type="file" id="userCertificat" (change)="onSelectCertificat($event)" #fileInputC style="display: none">
           <mat-form-field class="watch-category-full-width">
             <input matInput formControlName="certificatTest" placeholder="Certificat à charger" readonly>
@@ -109,8 +123,8 @@
         </div>
         <div>
           <mat-form-field>
-            <mat-label>Sélectionner un moyen de paiement :</mat-label>
-            <mat-select placeholder="Mode de Paiement" [(value)]="paiement">
+            <span>Sélectionner un moyen de paiement :</span>
+            <mat-select [(value)]="paiement">
               <mat-option value="vide">  </mat-option>
               <mat-option value="cheque" (click)="choixCh=true; choixVir=false; choixPayPal=false">Chèque</mat-option>
               <mat-option value="virement" (click)="choixCh=false; choixVir=true; choixPayPal=false">Virement</mat-option>
@@ -138,8 +152,7 @@
           </form>   -->
         </div> 
       </div> 
-    </form>
-      
+    </form> 
     <br>
   </div> 
 

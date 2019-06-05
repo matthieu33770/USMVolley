@@ -6,7 +6,7 @@
   <div class="boutons">
     <button mat-raised-button color="primary" (click)="nouvelleAnnee()">Nouvelle Année</button>
     <button mat-raised-button (click)="exportAsXLSX()">Exporter</button>
-    <button mat-raised-button color="accent" routerLink="/gestion/joueurs/detailjoueur/newJoueur">Nouveau</button>
+    <!-- <button mat-raised-button color="accent" routerLink="/gestion/joueurs/detailjoueur/newJoueur">Nouveau</button> -->
     <button mat-raised-button (click)="onEdit(selection.selected)">Editer</button>
     <span *ngIf="confirmDelete">
       <span>Etes vous sûr de vouloir supprimer ce joueur ?</span>
@@ -14,6 +14,33 @@
       <button mat-raised-button color="accent" (click)="confirmDelete=false">Non</button>
     </span>  
     <button *ngIf="!confirmDelete" mat-raised-button color="warn" (click)="confirmDelete=true">Supprimer</button>
+  </div>
+  <div class="menu">
+      <button mat-icon-button [matMenuTriggerFor]="menuJ">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+        <mat-menu #menuJ="matMenu">
+          <button mat-menu-item>
+            <mat-icon>restore</mat-icon>
+            <span>Nouvelle Année</span>
+          </button>
+          <button mat-menu-item (click)="exportAsXLSX()">
+            <mat-icon>save</mat-icon>
+            <span>Exporter</span>
+          </button>
+          <!-- <button mat-menu-item routerLink="/gestion/joueurs/detailjoueur/newJoueur">
+            <mat-icon>add</mat-icon>
+            <span>Nouveau</span>
+          </button> -->
+          <button mat-menu-item (click)="onEdit(selection.selected)">
+            <mat-icon>create</mat-icon>
+            <span>Editer</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>clear</mat-icon>
+            <span>Supprimer</span>
+          </button>
+        </mat-menu>
   </div>
   <br>
   <mat-form-field>
@@ -134,9 +161,126 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-</div>
+  </div>
+
+  <div class="tablejoueurmax">
+      <table mat-table [dataSource]="dataSource" class="tableau">
+    
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+  
+      <!-- Nom Column -->
+      <ng-container matColumnDef="nomJoueur">
+        <th mat-header-cell *matHeaderCellDef>Nom</th>
+        <td mat-cell *matCellDef="let joueur">{{joueur.nom}}</td>
+      </ng-container>
+      
+      <!-- Prénom Column -->
+      <ng-container matColumnDef="prenomJoueur">
+        <th mat-header-cell *matHeaderCellDef>Prénom</th>
+        <td mat-cell *matCellDef="let joueur">{{joueur.prenom}}</td>
+      </ng-container>
+  
+      <!-- Taille Column -->
+      <ng-container matColumnDef="tailleJoueur">
+        <th mat-header-cell *matHeaderCellDef>Taille</th>
+        <td mat-cell *matCellDef="let joueur">{{joueur.taille}}</td>
+      </ng-container>
+      
+      <!-- Sexe Column -->
+      <ng-container matColumnDef="sexeJoueur">
+        <th mat-header-cell *matHeaderCellDef>Sexe</th>
+        <td mat-cell *matCellDef="let joueur">{{joueur.sexe}}</td>
+      </ng-container>
+      
+      <!-- Numero Rue Column -->
+      <ng-container matColumnDef="numeroAdresseJoueur">
+        <th mat-header-cell *matHeaderCellDef>Numero</th>
+        <td mat-cell *matCellDef="let joueur">{{joueur.numeroAdresse}}</td>
+      </ng-container>
+      
+      <!-- Rue Column -->
+      <ng-container matColumnDef="rueJoueur">
+        <th mat-header-cell *matHeaderCellDef>Rue</th>
+        <td mat-cell *matCellDef="let joueur">{{joueur.rue}}</td>
+      </ng-container>
+      
+      <!-- Code Postal Column -->
+      <ng-container matColumnDef="codePostalJoueur">
+        <th mat-header-cell *matHeaderCellDef>Code Postal</th>
+        <td mat-cell *matCellDef="let joueur">{{joueur.codePostal}}</td>
+      </ng-container>
+  
+      <!-- Ville Column -->
+      <ng-container matColumnDef="villeJoueur">
+        <th mat-header-cell *matHeaderCellDef>Ville</th>
+        <td mat-cell *matCellDef="let joueur">{{joueur.ville}}</td>
+      </ng-container>
+  
+      <!-- Mail Column -->
+      <ng-container matColumnDef="mailJoueur">
+        <th mat-header-cell *matHeaderCellDef>@mail</th>
+        <td mat-cell *matCellDef="let joueur">{{joueur.mail}}</td>
+      </ng-container>
+  
+      <!-- Tel1 Column -->
+      <ng-container matColumnDef="telephone1Joueur">
+        <th mat-header-cell *matHeaderCellDef>Téléphone</th>
+        <td mat-cell *matCellDef="let joueur">{{joueur.telephone1}}</td>
+      </ng-container>
+  
+      <!-- Tel2 Column -->
+      <ng-container matColumnDef="telephone2Joueur">
+        <th mat-header-cell *matHeaderCellDef>Téléphone</th>
+        <td mat-cell *matCellDef="let joueur">{{joueur.telephone2}}</td>
+      </ng-container>
+  
+      <!-- Date de naissance Column -->
+      <ng-container matColumnDef="dateNaissanceJoueur">
+        <th mat-header-cell *matHeaderCellDef>Date de Naissance</th>
+        <td mat-cell *matCellDef="let joueur">{{joueur.dateNaissance}}</td>
+      </ng-container>
+  
+      <!-- User Column -->
+      <ng-container matColumnDef="userJoueur">
+        <th mat-header-cell *matHeaderCellDef>Fonction</th>
+        <td mat-cell *matCellDef="let joueur">{{joueur.user.fonction.libelleFonction}}</td>
+      </ng-container>
+  
+      <!-- Licence Column -->
+      <ng-container matColumnDef="avoirJoueur">
+        <th mat-header-cell *matHeaderCellDef>Numéro de Licence</th>
+        <td mat-cell *matCellDef="let joueur">{{joueur.avoir.licence.numeroLicence}}</td>
+      </ng-container>
+  
+      <!-- Licence Valide Column -->
+      <ng-container matColumnDef="licenceValideJoueur">
+        <th mat-header-cell *matHeaderCellDef>Licence Valide pour l'année</th>
+        <td mat-cell *matCellDef="let joueur">{{joueur.avoir.isValide}}</td>
+      </ng-container>
+  
+      <!-- Equipe Column -->
+      <ng-container matColumnDef="equipesJoueur">
+        <th mat-header-cell *matHeaderCellDef>Equipes</th>
+        <td mat-cell *matCellDef="let joueur">{{joueur.equipesJoueur}}</td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    </div>
 <br>
-<div class="boutons">
+<div class="bouton">
   <button mat-raised-button color="accent" routerLink="/gestion">Retour</button>
 </div>
 <br>

@@ -7,19 +7,19 @@
   <div class="data">
     <form [formGroup]="articleForm" >        
       <div formGroupName="articleGroup">
-          <mat-form-field class="watch-category-full-width">
+          <mat-form-field>
               <input matInput required placeholder="Titre de l'article" type="text" formControlName="titreArticle" [errorStateMatcher]="confirmValidParentMatcher" [(ngModel)]="editionArticle.titreArticle">
           </mat-form-field>
       </div>
       <div>
-        <mat-form-field class="watch-category-full-width">
+        <mat-form-field>
             <textarea matInput required placeholder="Contenu de l'article" type="text" formControlName="contenuArticle" [(ngModel)]="editionArticle.contenuArticle"></textarea>
         </mat-form-field>
       </div>
       <div>
         <input matInput placeholder="Photo de l'article" [(ngModel)]="editionArticle.photoArticle" formControlName="photoArticle">
         <input type="file" id="userPhoto" (change)="onSelectPhoto($event)" #fileInput style="display: none">
-        <mat-form-field class="watch-category-full-width">
+        <mat-form-field>
           <input matInput formControlName="photoArticle" placeholder="Photo à charger" readonly>
         </mat-form-field>
         <br>

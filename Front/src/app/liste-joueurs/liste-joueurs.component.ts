@@ -44,7 +44,8 @@ export class ListeJoueursComponent implements OnInit {
                                               this.joueur = Joueurs;
                                               this.nbreMasculin = Joueurs.filter(joueur => {if (joueur.sexe === 'Masculin') { return true; }} );
                                               this.nbreFeminin = Joueurs.filter(joueur => {if (joueur.sexe === 'Féminin') {return true; }} );
-                                              console.log(this.nbreMasculin, this.nbreFeminin); }
+                                              console.log(this.nbreMasculin, this.nbreFeminin);
+                                              }
                                               );
   }
 

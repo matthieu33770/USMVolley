@@ -113,6 +113,9 @@
           <button mat-raised-button (click)="selectFormulaire()">Selectionner</button>
           <br>
         </div>
+        <div *ngIf="editionLicence.formulaire">
+          <span>{{ editionLicence.formulaire }}</span>
+        </div>
         <div *ngIf="!editionLicence.certificatMedical">
           <span>Certificat médical :</span><br>
           <input type="file" id="userCertificat" (change)="onSelectCertificat($event)" #fileInputC style="display: none">
@@ -120,6 +123,10 @@
             <input matInput formControlName="certificatTest" placeholder="Certificat à charger" readonly>
           </mat-form-field>
           <button mat-raised-button (click)="selectCertificat()">Selectionner</button>
+        </div>
+        <div *ngIf="editionLicence.certificatMedical">
+          <span>{{ editionLicence.certificatMedical }}</span><br>
+          <span style="color:#FF0000">Le certificat médical est valable 3 ans !</span>
         </div>
         <div>
           <mat-form-field>

@@ -9,14 +9,33 @@
     font-size: 26px; 
     display: flex;
     justify-content: center;
+    align-content: center;
+    align-items: center;
     font-family: Muli; 
 }
 
 @media only screen and (min-width: 600px) {
+    .titre {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        font-size: 40px; 
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        font-family: Muli; 
+    }
+
     .contenuArticle {
         display: flex;
         flex-direction: column;
         align-items: center;
+        /* width: 70%; */
+    }
+
+    .contenu {
+        width: 70%;
     }
 
     .img {        
@@ -25,6 +44,21 @@
 }
 
 @media only screen and (max-width: 600px) {
+    .titre {
+        margin-top: 30px;
+        margin-bottom: 20px;
+        font-size: 30px; 
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        font-family: Muli; 
+    }
+
+    .contenu {
+        font-size: 16px;
+    }
+
     img {
         width: 100vw;
     }

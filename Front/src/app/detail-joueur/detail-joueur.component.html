@@ -86,15 +86,15 @@
         </mat-form-field>
       </div>
       <div>
-        <mat-form-field>
-            <input matInput placeholder="Formulaire" [(ngModel)]="editionJoueur.avoir.licence.formulaire" name="formulaire">
-        </mat-form-field>
+        <span>{{ editionJoueur.avoir.licence.formulaire }}</span>
+        <span *ngIf="!editionJoueur.avoir.licence.formulaire" style="color:#FF0000"><strong>Formulaire non transmis par le joueur</strong></span>
       </div>
+      <br>
       <div>
-        <mat-form-field>
-          <input matInput placeholder="Certificat Médical" [(ngModel)]="editionJoueur.avoir.licence.certificatMedical" name="certificat">
-        </mat-form-field>
+        <span>{{ editionJoueur.avoir.licence.certificatMedical }}</span>
+        <span *ngIf="!editionJoueur.avoir.licence.certificatMedical" style="color:#FF0000"><strong>Certificat Médical non transmis par le joueur</strong></span>
       </div>
+      <br>
       <div>
         <mat-form-field>
           <input matInput placeholder="Numero de Licence" [(ngModel)]="editionJoueur.avoir.licence.numeroLicence" name="numeroLicence">

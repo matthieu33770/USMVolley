@@ -41,7 +41,8 @@ public class MailController {
 	    }
 	 
 	    @PostMapping("/changeMdp")
-	    public ResponseEntity<?> sendEmail(@RequestParam(value= "username", required=true) String username , @RequestParam(value= "lien", required=true) String lien) {
+	    public ResponseEntity<?> sendEmail(@RequestParam(value= "username", required=true) String username,
+	    		@RequestParam(value= "lien", required=true) String lien) {
 	    	
 	    	Users user = null;
 	    	Joueurs joueur = null;
@@ -73,8 +74,6 @@ public class MailController {
 	        						+ "Si vous n'etes pas � l'origine de cette demande, merci de nous en informer\n\n"
 	        						+ "USM Volley Ball\nunionsallesmios.volley@gmail.com");
 	        helper.setSubject("Votre lien");
-	        
-	        System.out.println(message);
 	        
 	        sender.send(message);
 	    }
@@ -110,8 +109,6 @@ public class MailController {
 	        
 	        helper.setSubject(sujetMail);
 	        
-	        System.out.println(message);
-	        
 	        sender.send(message);
 	    }
 	    
@@ -144,8 +141,6 @@ public class MailController {
 	        						+ "Le match se joue contre " + adversaire + ", le " + date + " à // au " + lieu + "\n\n"
 	        						+ "Ton Capitaine");
 	        helper.setSubject("Sélectionné pour un match");
-	        
-	        System.out.println(message);
 	        
 	        sender.send(message);
 	    }

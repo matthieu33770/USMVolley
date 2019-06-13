@@ -15,7 +15,7 @@
 }
 
 table {
-    width: 100%;
+    width: 60%;
 }
 
 th.mat-header-cell {
@@ -26,11 +26,11 @@ td {
     text-align: center;
 }
 
-.tableequipe {
+.tableequipe-responsive {
     display: flex;
-    justify-content: center;
     height: 400px;
     overflow: auto;
+    justify-content: center;
 }
 
 .tableau {

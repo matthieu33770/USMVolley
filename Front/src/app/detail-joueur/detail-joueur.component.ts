@@ -70,11 +70,9 @@ export class DetailJoueurComponent implements OnInit {
   }
 
   onSave() {
-    console.log(this.paye);
-    console.log(this.editionJoueur.avoir.licence.certificatMedical);
-    console.log(this.editionJoueur.avoir.licence.formulaire);
     this.editionJoueur.avoir.isValide = this.paye;
-    this.editionJoueur.user.fonction = this.fonctionList.find(fonction => fonction.idFonction === this.editionJoueur.user.fonction.idFonction);
+    this.editionJoueur.user.fonction = this.fonctionList.find(fonction =>
+      fonction.idFonction === this.editionJoueur.user.fonction.idFonction);
     this.joueurService.updateJoueur(this.editionJoueur);
   }
 }

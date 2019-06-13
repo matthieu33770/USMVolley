@@ -65,6 +65,7 @@ export class SaisieComponent implements OnInit {
   fileInformation: FileInformation;
   formulaireTest: string;
   certificatTest: string;
+  disabled: Boolean = true;
 
   public payPalConfig ?: IPayPalConfig;
 
@@ -169,6 +170,7 @@ export class SaisieComponent implements OnInit {
                                                   this.certificat = this.player[0].nom + ' ' + this.player[0].prenom + ' - ' + this.annee + ' - Certificat.pdf';
                                                 }
                                                 this.joueur.push(joueur);
+                                                console.log(this.editionLicence);
                                                 });
                                               });
   }

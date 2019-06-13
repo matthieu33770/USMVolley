@@ -49,7 +49,7 @@ public class JwtTokenProvider {
      * @return the created JWT as String.
      */
     public String createToken(String username, Fonctions fonction) {
-    	System.out.println("token");
+    	
         Claims claims = Jwts.claims().setSubject(username);
         claims.put("auth", fonction);
 
@@ -91,9 +91,7 @@ public class JwtTokenProvider {
      */
     public String resolveToken(HttpServletRequest req) {
         String bearerToken = req.getHeader("Authorization");
-        System.out.println("http : " + req);
-        System.out.println("bearerToken : " + bearerToken);
-        System.out.println("bearerToken : " + req.getHeader("headers"));
+
         if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
             return bearerToken.substring(7);
         }

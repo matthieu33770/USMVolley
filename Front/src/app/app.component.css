@@ -10,48 +10,33 @@ header {
 }
 
 .usm {
-    max-height: 200px;
+    max-height: 100px;
 }
 
 .beach {
-    max-height: 100px;
+    max-height: 50px;
     margin-right: 100px;
-    margin-top: 40px;
+    margin-top: 20px;
 }
 
 .volley {
-    max-height: 100px;
+    max-height: 50px;
     margin-left: 100px;
-    margin-top: 40px;
+    margin-top: 20px;
 }
 
 .maxmenu {
     display: flex;
 }
 
-.logo {
-    display: flex;
-    flex-grow: 2;
-    justify-content: center;
-    align-items: center;
-}
-
-.img {
-    max-height: 90px;
-    opacity: 10%;
-}
-
 .menu1 {
-    /* justify-content: flex-end !important; */
     flex-grow: 1;
-    /* margin-top: 25px; */
  }
 
  .menu2 {
     flex-grow: 1;
     display: flex;
     justify-content: flex-end;
-    /* margin-top: 15px; */
  }
  
  footer {
@@ -63,37 +48,26 @@ header {
 
 .maxcontact {
     display: flex;
+    justify-content: space-around;
+    flex-direction: row;
 }
 
 .contacter {
-    flex-grow: 1;
     font-size: 14px;
-    font-weight: bold;
     text-decoration: underline;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    margin-left: 10px;
+    margin-top: 10px;
 }
 
-.president {
-    flex-grow: 2;
-    font-size: 12px;
-    margin-left: 150px;
+.lieux {
+    font-size: 14px;
+    margin-top: 10px;
 }
 
-.entraineur1 {
-    flex-grow: 3;
+.salles {
     font-size: 12px;
 }
 
-.entraineur2 {
-    flex-grow: 4;
-    font-size: 12px;
-}
-
-.entraineur3 {
-    flex-grow: 5;
+.mios {
     font-size: 12px;
 }
 
@@ -128,7 +102,7 @@ header, footer {font-family: Muli; }
 
     .usm {
         margin-top: 0px;
-        width: 280px;
-        height: 160px;
+        width: 160px;
+        height: 80px;
     }
 }

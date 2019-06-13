@@ -28,9 +28,9 @@ export class AppComponent implements OnInit {
               private loginService: LoginService) { }
 
   ngOnInit() {
-    
+
       this.getConnection();
-    
+
   }
 
   getConnection() {
@@ -42,11 +42,6 @@ export class AppComponent implements OnInit {
       this.isLoggedin = userRole.length > 0;
     });
   }
-
-  // getConnected() {
-  //   this.isLoggedin = this.loginService.logged;
-  //   console.log(this.isLoggedin);
-  // }
 
   onDeconnect() {
     this.loginService.signOut();

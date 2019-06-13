@@ -77,7 +77,6 @@ public class Joueurs implements Serializable {
 	public Joueurs(Integer idJoueur, String nom, String prenom, String sexe, String taille, Integer numeroAdresse,
 			String rue, Integer codePostal, String ville, String mail, String telephone1, String telephone2,
 			Date dateNaissance, Users user, Avoir avoir, Collection<Equipes> equipes) {
-		super();
 		this.idJoueur = idJoueur;
 		this.nom = nom;
 		this.prenom = prenom;

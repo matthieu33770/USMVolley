@@ -79,7 +79,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // Disallow everything else...
                 .anyRequest().authenticated();
         
-//      // Apply JWT v�rifie la requete avant envoie vers le controller
+        // Apply JWT vérifie la requete avant envoi vers le controller
         http.addFilterBefore(new JwtTokenFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
     }
 

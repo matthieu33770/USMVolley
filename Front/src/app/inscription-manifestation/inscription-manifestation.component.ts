@@ -43,8 +43,8 @@ export class InscriptionManifestationComponent implements OnInit {
   ngOnInit() {
     console.log(this.newParticipation);
     this.idManifestation = Number(this.route.snapshot.params.idManifestation);
-    this.getManifestation();
-    this.getDisponibilite();
+    // this.getManifestation();
+    // this.getDisponibilite();
   }
 
   getManifestation(): void {

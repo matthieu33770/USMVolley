@@ -25,8 +25,7 @@ export class EventService {
       evt.color = '#989392';
     }
     evt.start = manifestation.start + '';
-    evt.url = `http://localhost:4200/inscriptionmanifestation/${manifestation.idManifestation}`;
-console.log(evt);
+    evt.url = `/inscriptionmanifestation/${manifestation.idManifestation}`;
     return evt;
   }
 
@@ -35,7 +34,6 @@ console.log(evt);
       .toPromise()
       .then(
       manifestations => {
-        console.log(manifestations);
         return manifestations.map(EventService.manifestationsToEvents);
       }
     );

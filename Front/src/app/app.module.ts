@@ -116,7 +116,7 @@ registerLocaleData(localeFr);
         tokenGetter: function tokenGetter() {
           return localStorage.getItem('access_token');
         },
-        whitelistedDomains: ['localhost:8080'],
+        whitelistedDomains: ['localhost:5000'],
         blacklistedRoutes: ['http://localhost:4200/auth/login']
       }
     }),

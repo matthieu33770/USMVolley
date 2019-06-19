@@ -15,6 +15,8 @@ import { Equipe } from '../modeles/equipe';
 import { Manifestation } from '../modeles/manifestation';
 import { Disponibilite } from '../modeles/disponibilite';
 import { ParticipationPK } from '../modeles/participationPK';
+import { ParticipationService } from '../services/participation.service';
+import { Participation } from '../modeles/participation';
 
 @Component({
   selector: 'app-inscription-multiple',
@@ -27,6 +29,7 @@ export class InscriptionMultipleComponent implements OnInit, OnDestroy {
   joueur: Joueur = new Joueur(0, '', '', '', 0, '', 0, '', '', '', '', null, null, null, null);
   equipes: Equipe [] = [];
   manifestations: Manifestation [] = [];
+  participations: Participation [] = [];
   equipeJoueur: Equipe [] = [];
   date: string;
   auj = +new Date();
@@ -43,7 +46,8 @@ export class InscriptionMultipleComponent implements OnInit, OnDestroy {
   constructor(private joueurService: JoueursService,
               private equipeService: EquipesService,
               private manifestationService: ManifestationService,
-              private disponibiliteService: DisponibiliteService) { }
+              private disponibiliteService: DisponibiliteService,
+              private participationService: ParticipationService) { }
 
   ngOnInit() {
     this.username = jwt_decode(sessionStorage.getItem(environment.accessToken)).sub;
@@ -53,12 +57,22 @@ export class InscriptionMultipleComponent implements OnInit, OnDestroy {
         this.equipes = Equipes;
         this.getEquipe();
       });
+      this.manifestationService.publishManifestations();
       this.subManifestation = this.manifestationService.availableManifestation$.subscribe(Manifestations => {
         this.manifestations = Manifestations;
+        this.getManifestation();
       });
-      this.getManifestation();
     });
+    this.getParticipation();
     this.getDisponibilite();
+  }
+
+  getParticipation(): void {
+    this.participationService.publishParticipations();
+    this.participationService.availableParticipation$.subscribe(Participations => {
+      this.participations = Participations;
+      console.log(this.participations);
+    });
   }
 
   getEquipe(): void {
@@ -77,11 +91,7 @@ export class InscriptionMultipleComponent implements OnInit, OnDestroy {
 
   getManifestation(): void {
     if (this.manifestations) {
-    } else {
-      this.manifestationService.publishManifestations();
-    }
-    this.manifestations.forEach( manifestation => {
-      this.date = '' + manifestation.start;
+      this.manifestations.forEach( manifestation => {
       const dateManif = new Date(manifestation.start);
         if (+dateManif > this.auj) {
           for ( let i = 0; i < this.equipeJoueur.length; i ++) {
@@ -91,12 +101,12 @@ export class InscriptionMultipleComponent implements OnInit, OnDestroy {
           }
         }
       });
-
+    } else {
+      this.manifestationService.publishManifestations();
+    }
       this.manifestationList.sort((a: any, b: any) => {
-
         const left = Number(new Date(a.start));
         const right = Number(new Date(b.start));
-
         return this.manifestationList ? left - right : right - left;
       });
 
@@ -110,6 +120,7 @@ export class InscriptionMultipleComponent implements OnInit, OnDestroy {
   onSave() {
     this.newParticipation.idJoueur = this.joueur.idJoueur;
     for (let i = 0; i < this.manifestationList.length; i ++) {
+      this.manifestationList[i].idDispo = this.disponibiliteList[i].idDisponibilite;
       if (this.manifestationList[i].idDispo) {
         this.newParticipation.idManifestation = this.manifestationList[i].idManifestation;
         this.newParticipation.idDisponibilite = this.manifestationList[i].idDispo;

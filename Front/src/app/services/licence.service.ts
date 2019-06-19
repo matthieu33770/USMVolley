@@ -24,7 +24,7 @@ export class LicenceService {
 
   public getLicence(): Observable<Licence[]> {
     if (this.loginService.logged) {
-      return this.httpClient.get<Licence[]>('http://localhost:8080/licences/get/licences');
+      return this.httpClient.get<Licence[]>('http://localhost:5000/licences/get/licences');
     } else {
       this.router.navigate(['connexion']);
     }

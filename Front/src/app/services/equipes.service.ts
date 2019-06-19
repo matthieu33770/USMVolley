@@ -24,7 +24,7 @@ export class EquipesService {
 
   public getEquipes(): Observable<Equipe[]> {
     if (this.loginService.logged) {
-      return this.httpClient.get<Equipe[]>('http://localhost:8080/equipes/get/equipes');
+      return this.httpClient.get<Equipe[]>('http://localhost:5000/equipes/get/equipes');
     } else {
       this.router.navigate(['connexion']);
     }
@@ -32,7 +32,7 @@ export class EquipesService {
 
   getTeams(): Observable<Equipe[]> {
     if (this.loginService.logged) {
-      return this.httpClient.get<Equipe[]>('http://localhost:8080/equipes/get/equipes');
+      return this.httpClient.get<Equipe[]>('http://localhost:5000/equipes/get/equipes');
     } else {
       this.router.navigate(['connexion']);
     }
@@ -74,7 +74,7 @@ export class EquipesService {
   public createEquipe(newEquipe: Equipe) {
     console.log(newEquipe);
     if (this.loginService.logged) {
-      this.httpClient.post<Equipe>('http://localhost:8080/equipes/create', newEquipe).subscribe(
+      this.httpClient.post<Equipe>('http://localhost:5000/equipes/create', newEquipe).subscribe(
         createEquipe => {
           this.availableEquipe.push(createEquipe);
           this.availableEquipe$.next(this.availableEquipe);
@@ -91,7 +91,7 @@ export class EquipesService {
    */
   public updateEquipe(equipe: Equipe) {
     if (this.loginService.logged) {
-      this.httpClient.put<Equipe>(`http://localhost:8080/equipes/update/${equipe.idEquipe}`, equipe).subscribe(
+      this.httpClient.put<Equipe>(`http://localhost:5000/equipes/update/${equipe.idEquipe}`, equipe).subscribe(
         updateEquipe => {
           this.availableEquipe.splice(this.availableEquipe.indexOf(equipe), 1, updateEquipe);
           this.availableEquipe$.next(this.availableEquipe);
@@ -109,7 +109,7 @@ export class EquipesService {
    */
   supprimerEquipe(idEquipe: number): Equipe[] {
     if (this.loginService.logged) {
-      this.httpClient.delete('http://localhost:8080/equipes/delete/' + idEquipe).subscribe(
+      this.httpClient.delete('http://localhost:5000/equipes/delete/' + idEquipe).subscribe(
             () => { console.log('suppression equipe OK : ', idEquipe);
                     this.availableEquipe.splice(this.availableEquipe.indexOf(this.availableEquipe.find(equipe => equipe.idEquipe === idEquipe), 1));
                     this.availableEquipe$.next(this.availableEquipe);

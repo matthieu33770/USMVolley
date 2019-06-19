@@ -25,12 +25,12 @@ export class ArticlesService {
               private router: Router) { }
 
   public getArticles(): Observable<Article[]> {
-      return this.httpClient.get<Article[]>('http://localhost:8080/articles/get/articles');
+      return this.httpClient.get<Article[]>('http://localhost:5000/articles/get/articles');
   }
 
   getArt(): Observable<Article[]> {
     if (this.loginService.logged) {
-      return this.httpClient.get<Article[]>('http://localhost:8080/articles/get/articles');
+      return this.httpClient.get<Article[]>('http://localhost:5000/articles/get/articles');
     } else {
       this.router.navigate(['connexion']);
     }
@@ -69,7 +69,7 @@ export class ArticlesService {
    */
   public createArticle(newArticle: Article) {
     if (this.loginService.logged) {
-      this.httpClient.post<Article>('http://localhost:8080/articles/create', newArticle).subscribe(
+      this.httpClient.post<Article>('http://localhost:5000/articles/create', newArticle).subscribe(
         createArticle => {
           this.availableArticle.push(createArticle);
           this.availableArticle$.next(this.availableArticle);
@@ -86,7 +86,7 @@ export class ArticlesService {
    */
   public updateArticle(article: Article) {
     if (this.loginService.logged) {
-      this.httpClient.put<Article>(`http://localhost:8080/articles/update/${article.idArticle}`, article).subscribe(
+      this.httpClient.put<Article>(`http://localhost:5000/articles/update/${article.idArticle}`, article).subscribe(
         updateArticle => {
           this.availableArticle.splice(this.availableArticle.indexOf(article), 1, updateArticle);
           this.availableArticle$.next(this.availableArticle);
@@ -104,7 +104,7 @@ export class ArticlesService {
    */
   supprimerArticle(idArticle: number): Article[] {
     if (this.loginService.logged) {
-      this.httpClient.delete('http://localhost:8080/articles/delete/' + idArticle).subscribe(
+      this.httpClient.delete('http://localhost:5000/articles/delete/' + idArticle).subscribe(
             () => { console.log('suppression article OK : ', idArticle);
                     this.availableArticle.splice(this.availableArticle.indexOf(this.availableArticle.find(article => article.idArticle === idArticle), 1));
                     this.availableArticle$.next(this.availableArticle);
@@ -123,7 +123,7 @@ export class ArticlesService {
    */
   public addPhoto(data) {
     if (this.loginService.logged) {
-      this.httpClient.post('http://localhost:8080/articles/upload', data).subscribe(
+      this.httpClient.post('http://localhost:5000/articles/upload', data).subscribe(
         () => { console.log('dedans'); },
         (error) => {console.log('error : ', error); }
       );

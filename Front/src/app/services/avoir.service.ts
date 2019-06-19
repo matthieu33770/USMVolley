@@ -24,7 +24,7 @@ export class AvoirService {
 
    public getAvoir(): Observable<Avoir[]> {
     if (this.loginService.logged) {
-      return this.httpClient.get<Avoir[]>('http://localhost:8080/avoir/get/avoir');
+      return this.httpClient.get<Avoir[]>('http://localhost:5000/avoir/get/avoir');
     } else {
       this.router.navigate(['connexion']);
     }

@@ -78,7 +78,7 @@ export class JoueursService {
    * @param newJoueur le nouveau joueur à créer
    */
   public createJoueur(newJoueur: Joueur) {
-      this.httpClient.post<Joueur>('http://localhost:8080/joueurs/create', newJoueur).subscribe(
+      this.httpClient.post<Joueur>('http://localhost:5000/joueurs/create', newJoueur).subscribe(
         createJoueur => {
           this.availableJoueur.push(createJoueur);
           this.availableJoueur$.next(this.availableJoueur);
@@ -134,7 +134,7 @@ export class JoueursService {
    */
   public updateJoueur(joueur: Joueur) {
     if (this.loginService.logged) {
-      this.httpClient.put<Joueur>(`http://localhost:8080/joueurs/update/${joueur.idJoueur}`, joueur).subscribe(
+      this.httpClient.put<Joueur>(`http://localhost:5000/joueurs/update/${joueur.idJoueur}`, joueur).subscribe(
         updateJoueur => {
           this.availableJoueur.splice(this.availableJoueur.indexOf(joueur), 1, updateJoueur);
           this.availableJoueur$.next(this.availableJoueur);
@@ -156,7 +156,7 @@ export class JoueursService {
    */
   supprimerJoueur(idJoueur: number): Joueur[] {
     if (this.loginService.logged) {
-      this.httpClient.delete('http://localhost:8080/joueurs/delete/' + idJoueur).subscribe(
+      this.httpClient.delete('http://localhost:5000/joueurs/delete/' + idJoueur).subscribe(
             () => { console.log('suppression joueur OK : ', idJoueur);
                 },
             (error) => console.log('suppression joueur pb : ', error)
@@ -173,7 +173,7 @@ export class JoueursService {
    * param data
    */
   public addDocument(data) {
-      this.httpClient.post('http://localhost:8080/joueurs/upload', data).subscribe(
+      this.httpClient.post('http://localhost:5000/joueurs/upload', data).subscribe(
         () => { console.log('dedans'); },
         (error) => {console.log('error : ', error); }
       );

@@ -24,7 +24,7 @@ export class StatutService {
 
   public getStatuts(): Observable<Statut[]> {
     if (this.loginService.logged) {
-      return this.httpClient.get<Statut[]>('http://localhost:8080/statuts/get/statuts');
+      return this.httpClient.get<Statut[]>('http://localhost:5000/statuts/get/statuts');
     } else {
       this.router.navigate(['connexion']);
     }
@@ -61,7 +61,7 @@ export class StatutService {
    */
   public createStatut(newStatut: Statut) {
     if (this.loginService.logged) {
-      this.httpClient.post<Statut>('http://localhost:8080/statuts/create', newStatut).subscribe(
+      this.httpClient.post<Statut>('http://localhost:5000/statuts/create', newStatut).subscribe(
         createStatut => {
           this.availableStatut.push(createStatut);
           this.availableStatut$.next(this.availableStatut);
@@ -78,7 +78,7 @@ export class StatutService {
    */
   public updateStatut(statut: Statut) {
     if (this.loginService.logged) {
-      this.httpClient.put<Statut>(`http://localhost:8080/statuts/update/${statut.idStatut}`, statut).subscribe(
+      this.httpClient.put<Statut>(`http://localhost:5000/statuts/update/${statut.idStatut}`, statut).subscribe(
         updateStatut => {
           this.availableStatut.splice(this.availableStatut.indexOf(statut), 1, updateStatut);
           this.availableStatut$.next(this.availableStatut);
@@ -96,7 +96,7 @@ export class StatutService {
    */
   supprimerStatut(idStatut: number): Statut[] {
     if (this.loginService.logged) {
-      this.httpClient.delete('http://localhost:8080/statuts/delete/' + idStatut).subscribe(
+      this.httpClient.delete('http://localhost:5000/statuts/delete/' + idStatut).subscribe(
             () => { console.log('suppression statut OK : ', idStatut);
                 },
             (error) => console.log('suppression statut pb : ', error)

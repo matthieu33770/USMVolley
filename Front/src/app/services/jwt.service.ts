@@ -15,7 +15,7 @@ export class JwtService {
 
   login(username: string, mdp: string) {
     if (this.loginService.logged) {
-      return this.httpClient.post<{access_token: string}>('http://localhost:8080/joueurs/get', {username, mdp}).pipe(tap(res => {
+      return this.httpClient.post<{access_token: string}>('http://localhost:5000/joueurs/get', {username, mdp}).pipe(tap(res => {
         localStorage.setItem('access_token', res.access_token);
       }));
     } else {
@@ -25,7 +25,7 @@ export class JwtService {
 
   register(username: string, mdp: string) {
     if (this.loginService.logged) {
-      return this.httpClient.post<{access_token: string}>('http://localhost:8080/joueurs/get', {username, mdp}).pipe(tap(res => {
+      return this.httpClient.post<{access_token: string}>('http://localhost:5000/joueurs/get', {username, mdp}).pipe(tap(res => {
         this.login(username, mdp);
       }));
     } else {

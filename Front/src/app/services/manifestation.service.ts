@@ -25,7 +25,7 @@ export class ManifestationService {
               private router: Router) { }
 
    public getManifestations(): Observable<Manifestation[]> {
-      return this.httpClient.get<Manifestation[]>('http://localhost:8080/manifestations/get/manifestations');
+      return this.httpClient.get<Manifestation[]>('http://localhost:5000/manifestations/get/manifestations');
    }
 
    public publishManifestations() {
@@ -59,7 +59,7 @@ export class ManifestationService {
     */
    public createManifestation(newManifestation: Manifestation) {
     if (this.loginService.logged) {
-     this.httpClient.post<Manifestation>('http://localhost:8080/manifestations/create', newManifestation).subscribe(
+     this.httpClient.post<Manifestation>('http://localhost:5000/manifestations/create', newManifestation).subscribe(
        createManifestation => {
          this.availableManifestation.push(createManifestation);
          this.availableManifestation$.next(this.availableManifestation);
@@ -76,7 +76,7 @@ export class ManifestationService {
     */
    public updateManifestation(manifestation: Manifestation) {
     if (this.loginService.logged) {
-     this.httpClient.put<Manifestation>(`http://localhost:8080/manifestations/update/${manifestation.idManifestation}`, manifestation).subscribe(
+     this.httpClient.put<Manifestation>(`http://localhost:5000/manifestations/update/${manifestation.idManifestation}`, manifestation).subscribe(
        updateManifestation => {
          this.availableManifestation$.next(this.availableManifestation);
        }
@@ -93,7 +93,7 @@ export class ManifestationService {
     */
    supprimerManifestation(idManifestation: number): Manifestation[] {
     if (this.loginService.logged) {
-      this.httpClient.delete('http://localhost:8080/manifestations/delete/' + idManifestation).subscribe(
+      this.httpClient.delete('http://localhost:5000/manifestations/delete/' + idManifestation).subscribe(
         () => { console.log('suppression manifestation OK : ', idManifestation);
             },
         (error) => console.log('suppression manifestation pb : ', error)
@@ -115,14 +115,14 @@ export class ManifestationService {
     if (this.loginService.logged) {
       console.log('départ' + newParticipation.idJoueur);
       const participation = new Participation(newParticipation);
-      this.httpClient.post<Manifestation>('http://localhost:8080/participation/create', participation).subscribe();
+      this.httpClient.post<Manifestation>('http://localhost:5000/participation/create', participation).subscribe();
     } else {
       this.router.navigate(['connexion']);
     }
   }
 
   public getParticipations(): Observable<Participation[]> {
-    return this.httpClient.get<Participation[]>('http://localhost:8080/participation/get/participation');
+    return this.httpClient.get<Participation[]>('http://localhost:5000/participation/get/participation');
   }
 
    /**
@@ -132,7 +132,7 @@ export class ManifestationService {
     */
    public findParticipation(idManifestation: number) {
     if (this.loginService.logged) {
-      this.httpClient.get<Manifestation>('http://localhost:8080/participation/get/participation').subscribe();
+      this.httpClient.get<Manifestation>('http://localhost:5000/participation/get/participation').subscribe();
     } else {
       this.router.navigate(['connexion']);
     }

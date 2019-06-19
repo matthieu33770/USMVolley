@@ -24,7 +24,7 @@ export class UsersService {
 
   public getUsers(): Observable<User[]> {
     if (this.loginService.logged) {
-      return this.httpClient.get<User[]>('http://localhost:8080/users/get/users');
+      return this.httpClient.get<User[]>('http://localhost:5000/users/get/users');
     } else {
       this.router.navigate(['connexion']);
     }
@@ -83,7 +83,7 @@ export class UsersService {
    */
   public createUser(newUser: User) {
     if (this.loginService.logged) {
-      this.httpClient.post<User>('http://localhost:8080/users/create', newUser).subscribe(
+      this.httpClient.post<User>('http://localhost:5000/users/create', newUser).subscribe(
         createEquipe => {
           this.availableUser.push(createEquipe);
           this.availableUser$.next(this.availableUser);
@@ -100,7 +100,7 @@ export class UsersService {
    */
   public updateUser(user: User) {
     if (this.loginService.logged) {
-      return this.httpClient.put<User>(`http://localhost:8080/users/update/${user.idUser}`, user);
+      return this.httpClient.put<User>(`http://localhost:5000/users/update/${user.idUser}`, user);
     } else {
       this.router.navigate(['connexion']);
     }
@@ -113,7 +113,7 @@ export class UsersService {
    */
   supprimerUser(idUser: number): User[] {
     if (this.loginService.logged) {
-      this.httpClient.delete('http://localhost:8080/users/delete/' + idUser).subscribe(
+      this.httpClient.delete('http://localhost:5000/users/delete/' + idUser).subscribe(
       () => { console.log('suppression statut OK : ', idUser);
           },
       (error) => console.log('suppression statut pb : ', error)

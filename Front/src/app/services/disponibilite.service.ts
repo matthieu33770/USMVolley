@@ -24,7 +24,7 @@ export class DisponibiliteService {
 
   public getDisponibilites(): Observable<Disponibilite[]> {
     if (this.loginService.logged) {
-      return this.httpClient.get<Disponibilite[]>('http://localhost:8080/disponibilite/get/disponibilites');
+      return this.httpClient.get<Disponibilite[]>('http://localhost:5000/disponibilite/get/disponibilites');
     } else {
       this.router.navigate(['connexion']);
     }
@@ -61,7 +61,7 @@ export class DisponibiliteService {
    */
   public createDisponibilite(newDisponibilite: Disponibilite) {
     if (this.loginService.logged) {
-      this.httpClient.post<Disponibilite>('http://localhost:8080/disponibilite/create', newDisponibilite).subscribe(
+      this.httpClient.post<Disponibilite>('http://localhost:5000/disponibilite/create', newDisponibilite).subscribe(
         createDisponibilite => {
           this.availableDisponibilite.push(createDisponibilite);
           this.availableDisponibilite$.next(this.availableDisponibilite);
@@ -79,7 +79,7 @@ export class DisponibiliteService {
    */
   public updateDisponibilite(disponibilite: Disponibilite) {
     if (this.loginService.logged) {
-      this.httpClient.put<Disponibilite>(`http://localhost:8080/disponibilite/update/${disponibilite.idDisponibilite}`, disponibilite).subscribe(
+      this.httpClient.put<Disponibilite>(`http://localhost:5000/disponibilite/update/${disponibilite.idDisponibilite}`, disponibilite).subscribe(
         updateDisponibilite => {
           this.availableDisponibilite.splice(this.availableDisponibilite.indexOf(disponibilite), 1, updateDisponibilite);
           this.availableDisponibilite$.next(this.availableDisponibilite);
@@ -97,7 +97,7 @@ export class DisponibiliteService {
    */
   supprimerDisponibilite(idDisponibilite: number): Disponibilite[] {
     if (this.loginService.logged) {
-      this.httpClient.delete('http://localhost:8080/disponibilite/delete/' + idDisponibilite).subscribe(
+      this.httpClient.delete('http://localhost:5000/disponibilite/delete/' + idDisponibilite).subscribe(
             () => { console.log('suppression disponibilité OK : ', idDisponibilite);
                 },
             (error) => console.log('suppression disponibilité pb : ', error)

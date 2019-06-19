@@ -18,7 +18,7 @@ public class Categories implements Serializable {
 	@Column(name = "id_categorie")
 	private Integer idCategorie;
 	
-	@Column(name = "libelle_categoriee")
+	@Column(name = "libelle_categorie")
 	private String libelleCategorie;
 	
 	@Column(name = "age_max")

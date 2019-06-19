@@ -43,8 +43,8 @@ export class InscriptionManifestationComponent implements OnInit {
   ngOnInit() {
     console.log(this.newParticipation);
     this.idManifestation = Number(this.route.snapshot.params.idManifestation);
-    // this.getManifestation();
-    // this.getDisponibilite();
+    this.getManifestation();
+    this.getDisponibilite();
   }
 
   getManifestation(): void {
@@ -62,29 +62,9 @@ export class InscriptionManifestationComponent implements OnInit {
         this.newParticipation.idJoueur = joueur.idJoueur;
         this.joueurEquipe = this.inscriptionManifestation.equipe.joueurs.find(joueur => joueur.idJoueur === this.joueur.idJoueur);
         this.isInscriptionPossible = this.joueurEquipe.idJoueur === this.joueur.idJoueur;
-
-        // this.nbreMasculin = equipe.joueurs.filter(joueur => {if (joueur.sexe === 'Masculin') { return true; }} );
-
-        console.log(this.inscriptionManifestation.equipe.joueurs.find(Joueur => {if (Joueur.idJoueur === this.joueur.idJoueur) {return true; }}));
-
-        // this.inscriptionManifestation.equipe.joueurs.forEach(Joueurs => {
-        //   this.isInscriptionPossible = Joueurs.idJoueur === this.joueur.idJoueur;
-          // console.log(Joueurs.idJoueur);
-          console.log(this.joueur.idJoueur);
-          console.log(this.isInscriptionPossible);
-        // });
      });
     });
   }
-
-  // getJoueur(): void {
-  //   this.username = jwt_decode(sessionStorage.getItem(environment.accessToken)).sub;
-  //   this.joueurService.findByUsername(this.username).subscribe(joueur => {
-  //     this.joueur = joueur;
-  //     this.newParticipation.idJoueur = joueur.idJoueur;
-  //     console.log(this.joueur);
-  //   });
-  // }
 
   getDisponibilite(): void {
     this.disponibiliteService.getDisponibilites().subscribe(Disponibilites => {

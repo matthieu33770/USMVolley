@@ -23,12 +23,12 @@ export class CategorieService {
               private router: Router) { }
 
   getCategories(): Observable<Categorie[]> {
-      return this.httpClient.get<Categorie[]>('http://localhost:8080/categories/get/categories');
+      return this.httpClient.get<Categorie[]>('http://localhost:5000/categories/get/categories');
   }
 
   public getCategorie(): Observable<Categorie[]> {
     if (this.loginService.logged) {
-      return this.httpClient.get<Categorie[]>('http://localhost:8080/categories/get/categories');
+      return this.httpClient.get<Categorie[]>('http://localhost:5000/categories/get/categories');
     } else {
       this.router.navigate(['connexion']);
     }
@@ -65,7 +65,7 @@ export class CategorieService {
    */
   public createCategorie(newCategorie: Categorie) {
     if (this.loginService.logged) {
-      this.httpClient.post<Categorie>('http://localhost:8080/categories/create', newCategorie).subscribe(
+      this.httpClient.post<Categorie>('http://localhost:5000/categories/create', newCategorie).subscribe(
         createCategorie => {
           this.availableCategorie.push(createCategorie);
           this.availableCategorie$.next(this.availableCategorie);
@@ -82,7 +82,7 @@ export class CategorieService {
    */
   public updateCategorie(categorie: Categorie) {
     if (this.loginService.logged) {
-      this.httpClient.put<Categorie>(`http://localhost:8080/categories/update/${categorie.idCategorie}`, categorie).subscribe(
+      this.httpClient.put<Categorie>(`http://localhost:5000/categories/update/${categorie.idCategorie}`, categorie).subscribe(
         updateCategorie => {
           this.availableCategorie.splice(this.availableCategorie.indexOf(categorie), 1, updateCategorie);
           this.availableCategorie$.next(this.availableCategorie);
@@ -100,7 +100,7 @@ export class CategorieService {
    */
   supprimerCategorie(idCategorie: number): Categorie[] {
     if (this.loginService.logged) {
-      this.httpClient.delete('http://localhost:8080/categories/delete/' + idCategorie).subscribe(
+      this.httpClient.delete('http://localhost:5000/categories/delete/' + idCategorie).subscribe(
             () => { console.log('suppression categorie OK : ', idCategorie);
                     this.availableCategorie = this.availableCategorie.filter( categorie => categorie.idCategorie !== idCategorie ).slice();
                     this.availableCategorie$.next(this.availableCategorie);

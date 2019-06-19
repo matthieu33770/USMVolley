@@ -164,7 +164,7 @@
   </div> 
 
   <div class="boutons">
-    <button *ngIf="!isLoggedin" mat-raised-button color="accent" type="submit" (click)="onSave()">Enregistrer</button>
+    <button *ngIf="!isLoggedin" mat-raised-button color="accent" type="submit" (click)="onSave()" routerLink="/connexion">Enregistrer</button>
     <button *ngIf="isLoggedin" mat-raised-button color="accent" type="submit" (click)="onSave()">Mise à jour</button>
   </div>
   <br>

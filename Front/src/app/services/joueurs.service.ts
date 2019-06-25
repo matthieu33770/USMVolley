@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import {environment} from '../../environments/environment';
+import { environment } from '../../environments/environment';
 import { MatSnackBar } from '@angular/material';
 
 import { Joueur } from '../modeles/joueur';

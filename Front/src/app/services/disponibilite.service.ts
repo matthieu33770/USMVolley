@@ -23,11 +23,11 @@ export class DisponibiliteService {
               private router: Router) { }
 
   public getDisponibilites(): Observable<Disponibilite[]> {
-    if (this.loginService.logged) {
+    // if (this.loginService.logged) {
       return this.httpClient.get<Disponibilite[]>('http://localhost:5000/disponibilite/get/disponibilites');
-    } else {
-      this.router.navigate(['connexion']);
-    }
+    // } else {
+    //   this.router.navigate(['connexion']);
+    // }
   }
 
   public publishDisponibilites() {

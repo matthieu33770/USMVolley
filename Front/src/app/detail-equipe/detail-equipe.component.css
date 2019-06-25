@@ -25,14 +25,16 @@ table {
     justify-content: center;
 }
 
-.joueurEquipe {
+.joueurEquipe-responsive {
     margin-right: 40px;
     height: 400px;
+    width: 400px;
     overflow: auto;
 }
 
-.joueurDispo {
+.joueurDispo-responsive {
     margin-left: 40px;
     height: 400px;
+    width: 400px;
     overflow: auto;
 }

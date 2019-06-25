@@ -28,6 +28,11 @@
       <div class="joueurEquipe-responsive">
           <h3>Joueurs de l'équipe</h3>
           <div >
+            
+            <mat-form-field>
+              <input matInput (keyup)="applyFilterEquipe($event.target.value)" placeholder="Filtre">
+            </mat-form-field>
+
             <table mat-table [dataSource]="dataEquipe" class="tableau">
           
             <ng-container matColumnDef="select">
@@ -61,11 +66,14 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
           </div>
-        </div>
+      </div>
 
     <div class="joueurDispo-responsive">
         <h3>Joueurs disponibles</h3>
         <div>
+            <mat-form-field>
+              <input matInput (keyup)="applyFilterAdulte($event.target.value)" placeholder="Filtre">
+            </mat-form-field>
           <table mat-table [dataSource]="dataAdulte" class="tableau">
         
           <ng-container matColumnDef="select">
@@ -101,8 +109,10 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
         </div>
-      </div>
+    </div>
+    
   </div>
+
   <br>
   <div class="boutons">
       <button *ngIf="isModification" mat-raised-button color="primary" (click)="onSave()" routerLink="/gestion/equipes">Modifier</button>

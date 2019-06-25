@@ -140,4 +140,12 @@ export class DetailEquipeComponent implements OnInit {
       this.editionEquipe.joueurs.splice(this.editionEquipe.joueurs.indexOf(selected[i]), 1);
     }
   }
+
+  applyFilterEquipe(filterValue: string) {
+    this.dataEquipe.filter = filterValue.trim().toLowerCase();
+  }
+
+  applyFilterAdulte(filterValue: string) {
+    this.dataAdulte.filter = filterValue.trim().toLowerCase();
+  }
 }

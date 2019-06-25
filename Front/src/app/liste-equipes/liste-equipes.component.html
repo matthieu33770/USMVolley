@@ -15,6 +15,7 @@
     <button *ngIf="!confirmDelete" mat-raised-button color="warn" (click)="confirmDelete=true">Supprimer</button>
   </div>
   <br>
+
   <div class="tableequipe-responsive">
     <table mat-table [dataSource]="dataSource" class="tableau" [class.isMobile]="isMobile">
   
@@ -63,7 +64,8 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-</div>
+  </div>
+
 <br>
 <div class="boutons">
   <button mat-raised-button color="accent" routerLink="/gestion">Retour</button>

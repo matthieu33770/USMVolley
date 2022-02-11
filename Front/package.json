@@ -29,7 +29,7 @@
     "@fullcalendar/timegrid": "^4.1.0",
     "@material/icon-button": "^0.44.1",
     "@ng-bootstrap/ng-bootstrap": "^4.1.1",
-    "ajv": "^6.9.1",
+    "ajv": "^6.12.3",
     "angular-calendar": "^0.27.2",
     "angular-webstorage-service": "^1.0.2",
     "angularx-flatpickr": "^6.1.0",
